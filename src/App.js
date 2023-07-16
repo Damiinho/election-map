@@ -9,7 +9,7 @@ function App() {
       <div className="App">
         symulator
         <Parties />
-        <District name="okręg 1" deputies="2" />
+        <District name="1 okręg na cały kraj" deputies="460" />
       </div>
     </AppProvider>
   );

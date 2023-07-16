@@ -1,21 +1,32 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "./contexts/AppContext";
 import PartyInput from "./PartyInput";
 
 const Parties = () => {
-  const { parties, howMany, setHowMany } = useContext(AppContext);
+  const { howMany, setHowMany, parties, setParties } = useContext(AppContext);
 
   const handleHowManyInput = (e) => {
-    setHowMany(e.target.value);
+    setHowMany(parseInt(e.target.value));
   };
 
-  const renderPartyInputs = () => {
-    const partyInputs = [];
-    for (let i = 0; i < howMany; i++) {
-      partyInputs.push(<PartyInput id={i} key={i} />);
-    }
-    return partyInputs;
-  };
+  useEffect(() => {
+    setParties((prevParties) => {
+      const updatedParties = [...prevParties];
+      const currentLength = updatedParties.length;
+
+      if (howMany > currentLength) {
+        // Dodaj nowe puste elementy do tablicy parties
+        for (let i = currentLength; i < howMany; i++) {
+          updatedParties.push({ id: i, name: "" });
+        }
+      } else if (howMany < currentLength) {
+        // Usuń elementy z tablicy parties, ale zachowaj istniejące obiekty
+        updatedParties.length = howMany;
+      }
+
+      return updatedParties;
+    });
+  }, [howMany, setParties]);
 
   return (
     <div>
@@ -31,8 +42,10 @@ const Parties = () => {
         {howMany}
       </div>
       Uzupełnij nazwy partii:
-      {renderPartyInputs()}
-      Wybrane partie: {parties}
+      {parties.map((party) => (
+        <PartyInput key={party.id} id={party.id} />
+      ))}
+      Wybrane partie: {parties.map((party) => party.name).join(", ")}
     </div>
   );
 };
