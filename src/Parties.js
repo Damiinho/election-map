@@ -41,11 +41,10 @@ const Parties = () => {
         />{" "}
         {howMany}
       </div>
-      Uzupełnij nazwy partii:
+      Wpisz nazwy partii:
       {parties.map((party) => (
         <PartyInput key={party.id} id={party.id} />
       ))}
-      Wybrane partie: {parties.map((party) => party.name).join(", ")}
     </div>
   );
 };
