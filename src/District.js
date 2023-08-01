@@ -1,70 +1,82 @@
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
-import PartyResult from "./PartyResult";
 
 const District = (props) => {
-  const { parties } = useContext(AppContext);
-  const newParties = [...parties];
-  console.log(newParties);
-  const fillObjectWithDHondtMethod = (data, totalSeats) => {
-    const filledObject = [];
-    const parties = data.map((party) => ({
-      ...party,
-      result: parseInt(party.result),
-    }));
-    const sortedParties = [...parties].sort((a, b) => b.result - a.result);
-    const seatsDistribution = Array(sortedParties.length).fill(0);
+  const { parties, districts, setDistricts } = useContext(AppContext);
+  const [partiesInDistrict, setPartiesInDistrict] = useState([...parties]);
+  const [addLocal, setAddLocal] = useState(false);
+  const [name, setName] = useState("");
 
-    if (parties.length > 0) {
-      for (let i = 0; i < totalSeats; i++) {
-        const quotient = sortedParties.map((party, index) => ({
-          index,
-          quotient: party.result / (seatsDistribution[index] + 1),
-        }));
-        quotient.sort((a, b) => b.quotient - a.quotient);
-        seatsDistribution[quotient[0].index]++;
-      }
-
-      sortedParties.forEach((party, index) => {
-        filledObject.push({
-          name: party.name,
-          result: seatsDistribution[index],
-        });
-      });
-
-      return filledObject;
-    }
+  const handleAddLocalParty = () => {
+    setAddLocal(!addLocal);
   };
 
-  const filledObject = fillObjectWithDHondtMethod(newParties, 460);
+  const handleSubmitAddLocalParty = (e) => {
+    setAddLocal(!addLocal);
+    e.preventDefault();
+    const newParties = [...partiesInDistrict];
+    const party = {
+      name,
+      isOverThreshold: true,
+    };
 
-  console.log(filledObject);
+    newParties.push(party);
+    setName("");
+    setPartiesInDistrict(newParties);
+  };
+
+  const handleRemove = (index) => {
+    const newDistricts = [...districts];
+    newDistricts.splice(index, 1);
+    setDistricts(newDistricts);
+  };
+
+  const handleStart = () => {
+    const partiesWithResults = partiesInDistrict.map((party) => ({
+      ...party,
+      result: party.result !== undefined ? Number(party.result) : 0,
+    }));
+    setPartiesInDistrict(partiesWithResults);
+    console.log(partiesWithResults);
+  };
+
+  const handleResultChange = (index, value) => {
+    const updatedParties = [...partiesInDistrict];
+    updatedParties[index].result = value;
+    setPartiesInDistrict(updatedParties);
+  };
 
   return (
-    <>
-      <div>
-        Nazwa: {props.name}, liczba mandatów: {props.deputies}.
-      </div>
-      <div>
-        {parties.length > 0 ? (
-          <>
-            Symulacja wyników dla całej Polski przy założeniu tylko jednego
-            okręgu wyborczego:
-            <ul>
-              {filledObject.map((item, index) => (
-                <PartyResult
-                  key={index}
-                  name={item.name}
-                  result={item.result}
-                />
-              ))}
-            </ul>
-          </>
-        ) : (
-          ""
-        )}
-      </div>
-    </>
+    <div key={props.index}>
+      {props.name}, liczba mandatów: {props.deputies}, metoda {props.method}
+      <button onClick={() => handleRemove(props.index)}>Usuń okręg</button>
+      <button onClick={handleAddLocalParty}>dodaj lokalny komitet</button>
+      {partiesInDistrict.map((item, index) => (
+        <div key={index}>
+          {item.name}, wynik w procentach:{" "}
+          <input
+            type="number"
+            value={item.result}
+            onChange={(e) => handleResultChange(index, e.target.value)}
+          />
+        </div>
+      ))}
+      {addLocal ? (
+        <label className="">
+          <input
+            type="text"
+            placeholder="Nazwa partii"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button onClick={handleSubmitAddLocalParty}>Dodaj</button>
+        </label>
+      ) : (
+        ""
+      )}
+      <br />
+      <button onClick={handleStart}>generuj wyniki</button>
+    </div>
   );
 };
 

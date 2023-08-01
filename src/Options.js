@@ -1,14 +1,12 @@
 import AddParty from "./AddParty";
-import PartyList from "./PartyList";
+import AddDistrict from "./AddDistrict";
 
 const Options = () => {
   return (
-    <>
-      <div className="options">Uzupełnij listę startujących:</div>
+    <div className="options">
       <AddParty />
-      <div>Obecna lista: </div>
-      <PartyList />
-    </>
+      <AddDistrict />
+    </div>
   );
 };
 

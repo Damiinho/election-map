@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
+import PartyList from "./PartyList";
 
 const AddParty = () => {
   const [name, setName] = useState("");
-  const [isMinority, setIsMinority] = useState(false);
-  const [isCoalition, setIsCoalition] = useState(false);
+  const [isOverThreshold, setIsOverThreshold] = useState(true);
   const { parties, setParties } = useContext(AppContext);
 
   const handleSubmit = (e) => {
@@ -12,41 +12,41 @@ const AddParty = () => {
     const newParties = [...parties];
     const party = {
       name,
-      isMinority,
-      isCoalition,
+      isOverThreshold,
     };
     console.log(party);
 
     newParties.push(party);
     setName("");
-    setIsMinority(false);
-    setIsCoalition(false);
+    setIsOverThreshold(true);
     setParties(newParties);
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Nazwa partii"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      Mniejszość narodowa?
-      <input
-        type="checkbox"
-        label="Partia mniejszości narodowej"
-        checked={isMinority}
-        onChange={(e) => setIsMinority(e.target.checked)}
-      />
-      Koalicja?
-      <input
-        type="checkbox"
-        label="Partia koalicyjna"
-        checked={isCoalition}
-        onChange={(e) => setIsCoalition(e.target.checked)}
-      />
-      <button onClick={handleSubmit}>Dodaj</button>
+    <div className="options__addparty">
+      <div className="options__addparty-title">
+        Uzupełnij listę startujących:
+      </div>
+      <label className="options__addparty-label">
+        <input
+          type="text"
+          placeholder="Nazwa partii"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <div>
+          <p>Uwzględnić przy podziale mandatów?</p>
+          <input
+            type="checkbox"
+            label="Partia mniejszości narodowej"
+            checked={isOverThreshold}
+            onChange={(e) => setIsOverThreshold(e.target.checked)}
+          />
+        </div>
+        <button onClick={handleSubmit}>Dodaj</button>
+      </label>
+
+      <PartyList />
     </div>
   );
 };

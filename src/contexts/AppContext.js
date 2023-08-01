@@ -3,14 +3,14 @@ import { createContext, useState } from "react";
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [howMany, setHowMany] = useState(5);
   const [parties, setParties] = useState([]);
+  const [districts, setDistricts] = useState([]);
 
   const providerValue = {
     parties,
     setParties,
-    howMany,
-    setHowMany,
+    districts,
+    setDistricts,
   };
 
   return (

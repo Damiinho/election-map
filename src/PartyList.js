@@ -2,18 +2,28 @@ import { useContext } from "react";
 import { AppContext } from "./contexts/AppContext";
 
 const PartyList = () => {
-  const { parties } = useContext(AppContext);
+  const { parties, setParties } = useContext(AppContext);
+  const handleRemove = (index) => {
+    const newParties = [...parties];
+    newParties.splice(index, 1);
+    setParties(newParties);
+  };
+
   return (
-    <ul>
-      {parties.map((item) => (
-        <li>
-          {item.name}
-          <button>Usuń</button>
-          <button>Edytuj</button>
-          wpisz wynik wyborczy: <input type="number" />
-        </li>
-      ))}
-    </ul>
+    <div>
+      Obecna lista:
+      <ul>
+        {parties.map((item, index) => (
+          <li key={index}>
+            {item.name},{" "}
+            {item.isOverThreshold
+              ? "ponad progiem wyborczym"
+              : "pod progiem wyborczym"}
+            <button onClick={() => handleRemove(index)}>Usuń</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
