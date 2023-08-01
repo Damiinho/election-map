@@ -5,7 +5,7 @@ const AddDistrict = () => {
   const [name, setName] = useState("");
   const [deputies, setDeputies] = useState(0);
   const [method, setMethod] = useState("dhondt");
-  const { districts, setDistricts } = useContext(AppContext);
+  const { districts, setDistricts, parties } = useContext(AppContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +13,7 @@ const AddDistrict = () => {
       name,
       deputies,
       method,
+      parties: [...parties], // Utwórz kopię listy partii dla tego okręgu
     };
     const newDistricts = [...districts];
     newDistricts.push(district);

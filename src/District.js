@@ -2,8 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 
 const District = (props) => {
-  const { parties, districts, setDistricts } = useContext(AppContext);
-  const [partiesInDistrict, setPartiesInDistrict] = useState([...parties]);
+  const { districts, setDistricts } = useContext(AppContext);
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
 
@@ -14,7 +13,8 @@ const District = (props) => {
   const handleSubmitAddLocalParty = (e) => {
     setAddLocal(!addLocal);
     e.preventDefault();
-    const newParties = [...partiesInDistrict];
+    const newParties = [...districts[props.index].parties];
+    console.log(newParties);
     const party = {
       name,
       isOverThreshold: true,
@@ -22,7 +22,14 @@ const District = (props) => {
 
     newParties.push(party);
     setName("");
-    setPartiesInDistrict(newParties);
+    setDistricts((prevDistricts) => {
+      const updatedDistricts = [...prevDistricts];
+      updatedDistricts[props.index] = {
+        ...updatedDistricts[props.index],
+        parties: newParties,
+      };
+      return updatedDistricts;
+    });
   };
 
   const handleRemove = (index) => {
@@ -32,18 +39,41 @@ const District = (props) => {
   };
 
   const handleStart = () => {
-    const partiesWithResults = partiesInDistrict.map((party) => ({
+    // Skopiuj partie z tego okręgu
+    const partiesWithResults = districts[props.index].parties.map((party) => ({
       ...party,
       result: party.result !== undefined ? Number(party.result) : 0,
     }));
-    setPartiesInDistrict(partiesWithResults);
+
+    // Uaktualnij kontekst z nową listą partii dla tego okręgu
+    setDistricts((prevDistricts) => {
+      const updatedDistricts = [...prevDistricts];
+      updatedDistricts[props.index] = {
+        ...updatedDistricts[props.index],
+        parties: partiesWithResults,
+      };
+      return updatedDistricts;
+    });
+
     console.log(partiesWithResults);
   };
 
   const handleResultChange = (index, value) => {
-    const updatedParties = [...partiesInDistrict];
+    // Skopiuj partie z tego okręgu
+    const updatedParties = districts[props.index].parties.map((party) => ({
+      ...party,
+    }));
     updatedParties[index].result = value;
-    setPartiesInDistrict(updatedParties);
+
+    // Uaktualnij kontekst z nową listą partii dla tego okręgu
+    setDistricts((prevDistricts) => {
+      const updatedDistricts = [...prevDistricts];
+      updatedDistricts[props.index] = {
+        ...updatedDistricts[props.index],
+        parties: updatedParties,
+      };
+      return updatedDistricts;
+    });
   };
 
   return (
@@ -51,7 +81,7 @@ const District = (props) => {
       {props.name}, liczba mandatów: {props.deputies}, metoda {props.method}
       <button onClick={() => handleRemove(props.index)}>Usuń okręg</button>
       <button onClick={handleAddLocalParty}>dodaj lokalny komitet</button>
-      {partiesInDistrict.map((item, index) => (
+      {districts[props.index].parties.map((item, index) => (
         <div key={index}>
           {item.name}, wynik w procentach:{" "}
           <input
