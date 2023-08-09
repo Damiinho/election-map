@@ -75,15 +75,37 @@ const District = (props) => {
       return updatedDistricts;
     });
   };
+  const handleResultMeasure = () => {
+    setDistricts((prevDistricts) => {
+      const updatedDistricts = [...prevDistricts];
+      const currentMeasure = updatedDistricts[props.index].measure;
+
+      // Zmień miarę na przeciwną wartość
+      const newMeasure =
+        currentMeasure === "percentage" ? "number" : "percentage";
+
+      updatedDistricts[props.index] = {
+        ...updatedDistricts[props.index],
+        measure: newMeasure,
+      };
+      return updatedDistricts;
+    });
+  };
 
   return (
     <div key={props.index}>
       {props.name}, liczba mandatów: {props.deputies}, metoda {props.method}
       <button onClick={() => handleRemove(props.index)}>Usuń okręg</button>
       <button onClick={handleAddLocalParty}>dodaj lokalny komitet</button>
+      <button onClick={handleResultMeasure}>
+        podaj wynik w{" "}
+        {districts[props.index].measure === "percentage"
+          ? "procentach"
+          : "liczbach bezwzględnych"}
+      </button>
       {districts[props.index].parties.map((item, index) => (
         <div key={index}>
-          {item.name}, wynik w procentach:{" "}
+          {item.name}, wynik:{" "}
           <input
             type="number"
             value={item.result}

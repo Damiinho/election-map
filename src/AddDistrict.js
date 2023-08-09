@@ -14,6 +14,7 @@ const AddDistrict = () => {
       deputies,
       method,
       parties: [...parties], // Utwórz kopię listy partii dla tego okręgu
+      measure: "percentage",
     };
     const newDistricts = [...districts];
     newDistricts.push(district);
