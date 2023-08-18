@@ -50,12 +50,11 @@ const District = (props) => {
       const updatedDistricts = [...prevDistricts];
       updatedDistricts[props.index] = {
         ...updatedDistricts[props.index],
-        parties: partiesWithResults,
+        finalResult: partiesWithResults, // Przypisz wyniki do finalResult
+        showFinalResult: true, // Ustaw showFinalResult na true
       };
       return updatedDistricts;
     });
-
-    console.log(partiesWithResults);
   };
 
   const handleResultChange = (index, value) => {
