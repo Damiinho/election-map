@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
+import { randomColor } from "randomcolor";
 import PartyList from "./PartyList";
 
 const AddParty = () => {
@@ -13,6 +14,7 @@ const AddParty = () => {
     const party = {
       name,
       isOverThreshold,
+      color: randomColor(),
     };
     console.log(party);
 

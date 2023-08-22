@@ -1,10 +1,17 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import { randomColor } from "randomcolor";
 
+ChartJS.register(ArcElement, Tooltip, Legend);
 const District = (props) => {
   const { districts, setDistricts } = useContext(AppContext);
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
+  const [data, setData] = useState({});
+  const [options, setOptions] = useState({});
+
   const currentDistrict = districts[props.index];
 
   const handleAddLocalParty = () => {
@@ -19,6 +26,7 @@ const District = (props) => {
     const party = {
       name,
       isOverThreshold: true,
+      color: randomColor(),
     };
 
     newParties.push(party);
@@ -95,6 +103,24 @@ const District = (props) => {
 
       return updatedDistricts;
     });
+
+    const chartLabels = partiesWithMandates.map((party) => party.name);
+    const chartData = partiesWithMandates.map((party) => party.seats);
+    const chartColors = partiesWithMandates.map((party) => party.color);
+
+    setData({
+      labels: chartLabels,
+      datasets: [
+        {
+          label: "Wynik",
+          data: chartData,
+          backgroundColor: chartColors,
+          borderColor: chartColors,
+        },
+      ],
+    });
+
+    setOptions({});
 
     setAddLocal(false);
 
@@ -176,13 +202,13 @@ const District = (props) => {
       <br />
       <button onClick={handleStart}>generuj wyniki</button>
       <br />
-      {currentDistrict.showFinalResult
-        ? currentDistrict.finalResult.map((party) => (
-            <div>
-              {party.name}: {party.seats} mandatów
-            </div>
-          ))
-        : "tutaj wygeneruję wyniki"}
+      {currentDistrict.showFinalResult ? (
+        <div style={{ width: "200px", height: "200px" }}>
+          <Doughnut data={data} options={options}></Doughnut>
+        </div>
+      ) : (
+        "tutaj wygeneruję wyniki"
+      )}
     </div>
   );
 };
