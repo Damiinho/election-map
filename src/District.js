@@ -10,7 +10,6 @@ const District = (props) => {
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
   const [data, setData] = useState({});
-  const [options, setOptions] = useState({});
 
   const currentDistrict = districts[props.index];
 
@@ -120,8 +119,6 @@ const District = (props) => {
       ],
     });
 
-    setOptions({});
-
     setAddLocal(false);
 
     // Wyświetlenie wyników w konsoli
@@ -204,7 +201,17 @@ const District = (props) => {
       <br />
       {currentDistrict.showFinalResult ? (
         <div style={{ width: "200px", height: "200px" }}>
-          <Doughnut data={data} options={options}></Doughnut>
+          <Doughnut
+            data={data}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "bottom",
+                },
+              },
+            }}
+          ></Doughnut>
         </div>
       ) : (
         "tutaj wygeneruję wyniki"
