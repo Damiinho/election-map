@@ -51,10 +51,12 @@ const District = (props) => {
       updatedDistricts[props.index] = {
         ...updatedDistricts[props.index],
         finalResult: partiesWithResults, // Przypisz wyniki do finalResult
+        parties: partiesWithResults,
         showFinalResult: true, // Ustaw showFinalResult na true
       };
       return updatedDistricts;
     });
+    setAddLocal(false);
   };
 
   const handleResultChange = (index, value) => {
@@ -95,7 +97,9 @@ const District = (props) => {
     <div key={props.index}>
       {props.name}, liczba mandatów: {props.deputies}, metoda {props.method}
       <button onClick={() => handleRemove(props.index)}>Usuń okręg</button>
-      <button onClick={handleAddLocalParty}>dodaj lokalny komitet</button>
+      <button onClick={handleAddLocalParty}>
+        {addLocal ? "nie dodawaj" : "dodaj lokalny komitet"}
+      </button>
       <button onClick={handleResultMeasure}>
         podaj wynik w{" "}
         {districts[props.index].measure === "percentage"
