@@ -5,6 +5,7 @@ const District = (props) => {
   const { districts, setDistricts } = useContext(AppContext);
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
+  const currentDistrict = districts[props.index];
 
   const handleAddLocalParty = () => {
     setAddLocal(!addLocal);
@@ -13,7 +14,7 @@ const District = (props) => {
   const handleSubmitAddLocalParty = (e) => {
     setAddLocal(!addLocal);
     e.preventDefault();
-    const newParties = [...districts[props.index].parties];
+    const newParties = [...currentDistrict.parties];
     console.log(newParties);
     const party = {
       name,
@@ -39,29 +40,72 @@ const District = (props) => {
   };
 
   const handleStart = () => {
-    // Skopiuj partie z tego okręgu
-    const partiesWithResults = districts[props.index].parties.map((party) => ({
+    const currentDistrict = districts[props.index];
+    const partiesWithResults = currentDistrict.parties.map((party) => ({
       ...party,
       result: party.result !== undefined ? Number(party.result) : 0,
     }));
 
-    // Uaktualnij kontekst z nową listą partii dla tego okręgu
+    const totalMandates = currentDistrict.deputies;
+
+    // Funkcja do przydzielania mandatów
+    const distributeSeats = (parties, totalSeats) => {
+      const partiesWithSeats = parties.map((party) => ({
+        ...party,
+        seats: 0,
+      }));
+
+      for (let i = 0; i < totalSeats; i++) {
+        const adjustedResults = partiesWithSeats.map((party) => ({
+          ...party,
+          adjustedResult: party.result / (party.seats + 1),
+        }));
+
+        const nextMandateParty = adjustedResults.reduce(
+          (maxParty, party) =>
+            party.adjustedResult > maxParty.adjustedResult ? party : maxParty,
+          adjustedResults[0]
+        );
+
+        partiesWithSeats.find((party) => party.name === nextMandateParty.name)
+          .seats++;
+      }
+
+      return partiesWithSeats;
+    };
+
+    // Sprawdzenie, czy każda partia ma wynik 0 w results
+    const allPartiesHaveZeroResults = partiesWithResults.every(
+      (party) => party.result === 0
+    );
+
+    // Przydzielanie mandatów tylko jeśli nie wszystkie partie mają wynik 0
+    const partiesWithMandates = allPartiesHaveZeroResults
+      ? partiesWithResults.map((party) => ({ ...party, seats: 0 }))
+      : distributeSeats(partiesWithResults, totalMandates);
+
     setDistricts((prevDistricts) => {
       const updatedDistricts = [...prevDistricts];
       updatedDistricts[props.index] = {
         ...updatedDistricts[props.index],
-        finalResult: partiesWithResults, // Przypisz wyniki do finalResult
-        parties: partiesWithResults,
-        showFinalResult: true, // Ustaw showFinalResult na true
+        finalResult: partiesWithMandates,
+        parties: partiesWithResults, // Zachowujemy pierwotne wyniki
+        showFinalResult: true,
       };
+
       return updatedDistricts;
     });
+
     setAddLocal(false);
+
+    // Wyświetlenie wyników w konsoli
+    console.log("Wyniki po przydzieleniu mandatów:");
+    console.log(partiesWithMandates);
   };
 
   const handleResultChange = (index, value) => {
     // Skopiuj partie z tego okręgu
-    const updatedParties = districts[props.index].parties.map((party) => ({
+    const updatedParties = currentDistrict.parties.map((party) => ({
       ...party,
     }));
     updatedParties[index].result = value;
@@ -102,11 +146,11 @@ const District = (props) => {
       </button>
       <button onClick={handleResultMeasure}>
         podaj wynik w{" "}
-        {districts[props.index].measure === "percentage"
+        {currentDistrict.measure === "percentage"
           ? "procentach"
           : "liczbach bezwzględnych"}
       </button>
-      {districts[props.index].parties.map((item, index) => (
+      {currentDistrict.parties.map((item, index) => (
         <div key={index}>
           {item.name}, wynik:{" "}
           <input
@@ -131,6 +175,14 @@ const District = (props) => {
       )}
       <br />
       <button onClick={handleStart}>generuj wyniki</button>
+      <br />
+      {currentDistrict.showFinalResult
+        ? currentDistrict.finalResult.map((party) => (
+            <div>
+              {party.name}: {party.seats} mandatów
+            </div>
+          ))
+        : "tutaj wygeneruję wyniki"}
     </div>
   );
 };
