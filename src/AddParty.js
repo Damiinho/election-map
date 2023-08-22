@@ -6,6 +6,7 @@ import PartyList from "./PartyList";
 const AddParty = () => {
   const [name, setName] = useState("");
   const [isOverThreshold, setIsOverThreshold] = useState(true);
+  const [chosenColor, setChosenColor] = useState("");
   const { parties, setParties } = useContext(AppContext);
 
   const handleSubmit = (e) => {
@@ -14,7 +15,7 @@ const AddParty = () => {
     const party = {
       name,
       isOverThreshold,
-      color: randomColor(),
+      color: chosenColor === "" ? randomColor() : chosenColor,
     };
     console.log(party);
 
@@ -22,6 +23,7 @@ const AddParty = () => {
     setName("");
     setIsOverThreshold(true);
     setParties(newParties);
+    setChosenColor("");
   };
 
   return (
@@ -45,6 +47,15 @@ const AddParty = () => {
             onChange={(e) => setIsOverThreshold(e.target.checked)}
           />
         </div>
+        <div>
+          <input
+            type="color"
+            value={chosenColor}
+            onChange={(e) => setChosenColor(e.target.value)}
+          />
+          <p>wybrany kolor {chosenColor}</p>
+        </div>
+
         <button onClick={handleSubmit}>Dodaj</button>
       </label>
 
