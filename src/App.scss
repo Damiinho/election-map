@@ -13,4 +13,16 @@
       display: flex;
     }
   }
+
+  &__list {
+    &-ul {
+      &-element {
+        display: flex;
+        &__color {
+          width: 40px;
+          height: 20px;
+        }
+      }
+    }
+  }
 }

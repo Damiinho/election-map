@@ -10,16 +10,26 @@ const PartyList = () => {
   };
 
   return (
-    <div>
+    <div className="options__list">
       Obecna lista:
-      <ul>
+      <ul className="options__list-ul">
         {parties.map((item, index) => (
-          <li key={index}>
+          <li className="options__list-ul-element" key={index}>
             {item.name},{" "}
             {item.isOverThreshold
               ? "ponad progiem wyborczym"
               : "pod progiem wyborczym"}
-            <button onClick={() => handleRemove(index)}>Usuń</button>
+            , kolor:{" "}
+            <div
+              style={{ backgroundColor: item.color }}
+              className="options__list-ul-element__color"
+            ></div>
+            <button
+              className="options__list-ul-element__button"
+              onClick={() => handleRemove(index)}
+            >
+              Usuń
+            </button>
           </li>
         ))}
       </ul>
