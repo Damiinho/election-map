@@ -8,9 +8,17 @@ const AddParty = () => {
   const [isOverThreshold, setIsOverThreshold] = useState(true);
   const [chosenColor, setChosenColor] = useState("");
   const { parties, setParties } = useContext(AppContext);
+  const [duplicateError, setDuplicateError] = useState(false); // New state for duplicate error
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const existingParty = parties.find((party) => party.name === name);
+    if (existingParty) {
+      setDuplicateError(true);
+      return;
+    }
+
     const newParties = [...parties];
     const party = {
       name,
@@ -24,6 +32,7 @@ const AddParty = () => {
     setIsOverThreshold(true);
     setParties(newParties);
     setChosenColor("");
+    setDuplicateError(false);
   };
 
   return (
@@ -55,6 +64,8 @@ const AddParty = () => {
           />
           <p>wybrany kolor {chosenColor}</p>
         </div>
+
+        {duplicateError && <p>Partia o tej nazwie już istnieje.</p>}
 
         <button onClick={handleSubmit}>Dodaj</button>
       </label>
