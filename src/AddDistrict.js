@@ -5,10 +5,18 @@ const AddDistrict = () => {
   const [name, setName] = useState("");
   const [deputies, setDeputies] = useState(0);
   const [method, setMethod] = useState("dhondt");
+  const [error, setError] = useState(false);
   const { districts, setDistricts, parties } = useContext(AppContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError(false);
+
+    if (deputies < 1 || name === "") {
+      setError(true);
+      return;
+    }
+
     const district = {
       name,
       deputies,
@@ -57,6 +65,7 @@ const AddDistrict = () => {
         </div>
         <button onClick={handleSubmit}>Dodaj</button>
       </label>
+      {error && <div>Okręg musi mieć nazwę i liczbę mandatów</div>}
     </div>
   );
 };
