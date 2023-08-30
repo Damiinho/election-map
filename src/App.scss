@@ -1,3 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;400;700;800&family=Overpass:ital@0;1&display=swap");
+
+#root {
+  background-color: red;
+  background-image: url("./img/background_color.png");
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.App {
+  margin: 0 auto;
+  max-width: 1000px;
+
+  &__header {
+    width: 100%;
+    height: 70px;
+    background-color: #000000dd;
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    font-family: "Mukta", sans-serif;
+    font-family: "Overpass", sans-serif;
+    font-weight: 800;
+    line-height: 70px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  &__options {
+    &-handler {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      border-radius: 10px;
+      background-color: #808080dd;
+      cursor: pointer;
+
+      &__name {
+        position: relative;
+        top: 2px;
+        font-size: 24px;
+        font-family: "Mukta", sans-serif;
+        font-family: "Overpass", sans-serif;
+        font-weight: 200;
+      }
+      &__img {
+        width: 60px;
+        height: 40px;
+      }
+    }
+  }
+}
+
 .options {
   background-color: rgb(224, 193, 224);
   display: flex;
