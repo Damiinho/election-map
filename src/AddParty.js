@@ -43,6 +43,46 @@ const AddParty = () => {
     setDuplicateError(false);
     setEmptyError(false);
   };
+  const handlePredefined = () => {
+    console.log("wybrano wybory 2023");
+
+    setDuplicateError(false);
+    setEmptyError(false);
+
+    const predefinedParties = [
+      {
+        name: "Prawo i Sprawiedliwość",
+        isOverThreshold: true,
+        color: "#0008ff",
+      },
+      {
+        name: "Koalicja Obywatelska",
+        isOverThreshold: true,
+        color: "#e08300",
+      },
+      {
+        name: "Konfederacja",
+        isOverThreshold: true,
+        color: "#1e1c82",
+      },
+      {
+        name: "Trzecia Droga",
+        isOverThreshold: true,
+        color: "#18af0d",
+      },
+      {
+        name: "Lewica",
+        isOverThreshold: true,
+        color: "#d60000",
+      },
+    ];
+
+    setParties(predefinedParties);
+
+    setName("");
+    setIsOverThreshold(true);
+    setChosenColor("");
+  };
 
   return (
     <div className="options__addparty">
@@ -79,7 +119,8 @@ const AddParty = () => {
 
         <button onClick={handleSubmit}>Dodaj</button>
       </label>
-
+      Listy predefiniowane:{" "}
+      <button onClick={handlePredefined}>Wybory 2023 – sejm</button>
       <PartyList />
     </div>
   );
