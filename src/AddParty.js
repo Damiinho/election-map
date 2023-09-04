@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import { randomColor } from "randomcolor";
 import PartyList from "./PartyList";
+import { Button, TextField } from "@mui/material";
 
 const AddParty = () => {
   const [name, setName] = useState("");
@@ -123,13 +124,19 @@ const AddParty = () => {
     <div className="options__addparty">
       <div className="options__addparty-title">Dodaj komitety:</div>
       <label className="options__addparty-label">
-        <input
-          type="text"
+        <TextField
+          color="warning"
+          label="Nazwa partii"
+          hiddenLabel
+          variant="outlined"
           className="options__addparty-label__name"
-          placeholder="Nazwa partii"
+          size="small"
+          fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
+          style={{}}
         />
+
         <label className="options__addparty-label__threshold">
           <p>Uwzględnić przy podziale mandatów?</p>
           <input
@@ -147,8 +154,15 @@ const AddParty = () => {
           />
           <p>kolor</p>
         </div>
-
-        <button onClick={handleSubmit}>dodaj</button>
+        <Button
+          variant="contained"
+          color="success"
+          size="small"
+          style={{ textTransform: "lowercase" }}
+          onClick={handleSubmit}
+        >
+          dodaj
+        </Button>
       </label>
       {duplicateError && <p>Partia o tej nazwie już istnieje.</p>}
       {emptyError && <p>Partia musi mieć nazwę.</p>}

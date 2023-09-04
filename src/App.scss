@@ -83,7 +83,7 @@
       background-color: #ad7a2e3a;
       border-radius: 7px;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 2fr 1fr 1fr 1fr;
       grid-template-rows: 50px;
       grid-column-gap: 0px;
       grid-row-gap: 0px;
@@ -92,9 +92,9 @@
       justify-content: center;
       align-items: center;
       &__name {
-        height: 20px;
-        border-radius: 7px;
-        padding-left: 5px;
+        // height: 20px;
+        // border-radius: 7px;
+        // padding-left: 5px;
       }
       &__threshold {
         padding: 10px;
