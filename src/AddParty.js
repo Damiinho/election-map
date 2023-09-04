@@ -86,39 +86,37 @@ const AddParty = () => {
 
   return (
     <div className="options__addparty">
-      <div className="options__addparty-title">
-        Uzupełnij listę startujących:
-      </div>
+      <div className="options__addparty-title">Dodaj komitety:</div>
       <label className="options__addparty-label">
         <input
           type="text"
+          className="options__addparty-label__name"
           placeholder="Nazwa partii"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <div>
+        <label className="options__addparty-label__threshold">
           <p>Uwzględnić przy podziale mandatów?</p>
           <input
             type="checkbox"
-            label="Partia mniejszości narodowej"
+            label="Ponad progiem?"
             checked={isOverThreshold}
             onChange={(e) => setIsOverThreshold(e.target.checked)}
           />
-        </div>
-        <div>
+        </label>
+        <div className="options__addparty-label__color">
           <input
             type="color"
             value={chosenColor}
             onChange={(e) => setChosenColor(e.target.value)}
           />
-          <p>wybrany kolor {chosenColor}</p>
+          <p>kolor</p>
         </div>
 
-        {duplicateError && <p>Partia o tej nazwie już istnieje.</p>}
-        {emptyError && <p>Partia musi mieć nazwę.</p>}
-
-        <button onClick={handleSubmit}>Dodaj</button>
+        <button onClick={handleSubmit}>dodaj</button>
       </label>
+      {duplicateError && <p>Partia o tej nazwie już istnieje.</p>}
+      {emptyError && <p>Partia musi mieć nazwę.</p>}
       Listy predefiniowane:{" "}
       <button onClick={handlePredefined}>Wybory 2023 – sejm</button>
       <PartyList />
