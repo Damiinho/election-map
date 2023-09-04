@@ -43,39 +43,74 @@ const AddParty = () => {
     setDuplicateError(false);
     setEmptyError(false);
   };
-  const handlePredefined = () => {
+  const handlePredefined = (item) => {
     console.log("wybrano wybory 2023");
 
     setDuplicateError(false);
     setEmptyError(false);
-
-    const predefinedParties = [
-      {
-        name: "Prawo i Sprawiedliwość",
-        isOverThreshold: true,
-        color: "#0008ff",
-      },
-      {
-        name: "Koalicja Obywatelska",
-        isOverThreshold: true,
-        color: "#e08300",
-      },
-      {
-        name: "Konfederacja",
-        isOverThreshold: true,
-        color: "#1e1c82",
-      },
-      {
-        name: "Trzecia Droga",
-        isOverThreshold: true,
-        color: "#18af0d",
-      },
-      {
-        name: "Lewica",
-        isOverThreshold: true,
-        color: "#d60000",
-      },
-    ];
+    let predefinedParties = [];
+    if (item === "2023Poland") {
+      predefinedParties = [
+        {
+          name: "Prawo i Sprawiedliwość",
+          isOverThreshold: true,
+          color: "#0008ff",
+        },
+        {
+          name: "Koalicja Obywatelska",
+          isOverThreshold: true,
+          color: "#e08300",
+        },
+        {
+          name: "Konfederacja",
+          isOverThreshold: true,
+          color: "#1e1c82",
+        },
+        {
+          name: "Trzecia Droga",
+          isOverThreshold: true,
+          color: "#18af0d",
+        },
+        {
+          name: "Lewica",
+          isOverThreshold: true,
+          color: "#d60000",
+        },
+      ];
+    } else if (item === "2021Germany") {
+      predefinedParties = [
+        {
+          name: "CDU/CSU",
+          isOverThreshold: true,
+          color: "#000000",
+        },
+        {
+          name: "SPD",
+          isOverThreshold: true,
+          color: "#de001d",
+        },
+        {
+          name: "AfD",
+          isOverThreshold: true,
+          color: "#289ede",
+        },
+        {
+          name: "FDP",
+          isOverThreshold: true,
+          color: "#fded2e",
+        },
+        {
+          name: "Linke",
+          isOverThreshold: true,
+          color: "#bb2c75",
+        },
+        {
+          name: "Grüne",
+          isOverThreshold: true,
+          color: "#66a134",
+        },
+      ];
+    }
 
     setParties(predefinedParties);
 
@@ -117,8 +152,23 @@ const AddParty = () => {
       </label>
       {duplicateError && <p>Partia o tej nazwie już istnieje.</p>}
       {emptyError && <p>Partia musi mieć nazwę.</p>}
-      Listy predefiniowane:{" "}
-      <button onClick={handlePredefined}>Wybory 2023 – sejm</button>
+      <div className="options__addparty-predefined">
+        <p>Predefiniowane:</p>
+        <button
+          className="electionPoland"
+          onClick={() => handlePredefined("2023Poland")}
+        >
+          <p>wybory 2023</p>
+          <p>sejm</p>
+        </button>
+        <button
+          className="electionGermany"
+          onClick={() => handlePredefined("2021Germany")}
+        >
+          <p>wybory 2021</p>
+          <p>Niemcy</p>
+        </button>
+      </div>
       <PartyList />
     </div>
   );
