@@ -65,6 +65,7 @@
   background-color: #ffc36a3a;
   display: flex;
   border-radius: 7px;
+  padding-bottom: 5px;
 
   &__addparty {
     width: 50%;
@@ -195,12 +196,48 @@
   }
 
   &__list {
+    background-color: rgba(156, 98, 161, 0.171);
+    margin: 0 5px;
+    padding: 5px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     &-ul {
+      width: 100%;
       &-element {
-        display: flex;
+        height: 34px;
+        display: grid;
+        grid-template-columns: 3fr 1fr 1fr 1fr;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        &.legend {
+          background-color: #ca7a7aaf;
+          border-radius: 7px;
+          height: 26px;
+          div {
+            margin: 0 auto;
+          }
+        }
+        div {
+          padding: 2px 5px;
+        }
+        &__threshold {
+          text-align: center;
+        }
+
         &__color {
-          width: 40px;
-          height: 20px;
+          margin: 0 auto;
+          width: 25px;
+          height: 15px;
+          border-radius: 7px;
+          border: 2px solid rgba(73, 70, 70, 0.411);
+        }
+        &__delete {
+          text-align: center;
         }
       }
     }
