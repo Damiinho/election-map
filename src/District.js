@@ -3,6 +3,11 @@ import { AppContext } from "./contexts/AppContext";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { randomColor } from "randomcolor";
+import { Button, ButtonGroup, TextField } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const District = (props) => {
@@ -128,10 +133,13 @@ const District = (props) => {
 
   const handleResultChange = (index, value) => {
     // Skopiuj partie z tego okręgu
+    let currentValue = parseInt(value, 10);
+
+    if (currentValue < 0) currentValue = 0;
     const updatedParties = currentDistrict.parties.map((party) => ({
       ...party,
     }));
-    updatedParties[index].result = value;
+    updatedParties[index].result = currentValue;
 
     // Uaktualnij kontekst z nową listą partii dla tego okręgu
     setDistricts((prevDistricts) => {
@@ -143,79 +151,165 @@ const District = (props) => {
       return updatedDistricts;
     });
   };
-  const handleResultMeasure = () => {
-    setDistricts((prevDistricts) => {
-      const updatedDistricts = [...prevDistricts];
-      const currentMeasure = updatedDistricts[props.index].measure;
+  // const handleResultMeasure = () => {
+  //   setDistricts((prevDistricts) => {
+  //     const updatedDistricts = [...prevDistricts];
+  //     const currentMeasure = updatedDistricts[props.index].measure;
 
-      // Zmień miarę na przeciwną wartość
-      const newMeasure =
-        currentMeasure === "percentage" ? "number" : "percentage";
+  //     // Zmień miarę na przeciwną wartość
+  //     const newMeasure =
+  //       currentMeasure === "percentage" ? "number" : "percentage";
 
-      updatedDistricts[props.index] = {
-        ...updatedDistricts[props.index],
-        measure: newMeasure,
-      };
-      return updatedDistricts;
-    });
-  };
+  //     updatedDistricts[props.index] = {
+  //       ...updatedDistricts[props.index],
+  //       measure: newMeasure,
+  //     };
+  //     return updatedDistricts;
+  //   });
+  // };
 
   return (
-    <div key={props.index}>
-      {props.name}, liczba mandatów: {props.deputies}, metoda {props.method}
-      <button onClick={() => handleRemove(props.index)}>Usuń okręg</button>
-      <button onClick={handleAddLocalParty}>
-        {addLocal ? "nie dodawaj" : "dodaj lokalny komitet"}
-      </button>
-      <button onClick={handleResultMeasure}>
-        podaj wynik w{" "}
-        {currentDistrict.measure === "percentage"
-          ? "procentach"
-          : "liczbach bezwzględnych"}
-      </button>
-      {currentDistrict.parties.map((item, index) => (
-        <div key={index}>
-          {item.name}, wynik:{" "}
-          <input
-            type="number"
-            value={item.result}
-            onChange={(e) => handleResultChange(index, e.target.value)}
-          />
-        </div>
-      ))}
+    <div className="districts__element" key={props.index}>
+      <div className="districts__element-title">
+        <h1>{props.name}</h1>
+        <p>
+          Mandaty: <span>{props.deputies}</span>, metoda:{" "}
+          <span>{props.method === "dhondt" ? "d'Hondta" : "ilościowa"}</span>
+        </p>
+      </div>
+      <div className="districts__element-buttons">
+        <ButtonGroup
+          variant="contained"
+          aria-label="outlined primary button group"
+          color="error"
+        >
+          <Button
+            variant="contained"
+            startIcon={addLocal ? <CancelIcon /> : <AddCircleOutlinedIcon />}
+            color={addLocal ? "warning" : "success"}
+            size="small"
+            style={{
+              textTransform: "lowercase",
+              width: 130,
+            }}
+            onClick={handleAddLocalParty}
+          >
+            {addLocal ? "nie dodawaj" : "lokalny komitet"}
+          </Button>{" "}
+          <Button
+            variant="contained"
+            color="error"
+            size="small"
+            onClick={() => handleRemove(props.index)}
+          >
+            <DeleteForeverIcon color="string" fontSize="medium" />
+          </Button>
+        </ButtonGroup>
+        {/* <button onClick={handleResultMeasure}>
+          podaj wynik w{" "}
+          {currentDistrict.measure === "percentage"
+            ? "procentach"
+            : "liczbach bezwzględnych"}
+        </button> */}
+      </div>
       {addLocal ? (
-        <label className="">
-          <input
-            type="text"
-            placeholder="Nazwa partii"
+        <label className="districts__element-addlocal">
+          <TextField
+            color="success"
+            label="Nowy komitet"
+            hiddenLabel
+            variant="outlined"
+            size="small"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            sx={{
+              input: {
+                backgroundColor: "#50402923",
+                borderRadius: 1,
+              },
+            }}
+            style={{ width: 150 }}
           />
-          <button onClick={handleSubmitAddLocalParty}>Dodaj</button>
+          <Button
+            variant="contained"
+            color="success"
+            size="small"
+            onClick={handleSubmitAddLocalParty}
+            style={{ minWidth: 40 }}
+          >
+            <CheckCircleIcon color="string" fontSize="medium" />
+          </Button>
         </label>
       ) : (
         ""
       )}
-      <br />
-      <button onClick={handleStart}>generuj wyniki</button>
-      <br />
-      {currentDistrict.showFinalResult ? (
-        <div style={{ width: "200px", height: "200px" }}>
+      <div className="districts__element-list">
+        {currentDistrict.parties.map((item, index) => (
+          <div className="districts__element-list__item" key={index}>
+            <p>{item.name}</p>
+
+            <TextField
+              color="error"
+              type="number"
+              label="wynik"
+              InputProps={{
+                inputProps: {
+                  style: {
+                    textAlign: "center",
+                  },
+                },
+              }}
+              sx={{
+                input: {
+                  backgroundColor: "#50402923",
+                  borderRadius: 1,
+                },
+              }}
+              size="small"
+              onChange={(e) => handleResultChange(index, e.target.value)}
+              value={item.result}
+              variant="outlined"
+              style={{ width: 80 }}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="districts__element-start">
+        <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          style={{
+            textTransform: "lowercase",
+          }}
+          onClick={handleStart}
+        >
+          generuj wyniki
+        </Button>
+      </div>
+
+      <div className="districts__element-doughnut">
+        {currentDistrict.showFinalResult ? (
           <Doughnut
+            className="districts__element-doughnut__item"
             data={data}
+            style={{ cursor: "pointer" }}
             options={{
               responsive: true,
               plugins: {
                 legend: {
                   position: "bottom",
+                  labels: {
+                    color: "black",
+                  },
                 },
               },
             }}
           ></Doughnut>
-        </div>
-      ) : (
-        "tutaj wygeneruję wyniki"
-      )}
+        ) : (
+          "tutaj wygeneruję wyniki"
+        )}
+      </div>
     </div>
   );
 };

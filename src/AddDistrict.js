@@ -1,9 +1,17 @@
 import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 
 const AddDistrict = () => {
   const [name, setName] = useState("");
-  const [deputies, setDeputies] = useState(0);
+  const [deputies, setDeputies] = useState("");
   const [method, setMethod] = useState("dhondt");
   const [error, setError] = useState(false);
   const { districts, setDistricts, parties } = useContext(AppContext);
@@ -21,7 +29,7 @@ const AddDistrict = () => {
       name,
       deputies,
       method,
-      parties: [...parties], // Utwórz kopię listy partii dla tego okręgu
+      parties: [...parties],
       measure: "percentage",
       showFinalResult: false,
       finalResult: [],
@@ -30,7 +38,7 @@ const AddDistrict = () => {
     newDistricts.push(district);
     setDistricts(newDistricts);
     setName("");
-    setDeputies(0);
+    setDeputies("");
     setMethod("dhondt");
   };
 
@@ -38,32 +46,87 @@ const AddDistrict = () => {
     <div className="options__adddistrict">
       <h1 className="options__adddistrict-title">generuj okręg</h1>
       <label className="options__adddistrict-label">
-        <div>
-          Nazwa:
-          <input
-            type="text"
-            placeholder="Nazwa okręgu"
+        <div className="options__adddistrict-label__name">
+          <TextField
+            color="error"
+            label="Nazwa okręgu"
+            hiddenLabel
+            variant="outlined"
+            size="small"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            sx={{
+              input: {
+                backgroundColor: "#50402923",
+                borderRadius: 1,
+              },
+            }}
           />
         </div>
-        <div>
-          Liczba mandatów:{" "}
-          <input
+        <div className="options__adddistrict-label__deputies">
+          <TextField
+            color="error"
             type="number"
-            placeholder="Liczba mandatów"
+            label="Liczba mandatów"
+            InputProps={{
+              inputProps: {
+                style: {
+                  textAlign: "center",
+                },
+              },
+            }}
+            sx={{
+              input: {
+                backgroundColor: "#50402923",
+                borderRadius: 1,
+              },
+            }}
+            size="small"
+            onChange={(e) => {
+              let value = parseInt(e.target.value, 10);
+
+              if (value > 1000) value = 1000;
+              if (value < 0) value = 0;
+
+              setDeputies(value);
+            }}
             value={deputies}
-            onChange={(e) => setDeputies(e.target.value)}
+            variant="outlined"
           />
         </div>
-        <div>
-          Metoda podziału mandatów:
-          <select value={method} onChange={(e) => setMethod(e.target.value)}>
-            <option value="dhondt">d'Hondt</option>
-            <option value="normal">bez dzielenia</option>
-          </select>
+        <div className="options__adddistrict-label__method">
+          <FormControl
+            size="small"
+            style={{
+              width: 223,
+              backgroundColor: "#50402923",
+              borderRadius: 5,
+            }}
+          >
+            <InputLabel id="demo-simple-select-label">
+              Metoda podziału mandatów
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={method}
+              label="Metoda podziału mandatów"
+              onChange={(e) => setMethod(e.target.value)}
+            >
+              <MenuItem value="dhondt">d'Hondt</MenuItem>
+              <MenuItem value="normal">bez dzielenia</MenuItem>
+            </Select>
+          </FormControl>
         </div>
-        <button onClick={handleSubmit}>Dodaj</button>
+        <Button
+          variant="contained"
+          color="success"
+          size="small"
+          style={{ textTransform: "lowercase" }}
+          onClick={handleSubmit}
+        >
+          dodaj
+        </Button>
       </label>
       {error && <div>Okręg musi mieć nazwę i liczbę mandatów</div>}
     </div>

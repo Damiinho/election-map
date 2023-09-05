@@ -13,6 +13,9 @@ $material-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
 $default-border-radius: 7px;
 $default-padding: 5px;
 $default-gap: 5px;
+$primary-color: #ad7a2e3a;
+$secondary-color: #b6b5b381;
+$tertiary-color: #9c62a12c;
 
 @mixin title-in-options {
   font-size: 25px;
@@ -30,6 +33,18 @@ $default-gap: 5px;
 @mixin justify-align-center {
   justify-content: center;
   align-items: center;
+}
+@mixin add-button {
+  border-radius: $default-border-radius;
+  font-size: 15px;
+  width: 70px;
+  height: 30px;
+  cursor: pointer;
+  background-color: #81b84d;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  font-family: "MuseoModerno", cursive;
+  font-weight: 500;
 }
 
 #root {
@@ -102,7 +117,7 @@ $default-gap: 5px;
       @include title-in-options;
     }
     &-label {
-      background-color: #ad7a2e3a;
+      background-color: $primary-color;
       border-radius: $default-border-radius;
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -146,23 +161,14 @@ $default-gap: 5px;
         }
       }
       button {
-        border-radius: $default-border-radius;
-        font-size: 15px;
-        width: 70px;
-        height: 30px;
-        cursor: pointer;
-        background-color: #81b84d;
-        color: white;
-        text-shadow: 1px 1px 1px black;
-        font-family: "MuseoModerno", cursive;
-        font-weight: 500;
+        @include add-button;
       }
     }
     &-predefined {
       @include default-margin;
       padding: $default-padding;
       border-radius: $default-border-radius;
-      background-color: rgba(182, 181, 179, 0.507);
+      background-color: $secondary-color;
       display: flex;
       @include justify-align-center;
       button {
@@ -202,7 +208,7 @@ $default-gap: 5px;
   }
 
   &__list {
-    background-color: #9c62a12c;
+    background-color: $tertiary-color;
     @include default-margin;
     padding: $default-padding;
     border-radius: $default-border-radius;
@@ -262,6 +268,109 @@ $default-gap: 5px;
     gap: $default-gap;
     &-title {
       @include title-in-options;
+    }
+    &-label {
+      background-color: $primary-color;
+      border-radius: $default-border-radius;
+      @include default-margin;
+      display: flex;
+      flex-direction: column;
+      @include justify-align-center;
+      &__name {
+        margin-top: 10px;
+      }
+      &__deputies {
+        margin-top: 10px;
+      }
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      &__method {
+        margin-top: 10px;
+      }
+
+      button {
+        margin: 10px auto;
+        @include add-button;
+        width: 100px;
+      }
+    }
+  }
+}
+
+.districts {
+  margin-top: 5px;
+  background-color: #5040293a;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: $default-border-radius;
+  padding-bottom: $default-padding;
+  @include justify-align-center();
+  gap: 10px;
+  &__element {
+    margin: 10px 0;
+    background-color: $primary-color;
+    border-radius: $default-border-radius;
+    display: flex;
+    flex-direction: column;
+    @include justify-align-center();
+    width: 250px;
+    &-title {
+      font-family: "MuseoModerno", cursive;
+      font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      @include justify-align-center();
+      h1 {
+        padding: $default-padding;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      p {
+        font-size: 12px;
+
+        font-weight: 400;
+        span {
+          font-size: 15px;
+        }
+      }
+    }
+    &-buttons {
+      button {
+        font-family: "MuseoModerno", cursive;
+        font-weight: 500;
+        font-size: 10px;
+      }
+    }
+    &-addlocal {
+      margin-top: 10px;
+      display: flex;
+      gap: $default-gap;
+      @include justify-align-center();
+    }
+    &-list {
+      margin-top: 10px;
+      &__item {
+        display: flex;
+        justify-content: space-between;
+        gap: $default-gap;
+        padding: $default-padding;
+        align-items: center;
+        input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+      }
+    }
+    &-start {
+      button {
+        font-family: "MuseoModerno", cursive;
+        font-weight: 500;
+        font-size: 13px;
+      }
+    }
+    &-doughnut {
+      width: 250px;
+      margin-top: 10px;
     }
   }
 }
