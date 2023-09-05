@@ -202,7 +202,7 @@ $default-gap: 5px;
   }
 
   &__list {
-    background-color: rgba(156, 98, 161, 0.171);
+    background-color: #9c62a12c;
     @include default-margin;
     padding: $default-padding;
     border-radius: $default-border-radius;
@@ -222,6 +222,10 @@ $default-gap: 5px;
         grid-template-columns: 3fr 1fr 1fr 1fr;
         gap: $default-gap;
         @include justify-align-center;
+        border-bottom: 1px solid rgb(145, 145, 145);
+        &:hover {
+          background-color: #9c62a111;
+        }
         &.legend {
           background-color: #ca7a7aaf;
           border-radius: $default-border-radius;
