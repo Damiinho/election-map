@@ -132,7 +132,7 @@ const AddParty = () => {
       <label className="options__addparty-label">
         <TextField
           color="warning"
-          label="Nazwa partii"
+          label="Nazwa komitetu"
           hiddenLabel
           variant="outlined"
           className="options__addparty-label__name"
@@ -140,6 +140,12 @@ const AddParty = () => {
           fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
+          sx={{
+            input: {
+              backgroundColor: "#50402923",
+              borderRadius: 1,
+            },
+          }}
         />
 
         <label
