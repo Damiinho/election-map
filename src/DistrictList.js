@@ -6,7 +6,7 @@ const DistrictList = () => {
   const { districts } = useContext(AppContext);
 
   return (
-    <div>
+    <div className="districts">
       {districts.map((item, index) => (
         <District
           key={index}
