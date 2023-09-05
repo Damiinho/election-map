@@ -7,15 +7,29 @@
   box-sizing: border-box;
 }
 
+$material-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+  0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+$default-border-radius: 7px;
+$default-padding: 5px;
+$default-gap: 5px;
+
 @mixin title-in-options {
   font-size: 25px;
   text-align: center;
-  padding: 5px;
+  padding: $default-padding;
   font-family: "MuseoModerno", cursive;
   font-weight: 500;
   background-color: #46004641;
   margin: 5px 5px 0;
-  border-radius: 7px;
+  border-radius: $default-border-radius;
+}
+@mixin default-margin($top: 0, $right: 5px, $bottom: 0, $left: 5px) {
+  margin: $top $right $bottom $left;
+}
+@mixin justify-align-center {
+  justify-content: center;
+  align-items: center;
 }
 
 #root {
@@ -51,8 +65,7 @@
     &-handler {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      align-items: center;
+      @include justify-align-center;
       height: 40px;
       border-radius: 10px;
       background-color: #808080dd;
@@ -77,36 +90,34 @@
 .options {
   background-color: #ffc36a3a;
   display: flex;
-  border-radius: 7px;
-  padding-bottom: 5px;
+  border-radius: $default-border-radius;
+  padding-bottom: $default-padding;
 
   &__addparty {
     width: 50%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: $default-gap;
     &-title {
       @include title-in-options;
     }
     &-label {
       background-color: #ad7a2e3a;
-      border-radius: 7px;
+      border-radius: $default-border-radius;
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
       grid-template-rows: 50px;
       grid-column-gap: 0px;
       grid-row-gap: 0px;
       padding: 10px;
-      margin: 0 5px;
-      justify-content: center;
-      align-items: center;
+      @include default-margin;
+      @include justify-align-center;
 
       &__color {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        @include justify-align-center;
         flex-direction: column-reverse;
-        gap: 5px;
+        gap: $default-gap;
         font-family: "MuseoModerno", cursive;
         p {
           font-size: 12px;
@@ -121,25 +132,21 @@
           border: none;
           outline: none;
           background: transparent;
-          // border-radius: 50%; /* Dodaj zaokrąglenie */
           &:hover {
             cursor: pointer;
           }
           &::-webkit-color-swatch-wrapper {
-            border: none; /* Usuń obramowanie przycisku koloru dla przeglądarek Webkit (np. Chrome) */
+            border: none;
           }
           &::-webkit-color-swatch {
             border: none;
-            // border: 5px solid rgb(112, 112, 112); /* Usuń obramowanie przycisku koloru dla przeglądarek Webkit (np. Chrome) */
-            border-radius: 7px; /* Dodaj zaokrąglenie przyciskowi koloru dla przeglądarek Webkit */
-            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-              0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-              0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+            border-radius: $default-border-radius;
+            box-shadow: $material-box-shadow;
           }
         }
       }
       button {
-        border-radius: 7px;
+        border-radius: $default-border-radius;
         font-size: 15px;
         width: 70px;
         height: 30px;
@@ -152,24 +159,21 @@
       }
     }
     &-predefined {
-      margin: 0 5px;
-      padding: 5px;
-      border-radius: 7px;
+      @include default-margin;
+      padding: $default-padding;
+      border-radius: $default-border-radius;
       background-color: rgba(182, 181, 179, 0.507);
       display: flex;
-      justify-content: center;
-      align-items: center;
+      @include justify-align-center;
       button {
         height: 40px;
         font-size: 11px;
-        padding: 5px;
+        padding: $default-padding;
         margin-left: 20px;
         cursor: pointer;
-        border-radius: 7px;
+        border-radius: $default-border-radius;
         border: none;
-        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-          0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-          0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: $material-box-shadow;
         font-family: "MuseoModerno", cursive;
         font-weight: 500;
         p {
@@ -199,16 +203,15 @@
 
   &__list {
     background-color: rgba(156, 98, 161, 0.171);
-    margin: 0 5px;
-    padding: 5px;
-    border-radius: 7px;
+    @include default-margin;
+    padding: $default-padding;
+    border-radius: $default-border-radius;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include justify-align-center;
     &-title {
       font-size: 20px;
-      padding: 5px;
+      padding: $default-padding;
     }
 
     &-ul {
@@ -217,12 +220,11 @@
         min-height: 34px;
         display: grid;
         grid-template-columns: 3fr 1fr 1fr 1fr;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
+        gap: $default-gap;
+        @include justify-align-center;
         &.legend {
           background-color: #ca7a7aaf;
-          border-radius: 7px;
+          border-radius: $default-border-radius;
           height: 26px;
           font-family: "MuseoModerno", cursive;
           div {
@@ -240,10 +242,8 @@
           margin: 0 auto;
           width: 30px;
           height: 25px;
-          border-radius: 7px;
-          box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-            0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-            0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+          border-radius: $default-border-radius;
+          box-shadow: $material-box-shadow;
         }
         &__delete {
           text-align: center;
@@ -255,7 +255,7 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: $default-gap;
     &-title {
       @include title-in-options;
     }
