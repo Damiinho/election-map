@@ -2,7 +2,13 @@ import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import { randomColor } from "randomcolor";
 import PartyList from "./PartyList";
-import { Button, TextField } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 const AddParty = () => {
   const [name, setName] = useState("");
@@ -134,16 +140,30 @@ const AddParty = () => {
           fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{}}
         />
 
-        <label className="options__addparty-label__threshold">
-          <p>Uwzględnić przy podziale mandatów?</p>
-          <input
-            type="checkbox"
-            label="Ponad progiem?"
-            checked={isOverThreshold}
-            onChange={(e) => setIsOverThreshold(e.target.checked)}
+        <label
+          label="overThreshold"
+          className="options__addparty-label__threshold"
+        >
+          <FormControlLabel
+            className="options__addparty-label__threshold-form"
+            control={
+              <Checkbox
+                checked={isOverThreshold}
+                onChange={(e) => setIsOverThreshold(e.target.checked)}
+                color="success"
+              />
+            }
+            label={
+              <Typography
+                sx={{ fontSize: 10, fontFamily: "MuseoModerno, sans-serif" }}
+                className="options__addparty-label__threshold-form__typography"
+              >
+                Uwzględnić przy podziale mandatów?
+              </Typography>
+            }
+            labelPlacement="start"
           />
         </label>
         <div className="options__addparty-label__color">
