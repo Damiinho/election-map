@@ -128,7 +128,7 @@ const AddParty = () => {
 
   return (
     <div className="options__addparty">
-      <div className="options__addparty-title">Dodaj komitety:</div>
+      <div className="options__addparty-title">dodaj komitety</div>
       <label className="options__addparty-label">
         <TextField
           color="warning"
