@@ -151,22 +151,6 @@ const District = (props) => {
       return updatedDistricts;
     });
   };
-  // const handleResultMeasure = () => {
-  //   setDistricts((prevDistricts) => {
-  //     const updatedDistricts = [...prevDistricts];
-  //     const currentMeasure = updatedDistricts[props.index].measure;
-
-  //     // Zmień miarę na przeciwną wartość
-  //     const newMeasure =
-  //       currentMeasure === "percentage" ? "number" : "percentage";
-
-  //     updatedDistricts[props.index] = {
-  //       ...updatedDistricts[props.index],
-  //       measure: newMeasure,
-  //     };
-  //     return updatedDistricts;
-  //   });
-  // };
 
   return (
     <div className="districts__element" key={props.index}>
@@ -205,12 +189,6 @@ const District = (props) => {
             <DeleteForeverIcon color="string" fontSize="medium" />
           </Button>
         </ButtonGroup>
-        {/* <button onClick={handleResultMeasure}>
-          podaj wynik w{" "}
-          {currentDistrict.measure === "percentage"
-            ? "procentach"
-            : "liczbach bezwzględnych"}
-        </button> */}
       </div>
       {addLocal ? (
         <label className="districts__element-addlocal">

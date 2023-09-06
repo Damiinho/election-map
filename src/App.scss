@@ -182,14 +182,18 @@ $tertiary-color: #9c62a12c;
         box-shadow: $material-box-shadow;
         font-family: "MuseoModerno", cursive;
         font-weight: 500;
-        p {
-          text-shadow: 1px 1px 1px white;
-        }
         &.electionPoland {
           background: linear-gradient(
             rgba(255, 255, 255, 1) 50%,
             rgba(255, 25, 0, 1) 50%
           );
+          p {
+            position: relative;
+            top: -2px;
+          }
+          p:nth-of-type(2) {
+            color: white;
+          }
         }
         &.electionGermany {
           background: linear-gradient(
@@ -199,8 +203,13 @@ $tertiary-color: #9c62a12c;
             rgb(255, 255, 0) 66.6%
           );
           p:first-child {
+            position: relative;
+            top: 4px;
             color: white;
-            text-shadow: 1px 1px 1px black;
+          }
+          p:nth-of-type(2) {
+            position: relative;
+            top: 1px;
           }
         }
       }
@@ -315,6 +324,40 @@ $tertiary-color: #9c62a12c;
         margin: 10px auto;
         @include add-button;
         width: 100px;
+      }
+    }
+    &-predefined {
+      @include default-margin;
+      padding: $default-padding;
+      border-radius: $default-border-radius;
+      background-color: $secondary-color;
+      display: flex;
+      @include justify-align-center;
+
+      button {
+        height: 40px;
+        font-size: 11px;
+        padding: $default-padding;
+        margin-left: 20px;
+        cursor: pointer;
+        border-radius: $default-border-radius;
+        border: none;
+        box-shadow: $material-box-shadow;
+        font-family: "MuseoModerno", cursive;
+        font-weight: 500;
+        p {
+          position: relative;
+          top: -2px;
+        }
+        p:nth-of-type(2) {
+          color: white;
+        }
+        &.electionPoland {
+          background: linear-gradient(
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 25, 0, 1) 50%
+          );
+        }
       }
     }
   }
