@@ -22,9 +22,23 @@ const District = (props) => {
     setAddLocal(!addLocal);
   };
 
+  const handleLocalDelete = (index, districtIndex) => {
+    const newDistricts = [...districts];
+    newDistricts[districtIndex].parties.splice(index, 1);
+    setDistricts(newDistricts);
+  };
+
   const handleSubmitAddLocalParty = (e) => {
+    if (
+      name === "" ||
+      currentDistrict.parties.find((party) => party.name === name)
+    ) {
+      return;
+    }
+
     setAddLocal(!addLocal);
     e.preventDefault();
+
     const newParties = [...currentDistrict.parties];
     console.log(newParties);
     const party = {
@@ -151,9 +165,13 @@ const District = (props) => {
       return updatedDistricts;
     });
   };
-
   return (
-    <div className="districts__element" key={props.index}>
+    <div
+      className={`districts__element ${
+        currentDistrict.finalResult.length !== 0 ? "withresults" : ""
+      }`}
+      key={props.index}
+    >
       <div className="districts__element-title">
         <h1>{props.name}</h1>
         <p>
@@ -193,7 +211,7 @@ const District = (props) => {
       {addLocal ? (
         <label className="districts__element-addlocal">
           <TextField
-            color="success"
+            color="warning"
             label="Nowy komitet"
             hiddenLabel
             variant="outlined"
@@ -225,43 +243,62 @@ const District = (props) => {
         {currentDistrict.parties.map((item, index) => (
           <div className="districts__element-list__item" key={index}>
             <p>{item.name}</p>
-
-            <TextField
-              color="info"
-              type="number"
-              label="wynik"
-              InputProps={{
-                inputProps: {
-                  style: {
-                    textAlign: "center",
+            <div className="districts__element-list__item-handle">
+              <Button
+                variant="contained"
+                size="medium"
+                color="error"
+                sx={{
+                  minWidth: "20px",
+                  width: "20px",
+                  height: "30px",
+                  minHeight: "30px",
+                  "&:hover": {
+                    opacity: 1,
+                  },
+                  opacity: 0.6,
+                }}
+                onClick={() => handleLocalDelete(index, props.index)}
+              >
+                <CancelIcon />
+              </Button>
+              <TextField
+                color="info"
+                type="number"
+                label="wynik"
+                InputProps={{
+                  inputProps: {
+                    style: {
+                      textAlign: "center",
+                      color: "#cccccc",
+                    },
+                  },
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "white",
+                    },
+                  },
+                  input: {
+                    backgroundColor: "#d6c93855",
+                    borderRadius: 1,
+                  },
+                  label: {
                     color: "#cccccc",
+                    "&.Mui-focused": {
+                      color: "#ffffff",
+                      letterSpacing: 1.5,
+                    },
                   },
-                },
-              }}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused fieldset": {
-                    borderColor: "white",
-                  },
-                },
-                input: {
-                  backgroundColor: "#d6c93855",
-                  borderRadius: 1,
-                },
-                label: {
-                  color: "#cccccc",
-                  "&.Mui-focused": {
-                    color: "#ffffff",
-                    letterSpacing: 1.5,
-                  },
-                },
-              }}
-              size="small"
-              onChange={(e) => handleResultChange(index, e.target.value)}
-              value={item.result}
-              variant="outlined"
-              style={{ width: 80 }}
-            />
+                }}
+                size="small"
+                onChange={(e) => handleResultChange(index, e.target.value)}
+                value={item.result}
+                variant="outlined"
+                style={{ width: 80 }}
+              />
+            </div>
           </div>
         ))}
       </div>

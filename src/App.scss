@@ -364,23 +364,27 @@ $tertiary-color: #9c62a12c;
 }
 
 .districts {
+  width: 100%;
   margin-top: 5px;
   background-color: #5040293a;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   border-radius: $default-border-radius;
   padding-bottom: $default-padding;
-  @include justify-align-center();
-  gap: 10px;
+  align-items: flex-start;
   color: white;
   &__element {
-    margin: 10px 0;
+    grid-column: span 1;
+    margin: 10px auto;
     background-color: #504f45ad;
     border-radius: $default-border-radius;
     display: flex;
     flex-direction: column;
     @include justify-align-center();
     width: 250px;
+    // &.withresults {
+    //   grid-column: span 2;
+    // }
     &-title {
       font-family: "MuseoModerno", cursive;
       font-weight: 500;
@@ -402,6 +406,7 @@ $tertiary-color: #9c62a12c;
       }
     }
     &-buttons {
+      margin-top: 5px;
       button {
         font-family: "MuseoModerno", cursive;
         font-weight: 500;
@@ -428,6 +433,11 @@ $tertiary-color: #9c62a12c;
         }
         input[type="number"]::-webkit-inner-spin-button {
           -webkit-appearance: none;
+        }
+        &-handle {
+          display: flex;
+          gap: 3px;
+          @include justify-align-center();
         }
       }
     }
