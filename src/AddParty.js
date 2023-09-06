@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import { randomColor } from "randomcolor";
 import PartyList from "./PartyList";
+
 import {
   Button,
   Checkbox,
@@ -13,7 +14,7 @@ import {
 const AddParty = () => {
   const [name, setName] = useState("");
   const [isOverThreshold, setIsOverThreshold] = useState(true);
-  const [chosenColor, setChosenColor] = useState("");
+  const [chosenColor, setChosenColor] = useState(randomColor());
   const { parties, setParties } = useContext(AppContext);
   const [duplicateError, setDuplicateError] = useState(false);
   const [emptyError, setEmptyError] = useState(false);
@@ -46,13 +47,11 @@ const AddParty = () => {
     setName("");
     setIsOverThreshold(true);
     setParties(newParties);
-    setChosenColor("");
+    setChosenColor(randomColor());
     setDuplicateError(false);
     setEmptyError(false);
   };
   const handlePredefined = (item) => {
-    console.log("wybrano wybory 2023");
-
     setDuplicateError(false);
     setEmptyError(false);
     let predefinedParties = [];
