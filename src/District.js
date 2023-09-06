@@ -15,6 +15,7 @@ const District = (props) => {
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
   const [data, setData] = useState({});
+  const [currentResults, setCurrentResults] = useState([]);
 
   const currentDistrict = districts[props.index];
 
@@ -66,9 +67,10 @@ const District = (props) => {
 
   const handleStart = () => {
     const currentDistrict = districts[props.index];
-    const partiesWithResults = currentDistrict.parties.map((party) => ({
+    const partiesWithResults = currentDistrict.parties.map((party, index) => ({
       ...party,
-      result: party.result !== undefined ? Number(party.result) : 0,
+      result:
+        currentResults[index] !== undefined ? Number(currentResults[index]) : 0,
     }));
 
     const totalMandates = currentDistrict.deputies;
@@ -141,7 +143,6 @@ const District = (props) => {
   };
 
   const handleResultChange = (index, value) => {
-    // Skopiuj partie z tego okręgu
     let currentValue = parseInt(value, 10);
 
     if (currentValue < 0) currentValue = 0;
@@ -149,16 +150,9 @@ const District = (props) => {
       ...party,
     }));
     updatedParties[index].result = currentValue;
-
-    // Uaktualnij kontekst z nową listą partii dla tego okręgu
-    setDistricts((prevDistricts) => {
-      const updatedDistricts = [...prevDistricts];
-      updatedDistricts[props.index] = {
-        ...updatedDistricts[props.index],
-        parties: updatedParties,
-      };
-      return updatedDistricts;
-    });
+    const newResults = [...currentResults];
+    newResults[index] = currentValue;
+    setCurrentResults(newResults);
   };
   return (
     <div
@@ -289,7 +283,7 @@ const District = (props) => {
                 }}
                 size="small"
                 onChange={(e) => handleResultChange(index, e.target.value)}
-                value={item.result}
+                value={currentResults[index]}
                 variant="outlined"
                 style={{ width: 80 }}
               />
