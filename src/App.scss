@@ -382,9 +382,11 @@ $tertiary-color: #9c62a12c;
     flex-direction: column;
     @include justify-align-center();
     width: 250px;
-    // &.withresults {
-    //   grid-column: span 2;
-    // }
+    transition: 0.5s;
+    &.withresults {
+      grid-column: span 2;
+      width: 600px;
+    }
     &-title {
       font-family: "MuseoModerno", cursive;
       font-weight: 500;

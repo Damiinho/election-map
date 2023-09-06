@@ -111,13 +111,19 @@ const District = (props) => {
       ? partiesWithResults.map((party) => ({ ...party, seats: 0 }))
       : distributeSeats(partiesWithResults, totalMandates);
 
+    const booleanFinalResult = () => {
+      if (partiesWithResults.every((party) => party.result === 0)) {
+        return false;
+      } else return true;
+    };
+
     setDistricts((prevDistricts) => {
       const updatedDistricts = [...prevDistricts];
       updatedDistricts[props.index] = {
         ...updatedDistricts[props.index],
         finalResult: partiesWithMandates,
         parties: partiesWithResults, // Zachowujemy pierwotne wyniki
-        showFinalResult: true,
+        showFinalResult: booleanFinalResult(),
       };
 
       return updatedDistricts;
@@ -157,7 +163,7 @@ const District = (props) => {
   return (
     <div
       className={`districts__element ${
-        currentDistrict.finalResult.length !== 0 ? "withresults" : ""
+        currentDistrict.showFinalResult ? "withresults" : ""
       }`}
       key={props.index}
     >
