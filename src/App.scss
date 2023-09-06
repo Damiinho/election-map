@@ -422,6 +422,10 @@ $tertiary-color: #9c62a12c;
         gap: $default-gap;
         padding: $default-padding;
         align-items: center;
+
+        p {
+          max-width: 150px;
+        }
         input[type="number"]::-webkit-inner-spin-button {
           -webkit-appearance: none;
         }
