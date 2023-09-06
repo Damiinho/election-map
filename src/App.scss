@@ -241,6 +241,9 @@ $tertiary-color: #9c62a12c;
             margin: 0 auto;
           }
         }
+        &.active {
+          background-color: #ebd51777;
+        }
         div:first-of-type {
           padding: 2px 5px;
         }

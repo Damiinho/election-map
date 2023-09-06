@@ -61,7 +61,12 @@ const PartyList = () => {
               <div>kolor</div>
             </div>
             {parties.map((item, index) => (
-              <li className="options__list-ul-element" key={index}>
+              <li
+                className={`options__list-ul-element ${
+                  doubleClickedIndex === index ? "active" : ""
+                }`}
+                key={index}
+              >
                 {doubleClickedIndex === index ? (
                   <TextField
                     color="warning"
