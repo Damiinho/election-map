@@ -40,7 +40,6 @@ const District = (props) => {
     e.preventDefault();
 
     const newParties = [...currentDistrict.parties];
-    console.log(newParties);
     const party = {
       name,
       isOverThreshold: true,
@@ -139,10 +138,6 @@ const District = (props) => {
     });
 
     setAddLocal(false);
-
-    // Wyświetlenie wyników w konsoli
-    console.log("Wyniki po przydzieleniu mandatów:");
-    console.log(partiesWithMandates);
   };
 
   const handleResultChange = (index, value) => {
