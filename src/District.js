@@ -249,20 +249,33 @@ const District = (props) => {
             <p>{item.name}</p>
 
             <TextField
-              color="error"
+              color="info"
               type="number"
               label="wynik"
               InputProps={{
                 inputProps: {
                   style: {
                     textAlign: "center",
+                    color: "#cccccc",
                   },
                 },
               }}
               sx={{
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused fieldset": {
+                    borderColor: "white",
+                  },
+                },
                 input: {
-                  backgroundColor: "#50402923",
+                  backgroundColor: "#d6c93855",
                   borderRadius: 1,
+                },
+                label: {
+                  color: "#cccccc",
+                  "&.Mui-focused": {
+                    color: "#ffffff",
+                    letterSpacing: 1.5,
+                  },
                 },
               }}
               size="small"
@@ -300,7 +313,8 @@ const District = (props) => {
                 legend: {
                   position: "bottom",
                   labels: {
-                    color: "black",
+                    color: "white",
+                    letterSpacing: "10px",
                   },
                 },
               },

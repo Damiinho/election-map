@@ -307,9 +307,10 @@ $tertiary-color: #9c62a12c;
   padding-bottom: $default-padding;
   @include justify-align-center();
   gap: 10px;
+  color: white;
   &__element {
     margin: 10px 0;
-    background-color: $primary-color;
+    background-color: #504f45ad;
     border-radius: $default-border-radius;
     display: flex;
     flex-direction: column;
