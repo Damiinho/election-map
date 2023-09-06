@@ -83,6 +83,11 @@ const AddParty = () => {
           isOverThreshold: true,
           color: "#d60000",
         },
+        {
+          name: "Bezpartyjni Samorządowcy",
+          isOverThreshold: true,
+          color: "#000000",
+        },
       ];
     } else if (item === "2021Germany") {
       predefinedParties = [
