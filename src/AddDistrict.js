@@ -346,6 +346,32 @@ const AddDistrict = () => {
       finalResult: [],
     },
   ];
+  const testDistricts = [
+    {
+      name: "Legnica (1)",
+      deputies: 12,
+      method: "dhondt",
+      parties: [...parties],
+      showFinalResult: false,
+      finalResult: [],
+    },
+    {
+      name: "Wałbrzych (2)",
+      deputies: 8,
+      method: "dhondt",
+      parties: [...parties],
+      showFinalResult: false,
+      finalResult: [],
+    },
+    {
+      name: "Wrocław (3)",
+      deputies: 14,
+      method: "dhondt",
+      parties: [...parties],
+      showFinalResult: false,
+      finalResult: [],
+    },
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -375,6 +401,11 @@ const AddDistrict = () => {
   const handlePredefined = (item) => {
     if (item === "2023Poland") {
       setDistricts(polishDistricts);
+      setName("");
+      setDeputies("");
+      setMethod("dhondt");
+    } else if (item === "test") {
+      setDistricts(testDistricts);
       setName("");
       setDeputies("");
       setMethod("dhondt");
@@ -476,6 +507,13 @@ const AddDistrict = () => {
         >
           <p>sejm</p>
           <p>2023</p>
+        </button>
+        <button
+          className="electionPoland"
+          onClick={() => handlePredefined("test")}
+        >
+          <p>test</p>
+          <p>test</p>
         </button>
       </div>
     </div>
