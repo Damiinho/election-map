@@ -8,6 +8,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ReplayIcon from "@mui/icons-material/Replay";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const District = (props) => {
@@ -15,7 +17,9 @@ const District = (props) => {
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
   const [data, setData] = useState({});
-  const [currentResults, setCurrentResults] = useState([]);
+  const [currentResults, setCurrentResults] = useState(
+    Array(props.deputies).fill(0)
+  );
 
   const currentDistrict = districts[props.index];
 
@@ -59,10 +63,20 @@ const District = (props) => {
     });
   };
 
-  const handleRemove = (index) => {
+  const handleRemove = () => {
     const newDistricts = [...districts];
-    newDistricts.splice(index, 1);
+    newDistricts.splice(props.index, 1);
     setDistricts(newDistricts);
+  };
+
+  const handleRegenerate = () => {
+    currentDistrict.showFinalResult = false;
+    setDistricts((prevDistricts) => {
+      const updatedDistricts = [...prevDistricts];
+      updatedDistricts[props.index] = currentDistrict;
+
+      return updatedDistricts;
+    });
   };
 
   const handleStart = () => {
@@ -149,7 +163,7 @@ const District = (props) => {
   };
 
   const handleResultChange = (index, value) => {
-    let currentValue = parseInt(value, 10);
+    let currentValue = value;
 
     if (currentValue < 0) currentValue = 0;
     const updatedParties = currentDistrict.parties.map((party) => ({
@@ -197,7 +211,7 @@ const District = (props) => {
             variant="contained"
             color="error"
             size="small"
-            onClick={() => handleRemove(props.index)}
+            onClick={handleRemove}
           >
             <DeleteForeverIcon color="string" fontSize="medium" />
           </Button>
@@ -234,7 +248,11 @@ const District = (props) => {
       ) : (
         ""
       )}
-      <div className="districts__element-list">
+      <div
+        className={`districts__element-list ${
+          currentDistrict.showFinalResult ? "hide" : ""
+        }`}
+      >
         {currentDistrict.parties.map((item, index) => (
           <div className="districts__element-list__item" key={index}>
             <p>{item.name}</p>
@@ -300,14 +318,27 @@ const District = (props) => {
       <div className="districts__element-start">
         <Button
           variant="contained"
-          color="secondary"
+          color={`${currentDistrict.showFinalResult ? "warning" : "secondary"}`}
           size="small"
           style={{
             textTransform: "lowercase",
           }}
-          onClick={handleStart}
+          onClick={
+            currentDistrict.showFinalResult ? handleRegenerate : handleStart
+          }
+          startIcon={
+            currentDistrict.showFinalResult ? (
+              <ReplayIcon />
+            ) : (
+              <PlayCircleOutlineIcon />
+            )
+          }
         >
-          generuj wyniki
+          {`${
+            currentDistrict.showFinalResult
+              ? "popraw wyniki"
+              : "generuj mandaty"
+          }`}
         </Button>
       </div>
 
@@ -331,7 +362,7 @@ const District = (props) => {
             }}
           ></Doughnut>
         ) : (
-          "tutaj wygeneruję wyniki"
+          ""
         )}
       </div>
     </div>
