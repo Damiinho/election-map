@@ -39,7 +39,7 @@ const AddParty = () => {
     const party = {
       name,
       isOverThreshold,
-      color: chosenColor === "" ? randomColor() : chosenColor,
+      color: chosenColor,
     };
     console.log(party);
 
@@ -127,7 +127,7 @@ const AddParty = () => {
 
     setName("");
     setIsOverThreshold(true);
-    setChosenColor("");
+    setChosenColor(randomColor());
   };
 
   return (
