@@ -24,6 +24,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Wałbrzych (2)",
@@ -32,6 +33,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Wrocław (3)",
@@ -40,6 +42,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Bydgoszcz (4)",
@@ -48,6 +51,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Toruń (5)",
@@ -56,6 +60,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Lublin (6)",
@@ -64,6 +69,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Chełm (7)",
@@ -72,6 +78,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Zielona Góra (8)",
@@ -80,6 +87,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Łódź (9)",
@@ -88,6 +96,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Piotrków Trybunalski (10)",
@@ -96,6 +105,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Sieradz (11)",
@@ -104,6 +114,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Chrzanów (12)",
@@ -112,6 +123,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Kraków	(13)",
@@ -120,6 +132,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Nowy Sącz (14)",
@@ -128,6 +141,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Tarnów	(15)",
@@ -136,6 +150,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Płock (16)",
@@ -144,6 +159,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Radom (17)",
@@ -152,6 +168,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Siedlce (18)",
@@ -160,6 +177,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Warszawa (19)",
@@ -168,6 +186,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Warszawa – obwarzanek (20)",
@@ -176,6 +195,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Opole (21)",
@@ -184,6 +204,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Krosno (22)",
@@ -192,6 +213,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Rzeszów (23)",
@@ -200,6 +222,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Białystok (24)",
@@ -208,6 +231,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Gdańsk (25)",
@@ -216,6 +240,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Słupsk / Gdynia (26)",
@@ -224,6 +249,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Bielsko-Biała (27)",
@@ -232,6 +258,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Częstochowa (28)",
@@ -240,6 +267,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Gliwice (29)",
@@ -248,6 +276,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Rybnik (30)",
@@ -256,6 +285,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Katowice	(31)",
@@ -264,6 +294,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Sosnowiec (32)",
@@ -272,6 +303,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Kielce	(33)",
@@ -280,6 +312,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Elbląg (34)",
@@ -288,6 +321,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Olsztyn (35)",
@@ -296,6 +330,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Kalisz (36)",
@@ -304,6 +339,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Konin (37)",
@@ -312,6 +348,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Piła (38)",
@@ -320,6 +357,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Poznań (39)",
@@ -328,6 +366,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Koszalin (40)",
@@ -336,6 +375,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Szczecin (41)",
@@ -344,6 +384,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
   ];
   const testDistricts = [
@@ -354,6 +395,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Wałbrzych (2)",
@@ -362,6 +404,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
     {
       name: "Wrocław (3)",
@@ -370,6 +413,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     },
   ];
 
@@ -389,6 +433,7 @@ const AddDistrict = () => {
       parties: [...parties],
       showFinalResult: false,
       finalResult: [],
+      forChart: {},
     };
     const newDistricts = [...districts];
     newDistricts.push(district);

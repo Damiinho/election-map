@@ -16,7 +16,6 @@ const District = (props) => {
   const { districts, setDistricts } = useContext(AppContext);
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
-  const [data, setData] = useState({});
   const [currentResults, setCurrentResults] = useState(
     Array(props.deputies).fill(0)
   );
@@ -131,23 +130,11 @@ const District = (props) => {
       } else return true;
     };
 
-    setDistricts((prevDistricts) => {
-      const updatedDistricts = [...prevDistricts];
-      updatedDistricts[props.index] = {
-        ...updatedDistricts[props.index],
-        finalResult: partiesWithMandates,
-        parties: partiesWithResults, // Zachowujemy pierwotne wyniki
-        showFinalResult: booleanFinalResult(),
-      };
-
-      return updatedDistricts;
-    });
-
     const chartLabels = partiesWithMandates.map((party) => party.name);
     const chartData = partiesWithMandates.map((party) => party.seats);
     const chartColors = partiesWithMandates.map((party) => party.color);
 
-    setData({
+    const newForChart = {
       labels: chartLabels,
       datasets: [
         {
@@ -157,8 +144,21 @@ const District = (props) => {
           borderColor: chartColors,
         },
       ],
-    });
+    };
 
+    setDistricts((prevDistricts) => {
+      const updatedDistricts = [...prevDistricts];
+      updatedDistricts[props.index] = {
+        ...updatedDistricts[props.index],
+        finalResult: partiesWithMandates,
+        parties: partiesWithResults, // Zachowujemy pierwotne wyniki
+        showFinalResult: booleanFinalResult(),
+        forChart: newForChart,
+      };
+
+      return updatedDistricts;
+    });
+    setCurrentResults(Array(props.deputies).fill(0));
     setAddLocal(false);
   };
 
@@ -346,7 +346,7 @@ const District = (props) => {
         {currentDistrict.showFinalResult ? (
           <Doughnut
             className="districts__element-doughnut__item"
-            data={data}
+            data={currentDistrict.forChart}
             style={{ cursor: "pointer" }}
             options={{
               responsive: true,
