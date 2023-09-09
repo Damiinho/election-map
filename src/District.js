@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
 import { randomColor } from "randomcolor";
-import { Button, ButtonGroup, TextField } from "@mui/material";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
-import CancelIcon from "@mui/icons-material/Cancel";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ReplayIcon from "@mui/icons-material/Replay";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import StartButton from "./District/StartButton";
+import DoughnutChart from "./District/DoughnutChart";
+import PartyItem from "./District/PartyItem";
+import AddLocalParty from "./District/AddLocalParty";
+import TopButtons from "./District/TopButtons";
+import DoughnutDescription from "./District/DoughnutDescription";
+import DistrictTitle from "./District/DistrictTitle";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+
 const District = (props) => {
   const { districts, setDistricts } = useContext(AppContext);
   const [addLocal, setAddLocal] = useState(false);
@@ -184,198 +184,46 @@ const District = (props) => {
       }`}
       key={props.index}
     >
-      <div className="districts__element-title">
-        <h1>{props.name}</h1>
-        <p>
-          Mandaty: <span>{props.deputies}</span>, metoda:{" "}
-          <span>{props.method === "dhondt" ? "d'Hondta" : "ilościowa"}</span>
-        </p>
-      </div>
-      <div className="districts__element-buttons">
-        <ButtonGroup
-          variant="contained"
-          aria-label="outlined primary button group"
-          color="error"
-        >
-          <Button
-            variant="contained"
-            startIcon={addLocal ? <CancelIcon /> : <AddCircleOutlinedIcon />}
-            color={addLocal ? "warning" : "success"}
-            size="small"
-            style={{
-              textTransform: "lowercase",
-              width: 130,
-            }}
-            onClick={handleAddLocalParty}
-          >
-            {addLocal ? "nie dodawaj" : "lokalny komitet"}
-          </Button>{" "}
-          <Button
-            variant="contained"
-            color="error"
-            size="small"
-            onClick={handleRemove}
-          >
-            <DeleteForeverIcon color="string" fontSize="medium" />
-          </Button>
-        </ButtonGroup>
-      </div>
-      {addLocal ? (
-        <label className="districts__element-addlocal">
-          <TextField
-            color="warning"
-            label="Nowy komitet"
-            hiddenLabel
-            variant="outlined"
-            size="small"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            sx={{
-              input: {
-                backgroundColor: "#50402923",
-                borderRadius: 1,
-              },
-            }}
-            style={{ width: 150 }}
-          />
-          <Button
-            variant="contained"
-            color="success"
-            size="small"
-            onClick={handleSubmitAddLocalParty}
-            style={{ minWidth: 40 }}
-          >
-            <CheckCircleIcon color="string" fontSize="medium" />
-          </Button>
-        </label>
-      ) : (
-        ""
+      <DistrictTitle data={props} />
+      <TopButtons
+        addLocal={addLocal}
+        handleAddLocalParty={handleAddLocalParty}
+        handleRemove={handleRemove}
+      />
+      {addLocal && (
+        <AddLocalParty
+          name={name}
+          setName={setName}
+          handleSubmitAddLocalParty={handleSubmitAddLocalParty}
+        />
       )}
-      <div
-        className={`districts__element-list ${
-          currentDistrict.showFinalResult ? "hide" : ""
-        }`}
-      >
-        {currentDistrict.parties.map((item, index) => (
-          <div className="districts__element-list__item" key={index}>
-            <p>{item.name}</p>
-            <div className="districts__element-list__item-handle">
-              <Button
-                variant="contained"
-                size="medium"
-                color="error"
-                sx={{
-                  minWidth: "20px",
-                  width: "20px",
-                  height: "30px",
-                  minHeight: "30px",
-                  "&:hover": {
-                    opacity: 1,
-                  },
-                  opacity: 0.6,
-                }}
-                onClick={() => handleLocalDelete(index, props.index)}
-              >
-                <CancelIcon />
-              </Button>
-              <TextField
-                color="info"
-                type="number"
-                label="wynik"
-                InputProps={{
-                  inputProps: {
-                    style: {
-                      textAlign: "center",
-                      color: "#cccccc",
-                    },
-                  },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "&.Mui-focused fieldset": {
-                      borderColor: "white",
-                    },
-                  },
-                  input: {
-                    backgroundColor: "#d6c93855",
-                    borderRadius: 1,
-                  },
-                  label: {
-                    color: "#cccccc",
-                    "&.Mui-focused": {
-                      color: "#ffffff",
-                      letterSpacing: 1.5,
-                    },
-                  },
-                }}
-                size="small"
-                onChange={(e) => handleResultChange(index, e.target.value)}
-                value={currentResults[index]}
-                variant="outlined"
-                style={{ width: 80 }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="districts__element-start">
-        <Button
-          variant="contained"
-          color={`${currentDistrict.showFinalResult ? "warning" : "secondary"}`}
-          size="small"
-          style={{
-            textTransform: "lowercase",
-          }}
-          onClick={
-            currentDistrict.showFinalResult ? handleRegenerate : handleStart
-          }
-          startIcon={
-            currentDistrict.showFinalResult ? (
-              <ReplayIcon />
-            ) : (
-              <PlayCircleOutlineIcon />
-            )
-          }
-        >
-          {`${
-            currentDistrict.showFinalResult
-              ? "popraw wyniki"
-              : "generuj mandaty"
-          }`}
-        </Button>
-      </div>
 
-      {currentDistrict.showFinalResult ? (
-        <div className="districts__element-doughnut">
-          <div className="districts__element-doughnut__description">
-            {currentDistrict.finalResult.map((item) => (
-              <div>
-                {item.name}, wynik: {item.result}, miejsca: {item.seats}
-              </div>
-            ))}
-          </div>
-
-          <div className="districts__element-doughnut__item">
-            <Doughnut
-              data={currentDistrict.forChart}
-              style={{ cursor: "pointer" }}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: "bottom",
-                    labels: {
-                      color: "white",
-                      letterSpacing: "10px",
-                    },
-                  },
-                },
-              }}
-            ></Doughnut>
-          </div>
+      {!currentDistrict.showFinalResult && (
+        <div className="districts__element-list">
+          {currentDistrict.parties.map((item, index) => (
+            <PartyItem
+              key={index}
+              index={index}
+              item={item}
+              currentResults={currentResults}
+              handleLocalDelete={handleLocalDelete}
+              handleResultChange={handleResultChange}
+            />
+          ))}
         </div>
-      ) : (
-        ""
+      )}
+
+      <StartButton
+        currentDistrict={currentDistrict}
+        handleRegenerate={handleRegenerate}
+        handleStart={handleStart}
+      />
+
+      {currentDistrict.showFinalResult && (
+        <div className="districts__element-doughnut">
+          <DoughnutDescription finalResult={currentDistrict.finalResult} />
+          <DoughnutChart data={currentDistrict.forChart} />
+        </div>
       )}
     </div>
   );
