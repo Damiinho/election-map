@@ -4,6 +4,7 @@ import { randomColor } from "randomcolor";
 import PartyList from "./PartyList";
 
 import {
+  Alert,
   Button,
   Checkbox,
   FormControlLabel,
@@ -18,6 +19,7 @@ const AddParty = () => {
   const { parties, setParties } = useContext(AppContext);
   const [duplicateError, setDuplicateError] = useState(false);
   const [emptyError, setEmptyError] = useState(false);
+  const [addPartySuccess, setAddPartySuccess] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +52,10 @@ const AddParty = () => {
     setChosenColor(randomColor());
     setDuplicateError(false);
     setEmptyError(false);
+    setAddPartySuccess(true);
+    setTimeout(() => {
+      setAddPartySuccess(false);
+    }, 2000);
   };
   const handlePredefined = (item) => {
     setDuplicateError(false);
@@ -167,10 +173,15 @@ const AddParty = () => {
             }
             label={
               <Typography
-                sx={{ fontSize: 10, fontFamily: "MuseoModerno, sans-serif" }}
+                sx={{
+                  textAlign: "center",
+                  fontSize: 13,
+                  fontFamily: "MuseoModerno, sans-serif",
+                }}
                 className="options__addparty-label__threshold-form__typography"
               >
-                Uwzględnić przy podziale mandatów?
+                <p>{`>`}</p>
+                <p>próg?</p>
               </Typography>
             }
             labelPlacement="start"
@@ -194,8 +205,50 @@ const AddParty = () => {
           dodaj
         </Button>
       </label>
-      {duplicateError && <p>Partia o tej nazwie już istnieje.</p>}
-      {emptyError && <p>Partia musi mieć nazwę.</p>}
+
+      <Alert
+        fullWidth
+        style={{
+          margin: "0 5px",
+          backgroundColor: `${
+            duplicateError || emptyError
+              ? "#9c00008c"
+              : addPartySuccess
+              ? "#0d9c008c"
+              : "#1988e48c"
+          }`,
+        }}
+        variant="filled"
+        severity={
+          duplicateError || emptyError
+            ? "error"
+            : addPartySuccess
+            ? "success"
+            : "info"
+        }
+      >
+        {!(duplicateError || emptyError || addPartySuccess) && (
+          <p>
+            Wpisz nazwę nowego komitetu, ustal opcje i <strong>dodaj go</strong>
+          </p>
+        )}
+        {duplicateError && (
+          <p>
+            Komitet o tej nazwie <strong>już istnieje</strong>
+          </p>
+        )}
+        {emptyError && (
+          <p>
+            Komitet musi <strong>mieć nazwę</strong>
+          </p>
+        )}
+        {addPartySuccess && (
+          <p>
+            <strong>Komitet dodany!</strong>
+          </p>
+        )}
+      </Alert>
+
       <div className="options__addparty-predefined">
         <p>Predefiniowane:</p>
         <button
