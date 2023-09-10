@@ -9,6 +9,7 @@ const PartyList = () => {
   const { parties, setParties } = useContext(AppContext);
   const [doubleClickedIndex, setdoubleClickedIndex] = useState("");
   const [newPartyName, setNewPartyName] = useState("");
+  const [hide, setHide] = useState(false);
 
   const handleRemove = (index) => {
     const newParties = [...parties];
@@ -48,11 +49,17 @@ const PartyList = () => {
     setParties(newParties);
   };
 
+  const handleHide = () => {
+    setHide(!hide);
+  };
+
   return (
-    <div className="options__list">
+    <div className={`options__list ${hide ? "hide" : ""}`}>
       {parties.length > 0 ? (
         <>
-          <p className="options__list-title">Lista wybranych komitetów:</p>
+          <p className={`options__list-title`} onClick={handleHide}>
+            Lista wybranych komitetów
+          </p>
 
           <ul className="options__list-ul">
             <div className="options__list-ul-element legend">

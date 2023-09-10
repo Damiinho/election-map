@@ -223,8 +223,17 @@ $tertiary-color: #9c62a12c;
     border-radius: $default-border-radius;
     display: flex;
     flex-direction: column;
-    @include justify-align-center;
+    transition: max-height 1.5s; /* Używamy max-height z transition */
+    max-height: 1000px;
+    overflow: hidden;
+    &.hide {
+      // background-color: #fff;
+      max-height: 45px;
+    }
     &-title {
+      width: 100%;
+      cursor: pointer;
+      text-align: center;
       font-size: 20px;
       padding: $default-padding;
     }
