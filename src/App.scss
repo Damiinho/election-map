@@ -373,101 +373,139 @@ $tertiary-color: #9c62a12c;
 }
 
 .districts {
-  width: 100%;
-  margin-top: 5px;
   background-color: #5040293a;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 5px;
+  width: 100%;
   border-radius: $default-border-radius;
   padding-bottom: $default-padding;
-  align-items: flex-start;
-  color: white;
-  &__element {
-    grid-column: span 1;
-    margin: 10px auto;
-    background-color: #504f45ad;
-    border-radius: $default-border-radius;
-    display: flex;
-    flex-direction: column;
-    @include justify-align-center();
-    width: 250px;
-    transition: 0.5s;
-    &.withresults {
-      grid-column: span 2;
-      width: 600px;
-    }
-    &-title {
-      font-family: "MuseoModerno", cursive;
-      font-weight: 500;
+  &-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: flex-start;
+    color: white;
+
+    &__element {
+      grid-column: span 1;
+      margin: 10px auto;
+      background-color: #504f45ad;
+      border-radius: $default-border-radius;
       display: flex;
       flex-direction: column;
       @include justify-align-center();
-      h1 {
-        padding: $default-padding;
-        font-size: 20px;
-        font-weight: 500;
+      width: 250px;
+      transition: 0.5s;
+      &.withresults {
+        grid-column: span 2;
+        width: 600px;
       }
-      p {
-        font-size: 12px;
-
-        font-weight: 400;
-        span {
-          font-size: 15px;
-        }
-      }
-    }
-    &-buttons {
-      margin-top: 5px;
-      button {
+      &-title {
         font-family: "MuseoModerno", cursive;
         font-weight: 500;
-        font-size: 10px;
-      }
-    }
-    &-addlocal {
-      margin-top: 10px;
-      display: flex;
-      gap: $default-gap;
-      @include justify-align-center();
-    }
-    &-list {
-      margin-top: 10px;
-
-      &__item {
         display: flex;
-        justify-content: space-between;
-        gap: $default-gap;
-        padding: $default-padding;
-        align-items: center;
-
+        flex-direction: column;
+        @include justify-align-center();
+        h1 {
+          padding: $default-padding;
+          font-size: 20px;
+          font-weight: 500;
+        }
         p {
-          max-width: 150px;
+          font-size: 12px;
+
+          font-weight: 400;
+          span {
+            font-size: 15px;
+          }
         }
-        input[type="number"]::-webkit-inner-spin-button {
-          -webkit-appearance: none;
+      }
+      &-buttons {
+        margin-top: 5px;
+        button {
+          font-family: "MuseoModerno", cursive;
+          font-weight: 500;
+          font-size: 10px;
         }
-        &-handle {
+      }
+      &-addlocal {
+        margin-top: 10px;
+        display: flex;
+        gap: $default-gap;
+        @include justify-align-center();
+      }
+      &-list {
+        margin-top: 10px;
+
+        &__item {
           display: flex;
-          gap: 3px;
-          @include justify-align-center();
+          justify-content: space-between;
+          gap: $default-gap;
+          padding: $default-padding;
+          align-items: center;
+
+          p {
+            max-width: 150px;
+          }
+          input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+          }
+          &-handle {
+            display: flex;
+            gap: 3px;
+            @include justify-align-center();
+          }
         }
       }
-    }
-    &-start {
-      margin: 10px 0;
-      button {
-        font-family: "MuseoModerno", cursive;
-        font-weight: 500;
-        font-size: 13px;
+      &-start {
+        margin: 10px 0;
+        button {
+          font-family: "MuseoModerno", cursive;
+          font-weight: 500;
+          font-size: 13px;
+        }
       }
-    }
-    &-doughnut {
-      margin-top: 10px;
-      display: flex;
-      // &__item {
-      //   // width: 250px;
-      //   // margin-top: 10px;
-      // }
+      &-doughnut {
+        margin-top: 10px;
+        display: flex;
+        // &__item {
+        //   // width: 250px;
+        //   // margin-top: 10px;
+        // }
+        &__description {
+          background-color: #0026ff34;
+          border-radius: $default-border-radius;
+          padding: $default-padding;
+          margin-bottom: 10px;
+          thead {
+            background-color: #ffffff49;
+            color: black;
+            th {
+              width: 70px;
+              border-radius: $default-border-radius;
+            }
+            th:first-of-type {
+              width: 200px;
+            }
+          }
+          tbody {
+            tr {
+              td {
+                border-radius: $default-border-radius;
+                padding: $default-padding;
+                text-align: center;
+              }
+              td:first-of-type {
+                text-align: left;
+              }
+              td:last-of-type {
+                font-weight: bold;
+              }
+            }
+            tr:nth-of-type(odd) {
+              background-color: #0026ff2a;
+            }
+          }
+        }
+      }
     }
   }
 }

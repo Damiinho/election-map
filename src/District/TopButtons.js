@@ -5,7 +5,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 const TopButtons = (props) => {
   return (
-    <div className="districts__element-buttons">
+    <div className="districts-list__element-buttons">
       <ButtonGroup
         variant="contained"
         aria-label="outlined primary button group"

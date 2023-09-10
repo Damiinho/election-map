@@ -3,9 +3,9 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 const PartyItem = (props) => {
   return (
-    <div className="districts__element-list__item">
+    <div className="districts-list__element-list__item">
       <p>{props.item.name}</p>
-      <div className="districts__element-list__item-handle">
+      <div className="districts-list__element-list__item-handle">
         <Button
           variant="contained"
           size="medium"

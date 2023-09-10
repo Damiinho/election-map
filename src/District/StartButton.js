@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 
 const StartButton = (props) => {
   return (
-    <div className="districts__element-start">
+    <div className="districts-list__element-start">
       <Button
         variant="contained"
         color={`${
