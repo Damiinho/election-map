@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import {
+  Alert,
   Button,
   FormControl,
   InputLabel,
@@ -14,6 +15,7 @@ const AddDistrict = () => {
   const [deputies, setDeputies] = useState("");
   const [method, setMethod] = useState("dhondt");
   const [error, setError] = useState(false);
+  const [addDistrictSuccess, setAddDistrictSuccess] = useState(false);
   const { districts, setDistricts, parties } = useContext(AppContext);
 
   const polishDistricts = [
@@ -418,7 +420,6 @@ const AddDistrict = () => {
   ];
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     setError(false);
 
     if (deputies < 1 || name === "") {
@@ -441,6 +442,10 @@ const AddDistrict = () => {
     setName("");
     setDeputies("");
     setMethod("dhondt");
+    setAddDistrictSuccess(true);
+    setTimeout(() => {
+      setAddDistrictSuccess(false);
+    }, 2000);
   };
 
   const handlePredefined = (item) => {
@@ -470,6 +475,11 @@ const AddDistrict = () => {
             size="small"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
             sx={{
               input: {
                 backgroundColor: "#50402923",
@@ -504,6 +514,11 @@ const AddDistrict = () => {
               if (value < 0) value = 0;
 
               setDeputies(value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
             }}
             value={deputies}
             variant="outlined"
@@ -543,7 +558,33 @@ const AddDistrict = () => {
           dodaj
         </Button>
       </label>
-      {error && <div>Okręg musi mieć nazwę i liczbę mandatów</div>}
+      <Alert
+        fullWidth
+        style={{
+          margin: "0 5px",
+          backgroundColor: `${
+            error ? "#9c00008c" : addDistrictSuccess ? "#0d9c008c" : "#1988e48c"
+          }`,
+        }}
+        variant="filled"
+        severity={error ? "error" : addDistrictSuccess ? "success" : "info"}
+      >
+        {!error && !addDistrictSuccess && (
+          <p>
+            Wpisz nazwę nowego okręgu, ustal opcje i <strong>dodaj go</strong>
+          </p>
+        )}
+        {error && (
+          <p>
+            Okręg <strong>musi mieć nazwę i ustaloną liczbę mandatów</strong>
+          </p>
+        )}
+        {addDistrictSuccess && (
+          <p>
+            <strong>Okręg dodany!</strong>
+          </p>
+        )}
+      </Alert>
       <div className="options__adddistrict-predefined">
         <p>Predefiniowane okręgi</p>
         <button

@@ -41,7 +41,6 @@ const District = (props) => {
     }
 
     setAddLocal(!addLocal);
-    e.preventDefault();
 
     const newParties = [...currentDistrict.parties];
     const party = {

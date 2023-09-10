@@ -22,8 +22,6 @@ const AddParty = () => {
   const [addPartySuccess, setAddPartySuccess] = useState(false);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
     setDuplicateError(false);
     setEmptyError(false);
 
@@ -150,6 +148,11 @@ const AddParty = () => {
           fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSubmit();
+            }
+          }}
           sx={{
             input: {
               backgroundColor: "#50402923",

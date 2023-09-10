@@ -12,6 +12,11 @@ const AddLocalParty = (props) => {
         size="small"
         value={props.name}
         onChange={(e) => props.setName(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            props.handleSubmitAddLocalParty();
+          }
+        }}
         sx={{
           input: {
             backgroundColor: "#50402923",
