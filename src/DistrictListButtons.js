@@ -1,9 +1,9 @@
-import { Button } from "@mui/material";
+import MySwitch from "./MySwitch";
 
 const DistrictListButton = () => {
   return (
     <>
-      <Button>elo</Button>
+      <MySwitch />
     </>
   );
 };

@@ -85,6 +85,7 @@ $tertiary-color: #9c62a12c;
       border-radius: 10px;
       background-color: #808080dd;
       cursor: pointer;
+      position: relative;
 
       &__name {
         position: relative;
@@ -94,9 +95,22 @@ $tertiary-color: #9c62a12c;
         font-family: "Overpass", sans-serif;
         font-weight: 200;
       }
-      &__img {
-        width: 60px;
-        height: 40px;
+      &__side {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        display: flex;
+        flex-direction: row;
+        @include justify-align-center;
+        &-img {
+          position: relative;
+          top: 0;
+          left: 0;
+          transform: translate(-50%, -50%);
+
+          width: 45px;
+          height: 30px;
+        }
       }
     }
   }
@@ -104,12 +118,22 @@ $tertiary-color: #9c62a12c;
 
 .options {
   background-color: #ffc36a3a;
-  display: flex;
+  display: grid;
   border-radius: $default-border-radius;
   padding-bottom: $default-padding;
 
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 1s ease-out;
+
+  overflow: hidden;
+  &.hide {
+    grid-template-rows: 0fr;
+    overflow: hidden;
+  }
+
   &__addparty {
-    width: 50%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: $default-gap;
@@ -302,7 +326,7 @@ $tertiary-color: #9c62a12c;
     }
   }
   &__adddistrict {
-    width: 50%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: $default-gap;
@@ -378,6 +402,7 @@ $tertiary-color: #9c62a12c;
   width: 100%;
   border-radius: $default-border-radius;
   padding-bottom: $default-padding;
+
   &-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
