@@ -246,23 +246,32 @@ $tertiary-color: #9c62a12c;
     border-radius: $default-border-radius;
     display: flex;
     flex-direction: column;
-    transition: max-height 1.5s; /* Używamy max-height z transition */
-    max-height: 1000px;
-    overflow: hidden;
-    &.hide {
-      // background-color: #fff;
-      max-height: 45px;
-    }
+
     &-title {
+      position: relative;
       width: 100%;
       cursor: pointer;
       text-align: center;
       font-size: 20px;
       padding: $default-padding;
+      > div {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
     }
 
     &-ul {
-      width: 100%;
+      display: grid;
+      grid-template-rows: 1fr;
+
+      transition: 0.5s;
+      > div {
+        overflow: hidden;
+      }
+      &.hide {
+        grid-template-rows: 0fr;
+      }
       &-element {
         min-height: 34px;
         display: grid;
@@ -270,6 +279,7 @@ $tertiary-color: #9c62a12c;
         gap: $default-gap;
         @include justify-align-center;
         border-bottom: 1px solid rgb(145, 145, 145);
+
         &:hover {
           background-color: #9c62a111;
         }

@@ -4,6 +4,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Button, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import MySwitch from "./MySwitch";
 
 const PartyList = () => {
   const { parties, setParties } = useContext(AppContext);
@@ -54,75 +55,83 @@ const PartyList = () => {
   };
 
   return (
-    <div className={`options__list ${hide ? "hide" : ""}`}>
+    <div className={`options__list `}>
       {parties.length > 0 ? (
         <>
-          <p className={`options__list-title`} onClick={handleHide}>
-            Lista wybranych komitetów
-          </p>
+          <div className={`options__list-title`}>
+            <p>Lista wybranych komitetów</p>
+            <MySwitch
+              onClick={handleHide}
+              imgDisplay
+              defaultValue
+              thumbDisplay={false}
+            />
+          </div>
 
-          <ul className="options__list-ul">
-            <div className="options__list-ul-element legend">
-              <div>nazwa</div>
-              <div>{`> próg`}</div>
-              <div>kolor</div>
-            </div>
-            {parties.map((item, index) => (
-              <li
-                className={`options__list-ul-element ${
-                  doubleClickedIndex === index ? "active" : ""
-                }`}
-                key={index}
-              >
-                {doubleClickedIndex === index ? (
-                  <TextField
-                    color="warning"
-                    hiddenLabel
-                    variant="standard"
-                    size="small"
-                    fullWidth
-                    value={newPartyName}
-                    onChange={(e) => setNewPartyName(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleEnterName(index);
-                      }
-                    }}
-                  />
-                ) : (
-                  <div onDoubleClick={() => handleDoubleClickName(index)}>
-                    {item.name}
-                  </div>
-                )}
-                <div
-                  className="options__list-ul-element__threshold"
-                  onClick={() => handleThreshold(index)}
+          <ul className={`options__list-ul ${hide ? "hide" : ""}`}>
+            <div>
+              <div className="options__list-ul-element legend">
+                <div>nazwa</div>
+                <div>{`> próg`}</div>
+                <div>kolor</div>
+              </div>
+              {parties.map((item, index) => (
+                <li
+                  className={`options__list-ul-element ${
+                    doubleClickedIndex === index ? "active" : ""
+                  }`}
+                  key={index}
                 >
-                  {item.isOverThreshold ? (
-                    <CheckCircleIcon color="success" fontSize="medium" />
+                  {doubleClickedIndex === index ? (
+                    <TextField
+                      color="warning"
+                      hiddenLabel
+                      variant="standard"
+                      size="small"
+                      fullWidth
+                      value={newPartyName}
+                      onChange={(e) => setNewPartyName(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleEnterName(index);
+                        }
+                      }}
+                    />
                   ) : (
-                    <CancelIcon color="error" fontSize="medium" />
+                    <div onDoubleClick={() => handleDoubleClickName(index)}>
+                      {item.name}
+                    </div>
                   )}
-                </div>
-                <input
-                  className="options__list-ul-element__color"
-                  type="color"
-                  value={item.color}
-                  onChange={(e) => handleColor(index, e.target.value)}
-                />
-                <div className="options__list-ul-element__delete">
-                  <Button
-                    variant="contained"
-                    color="error"
-                    size="small"
-                    style={{ minWidth: "40px", height: "30px", padding: "0" }}
-                    onClick={() => handleRemove(index)}
+                  <div
+                    className="options__list-ul-element__threshold"
+                    onClick={() => handleThreshold(index)}
                   >
-                    <DeleteForeverIcon color="string" fontSize="medium" />
-                  </Button>
-                </div>
-              </li>
-            ))}
+                    {item.isOverThreshold ? (
+                      <CheckCircleIcon color="success" fontSize="medium" />
+                    ) : (
+                      <CancelIcon color="error" fontSize="medium" />
+                    )}
+                  </div>
+                  <input
+                    className="options__list-ul-element__color"
+                    type="color"
+                    value={item.color}
+                    onChange={(e) => handleColor(index, e.target.value)}
+                  />
+                  <div className="options__list-ul-element__delete">
+                    <Button
+                      variant="contained"
+                      color="error"
+                      size="small"
+                      style={{ minWidth: "40px", height: "30px", padding: "0" }}
+                      onClick={() => handleRemove(index)}
+                    >
+                      <DeleteForeverIcon color="string" fontSize="medium" />
+                    </Button>
+                  </div>
+                </li>
+              ))}
+            </div>
           </ul>
         </>
       ) : (
