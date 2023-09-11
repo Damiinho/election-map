@@ -13,10 +13,15 @@ const Options = () => {
 
   return (
     <div className="App__options">
-      <div className="App__options-handler" onClick={handleShowOptions}>
+      <div className="App__options-handler">
         <span className="App__options-handler__name">Ustawienia</span>
         <div className="App__options-handler__side">
-          <MySwitch imgDisplay defaultValue={true} thumbDisplay={false} />
+          <MySwitch
+            onClick={handleShowOptions}
+            imgDisplay
+            defaultValue={true}
+            thumbDisplay={false}
+          />
         </div>
       </div>
       <div className={`options ${!showOptions ? "hide" : ""}`}>

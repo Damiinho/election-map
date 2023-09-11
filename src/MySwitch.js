@@ -15,6 +15,9 @@ const MySwitch = (props) => {
 
   const handleClick = () => {
     setIsChecked(!isChecked);
+    if (props.onClick) {
+      props.onClick();
+    }
   };
 
   const mySwitchStyle = {
