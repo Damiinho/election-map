@@ -12,10 +12,10 @@ const DistrictList = () => {
   };
 
   return (
-    <div className="districts">
-      <div className="districts-title">
+    <div className="App__districtlist">
+      <div className="App__districtlist-title">
         <span>Okręgi</span>
-        <div className="districts-title__side">
+        <div className="App__districtlist-title__side">
           <MySwitch
             onClick={handleShowDistricts}
             imgDisplay
@@ -24,9 +24,9 @@ const DistrictList = () => {
           />
         </div>
       </div>
-      <div className={`districts-wrapper ${showDistricts ? "" : "hide"}`}>
+      <div className={`App__districtlist-main ${showDistricts ? "" : "hide"}`}>
         {/* <DistrictListButton /> */}
-        <div className="districts-list">
+        <div className="list">
           {districts.map((item, index) => (
             <District
               key={index}

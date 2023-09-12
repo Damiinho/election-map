@@ -463,10 +463,10 @@ const AddDistrict = () => {
   };
 
   return (
-    <div className="options__adddistrict">
-      <h1 className="options__adddistrict-title">generuj okręgi</h1>
-      <label className="options__adddistrict-label">
-        <div className="options__adddistrict-label__name">
+    <div className="adddistrict">
+      <h1 className="adddistrict__title">generuj okręgi</h1>
+      <label className="adddistrict__label">
+        <div className="adddistrict__label-name">
           <TextField
             color="error"
             label="Nazwa okręgu"
@@ -488,7 +488,7 @@ const AddDistrict = () => {
             }}
           />
         </div>
-        <div className="options__adddistrict-label__deputies">
+        <div className="adddistrict__label-deputies">
           <TextField
             color="error"
             type="number"
@@ -524,7 +524,7 @@ const AddDistrict = () => {
             variant="outlined"
           />
         </div>
-        <div className="options__adddistrict-label__method">
+        <div className="adddistrict__label-method">
           <FormControl
             size="small"
             style={{
@@ -584,7 +584,7 @@ const AddDistrict = () => {
           </p>
         )}
       </Alert>
-      <div className="options__adddistrict-predefined">
+      <div className="adddistrict__predefined">
         <p>Predefiniowane okręgi</p>
         <button
           className="electionPoland"

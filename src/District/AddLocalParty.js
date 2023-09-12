@@ -3,7 +3,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const AddLocalParty = (props) => {
   return (
-    <label className="districts-list__element-addlocal">
+    <label className="list__element-addlocal">
       <TextField
         color="warning"
         label="Nowy komitet"

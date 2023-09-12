@@ -11,6 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import AddPartyPredefined from "./AddPartyPredefined";
 
 const AddParty = () => {
   const [name, setName] = useState("");
@@ -135,15 +136,15 @@ const AddParty = () => {
   };
 
   return (
-    <div className="options__addparty">
-      <div className="options__addparty-title">dodaj komitety</div>
-      <label className="options__addparty-label">
+    <div className="addparty">
+      <div className="addparty__title">dodaj komitety</div>
+      <label className="addparty__label">
         <TextField
           color="warning"
           label="Nazwa komitetu"
           hiddenLabel
           variant="outlined"
-          className="options__addparty-label__name"
+          className="addparty__label-name"
           size="small"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -160,12 +161,9 @@ const AddParty = () => {
           }}
         />
 
-        <label
-          label="overThreshold"
-          className="options__addparty-label__threshold"
-        >
+        <label label="overThreshold" className="addparty__label-threshold">
           <FormControlLabel
-            className="options__addparty-label__threshold-form"
+            className="addparty__label-threshold__form"
             control={
               <Checkbox
                 checked={isOverThreshold}
@@ -180,7 +178,7 @@ const AddParty = () => {
                   fontSize: 13,
                   fontFamily: "MuseoModerno, sans-serif",
                 }}
-                className="options__addparty-label__threshold-form__typography"
+                className="addparty__label-threshold__form-typography"
               >
                 <span>{`>`}</span>
                 <br />
@@ -190,7 +188,7 @@ const AddParty = () => {
             labelPlacement="start"
           />
         </label>
-        <div className="options__addparty-label__color">
+        <div className="addparty__label-color">
           <input
             type="color"
             value={chosenColor}
@@ -251,25 +249,7 @@ const AddParty = () => {
         )}
       </Alert>
 
-      <div className="options__addparty-predefined">
-        <p>Predefiniowane:</p>
-        <button
-          className="electionPoland"
-          onClick={() => handlePredefined("2023Poland")}
-        >
-          <span>wybory 2023</span>
-          <br />
-          <span>sejm</span>
-        </button>
-        <button
-          className="electionGermany"
-          onClick={() => handlePredefined("2021Germany")}
-        >
-          <span>wybory 2021</span>
-          <br />
-          <span>Niemcy</span>
-        </button>
-      </div>
+      <AddPartyPredefined click={handlePredefined} />
       <PartyList />
     </div>
   );

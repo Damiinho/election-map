@@ -180,7 +180,7 @@ const District = (props) => {
 
   return (
     <div
-      className={`districts-list__element ${
+      className={`list__element ${
         currentDistrict.showFinalResult ? "withresults" : ""
       }`}
       key={props.index}
@@ -201,7 +201,7 @@ const District = (props) => {
       )}
 
       {!currentDistrict.showFinalResult && (
-        <div className="districts-list__element-list">
+        <div className="list__element-parties">
           {currentDistrict.parties.map((item, index) => (
             <PartyItem
               key={index}
@@ -223,12 +223,12 @@ const District = (props) => {
 
       {currentDistrict.showFinalResult && (
         <>
-          <div className="districts-list__element-doughnut">
+          <div className="list__element-doughnut">
             <DoughnutDescription finalResult={currentDistrict.finalResult} />
             <DoughnutChart data={currentDistrict.forChart} />
           </div>
 
-          <div className="districts-list__element-bars">
+          <div className="list__element-bars">
             <ResultBar finalResult={currentDistrict.finalResult} />
             <SeatsBar finalResult={currentDistrict.finalResult} />
           </div>

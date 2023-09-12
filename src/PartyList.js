@@ -54,10 +54,10 @@ const PartyList = () => {
   };
 
   return (
-    <div className={`options__list `}>
+    <div className={`addparty__list `}>
       {parties.length > 0 ? (
         <>
-          <div className={`options__list-title`}>
+          <div className={`addparty__list-title`}>
             <span>Lista wybranych komitetów</span>
             <MySwitch
               onClick={handleHide}
@@ -67,16 +67,16 @@ const PartyList = () => {
             />
           </div>
 
-          <ul className={`options__list-ul ${hide ? "hide" : ""}`}>
+          <ul className={`addparty__list-ul ${hide ? "hide" : ""}`}>
             <div>
-              <div className="options__list-ul-element legend">
+              <div className="addparty__list-ul-element legend">
                 <div>nazwa</div>
                 <div>{`> próg`}</div>
                 <div>kolor</div>
               </div>
               {parties.map((item, index) => (
                 <li
-                  className={`options__list-ul-element ${
+                  className={`addparty__list-ul-element ${
                     doubleClickedIndex === index ? "active" : ""
                   }`}
                   key={index}
@@ -101,7 +101,7 @@ const PartyList = () => {
                       {item.name}
                     </div>
                   )}
-                  <div className="options__list-ul-element__threshold">
+                  <div className="addparty__list-ul-element__threshold">
                     <MySwitch
                       onClick={() => handleThreshold(index)}
                       checkedObject={
@@ -139,12 +139,12 @@ const PartyList = () => {
                     />
                   </div>
                   <input
-                    className="options__list-ul-element__color"
+                    className="addparty__list-ul-element__color"
                     type="color"
                     value={item.color}
                     onChange={(e) => handleColor(index, e.target.value)}
                   />
-                  <div className="options__list-ul-element__delete">
+                  <div className="addparty__list-ul-element__delete">
                     <Button
                       variant="contained"
                       color="error"

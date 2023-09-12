@@ -2,7 +2,7 @@ import React from "react";
 
 const DoughnutDescription = (props) => {
   return (
-    <table className="districts-list__element-doughnut__description">
+    <table className="list__element-doughnut__description">
       <thead>
         <tr>
           <th>Nazwa</th>
