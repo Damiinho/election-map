@@ -10,6 +10,9 @@ const MySwitch = (props) => {
   const imgDisplay = props.imgDisplay || false;
   const checkedIMG = props.checkedIMG || showSVG;
   const uncheckedIMG = props.uncheckedIMG || hideSVG;
+  const objectDisplay = props.objectDisplay || false;
+  const checkedObject = props.checkedObject || "";
+  const uncheckedObject = props.uncheckedObject || "";
   const thumbDisplay = props.thumbDisplay === false ? false : true;
   const thumbColor = props.thumbColor || "#90c4ff";
   const trackColor = props.trackColor || "#727272bb";
@@ -55,6 +58,7 @@ const MySwitch = (props) => {
       ? "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)"
       : "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
     transition: "boxShadow 0.5s",
+    position: "relative",
   };
 
   const thumbStyle = {
@@ -65,9 +69,8 @@ const MySwitch = (props) => {
     boxShadow: thumbDisplay
       ? "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)"
       : "",
-    position: "relative",
-    top: "0",
-    transform: `translateY(-${4 * size}px)`,
+    position: "absolute",
+    top: `-${4 * size}px`,
     transition: "0.2s",
     left: isChecked ? 20 * size : 0,
   };
@@ -90,6 +93,7 @@ const MySwitch = (props) => {
             src={isChecked ? checkedIMG : uncheckedIMG}
             alt="thumb"
           />
+          {objectDisplay ? (isChecked ? checkedObject : uncheckedObject) : ""}
         </div>
       </div>
     </div>
