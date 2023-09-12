@@ -21,7 +21,6 @@ const PartyList = () => {
   const handleThreshold = (index) => {
     const newParties = [...parties];
     newParties[index].isOverThreshold = !newParties[index].isOverThreshold;
-
     setParties(newParties);
   };
 
@@ -102,15 +101,42 @@ const PartyList = () => {
                       {item.name}
                     </div>
                   )}
-                  <div
-                    className="options__list-ul-element__threshold"
-                    onClick={() => handleThreshold(index)}
-                  >
-                    {item.isOverThreshold ? (
-                      <CheckCircleIcon color="success" fontSize="medium" />
-                    ) : (
-                      <CancelIcon color="error" fontSize="medium" />
-                    )}
+                  <div className="options__list-ul-element__threshold">
+                    <MySwitch
+                      onClick={() => handleThreshold(index)}
+                      checkedObject={
+                        <CheckCircleIcon
+                          style={{
+                            width: "120%",
+                            height: "120%",
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            color: "green",
+                          }}
+                        />
+                      }
+                      uncheckedObject={
+                        <CancelIcon
+                          style={{
+                            width: "120%",
+                            height: "120%",
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            color: "red",
+                          }}
+                        />
+                      }
+                      trackColor={"#d3d3d3"}
+                      trackCheckedColor={"#b6ddb8"}
+                      thumbDisplay={false}
+                      size={1}
+                      objectDisplay
+                      defaultValue={item.isOverThreshold}
+                    />
                   </div>
                   <input
                     className="options__list-ul-element__color"

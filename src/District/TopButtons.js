@@ -11,21 +11,23 @@ const TopButtons = (props) => {
         aria-label="outlined primary button group"
         color="error"
       >
-        <Button
-          variant="contained"
-          startIcon={
-            props.addLocal ? <CancelIcon /> : <AddCircleOutlinedIcon />
-          }
-          color={props.addLocal ? "warning" : "success"}
-          size="small"
-          style={{
-            textTransform: "lowercase",
-            width: 130,
-          }}
-          onClick={props.handleAddLocalParty}
-        >
-          {props.addLocal ? "nie dodawaj" : "lokalny komitet"}
-        </Button>{" "}
+        {!props.showFinalResult && (
+          <Button
+            variant="contained"
+            startIcon={
+              props.addLocal ? <CancelIcon /> : <AddCircleOutlinedIcon />
+            }
+            color={props.addLocal ? "warning" : "success"}
+            size="small"
+            style={{
+              textTransform: "lowercase",
+              width: 130,
+            }}
+            onClick={props.handleAddLocalParty}
+          >
+            {props.addLocal ? "nie dodawaj" : "lokalny komitet"}
+          </Button>
+        )}{" "}
         <Button
           variant="contained"
           color="error"

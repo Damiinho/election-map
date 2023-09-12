@@ -186,6 +186,7 @@ const District = (props) => {
       <DistrictTitle data={props} />
       <TopButtons
         addLocal={addLocal}
+        showFinalResult={currentDistrict.showFinalResult}
         handleAddLocalParty={handleAddLocalParty}
         handleRemove={handleRemove}
       />
