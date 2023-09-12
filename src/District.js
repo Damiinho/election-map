@@ -9,6 +9,8 @@ import AddLocalParty from "./District/AddLocalParty";
 import TopButtons from "./District/TopButtons";
 import DoughnutDescription from "./District/DoughnutDescription";
 import DistrictTitle from "./District/DistrictTitle";
+import ResultBar from "./District/ResultBar";
+import SeatsBar from "./District/SeatsBar";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -220,10 +222,17 @@ const District = (props) => {
       />
 
       {currentDistrict.showFinalResult && (
-        <div className="districts-list__element-doughnut">
-          <DoughnutDescription finalResult={currentDistrict.finalResult} />
-          <DoughnutChart data={currentDistrict.forChart} />
-        </div>
+        <>
+          <div className="districts-list__element-doughnut">
+            <DoughnutDescription finalResult={currentDistrict.finalResult} />
+            <DoughnutChart data={currentDistrict.forChart} />
+          </div>
+
+          <div className="districts-list__element-bars">
+            <ResultBar finalResult={currentDistrict.finalResult} />
+            <SeatsBar finalResult={currentDistrict.finalResult} />
+          </div>
+        </>
       )}
     </div>
   );

@@ -14,7 +14,7 @@ const DistrictList = () => {
   return (
     <div className="districts">
       <div className="districts-title">
-        <p>Okręgi</p>
+        <span>Okręgi</span>
         <div className="districts-title__side">
           <MySwitch
             onClick={handleShowDistricts}

@@ -559,7 +559,6 @@ const AddDistrict = () => {
         </Button>
       </label>
       <Alert
-        fullWidth
         style={{
           margin: "0 5px",
           backgroundColor: `${

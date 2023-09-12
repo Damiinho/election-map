@@ -10,7 +10,8 @@ const DoughnutChart = (props) => {
           responsive: true,
           plugins: {
             legend: {
-              position: "bottom",
+              position: "left", // Ustaw pozycję legendy na lewo
+              align: "center", // Ustawienie align na "start" pozwoli umieścić legendę po lewej
               labels: {
                 color: "white",
                 letterSpacing: "10px",

@@ -145,7 +145,6 @@ const AddParty = () => {
           variant="outlined"
           className="options__addparty-label__name"
           size="small"
-          fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => {
@@ -183,8 +182,9 @@ const AddParty = () => {
                 }}
                 className="options__addparty-label__threshold-form__typography"
               >
-                <p>{`>`}</p>
-                <p>próg?</p>
+                <span>{`>`}</span>
+                <br />
+                <span>próg?</span>
               </Typography>
             }
             labelPlacement="start"
@@ -196,7 +196,7 @@ const AddParty = () => {
             value={chosenColor}
             onChange={(e) => setChosenColor(e.target.value)}
           />
-          <p>kolor</p>
+          <span>kolor</span>
         </div>
         <Button
           variant="contained"
@@ -210,7 +210,6 @@ const AddParty = () => {
       </label>
 
       <Alert
-        fullWidth
         style={{
           margin: "0 5px",
           backgroundColor: `${
@@ -231,24 +230,24 @@ const AddParty = () => {
         }
       >
         {!(duplicateError || emptyError || addPartySuccess) && (
-          <p>
+          <>
             Wpisz nazwę nowego komitetu, ustal opcje i <strong>dodaj go</strong>
-          </p>
+          </>
         )}
         {duplicateError && (
-          <p>
+          <>
             Komitet o tej nazwie <strong>już istnieje</strong>
-          </p>
+          </>
         )}
         {emptyError && (
-          <p>
+          <>
             Komitet musi <strong>mieć nazwę</strong>
-          </p>
+          </>
         )}
         {addPartySuccess && (
-          <p>
+          <>
             <strong>Komitet dodany!</strong>
-          </p>
+          </>
         )}
       </Alert>
 
@@ -258,15 +257,17 @@ const AddParty = () => {
           className="electionPoland"
           onClick={() => handlePredefined("2023Poland")}
         >
-          <p>wybory 2023</p>
-          <p>sejm</p>
+          <span>wybory 2023</span>
+          <br />
+          <span>sejm</span>
         </button>
         <button
           className="electionGermany"
           onClick={() => handlePredefined("2021Germany")}
         >
-          <p>wybory 2021</p>
-          <p>Niemcy</p>
+          <span>wybory 2021</span>
+          <br />
+          <span>Niemcy</span>
         </button>
       </div>
       <PartyList />
