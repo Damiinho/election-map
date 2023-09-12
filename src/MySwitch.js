@@ -3,7 +3,10 @@ import hideSVG from "./img/hide.svg";
 import showSVG from "./img/show.svg";
 
 const MySwitch = (props) => {
+  const [isAnimating, setIsAnimating] = useState(false);
   const [isChecked, setIsChecked] = useState(props.defaultValue || false);
+
+  const animating = props.animating || false;
   const imgDisplay = props.imgDisplay || false;
   const checkedIMG = props.checkedIMG || showSVG;
   const uncheckedIMG = props.uncheckedIMG || hideSVG;
@@ -11,9 +14,20 @@ const MySwitch = (props) => {
   const thumbColor = props.thumbColor || "#90c4ff";
   const trackColor = props.trackColor || "#727272bb";
   const trackCheckedColor = props.trackCheckedColor || "#4871bdb9";
+  const borderRounded = props.borderRounded || 10;
+  const sizeIMG = props.sizeIMG || 1;
   const size = props.size || 1;
 
   const handleClick = () => {
+    if (animating) {
+      if (!isAnimating) {
+        setIsAnimating(true);
+        setTimeout(() => {
+          setIsChecked(!isChecked);
+          setIsAnimating(false);
+        }, 50); // 0.5 sekundy (500ms) opóźnienia, aby uzyskać efekt animacji
+      }
+    }
     setIsChecked(!isChecked);
     if (props.onClick) {
       props.onClick();
@@ -21,6 +35,7 @@ const MySwitch = (props) => {
   };
 
   const mySwitchStyle = {
+    borderRadius: borderRounded,
     cursor: "pointer",
     width: size * 80,
     height: size * 35,
@@ -32,23 +47,27 @@ const MySwitch = (props) => {
   const trackStyle = {
     width: size * 43,
     height: size * 15,
-    borderRadius: "10px",
+    borderRadius: borderRounded,
     backgroundColor: isChecked ? trackCheckedColor : trackColor,
-    boxShadow:
-      "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+    boxShadow: isAnimating
+      ? "0px 3px 1px -8px rgba(0, 0, 0, 0.8), 0px 2px 2px 0px rgba(0, 0, 0, 0.56), 0px 1px 20px 0px rgba(0, 0, 0, 0.48)"
+      : isChecked
+      ? "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)"
+      : "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+    transition: "boxShadow 0.5s",
   };
 
   const thumbStyle = {
     width: size * 23,
     height: size * 23,
-    borderRadius: "10px",
+    borderRadius: borderRounded,
     backgroundColor: thumbDisplay ? thumbColor : "",
     boxShadow: thumbDisplay
       ? "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)"
       : "",
     position: "relative",
     top: "0",
-    transform: "translateY(-17.3913%)",
+    transform: `translateY(-${4 * size}px)`,
     transition: "0.2s",
     left: isChecked ? 20 * size : 0,
   };
@@ -59,7 +78,7 @@ const MySwitch = (props) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "240%",
+    width: `${240 * sizeIMG}%`,
   };
 
   return (
