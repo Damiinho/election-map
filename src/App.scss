@@ -553,6 +553,9 @@ $tertiary-color: #9c62a12c;
                 th:first-of-type {
                   width: 200px;
                 }
+                th:last-of-type {
+                  width: 70px;
+                }
               }
               tbody {
                 tr {
@@ -564,7 +567,7 @@ $tertiary-color: #9c62a12c;
                   td:first-of-type {
                     text-align: left;
                   }
-                  td:last-of-type {
+                  td:nth-of-type(3) {
                     font-weight: bold;
                   }
                 }
@@ -576,8 +579,55 @@ $tertiary-color: #9c62a12c;
           }
           &-bars {
             grid-column: span 3;
-            height: 20px;
-            background-color: red;
+            // height: 20px;
+            // background-color: red;
+            @include justify-align-center();
+            &__bar {
+              margin: 0 auto;
+              width: 90%;
+              // height: 100px;
+              // overflow: hidden;
+              border-radius: $default-border-radius;
+
+              display: flex;
+              flex-direction: column;
+              @include justify-align-center();
+
+              &-wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                overflow: hidden;
+                border-radius: 12px;
+                &__center {
+                  width: 10px;
+                  height: 100%;
+                  background-color: #ffffff48;
+                  position: absolute;
+                  top: 0%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  cursor: pointer;
+                }
+                &__item {
+                  cursor: pointer;
+                  &-color {
+                    display: flex;
+                    height: 30px;
+                    @include justify-align-center();
+                    // border-radius: ;
+                  }
+                }
+                &__item:first-of-type {
+                  &-color {
+                    border-radius: 10px 0 0 10px;
+                  }
+                }
+              }
+            }
           }
         }
       }

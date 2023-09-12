@@ -224,13 +224,16 @@ const District = (props) => {
       {currentDistrict.showFinalResult && (
         <>
           <div className="list__element-doughnut">
-            <DoughnutDescription finalResult={currentDistrict.finalResult} />
+            <DoughnutDescription
+              districtIndex={props.index}
+              finalResult={currentDistrict.finalResult}
+            />
             <DoughnutChart data={currentDistrict.forChart} />
           </div>
 
           <div className="list__element-bars">
-            <ResultBar finalResult={currentDistrict.finalResult} />
             <SeatsBar finalResult={currentDistrict.finalResult} />
+            <ResultBar finalResult={currentDistrict.finalResult} />
           </div>
         </>
       )}
