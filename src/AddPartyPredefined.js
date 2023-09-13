@@ -1,6 +1,6 @@
 const AddPartyPredefined = (props) => {
   return (
-    <div className="addparty__predefined">
+    <div className="addparty__main-predefined">
       <p>Predefiniowane:</p>
       <button
         className="electionPoland"

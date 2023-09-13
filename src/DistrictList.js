@@ -11,10 +11,10 @@ const DistrictList = () => {
     setShowDistricts(!showDistricts);
   };
 
-  return (
+  return districts.length > 0 ? (
     <div className="App__districtlist">
       <div className="App__districtlist-title">
-        <span>Okręgi</span>
+        3. wpisz wyniki
         <div className="App__districtlist-title__side">
           <MySwitch
             onClick={handleShowDistricts}
@@ -39,7 +39,7 @@ const DistrictList = () => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default DistrictList;

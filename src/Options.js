@@ -1,19 +1,19 @@
 import AddParty from "./AddParty";
 import AddDistrict from "./AddDistrict";
-import { useContext } from "react";
-import { AppContext } from "./contexts/AppContext";
-import MySwitch from "./MySwitch";
+// import { useContext } from "react";
+// import { AppContext } from "./contexts/AppContext";
+// import MySwitch from "./MySwitch";
 
 const Options = () => {
-  const { showOptions, setShowOptions } = useContext(AppContext);
+  // const { showOptions, setShowOptions } = useContext(AppContext);
 
-  const handleShowOptions = () => {
-    setShowOptions(!showOptions);
-  };
+  // const handleShowOptions = () => {
+  //   setShowOptions(!showOptions);
+  // };
 
   return (
     <div className="App__options">
-      <div className="App__options-header">
+      {/* <div className="App__options-header">
         <span className="App__options-header__name">Ustawienia</span>
         <div className="App__options-header__side">
           <MySwitch
@@ -23,8 +23,8 @@ const Options = () => {
             thumbDisplay={false}
           />
         </div>
-      </div>
-      <div className={`App__options-main ${!showOptions ? "hide" : ""}`}>
+      </div> */}
+      <div className={`App__options-main`}>
         <AddParty />
         <AddDistrict />
       </div>
