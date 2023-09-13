@@ -22,7 +22,7 @@ const SeatsBar = (props) => {
               className="list__element-bars__bar-wrapper__item"
               style={{ width: `${(item.seats / sum) * 100}%` }}
               data-tooltip-id="my-tooltip"
-              data-tooltip-content={item.name}
+              data-tooltip-content={`${item.name}, mandaty: ${item.seats}`}
             >
               <div
                 className="list__element-bars__bar-wrapper__item-color"

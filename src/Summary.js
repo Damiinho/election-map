@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useContext } from "react";
 import MySwitch from "./MySwitch";
+import { AppContext } from "./contexts/AppContext";
 
 const Summary = () => {
-  const [showSummary, setShowSummary] = useState(true);
+  const { districts, showSummary, setShowSummary } = useContext(AppContext);
 
   const handleShowSummary = () => {
     setShowSummary(!showSummary);
   };
 
-  return (
+  const shouldShowSummary = districts.some(
+    (district) => district.showFinalResult
+  );
+
+  return shouldShowSummary ? (
     <div className="App__summary">
       <div className="App__summary-title">
         4. zobacz podsumowanie
@@ -16,16 +21,16 @@ const Summary = () => {
           <MySwitch
             onClick={handleShowSummary}
             imgDisplay
-            defaultValue={true}
+            value={showSummary}
             thumbDisplay={false}
           />
         </div>
       </div>
-      <div className="App__summary-main">
-        <div className="summary"></div>
+      <div className={`App__summary-main  ${showSummary ? "" : "hide"}`}>
+        <div className="presentation"></div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Summary;

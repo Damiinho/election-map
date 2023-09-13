@@ -718,5 +718,18 @@ $tertiary-color: #9c62a12c;
         @include justify-align-center;
       }
     }
+    &-main {
+      display: grid;
+      grid-template-rows: 1fr;
+
+      transition: grid-template-rows 1s ease-out;
+
+      &.hide {
+        grid-template-rows: 0fr;
+      }
+      .presentation {
+        overflow: hidden;
+      }
+    }
   }
 }
