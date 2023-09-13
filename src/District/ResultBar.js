@@ -22,13 +22,18 @@ const ResultBar = (props) => {
               className="list__element-bars__bar-wrapper__item"
               style={{ width: `${(item.result / sum) * 100}%` }}
               data-tooltip-id="my-tooltip"
-              data-tooltip-content={item.name}
+              data-tooltip-content={`${item.name}, ${(
+                (item.result / sum) *
+                100
+              ).toFixed(2)}%`}
             >
               <div
                 className="list__element-bars__bar-wrapper__item-color"
                 style={{ backgroundColor: `${item.color}` }}
               >
-                <span>{((item.result / sum) * 100).toFixed(2)}%</span>
+                {item.result / sum > 0.03 && (
+                  <span>{((item.result / sum) * 100).toFixed(2)}%</span>
+                )}
               </div>
             </div>
           );

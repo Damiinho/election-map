@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ArrowDropDownSharpIcon from "@mui/icons-material/ArrowDropDownSharp";
+import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
 import { AppContext } from "../contexts/AppContext";
 
 const DoughnutDescription = (props) => {
@@ -24,32 +26,54 @@ const DoughnutDescription = (props) => {
     <table className="list__element-doughnut__description">
       <thead>
         <tr>
-          <th>Nazwa</th>
-          <th>Wynik</th>
-          <th>Miejsca</th>
-          <th></th>
+          <th>nazwa</th>
+          <th>wynik</th>
+          <th>miejsca</th>
+          <th>pozycja</th>
         </tr>
       </thead>
       <tbody>
         {props.finalResult.map((item, index) => (
-          <tr key={item.name}>
+          <tr
+            // style={
+            //   { backgroundColor: item.color }
+            //   }
+            key={item.name}
+          >
             <td>{item.name}</td>
             <td>{item.result}</td>
             <td>{item.seats}</td>
             <td>
-              <KeyboardArrowDownIcon
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  if (index < props.finalResult.length - 1) {
-                    handleArrowClick(index, index + 1);
-                  }
+              <ArrowDropUpSharpIcon
+                fontSize="small"
+                style={{
+                  cursor: index > 0 ? "pointer" : "",
+                  backgroundColor: "#061a8b46",
+                  borderRadius: 5,
+                  color: index > 0 ? "white" : "#061a8b46",
+                  margin: "0 auto",
                 }}
-              />
-              <KeyboardArrowUpIcon
-                style={{ cursor: "pointer" }}
                 onClick={() => {
                   if (index > 0) {
                     handleArrowClick(index, index - 1);
+                  }
+                }}
+              />
+              <ArrowDropDownSharpIcon
+                fontSize="small"
+                style={{
+                  cursor: index < props.finalResult.length - 1 ? "pointer" : "",
+                  backgroundColor: "#061a8b46",
+                  borderRadius: 5,
+                  color:
+                    index < props.finalResult.length - 1
+                      ? "white"
+                      : "#061a8b46",
+                  margin: "0 auto",
+                }}
+                onClick={() => {
+                  if (index < props.finalResult.length - 1) {
+                    handleArrowClick(index, index + 1);
                   }
                 }}
               />

@@ -541,34 +541,43 @@ $tertiary-color: #9c62a12c;
             &__description {
               background-color: #0026ff34;
               border-radius: $default-border-radius;
-              padding: $default-padding;
-              margin-bottom: 10px;
+              padding: 2px;
+              font-size: 12px;
+
+              font-family: "Mukta", sans-serif;
+
               thead {
                 background-color: #ffffff49;
                 color: black;
                 th {
-                  width: 70px;
+                  width: 50px;
                   border-radius: $default-border-radius;
                 }
                 th:first-of-type {
-                  width: 200px;
+                  width: 150px;
                 }
                 th:last-of-type {
-                  width: 70px;
+                  width: 42px;
                 }
               }
               tbody {
                 tr {
                   td {
                     border-radius: $default-border-radius;
-                    padding: $default-padding;
                     text-align: center;
                   }
                   td:first-of-type {
                     text-align: left;
+                    padding-left: 5px;
                   }
                   td:nth-of-type(3) {
                     font-weight: bold;
+                  }
+                  td:last-of-type {
+                    display: grid;
+                    gap: 2px;
+                    grid-template-columns: 1fr 1fr;
+                    @include justify-align-center();
                   }
                 }
                 tr:nth-of-type(odd) {
@@ -603,9 +612,31 @@ $tertiary-color: #9c62a12c;
                 overflow: hidden;
                 border-radius: 12px;
                 &__center {
-                  width: 10px;
+                  width: 3px;
                   height: 100%;
                   background-color: #ffffff48;
+                  background-image: linear-gradient(
+                    0deg,
+                    #ffffff 0%,
+                    #ffffff 12.5%,
+                    transparent 12.5%,
+                    transparent 25%,
+                    #ffffff 25%,
+                    #ffffff 37.5%,
+
+                    transparent 37.5%,
+                    transparent 50%,
+                    #ffffff 50%,
+                    #ffffff 62.5%,
+
+                    transparent 62.5%,
+                    transparent 75%,
+                    #ffffff 75%,
+                    #ffffff 87.5%,
+                    transparent 87.5%,
+                    transparent 100%
+                  );
+
                   position: absolute;
                   top: 0%;
                   left: 50%;
@@ -617,6 +648,10 @@ $tertiary-color: #9c62a12c;
                   &-color {
                     display: flex;
                     height: 30px;
+                    font-size: 12px;
+                    font-family: "Overpass", sans-serif;
+                    font-family: "MuseoModerno", cursive;
+                    color: rgb(235, 235, 235);
                     @include justify-align-center();
                     // border-radius: ;
                   }

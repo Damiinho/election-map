@@ -65,27 +65,27 @@ const AddParty = () => {
         {
           name: "Prawo i Sprawiedliwość",
           isOverThreshold: true,
-          color: "#0008ff",
+          color: "#175aa7",
         },
         {
           name: "Koalicja Obywatelska",
           isOverThreshold: true,
-          color: "#e08300",
+          color: "#f9641d",
         },
         {
           name: "Konfederacja",
           isOverThreshold: true,
-          color: "#1e1c82",
+          color: "#1a2e4d",
         },
         {
           name: "Trzecia Droga",
           isOverThreshold: true,
-          color: "#18af0d",
+          color: "#96cc22",
         },
         {
           name: "Lewica",
           isOverThreshold: true,
-          color: "#d60000",
+          color: "#e0002a",
         },
         {
           name: "Bezpartyjni Samorządowcy",
