@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import AddPartyPredefined from "./AddPartyPredefined";
+import MySwitch from "./MySwitch";
 
 const AddParty = () => {
   const [name, setName] = useState("");
@@ -19,6 +20,7 @@ const AddParty = () => {
   const [chosenColor, setChosenColor] = useState(randomColor());
   const { parties, setParties } = useContext(AppContext);
   const [duplicateError, setDuplicateError] = useState(false);
+  const [showAddParty, setShowAddParty] = useState(true);
   const [emptyError, setEmptyError] = useState(false);
   const [addPartySuccess, setAddPartySuccess] = useState(false);
 
@@ -135,122 +137,144 @@ const AddParty = () => {
     setChosenColor(randomColor());
   };
 
+  const handleShowAddParty = () => {
+    setShowAddParty(!showAddParty);
+  };
+
   return (
     <div className="addparty">
-      <div className="addparty__title">dodaj komitety</div>
-      <label className="addparty__label">
-        <TextField
-          color="warning"
-          label="Nazwa komitetu"
-          hiddenLabel
-          variant="outlined"
-          className="addparty__label-name"
-          size="small"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSubmit();
-            }
-          }}
-          sx={{
-            input: {
-              backgroundColor: "#50402923",
-              borderRadius: 1,
-            },
-          }}
-        />
-
-        <label label="overThreshold" className="addparty__label-threshold">
-          <FormControlLabel
-            className="addparty__label-threshold__form"
-            control={
-              <Checkbox
-                checked={isOverThreshold}
-                onChange={(e) => setIsOverThreshold(e.target.checked)}
-                color="success"
-              />
-            }
-            label={
-              <Typography
-                sx={{
-                  textAlign: "center",
-                  fontSize: 13,
-                  fontFamily: "MuseoModerno, sans-serif",
-                }}
-                className="addparty__label-threshold__form-typography"
-              >
-                <span>{`>`}</span>
-                <br />
-                <span>próg?</span>
-              </Typography>
-            }
-            labelPlacement="start"
+      <div className="addparty__title">
+        1. dodaj komitety
+        <div className="addparty__title__side">
+          <MySwitch
+            onClick={handleShowAddParty}
+            imgDisplay
+            defaultValue={true}
+            thumbDisplay={false}
           />
-        </label>
-        <div className="addparty__label-color">
-          <input
-            type="color"
-            value={chosenColor}
-            onChange={(e) => setChosenColor(e.target.value)}
-          />
-          <span>kolor</span>
         </div>
-        <Button
-          variant="contained"
-          color="success"
-          size="small"
-          style={{ textTransform: "lowercase" }}
-          onClick={handleSubmit}
-        >
-          dodaj
-        </Button>
-      </label>
+      </div>
+      <div className={`addparty__main ${showAddParty ? "" : "hide"}`}>
+        <div>
+          <label className="addparty__main-label">
+            <TextField
+              color="warning"
+              label="Nazwa komitetu"
+              hiddenLabel
+              variant="outlined"
+              className="addparty__main-label__name"
+              size="small"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
+              sx={{
+                input: {
+                  backgroundColor: "#50402923",
+                  borderRadius: 1,
+                },
+              }}
+            />
 
-      <Alert
-        style={{
-          margin: "0 5px",
-          backgroundColor: `${
-            duplicateError || emptyError
-              ? "#9c00008c"
-              : addPartySuccess
-              ? "#0d9c008c"
-              : "#1988e48c"
-          }`,
-        }}
-        variant="filled"
-        severity={
-          duplicateError || emptyError
-            ? "error"
-            : addPartySuccess
-            ? "success"
-            : "info"
-        }
-      >
-        {!(duplicateError || emptyError || addPartySuccess) && (
-          <>
-            Wpisz nazwę nowego komitetu, ustal opcje i <strong>dodaj go</strong>
-          </>
-        )}
-        {duplicateError && (
-          <>
-            Komitet o tej nazwie <strong>już istnieje</strong>
-          </>
-        )}
-        {emptyError && (
-          <>
-            Komitet musi <strong>mieć nazwę</strong>
-          </>
-        )}
-        {addPartySuccess && (
-          <>
-            <strong>Komitet dodany!</strong>
-          </>
-        )}
-      </Alert>
+            <label
+              label="overThreshold"
+              className="addparty__main-label__threshold"
+            >
+              <FormControlLabel
+                className="addparty__label-threshold__form"
+                control={
+                  <Checkbox
+                    checked={isOverThreshold}
+                    onChange={(e) => setIsOverThreshold(e.target.checked)}
+                    color="success"
+                  />
+                }
+                label={
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: 13,
+                      fontFamily: "MuseoModerno, sans-serif",
+                    }}
+                    className="addparty__main-label__threshold-form__typography"
+                  >
+                    <span>{`>`}</span>
+                    <br />
+                    <span>próg?</span>
+                  </Typography>
+                }
+                labelPlacement="start"
+              />
+            </label>
+            <div className="addparty__main-label__color">
+              <input
+                type="color"
+                value={chosenColor}
+                onChange={(e) => setChosenColor(e.target.value)}
+              />
+              <span>kolor</span>
+            </div>
+            <Button
+              variant="contained"
+              color="success"
+              size="small"
+              style={{ textTransform: "lowercase" }}
+              onClick={handleSubmit}
+            >
+              dodaj
+            </Button>
+          </label>
 
-      <AddPartyPredefined click={handlePredefined} />
-      <PartyList />
+          <Alert
+            style={{
+              margin: "0 5px",
+              backgroundColor: `${
+                duplicateError || emptyError
+                  ? "#9c00008c"
+                  : addPartySuccess
+                  ? "#0d9c008c"
+                  : "#1988e48c"
+              }`,
+            }}
+            variant="filled"
+            severity={
+              duplicateError || emptyError
+                ? "error"
+                : addPartySuccess
+                ? "success"
+                : "info"
+            }
+          >
+            {!(duplicateError || emptyError || addPartySuccess) && (
+              <>
+                Wpisz nazwę nowego komitetu, ustal opcje i{" "}
+                <strong>dodaj go</strong>
+              </>
+            )}
+            {duplicateError && (
+              <>
+                Komitet o tej nazwie <strong>już istnieje</strong>
+              </>
+            )}
+            {emptyError && (
+              <>
+                Komitet musi <strong>mieć nazwę</strong>
+              </>
+            )}
+            {addPartySuccess && (
+              <>
+                <strong>Komitet dodany!</strong>
+              </>
+            )}
+          </Alert>
+
+          <AddPartyPredefined click={handlePredefined} />
+          <PartyList />
+        </div>
+      </div>
     </div>
   );
 };

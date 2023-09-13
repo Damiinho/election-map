@@ -9,6 +9,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import MySwitch from "./MySwitch";
 
 const AddDistrict = () => {
   const [name, setName] = useState("");
@@ -16,6 +17,7 @@ const AddDistrict = () => {
   const [method, setMethod] = useState("dhondt");
   const [error, setError] = useState(false);
   const [addDistrictSuccess, setAddDistrictSuccess] = useState(false);
+  const [showAddDistrict, setShowAddDistrict] = useState(true);
   const { districts, setDistricts, parties } = useContext(AppContext);
 
   const polishDistricts = [
@@ -462,144 +464,168 @@ const AddDistrict = () => {
     }
   };
 
+  const handleShowAddDistrict = () => {
+    setShowAddDistrict(!showAddDistrict);
+  };
+
   return (
     <div className="adddistrict">
-      <h1 className="adddistrict__title">generuj okręgi</h1>
-      <label className="adddistrict__label">
-        <div className="adddistrict__label-name">
-          <TextField
-            color="error"
-            label="Nazwa okręgu"
-            hiddenLabel
-            variant="outlined"
-            size="small"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-            sx={{
-              input: {
-                backgroundColor: "#50402923",
-                borderRadius: 1,
-              },
-            }}
+      <div className="adddistrict__title">
+        2. generuj okręgi{" "}
+        <div className="addparty__title__side">
+          <MySwitch
+            onClick={handleShowAddDistrict}
+            imgDisplay
+            defaultValue={true}
+            thumbDisplay={false}
           />
         </div>
-        <div className="adddistrict__label-deputies">
-          <TextField
-            color="error"
-            type="number"
-            label="Liczba mandatów"
-            InputProps={{
-              inputProps: {
-                style: {
-                  textAlign: "center",
-                },
-              },
-            }}
-            sx={{
-              input: {
-                backgroundColor: "#50402923",
-                borderRadius: 1,
-              },
-            }}
-            size="small"
-            onChange={(e) => {
-              let value = parseInt(e.target.value, 10);
+      </div>
+      <div className={`adddistrict__main ${showAddDistrict ? "" : "hide"}`}>
+        <div>
+          <label className="adddistrict__main-label">
+            <div className="adddistrict__main-label-name">
+              <TextField
+                color="error"
+                label="Nazwa okręgu"
+                hiddenLabel
+                variant="outlined"
+                size="small"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+                sx={{
+                  input: {
+                    backgroundColor: "#50402923",
+                    borderRadius: 1,
+                  },
+                }}
+              />
+            </div>
+            <div className="adddistrict__main-label-deputies">
+              <TextField
+                color="error"
+                type="number"
+                label="Liczba mandatów"
+                InputProps={{
+                  inputProps: {
+                    style: {
+                      textAlign: "center",
+                    },
+                  },
+                }}
+                sx={{
+                  input: {
+                    backgroundColor: "#50402923",
+                    borderRadius: 1,
+                  },
+                }}
+                size="small"
+                onChange={(e) => {
+                  let value = parseInt(e.target.value, 10);
 
-              if (value > 1000) value = 1000;
-              if (value < 0) value = 0;
+                  if (value > 1000) value = 1000;
+                  if (value < 0) value = 0;
 
-              setDeputies(value);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-            value={deputies}
-            variant="outlined"
-          />
-        </div>
-        <div className="adddistrict__label-method">
-          <FormControl
-            size="small"
-            style={{
-              width: 223,
-              backgroundColor: "#50402923",
-              borderRadius: 5,
-            }}
-          >
-            <InputLabel id="demo-simple-select-label">
-              Metoda podziału mandatów
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={method}
-              label="Metoda podziału mandatów"
-              onChange={(e) => setMethod(e.target.value)}
+                  setDeputies(value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+                value={deputies}
+                variant="outlined"
+              />
+            </div>
+            <div className="adddistrict__main-label-method">
+              <FormControl
+                size="small"
+                style={{
+                  width: 223,
+                  backgroundColor: "#50402923",
+                  borderRadius: 5,
+                }}
+              >
+                <InputLabel id="demo-simple-select-label">
+                  Metoda podziału mandatów
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={method}
+                  label="Metoda podziału mandatów"
+                  onChange={(e) => setMethod(e.target.value)}
+                >
+                  <MenuItem value="dhondt">d'Hondt</MenuItem>
+                  <MenuItem value="normal">bez dzielenia</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <Button
+              variant="contained"
+              color="success"
+              size="small"
+              style={{ textTransform: "lowercase" }}
+              onClick={handleSubmit}
             >
-              <MenuItem value="dhondt">d'Hondt</MenuItem>
-              <MenuItem value="normal">bez dzielenia</MenuItem>
-            </Select>
-          </FormControl>
+              dodaj
+            </Button>
+          </label>
+          <Alert
+            style={{
+              margin: "0 5px",
+              backgroundColor: `${
+                error
+                  ? "#9c00008c"
+                  : addDistrictSuccess
+                  ? "#0d9c008c"
+                  : "#1988e48c"
+              }`,
+            }}
+            variant="filled"
+            severity={error ? "error" : addDistrictSuccess ? "success" : "info"}
+          >
+            {!error && !addDistrictSuccess && (
+              <p>
+                Wpisz nazwę nowego okręgu, ustal opcje i{" "}
+                <strong>dodaj go</strong>
+              </p>
+            )}
+            {error && (
+              <p>
+                Okręg{" "}
+                <strong>musi mieć nazwę i ustaloną liczbę mandatów</strong>
+              </p>
+            )}
+            {addDistrictSuccess && (
+              <p>
+                <strong>Okręg dodany!</strong>
+              </p>
+            )}
+          </Alert>
+          <div className="adddistrict__main-predefined">
+            <p>Predefiniowane okręgi</p>
+            <button
+              className="electionPoland"
+              onClick={() => handlePredefined("2023Poland")}
+            >
+              <p>sejm</p>
+              <p>2023</p>
+            </button>
+            <button
+              className="electionPoland"
+              onClick={() => handlePredefined("test")}
+            >
+              <p>test</p>
+              <p>test</p>
+            </button>
+          </div>
         </div>
-        <Button
-          variant="contained"
-          color="success"
-          size="small"
-          style={{ textTransform: "lowercase" }}
-          onClick={handleSubmit}
-        >
-          dodaj
-        </Button>
-      </label>
-      <Alert
-        style={{
-          margin: "0 5px",
-          backgroundColor: `${
-            error ? "#9c00008c" : addDistrictSuccess ? "#0d9c008c" : "#1988e48c"
-          }`,
-        }}
-        variant="filled"
-        severity={error ? "error" : addDistrictSuccess ? "success" : "info"}
-      >
-        {!error && !addDistrictSuccess && (
-          <p>
-            Wpisz nazwę nowego okręgu, ustal opcje i <strong>dodaj go</strong>
-          </p>
-        )}
-        {error && (
-          <p>
-            Okręg <strong>musi mieć nazwę i ustaloną liczbę mandatów</strong>
-          </p>
-        )}
-        {addDistrictSuccess && (
-          <p>
-            <strong>Okręg dodany!</strong>
-          </p>
-        )}
-      </Alert>
-      <div className="adddistrict__predefined">
-        <p>Predefiniowane okręgi</p>
-        <button
-          className="electionPoland"
-          onClick={() => handlePredefined("2023Poland")}
-        >
-          <p>sejm</p>
-          <p>2023</p>
-        </button>
-        <button
-          className="electionPoland"
-          onClick={() => handlePredefined("test")}
-        >
-          <p>test</p>
-          <p>test</p>
-        </button>
       </div>
     </div>
   );
