@@ -1,7 +1,7 @@
 import { Tooltip } from "react-tooltip";
 
 const ResultBar = (props) => {
-  const sum = props.finalResult.reduce((total, item) => total + item.result, 0);
+  const sum = props.result.reduce((total, item) => total + item.result, 0);
 
   return (
     <div className="list__element-bars__bar">
@@ -13,7 +13,7 @@ const ResultBar = (props) => {
           data-tooltip-id="my-tooltip"
           data-tooltip-content="50%"
         ></div>
-        {props.finalResult.map((item) => {
+        {props.result.map((item) => {
           if (item.result === 0) return null;
 
           return (

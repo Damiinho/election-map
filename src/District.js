@@ -11,6 +11,7 @@ import DoughnutDescription from "./District/DoughnutDescription";
 import DistrictTitle from "./District/DistrictTitle";
 import ResultBar from "./District/ResultBar";
 import SeatsBar from "./District/SeatsBar";
+import MyBar from "./MyBar";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -232,8 +233,17 @@ const District = (props) => {
           </div>
 
           <div className="list__element-bars">
-            <SeatsBar finalResult={currentDistrict.finalResult} />
-            <ResultBar finalResult={currentDistrict.finalResult} />
+            <MyBar
+              result={currentDistrict.finalResult}
+              value="seats"
+              name="Liczba mandatów z listy"
+            />
+            {/* <MyBar result={currentDistrict.finalResult} value="seats" /> */}
+            <MyBar
+              result={currentDistrict.finalResult}
+              value="result"
+              name="Wynik procentowy na liscie"
+            />
           </div>
         </>
       )}

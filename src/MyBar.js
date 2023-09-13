@@ -1,12 +1,16 @@
 import { Tooltip } from "react-tooltip";
 
-const SeatsBar = (props) => {
-  const sum = props.result.reduce((total, item) => total + item.seats, 0);
+const MyBar = (props) => {
+  const sum = props.result.reduce(
+    (total, item) => total + item[props.value],
+    0
+  );
+  console.log(sum);
 
   return (
     <div className="list__element-bars__bar">
       <Tooltip id="my-tooltip" />
-      Liczba mandatów z listy
+      {props.name}
       <div className="list__element-bars__bar-wrapper">
         <div
           className="list__element-bars__bar-wrapper__center"
@@ -14,21 +18,25 @@ const SeatsBar = (props) => {
           data-tooltip-content="50%"
         ></div>
         {props.result.map((item) => {
-          if (item.seats === 0) return null;
+          if (item[props.value] === 0) return null;
+          const itemValue =
+            props.value === "result"
+              ? `${((item[props.value] / sum) * 100).toFixed(2)}%`
+              : `${item[props.value]}`;
 
           return (
             <div
               key={item.color}
               className="list__element-bars__bar-wrapper__item"
-              style={{ width: `${(item.seats / sum) * 100}%` }}
+              style={{ width: `${(item[props.value] / sum) * 100}%` }}
               data-tooltip-id="my-tooltip"
-              data-tooltip-content={`${item.name}, mandaty: ${item.seats}`}
+              data-tooltip-content={`${item.name}, ${itemValue}`}
             >
               <div
                 className="list__element-bars__bar-wrapper__item-color"
                 style={{ backgroundColor: `${item.color}` }}
               >
-                <span>{item.seats}</span>
+                {item.result / sum > 0.03 && <span>{itemValue}</span>}
               </div>
             </div>
           );
@@ -38,4 +46,4 @@ const SeatsBar = (props) => {
   );
 };
 
-export default SeatsBar;
+export default MyBar;
