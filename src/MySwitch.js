@@ -4,7 +4,7 @@ import showSVG from "./img/show.svg";
 
 const MySwitch = (props) => {
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isChecked, setIsChecked] = useState(props.defaultValue || false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const animating = props.animating || false;
   const imgDisplay = props.imgDisplay || false;
@@ -20,6 +20,8 @@ const MySwitch = (props) => {
   const borderRounded = props.borderRounded || 10;
   const sizeIMG = props.sizeIMG || 1;
   const size = props.size || 1;
+  const value =
+    props.value === true || props.value === false ? props.value : isChecked;
 
   const handleClick = () => {
     if (animating) {
@@ -51,10 +53,10 @@ const MySwitch = (props) => {
     width: size * 43,
     height: size * 15,
     borderRadius: borderRounded,
-    backgroundColor: isChecked ? trackCheckedColor : trackColor,
+    backgroundColor: value ? trackCheckedColor : trackColor,
     boxShadow: isAnimating
       ? "0px 3px 1px -8px rgba(0, 0, 0, 0.8), 0px 2px 2px 0px rgba(0, 0, 0, 0.56), 0px 1px 20px 0px rgba(0, 0, 0, 0.48)"
-      : isChecked
+      : value
       ? "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)"
       : "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
     transition: "boxShadow 0.5s",
@@ -72,7 +74,7 @@ const MySwitch = (props) => {
     position: "absolute",
     top: `-${4 * size}px`,
     transition: "0.2s",
-    left: isChecked ? 20 * size : 0,
+    left: value ? 20 * size : 0,
   };
 
   const imgStyle = {
@@ -90,10 +92,10 @@ const MySwitch = (props) => {
         <div style={thumbStyle}>
           <img
             style={imgStyle}
-            src={isChecked ? checkedIMG : uncheckedIMG}
+            src={value ? checkedIMG : uncheckedIMG}
             alt="thumb"
           />
-          {objectDisplay ? (isChecked ? checkedObject : uncheckedObject) : ""}
+          {objectDisplay ? (value ? checkedObject : uncheckedObject) : ""}
         </div>
       </div>
     </div>

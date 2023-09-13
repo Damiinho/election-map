@@ -17,7 +17,8 @@ const AddDistrict = () => {
   const [method, setMethod] = useState("dhondt");
   const [error, setError] = useState(false);
   const [addDistrictSuccess, setAddDistrictSuccess] = useState(false);
-  const [showAddDistrict, setShowAddDistrict] = useState(true);
+  const { showAddDistrict, setShowAddDistrict } = useContext(AppContext);
+  const { showAddParty, setShowAddParty } = useContext(AppContext);
   const { districts, setDistricts, parties } = useContext(AppContext);
 
   const polishDistricts = [
@@ -462,6 +463,8 @@ const AddDistrict = () => {
       setDeputies("");
       setMethod("dhondt");
     }
+    setShowAddDistrict(false);
+    setShowAddParty(false);
   };
 
   const handleShowAddDistrict = () => {
@@ -476,7 +479,7 @@ const AddDistrict = () => {
           <MySwitch
             onClick={handleShowAddDistrict}
             imgDisplay
-            defaultValue={true}
+            value={showAddDistrict}
             thumbDisplay={false}
           />
         </div>

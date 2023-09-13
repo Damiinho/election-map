@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "./contexts/AppContext";
 import District from "./District";
 import DistrictListButton from "./DistrictListButtons";
@@ -6,7 +6,7 @@ import MySwitch from "./MySwitch";
 
 const DistrictList = () => {
   const { districts } = useContext(AppContext);
-  const [showDistricts, setShowDistricts] = useState(true);
+  const { showDistricts, setShowDistricts } = useContext(AppContext);
   const handleShowDistricts = () => {
     setShowDistricts(!showDistricts);
   };
@@ -20,7 +20,7 @@ const DistrictList = () => {
             onClick={handleShowDistricts}
             imgDisplay
             thumbDisplay={false}
-            defaultValue
+            value={showDistricts}
           />
         </div>
       </div>

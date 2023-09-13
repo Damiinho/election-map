@@ -20,7 +20,7 @@ const AddParty = () => {
   const [chosenColor, setChosenColor] = useState(randomColor());
   const { parties, setParties } = useContext(AppContext);
   const [duplicateError, setDuplicateError] = useState(false);
-  const [showAddParty, setShowAddParty] = useState(true);
+  const { showAddParty, setShowAddParty } = useContext(AppContext);
   const [emptyError, setEmptyError] = useState(false);
   const [addPartySuccess, setAddPartySuccess] = useState(false);
 
@@ -149,7 +149,7 @@ const AddParty = () => {
           <MySwitch
             onClick={handleShowAddParty}
             imgDisplay
-            defaultValue={true}
+            value={showAddParty}
             thumbDisplay={false}
           />
         </div>
