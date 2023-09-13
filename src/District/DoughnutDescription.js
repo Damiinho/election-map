@@ -34,12 +34,7 @@ const DoughnutDescription = (props) => {
       </thead>
       <tbody>
         {props.finalResult.map((item, index) => (
-          <tr
-            // style={
-            //   { backgroundColor: item.color }
-            //   }
-            key={item.name}
-          >
+          <tr style={{ backgroundColor: `${item.color}aa` }} key={item.name}>
             <td>{item.name}</td>
             <td>{item.result}</td>
             <td>{item.seats}</td>
