@@ -10,7 +10,7 @@ const PartyList = () => {
   const { parties, setParties } = useContext(AppContext);
   const [doubleClickedIndex, setdoubleClickedIndex] = useState("");
   const [newPartyName, setNewPartyName] = useState("");
-  const [hide, setHide] = useState(false);
+  const [showAddPartyList, setShowAddPartyList] = useState(true);
 
   const handleRemove = (index) => {
     const newParties = [...parties];
@@ -50,7 +50,7 @@ const PartyList = () => {
   };
 
   const handleHide = () => {
-    setHide(!hide);
+    setShowAddPartyList(!showAddPartyList);
   };
 
   return (
@@ -62,12 +62,16 @@ const PartyList = () => {
             <MySwitch
               onClick={handleHide}
               imgDisplay
-              defaultValue
+              value={showAddPartyList}
               thumbDisplay={false}
             />
           </div>
 
-          <ul className={`addparty__main-list__ul ${hide ? "hide" : ""}`}>
+          <ul
+            className={`addparty__main-list__ul ${
+              !showAddPartyList ? "hide" : ""
+            }`}
+          >
             <div>
               <div className="addparty__main-list__ul-element legend">
                 <div>nazwa</div>
@@ -135,7 +139,7 @@ const PartyList = () => {
                       thumbDisplay={false}
                       size={1}
                       objectDisplay
-                      defaultValue={item.isOverThreshold}
+                      value={parties[index].isOverThreshold}
                     />
                   </div>
                   <input
