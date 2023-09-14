@@ -236,7 +236,6 @@ const District = (props) => {
               value="seats"
               name="Liczba mandatów z listy"
             />
-            {/* <MyBar result={currentDistrict.finalResult} value="seats" /> */}
             <MyBar
               result={currentDistrict.finalResult}
               value="result"

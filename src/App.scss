@@ -657,6 +657,15 @@ $tertiary-color: #9c62a12c;
       }
       .presentation {
         overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        &__description {
+          &-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
         &__set {
           width: 300px;
           display: grid;
