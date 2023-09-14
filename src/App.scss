@@ -631,6 +631,7 @@ $tertiary-color: #9c62a12c;
   &__summary {
     margin-top: 10px;
     background-color: $tertiary-color;
+    margin-bottom: 20px;
     &-title {
       position: relative;
       @include title-in-options;
