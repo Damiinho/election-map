@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import MySwitch from "./MySwitch";
 import { AppContext } from "./contexts/AppContext";
+// import { parliamentIMG } from "./img/parliamentary-template.svg";
+import SummaryParliament from "./SummaryParliament";
 
 const Summary = () => {
   const { districts, showSummary, setShowSummary } = useContext(AppContext);
@@ -72,15 +74,25 @@ const Summary = () => {
       </div>
       <div className={`App__summary-main ${showSummary ? "" : "hide"}`}>
         <div className="presentation">
-          Liczba miejsc do wykorzystania: {deputiesSum}
-          <ul>
-            {finalResultSummary.map((item, index) => (
-              <li key={index}>
-                {item.name}, {item.color}, Result: {item.result}, Seats:{" "}
-                {item.seats}
-              </li>
-            ))}
-          </ul>
+          <div className="presentation__description">
+            <div className="presentation__description-item">
+              <div className="presentation__description-item__txt">
+                Miejsc w wyborach:
+              </div>
+              <div className="presentation__description-item__value">
+                {deputiesSum}
+              </div>
+            </div>
+            <ul>
+              {finalResultSummary.map((item, index) => (
+                <li key={index}>
+                  {item.name}, {item.color}, Result: {item.result}, Seats:{" "}
+                  {item.seats}
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="presentation__set">
             {finalResultSummary.map((item, index) => {
               const seatDivs = [];
@@ -120,6 +132,9 @@ const Summary = () => {
           </div>
         </div>
       </div>
+      {/* <div className="test">
+        <SummaryParliament />
+      </div> */}
     </div>
   ) : null;
 };
