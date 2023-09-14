@@ -9,8 +9,6 @@ import AddLocalParty from "./District/AddLocalParty";
 import TopButtons from "./District/TopButtons";
 import DoughnutDescription from "./District/DoughnutDescription";
 import DistrictTitle from "./District/DistrictTitle";
-import ResultBar from "./District/ResultBar";
-import SeatsBar from "./District/SeatsBar";
 import MyBar from "./MyBar";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
