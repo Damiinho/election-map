@@ -15,12 +15,12 @@ import AddPartyPredefined from "./AddPartyPredefined";
 import MySwitch from "./MySwitch";
 
 const AddParty = () => {
+  const { parties, setParties, showAddParty, setShowAddParty } =
+    useContext(AppContext);
   const [name, setName] = useState("");
   const [isOverThreshold, setIsOverThreshold] = useState(true);
   const [chosenColor, setChosenColor] = useState(randomColor());
-  const { parties, setParties } = useContext(AppContext);
   const [duplicateError, setDuplicateError] = useState(false);
-  const { showAddParty, setShowAddParty } = useContext(AppContext);
   const [emptyError, setEmptyError] = useState(false);
   const [addPartySuccess, setAddPartySuccess] = useState(false);
 

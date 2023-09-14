@@ -10,6 +10,8 @@ export const AppProvider = ({ children }) => {
   const [showAddParty, setShowAddParty] = useState(true);
   const [showDistricts, setShowDistricts] = useState(true);
   const [showSummary, setShowSummary] = useState(true);
+  const [showAddPartyList, setShowAddPartyList] = useState(true);
+  const [finalResultSummary, setFinalResultSummary] = useState([]);
 
   const providerValue = {
     parties,
@@ -26,6 +28,10 @@ export const AppProvider = ({ children }) => {
     setShowDistricts,
     showSummary,
     setShowSummary,
+    showAddPartyList,
+    setShowAddPartyList,
+    finalResultSummary,
+    setFinalResultSummary,
   };
 
   return (

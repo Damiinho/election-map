@@ -7,10 +7,10 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import MySwitch from "./MySwitch";
 
 const PartyList = () => {
-  const { parties, setParties } = useContext(AppContext);
+  const { parties, setParties, showAddPartyList, setShowAddPartyList } =
+    useContext(AppContext);
   const [doubleClickedIndex, setdoubleClickedIndex] = useState("");
   const [newPartyName, setNewPartyName] = useState("");
-  const [showAddPartyList, setShowAddPartyList] = useState(true);
 
   const handleRemove = (index) => {
     const newParties = [...parties];

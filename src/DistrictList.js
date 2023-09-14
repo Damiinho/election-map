@@ -5,8 +5,7 @@ import DistrictListButton from "./DistrictListButtons";
 import MySwitch from "./MySwitch";
 
 const DistrictList = () => {
-  const { districts } = useContext(AppContext);
-  const { showDistricts, setShowDistricts } = useContext(AppContext);
+  const { districts, showDistricts, setShowDistricts } = useContext(AppContext);
   const handleShowDistricts = () => {
     setShowDistricts(!showDistricts);
   };

@@ -224,7 +224,7 @@ const District = (props) => {
         <>
           <div className="list__element-doughnut">
             <DoughnutDescription
-              districtIndex={props.index}
+              currentDistrict={currentDistrict}
               finalResult={currentDistrict.finalResult}
             />
             <DoughnutChart data={currentDistrict.forChart} />
