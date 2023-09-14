@@ -4,6 +4,9 @@ import { AppContext } from "./contexts/AppContext";
 
 const Summary = () => {
   const { districts, showSummary, setShowSummary } = useContext(AppContext);
+  const [finalResultSummary, setFinalResultSummary] = useState([]);
+  const [unassignedSeats, setUnassignedSeats] = useState(0);
+  // const [totalSeatsRendered, setTotalSeatsRendered] = useState(0);
 
   const handleShowSummary = () => {
     setShowSummary(!showSummary);
@@ -18,16 +21,10 @@ const Summary = () => {
     0
   );
 
-  const [finalResultSummary, setFinalResultSummary] = useState([]);
-
-  // Efekt, który aktualizuje finalResultSummary przy zmianach w districts
   useEffect(() => {
     const updatedFinalResultSummary = [];
-
-    // Mapa do śledzenia unikalnych kombinacji name i color
     const nameColorMap = {};
 
-    // Iteruj przez wszystkie dzielnice i ich finalResults
     districts.forEach((district) => {
       if (district.finalResult && Array.isArray(district.finalResult)) {
         district.finalResult.forEach((item) => {
@@ -35,11 +32,9 @@ const Summary = () => {
             const key = `${item.name}_${item.color}`;
 
             if (nameColorMap[key]) {
-              // Jeśli istnieje już taki element, zaktualizuj result i seats
               nameColorMap[key].result += item.result;
               nameColorMap[key].seats += item.seats;
             } else {
-              // W przeciwnym razie dodaj jako nowy element
               nameColorMap[key] = { ...item };
               updatedFinalResultSummary.push(nameColorMap[key]);
             }
@@ -50,6 +45,15 @@ const Summary = () => {
 
     setFinalResultSummary(updatedFinalResultSummary);
   }, [districts]);
+
+  useEffect(() => {
+    let totalSeats = 0;
+    finalResultSummary.forEach((item) => {
+      totalSeats += item.seats;
+    });
+    // setTotalSeatsRendered(totalSeats);
+    setUnassignedSeats(deputiesSum - totalSeats);
+  }, [districts, finalResultSummary, deputiesSum]);
 
   return shouldShowSummary ? (
     <div className="App__summary">
@@ -66,9 +70,9 @@ const Summary = () => {
           />
         </div>
       </div>
-      <div className={`App__summary-main  ${showSummary ? "" : "hide"}`}>
+      <div className={`App__summary-main ${showSummary ? "" : "hide"}`}>
         <div className="presentation">
-          {/* Wyświetl nazwy w elemencie presentation */}
+          Liczba miejsc do wykorzystania: {deputiesSum}
           <ul>
             {finalResultSummary.map((item, index) => (
               <li key={index}>
@@ -77,6 +81,43 @@ const Summary = () => {
               </li>
             ))}
           </ul>
+          <div className="presentation__set">
+            {finalResultSummary.map((item, index) => {
+              const seatDivs = [];
+              for (let i = 0; i < item.seats; i++) {
+                seatDivs.push(
+                  <div
+                    className="presentation__set-seat"
+                    style={{ backgroundColor: item.color }}
+                    key={i}
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content={item.name}
+                  ></div>
+                );
+              }
+              return seatDivs;
+            })}
+            {unassignedSeats > 0 && (
+              <>
+                {unassignedSeats > 0 &&
+                  (() => {
+                    const unassignedSeatDivs = [];
+                    for (let i = 0; i < unassignedSeats; i++) {
+                      unassignedSeatDivs.push(
+                        <div
+                          className="presentation__set-seat"
+                          style={{ backgroundColor: "grey" }}
+                          key={i}
+                          data-tooltip-id="my-tooltip"
+                          data-tooltip-content="nieprzypisany"
+                        ></div>
+                      );
+                    }
+                    return unassignedSeatDivs;
+                  })()}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

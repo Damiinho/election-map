@@ -729,6 +729,19 @@ $tertiary-color: #9c62a12c;
       }
       .presentation {
         overflow: hidden;
+        &__set {
+          width: 300px;
+          display: grid;
+          grid-template-columns: repeat(10, 1fr);
+          gap: 5px;
+          &-seat {
+            // background-color: green;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+        }
       }
     }
   }

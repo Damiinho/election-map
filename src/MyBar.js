@@ -5,11 +5,10 @@ const MyBar = (props) => {
     (total, item) => total + item[props.value],
     0
   );
-  console.log(sum);
 
   return (
     <div className="list__element-bars__bar">
-      <Tooltip id="my-tooltip" />
+      <Tooltip id="myBar-tooltip" />
       {props.name}
       <div className="list__element-bars__bar-wrapper">
         <div
@@ -29,7 +28,7 @@ const MyBar = (props) => {
               key={item.color}
               className="list__element-bars__bar-wrapper__item"
               style={{ width: `${(item[props.value] / sum) * 100}%` }}
-              data-tooltip-id="my-tooltip"
+              data-tooltip-id="myBar-tooltip"
               data-tooltip-content={`${item.name}, ${itemValue}`}
             >
               <div
