@@ -14,7 +14,7 @@ import MyBar from "./MyBar";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const District = (props) => {
-  const { districts, setDistricts } = useContext(AppContext);
+  const { districts, setDistricts, setStrictSejm } = useContext(AppContext);
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
   const [currentResults, setCurrentResults] = useState(
@@ -66,6 +66,7 @@ const District = (props) => {
     const newDistricts = [...districts];
     newDistricts.splice(props.index, 1);
     setDistricts(newDistricts);
+    setStrictSejm(false);
   };
 
   const handleRegenerate = () => {

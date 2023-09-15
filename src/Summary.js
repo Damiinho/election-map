@@ -4,6 +4,7 @@ import { AppContext } from "./contexts/AppContext";
 import SummaryTable from "./SummaryTable";
 import MySmallInfoBox from "./MySmallInfoBox";
 import MyBar from "./MyBar";
+import SummaryParliament from "./SummaryParliament";
 
 const Summary = () => {
   const {
@@ -12,6 +13,7 @@ const Summary = () => {
     setShowSummary,
     finalResultSummary,
     setFinalResultSummary,
+    strictSejm,
   } = useContext(AppContext);
 
   const [unassignedSeats, setUnassignedSeats] = useState(0);
@@ -151,6 +153,7 @@ const Summary = () => {
               value="result"
               name="łączny wynik procentowy"
             />
+            {strictSejm ? <SummaryParliament /> : null}
           </div>
         </div>
       </div>

@@ -25,6 +25,7 @@ const AddDistrict = () => {
     setDistricts,
     parties,
     setShowDistricts,
+    setStrictSejm,
   } = useContext(AppContext);
 
   const polishDistricts = [
@@ -36,6 +37,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "dl",
     },
     {
       name: "Wałbrzych (2)",
@@ -45,6 +47,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "db",
     },
     {
       name: "Wrocław (3)",
@@ -54,6 +57,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "dw",
     },
     {
       name: "Bydgoszcz (4)",
@@ -63,6 +67,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "cb",
     },
     {
       name: "Toruń (5)",
@@ -72,6 +77,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "ct",
     },
     {
       name: "Lublin (6)",
@@ -81,6 +87,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "lu",
     },
     {
       name: "Chełm (7)",
@@ -90,6 +97,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "cch",
     },
     {
       name: "Zielona Góra (8)",
@@ -99,6 +107,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "fz",
     },
     {
       name: "Łódź (9)",
@@ -108,6 +117,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "el",
     },
     {
       name: "Piotrków Trybunalski (10)",
@@ -117,6 +127,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "ep",
     },
     {
       name: "Sieradz (11)",
@@ -126,6 +137,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "esi",
     },
     {
       name: "Chrzanów (12)",
@@ -135,6 +147,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "kch",
     },
     {
       name: "Kraków	(13)",
@@ -144,6 +157,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "kr",
     },
     {
       name: "Nowy Sącz (14)",
@@ -153,6 +167,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "kn",
     },
     {
       name: "Tarnów	(15)",
@@ -162,6 +177,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "kt",
     },
     {
       name: "Płock (16)",
@@ -171,6 +187,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "wp",
     },
     {
       name: "Radom (17)",
@@ -180,6 +197,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "wr",
     },
     {
       name: "Siedlce (18)",
@@ -189,6 +207,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "ws",
     },
     {
       name: "Warszawa (19)",
@@ -198,6 +217,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "wa",
     },
     {
       name: "Warszawa – obwarzanek (20)",
@@ -207,6 +227,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "wb",
     },
     {
       name: "Opole (21)",
@@ -216,6 +237,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "op",
     },
     {
       name: "Krosno (22)",
@@ -225,6 +247,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "rk",
     },
     {
       name: "Rzeszów (23)",
@@ -234,6 +257,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "rz",
     },
     {
       name: "Białystok (24)",
@@ -243,6 +267,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "bi",
     },
     {
       name: "Gdańsk (25)",
@@ -252,6 +277,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "gd",
     },
     {
       name: "Słupsk / Gdynia (26)",
@@ -261,6 +287,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "gs",
     },
     {
       name: "Bielsko-Biała (27)",
@@ -270,6 +297,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "sb",
     },
     {
       name: "Częstochowa (28)",
@@ -279,6 +307,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "sc",
     },
     {
       name: "Gliwice (29)",
@@ -288,6 +317,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "sg",
     },
     {
       name: "Rybnik (30)",
@@ -297,6 +327,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "sr",
     },
     {
       name: "Katowice	(31)",
@@ -306,6 +337,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "sk",
     },
     {
       name: "Sosnowiec (32)",
@@ -315,6 +347,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "ss",
     },
     {
       name: "Kielce	(33)",
@@ -324,6 +357,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "tk",
     },
     {
       name: "Elbląg (34)",
@@ -333,6 +367,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "ne",
     },
     {
       name: "Olsztyn (35)",
@@ -342,6 +377,8 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+
+      id: "no",
     },
     {
       name: "Kalisz (36)",
@@ -351,6 +388,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "pk",
     },
     {
       name: "Konin (37)",
@@ -360,6 +398,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "pn",
     },
     {
       name: "Piła (38)",
@@ -369,6 +408,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "pp",
     },
     {
       name: "Poznań (39)",
@@ -378,6 +418,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "po",
     },
     {
       name: "Koszalin (40)",
@@ -387,6 +428,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "zk",
     },
     {
       name: "Szczecin (41)",
@@ -396,6 +438,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
+      id: "zs",
     },
   ];
   const testDistricts = [
@@ -455,6 +498,7 @@ const AddDistrict = () => {
     setTimeout(() => {
       setAddDistrictSuccess(false);
     }, 2000);
+    setStrictSejm(false);
   };
 
   const handlePredefined = (item) => {
@@ -463,6 +507,7 @@ const AddDistrict = () => {
       setName("");
       setDeputies("");
       setMethod("dhondt");
+      setStrictSejm(true);
     } else if (item === "test") {
       setDistricts(testDistricts);
       setName("");

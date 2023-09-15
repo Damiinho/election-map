@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
   const [showSummary, setShowSummary] = useState(true);
   const [showAddPartyList, setShowAddPartyList] = useState(true);
   const [finalResultSummary, setFinalResultSummary] = useState([]);
+  const [strictSejm, setStrictSejm] = useState(false);
 
   const providerValue = {
     parties,
@@ -32,6 +33,8 @@ export const AppProvider = ({ children }) => {
     setShowAddPartyList,
     finalResultSummary,
     setFinalResultSummary,
+    strictSejm,
+    setStrictSejm,
   };
 
   return (
