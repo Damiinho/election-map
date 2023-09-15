@@ -24,6 +24,7 @@ const AddDistrict = () => {
     districts,
     setDistricts,
     parties,
+    setShowDistricts,
   } = useContext(AppContext);
 
   const polishDistricts = [
@@ -470,6 +471,7 @@ const AddDistrict = () => {
     }
     setShowAddDistrict(false);
     setShowAddParty(false);
+    setShowDistricts(true);
   };
 
   const handleShowAddDistrict = () => {
@@ -478,7 +480,11 @@ const AddDistrict = () => {
 
   return (
     <div className="adddistrict">
-      <div className="adddistrict__title">
+      <div
+        className="adddistrict__title"
+        style={{ cursor: "pointer" }}
+        onClick={handleShowAddDistrict}
+      >
         2. generuj okręgi{" "}
         <div className="addparty__title__side">
           <MySwitch

@@ -98,7 +98,11 @@ const Summary = () => {
 
   return shouldShowSummary ? (
     <div className="App__summary">
-      <div className="App__summary-title">
+      <div
+        className="App__summary-title"
+        style={{ cursor: "pointer" }}
+        onClick={handleShowSummary}
+      >
         4. zobacz podsumowanie
         <div className="App__summary-title__side">
           <MySwitch
@@ -112,18 +116,25 @@ const Summary = () => {
       <div className={`App__summary-main ${showSummary ? "" : "hide"}`}>
         <div className="presentation">
           <div className="presentation__description">
-            <MySmallInfoBox txt="liczba miejsc" value={deputiesSum} />
-            <MySmallInfoBox
-              txt="nieprzydzielone"
-              value={unassignedSeats}
-              backgroundTop="grey"
-              fontSizeTop={13}
-              fontSizeBottom={20}
-              paddingBottom="2px 0 0 2px"
-            />
             <SummaryTable />
           </div>
           <div className="presentation__block">
+            <div className="presentation__block-boxes">
+              <div className="presentation__block-boxes__item">
+                <MySmallInfoBox txt="liczba miejsc" value={deputiesSum} />
+              </div>
+              <div className="presentation__block-boxes__item">
+                <MySmallInfoBox
+                  txt="nieprzydzielone"
+                  value={unassignedSeats}
+                  backgroundTop="grey"
+                  fontSizeTop={13}
+                  fontSizeBottom={20}
+                  // paddingBottom="2px 0 0 2px"
+                />
+              </div>
+            </div>
+
             <div className="presentation__block-set">
               {finalResultSummary.map((item, index) => renderSeatDivs(item))}
               {unassignedSeats > 0 && renderUnassignedSeatDivs()}
@@ -138,7 +149,7 @@ const Summary = () => {
             <MyBar
               result={finalResultSummary}
               value="result"
-              name="łączba licwynik procentowy"
+              name="łączny wynik procentowy"
             />
           </div>
         </div>

@@ -143,7 +143,11 @@ const AddParty = () => {
 
   return (
     <div className="addparty">
-      <div className="addparty__title">
+      <div
+        className="addparty__title"
+        style={{ cursor: "pointer" }}
+        onClick={handleShowAddParty}
+      >
         1. dodaj komitety
         <div className="addparty__title__side">
           <MySwitch
