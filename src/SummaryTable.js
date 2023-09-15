@@ -15,7 +15,7 @@ const SummaryTable = (props) => {
   };
 
   return (
-    <table className="list__element-doughnut__description">
+    <table className="presentation__description-table">
       <thead>
         <tr>
           <th>nazwa</th>
