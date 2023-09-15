@@ -24,7 +24,7 @@ const MySmallInfoBox = (props) => {
         fontFamily: "Overpass, sans-serif",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
       }}
     >
@@ -44,7 +44,14 @@ const MySmallInfoBox = (props) => {
       </div>
       <div
         className="presentation__description-item__value"
-        style={{ fontSize: fontSizeBottom, padding: paddingBottom }}
+        style={{
+          fontSize: fontSizeBottom,
+          padding: paddingBottom,
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         {props.value}
       </div>

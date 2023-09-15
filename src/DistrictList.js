@@ -12,7 +12,11 @@ const DistrictList = () => {
 
   return districts.length > 0 ? (
     <div className="App__districtlist">
-      <div className="App__districtlist-title">
+      <div
+        className="App__districtlist-title"
+        style={{ cursor: "pointer" }}
+        onClick={handleShowDistricts}
+      >
         3. wpisz wyniki
         <div className="App__districtlist-title__side">
           <MySwitch

@@ -712,8 +712,16 @@ $tertiary-color: #9c62a12c;
           }
         }
         &__block {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          &-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+          }
           &-set {
-            margin-top: 10px;
+            margin: 10px auto 0;
             width: 250px;
             display: grid;
             grid-template-columns: repeat(10, 1fr);
