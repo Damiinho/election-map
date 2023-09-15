@@ -97,7 +97,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
-      id: "cch",
+      id: "lc",
     },
     {
       name: "Zielona Góra (8)",
