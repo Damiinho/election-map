@@ -8,7 +8,7 @@ const MySmallInfoBox = (props) => {
   const fontSizeBottom = props.fontSizeBottom || 25;
   const paddingTop = props.paddingTop || "5px 0 5px 0";
   const paddingBottom = props.paddingBottom || 0;
-  const radius = props.radius || 7;
+  const radius = props.radius || "7px";
   const allWidth = props.allWidth || 120;
   return (
     <div

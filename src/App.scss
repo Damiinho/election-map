@@ -730,6 +730,9 @@ $tertiary-color: #9c62a12c;
             }
           }
         }
+        &__bar {
+          grid-column: span 2;
+        }
       }
     }
   }

@@ -3,6 +3,7 @@ import MySwitch from "./MySwitch";
 import { AppContext } from "./contexts/AppContext";
 import SummaryTable from "./SummaryTable";
 import MySmallInfoBox from "./MySmallInfoBox";
+import MyBar from "./MyBar";
 
 const Summary = () => {
   const {
@@ -66,7 +67,6 @@ const Summary = () => {
   const renderSeatDivs = (item) => {
     const seatDivs = [];
     for (let i = 0; i < item.seats; i++) {
-      console.log(item);
       seatDivs.push(
         <div
           className="presentation__block-set__seat"
@@ -95,6 +95,7 @@ const Summary = () => {
     }
     return unassignedSeatDivs;
   };
+  console.log(finalResultSummary);
 
   return shouldShowSummary ? (
     <div className="App__summary">
@@ -128,6 +129,18 @@ const Summary = () => {
               {finalResultSummary.map((item, index) => renderSeatDivs(item))}
               {unassignedSeats > 0 && renderUnassignedSeatDivs()}
             </div>
+          </div>
+          <div className="presentation__bar">
+            <MyBar
+              result={finalResultSummary}
+              value="seats"
+              name="łączba liczba mandatów"
+            />
+            <MyBar
+              result={finalResultSummary}
+              value="result"
+              name="łączba licwynik procentowy"
+            />
           </div>
         </div>
       </div>
