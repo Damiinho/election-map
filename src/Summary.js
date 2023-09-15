@@ -95,7 +95,6 @@ const Summary = () => {
     }
     return unassignedSeatDivs;
   };
-  console.log(finalResultSummary);
 
   return shouldShowSummary ? (
     <div className="App__summary">
