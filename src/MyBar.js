@@ -31,7 +31,7 @@ const MyBar = (props) => {
     height: "100%",
     backgroundColor: "#ffffff48",
     backgroundImage:
-      "linear-gradient(0deg, #ffffff 0%, #ffffff 12.5%, transparent 12.5%, transparent 25%, #ffffff 25%, #ffffff 37.5%, transparent 37.5%, transparent 50%, #ffffff 50%, #ffffff 62.5%, transparent 62.5%, transparent 75%, #ffffff 75%, #ffffff 87.5%, transparent 87.5%, transparent 100%)",
+      "linear-gradient(0deg, #ffffff33 0%, #ffffff33 12.5%, transparent 12.5%, transparent 25%, #ffffff33 25%, #ffffff33 37.5%, transparent 37.5%, transparent 50%, #ffffff33 50%, #ffffff33 62.5%, transparent 62.5%, transparent 75%, #ffffff33 75%, #ffffff33 87.5%, transparent 87.5%, transparent 100%)",
     position: "absolute",
     top: "0%",
     left: "50%",
