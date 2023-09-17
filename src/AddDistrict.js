@@ -347,7 +347,7 @@ const AddDistrict = () => {
       showFinalResult: false,
       finalResult: [],
       forChart: {},
-      id: "ss",
+      id: "so",
     },
     {
       name: "Kielce	(33)",
