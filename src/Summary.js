@@ -153,7 +153,9 @@ const Summary = () => {
               value="result"
               name="łączny wynik procentowy"
             />
-            {strictSejm ? <SummaryParliament /> : null}
+            <div style={{ width: 900, height: 800, margin: "0 auto" }}>
+              {strictSejm ? <SummaryParliament /> : null}
+            </div>
           </div>
         </div>
       </div>
