@@ -94,6 +94,12 @@ const SummaryParliament = () => {
               padding: 2,
             }}
           >
+            <div style={{ textAlign: "center", fontSize: 20 }}>
+              {
+                districts.find((district) => district.id === hoveredElement)
+                  .name
+              }
+            </div>
             <div
               style={{
                 padding: 2,
