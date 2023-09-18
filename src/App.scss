@@ -724,12 +724,13 @@ $tertiary-color: #9c62a12c;
             margin: 10px auto 0;
             width: 250px;
             display: grid;
-            grid-template-columns: repeat(10, 1fr);
+            grid-auto-flow: column;
+            grid-template-rows: repeat(20, 1fr);
             gap: 5px;
             &__seat {
               // background-color: green;
-              width: 20px;
-              height: 20px;
+              width: 10px;
+              height: 10px;
               border-radius: 50%;
               cursor: pointer;
               &:hover {

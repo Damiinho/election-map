@@ -1,13 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import District from "./District";
 import DistrictListButton from "./DistrictListButtons";
 import MySwitch from "./MySwitch";
+import { TextField } from "@mui/material";
+import SearchDistrict from "./SearchDistrict";
 
 const DistrictList = () => {
-  const { districts, showDistricts, setShowDistricts } = useContext(AppContext);
-  const handleShowDistricts = () => {
-    setShowDistricts(!showDistricts);
+  const { districts, showDistricts, setShowDistricts, searchDistrictValue } =
+    useContext(AppContext);
+
+  const handleShowDistricts = (event) => {
+    let target = event.target;
+    let isSearchDistrictClicked = false;
+
+    while (target) {
+      if (target.classList.contains("App__districtlist-title__search")) {
+        isSearchDistrictClicked = true;
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (!isSearchDistrictClicked) {
+      setShowDistricts(!showDistricts);
+    }
   };
 
   return districts.length > 0 ? (
@@ -26,19 +43,27 @@ const DistrictList = () => {
             value={showDistricts}
           />
         </div>
+        <SearchDistrict />
       </div>
       <div className={`App__districtlist-main ${showDistricts ? "" : "hide"}`}>
         {/* <DistrictListButton /> */}
         <div className="list">
-          {districts.map((item, index) => (
-            <District
-              key={index}
-              name={item.name}
-              deputies={item.deputies}
-              method={item.method}
-              index={index}
-            />
-          ))}
+          {districts.map(
+            (item, index) =>
+              // Warunek do ukrywania elementów, które nie spełniają kryteriów
+              (searchDistrictValue === "" ||
+                item.name
+                  .toLowerCase()
+                  .includes(searchDistrictValue.toLowerCase())) && (
+                <District
+                  key={index}
+                  name={item.name}
+                  deputies={item.deputies}
+                  method={item.method}
+                  index={index}
+                />
+              )
+          )}
         </div>
       </div>
     </div>
