@@ -1,14 +1,12 @@
 import { Button, ButtonGroup, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
-import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const SearchDistrict = () => {
   const [searchValue, setSearchValue] = useState("");
-  const { searchDistrictValue, setSearchDistrictValue, setShowDistricts } =
-    useContext(AppContext);
+  const { setSearchDistrictValue, setShowDistricts } = useContext(AppContext);
   const handleSubmit = () => {
     setSearchDistrictValue(searchValue);
     setShowDistricts(true);

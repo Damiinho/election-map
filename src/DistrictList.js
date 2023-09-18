@@ -1,16 +1,18 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "./contexts/AppContext";
 import District from "./District";
-import DistrictListButton from "./DistrictListButtons";
 import MySwitch from "./MySwitch";
-import { TextField } from "@mui/material";
 import SearchDistrict from "./SearchDistrict";
 
 const DistrictList = () => {
   const { districts, showDistricts, setShowDistricts, searchDistrictValue } =
     useContext(AppContext);
 
-  const handleShowDistricts = (event) => {
+  const handleShowDistricts = (event, value) => {
+    if (value === "switch") {
+      setShowDistricts(!showDistricts);
+      return;
+    }
     let target = event.target;
     let isSearchDistrictClicked = false;
 
@@ -37,7 +39,7 @@ const DistrictList = () => {
         3. wpisz wyniki
         <div className="App__districtlist-title__side">
           <MySwitch
-            onClick={handleShowDistricts}
+            onClick={() => handleShowDistricts("switch")}
             imgDisplay
             thumbDisplay={false}
             value={showDistricts}
@@ -50,7 +52,6 @@ const DistrictList = () => {
         <div className="list">
           {districts.map(
             (item, index) =>
-              // Warunek do ukrywania elementów, które nie spełniają kryteriów
               (searchDistrictValue === "" ||
                 item.name
                   .toLowerCase()
