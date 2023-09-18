@@ -1,71 +1,175 @@
 import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
+import MySwitch from "./MySwitch";
 
 const SummaryParliament = () => {
   const [hoveredElement, setHoveredElement] = useState(null);
-  const { districts } = useContext(AppContext);
+  const { districts, showMapByResults, setShowMapByResults } =
+    useContext(AppContext);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
-  const gradientMap = districts.reduce((map, district) => {
-    if (district.finalResult && district.finalResult.length > 0) {
-      const sortedParties = district.finalResult.sort(
-        (a, b) => b.seats - a.seats
-      );
+  const handleShowByResults = () => {
+    setShowMapByResults(!showMapByResults);
+  };
 
-      const maxSeats = sortedParties[0].seats;
-      const partiesWithMaxSeats = sortedParties.filter(
-        (party) => party.seats === maxSeats
-      );
+  const GradientsByResult = () => {
+    const gradientMap = districts.reduce((map, district) => {
+      if (district.finalResult && district.finalResult.length > 0) {
+        const sortedParties = district.finalResult.sort(
+          (a, b) => b.result - a.result
+        );
 
-      const numColors = partiesWithMaxSeats.length;
-      const stops = [];
-      let offset = 0;
+        const maxSeats = sortedParties[0].result;
+        const partiesWithMaxSeats = sortedParties.filter(
+          (party) => party.result === maxSeats
+        );
 
-      while (offset < 1) {
-        for (let i = 0; i < numColors && offset < 1; i++) {
-          const color = partiesWithMaxSeats[i].color;
+        const numColors = partiesWithMaxSeats.length;
+        const stops = [];
+        let offset = 0;
+
+        if (numColors > 1) {
+          while (offset < 1) {
+            for (let i = 0; i < numColors && offset < 1; i++) {
+              const color = partiesWithMaxSeats[i].color;
+
+              stops.push(
+                <stop
+                  key={`${offset}_${i}_result`}
+                  offset={`${offset}`}
+                  stopColor={color}
+                />,
+                <stop
+                  key={`${offset + 0.05}_${i}_result`}
+                  offset={`${offset + 0.05}`}
+                  stopColor={color}
+                />
+              );
+              offset += 0.05;
+            }
+          }
+        } else if (numColors === 1) {
           stops.push(
             <stop
-              key={`${offset}_${i}`}
+              key={`${offset}_${district.id}_result`}
               offset={`${offset}`}
-              stopColor={color}
-            />,
-            <stop
-              key={`${offset + 0.05}_${i}`}
-              offset={`${offset + 0.05}`}
-              stopColor={color}
+              stopColor={partiesWithMaxSeats[0].color}
             />
           );
-          offset += 0.05;
         }
+        const gradientId = `id${district.id}`;
+
+        const gradient = (
+          <linearGradient
+            key={`${district.id}_result`}
+            id={gradientId}
+            spreadMethod="pad"
+            gradientTransform="rotate(90)"
+          >
+            {stops}
+          </linearGradient>
+        );
+
+        map[district.id] = gradient;
+      } else {
+        const gradientId = `id${district.id}`;
+        const gradient = (
+          <linearGradient
+            key={`${district.id}_result`}
+            id={gradientId}
+            spreadMethod="pad"
+          >
+            <stop offset="0" stopColor="#cecece" />
+          </linearGradient>
+        );
+
+        map[district.id] = gradient;
       }
-      const gradientId = `id${district.id}`;
+      return map;
+    }, {});
 
-      const gradient = (
-        <linearGradient
-          key={district.id}
-          id={gradientId}
-          spreadMethod="pad"
-          gradientTransform="rotate(90)"
-        >
-          {stops}
-        </linearGradient>
-      );
+    return <defs>{Object.values(gradientMap)}</defs>;
+  };
 
-      map[district.id] = gradient;
-    } else {
-      const gradientId = `id${district.id}`;
-      const gradient = (
-        <linearGradient key={district.id} id={gradientId} spreadMethod="pad">
-          <stop offset="0" stopColor="#cecece" />
-        </linearGradient>
-      );
+  const GradientsBySeats = () => {
+    const gradientMap = districts.reduce((map, district) => {
+      if (district.finalResult && district.finalResult.length > 0) {
+        const sortedParties = district.finalResult.sort(
+          (a, b) => b.seats - a.seats
+        );
 
-      map[district.id] = gradient;
-    }
+        const maxSeats = sortedParties[0].seats;
+        const partiesWithMaxSeats = sortedParties.filter(
+          (party) => party.seats === maxSeats
+        );
 
-    return map;
-  }, {});
+        const numColors = partiesWithMaxSeats.length;
+        const stops = [];
+        let offset = 0;
+
+        if (numColors > 1) {
+          while (offset < 1) {
+            for (let i = 0; i < numColors && offset < 1; i++) {
+              const color = partiesWithMaxSeats[i].color;
+
+              stops.push(
+                <stop
+                  key={`${offset}_${i}_seats`}
+                  offset={`${offset}`}
+                  stopColor={color}
+                />,
+                <stop
+                  key={`${offset + 0.05}_${i}_seats`}
+                  offset={`${offset + 0.05}`}
+                  stopColor={color}
+                />
+              );
+              offset += 0.05;
+            }
+          }
+        } else if (numColors === 1) {
+          stops.push(
+            <stop
+              key={`${offset}_${district.id}_seats`}
+              offset={`${offset}`}
+              stopColor={partiesWithMaxSeats[0].color}
+            />
+          );
+        }
+
+        const gradientId = `id${district.id}`;
+
+        const gradient = (
+          <linearGradient
+            key={`${district.id}_seats`}
+            id={gradientId}
+            spreadMethod="pad"
+            gradientTransform="rotate(90)"
+          >
+            {stops}
+          </linearGradient>
+        );
+
+        map[district.id] = gradient;
+      } else {
+        const gradientId = `id${district.id}`;
+        const gradient = (
+          <linearGradient
+            key={`${district.id}_seats`}
+            id={gradientId}
+            spreadMethod="pad"
+          >
+            <stop offset="0" stopColor="#cecece" />
+          </linearGradient>
+        );
+
+        map[district.id] = gradient;
+      }
+      return map;
+    }, {});
+
+    return <defs>{Object.values(gradientMap)}</defs>;
+  };
 
   const handleMouseOver = (event, elementId) => {
     setHoveredElement(elementId);
@@ -78,6 +182,23 @@ const SummaryParliament = () => {
 
   return (
     <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+
+          fontFamily: "Mukta, sans-serif",
+        }}
+      >
+        <span style={{ fontSize: 20 }}>uzyskane mandaty</span>
+        <MySwitch
+          size={1.5}
+          value={showMapByResults}
+          onClick={handleShowByResults}
+        />
+        <span style={{ fontSize: 20 }}>uzyskany wynik</span>
+      </div>
       {hoveredElement &&
         districts.find((district) => district.id === hoveredElement)
           ?.finalResult.length > 0 && (
@@ -109,7 +230,7 @@ const SummaryParliament = () => {
               }}
             >
               <div></div>
-              <div style={{ margin: "0 auto" }}>miejsca</div>
+              <div style={{ margin: "0 auto" }}>mandaty</div>
               <div style={{ margin: "0 auto" }}>wynik</div>
             </div>
             {districts.find((district) => district.id === hoveredElement)
@@ -139,7 +260,7 @@ const SummaryParliament = () => {
         viewBox="0 0 1050 1050"
         preserveAspectRatio="xMidYMid meet"
       >
-        <defs>{Object.values(gradientMap)}</defs>
+        {showMapByResults ? <GradientsByResult /> : <GradientsBySeats />}
         <g className="layer">
           {/* <title>{"Layer 1"}</title> */}
           <filter id="shadow">
@@ -162,7 +283,7 @@ const SummaryParliament = () => {
             />
             <feComposite operator="in" in="combined" in2="SourceGraphic" />
           </filter>
-          ?
+
           <path
             id="bi"
             fill={`url(#idbi)`}
