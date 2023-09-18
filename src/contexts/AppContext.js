@@ -15,6 +15,7 @@ export const AppProvider = ({ children }) => {
   const [strictSejm, setStrictSejm] = useState(false);
   const [searchDistrictValue, setSearchDistrictValue] = useState("");
   const [showMapByResults, setShowMapByResults] = useState(false);
+  const [advancedVersion, setAdvancedVersion] = useState(false);
 
   const providerValue = {
     parties,
@@ -41,6 +42,8 @@ export const AppProvider = ({ children }) => {
     setSearchDistrictValue,
     showMapByResults,
     setShowMapByResults,
+    advancedVersion,
+    setAdvancedVersion,
   };
 
   return (

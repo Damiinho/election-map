@@ -2,7 +2,7 @@ import { Button, ButtonGroup, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const SearchDistrict = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -13,7 +13,7 @@ const SearchDistrict = () => {
   };
 
   return (
-    <div className="App__districtlist-title__search">
+    <div className="App__districtlist-handler__search">
       <TextField
         color="error"
         label="szukaj okręgu"
@@ -63,7 +63,7 @@ const SearchDistrict = () => {
             setSearchValue("");
           }}
         >
-          <DeleteForeverIcon color="string" fontSize="medium" />
+          <CancelIcon color="string" fontSize="medium" />
         </Button>
       </ButtonGroup>
     </div>

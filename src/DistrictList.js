@@ -3,10 +3,19 @@ import { AppContext } from "./contexts/AppContext";
 import District from "./District";
 import MySwitch from "./MySwitch";
 import SearchDistrict from "./SearchDistrict";
+import { Button } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const DistrictList = () => {
-  const { districts, showDistricts, setShowDistricts, searchDistrictValue } =
-    useContext(AppContext);
+  const {
+    districts,
+    showDistricts,
+    setShowDistricts,
+    searchDistrictValue,
+    setDistricts,
+    setShowAddDistrict,
+    setShowAddParty,
+  } = useContext(AppContext);
 
   const handleShowDistricts = (event, value) => {
     if (value === "switch") {
@@ -45,8 +54,33 @@ const DistrictList = () => {
             value={showDistricts}
           />
         </div>
-        <SearchDistrict />
       </div>
+
+      <div className="App__districtlist-handler">
+        <SearchDistrict />
+        <span className="App__districtlist-handler__text">
+          liczba okręgów:{" "}
+          <span className="App__districtlist-handler__text-number">
+            {districts.length}
+          </span>
+        </span>
+        <Button
+          variant="contained"
+          color="error"
+          size="small"
+          style={{ textTransform: "lowercase" }}
+          endIcon={<DeleteForeverIcon />}
+          onClick={() => {
+            setDistricts([]);
+            setShowAddDistrict(true);
+            setShowAddParty(true);
+          }}
+        >
+          Usuń wszystkie
+        </Button>
+        {/* <Button>Pokaż tylko nieuzupełnione</Button> */}
+      </div>
+
       <div className={`App__districtlist-main ${showDistricts ? "" : "hide"}`}>
         {/* <DistrictListButton /> */}
         <div className="list">
