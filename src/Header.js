@@ -3,13 +3,22 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useContext } from "react";
 import { AppContext } from "./contexts/AppContext";
+import Logo from "./img/calculatorlogo.png";
+import Logo2 from "./img/calculatorlogo2.png";
+import Logo3 from "./img/calculatorlogo3.png";
+import SimpleLogo3 from "./img/calculatorsimplelogo3.png";
+import SimpleLogo from "./img/calculatorsimplelogo.png";
+import SimpleLogo2 from "./img/calculatorsimplelogo2.png";
 
 const Header = () => {
   const { advancedVersion, setAdvancedVersion } = useContext(AppContext);
 
   return (
     <div className="App__header">
-      kalkulator wyborczy
+      <div className="App__header-title">
+        <span>kalkulator wyborczy</span>
+        <img src={SimpleLogo2} alt="" style={{ width: 80 }} />
+      </div>
       <div className="App__header-side">
         <MySwitch
           onClick={() => {

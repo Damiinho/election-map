@@ -65,7 +65,7 @@ $tertiary-color: #9c62a12c;
   &__header {
     padding: 20px 0 0 0;
     width: 100%;
-    height: 100px;
+    // height: 125px;
     background-color: #00498ddd;
     color: #fff;
     font-size: 50px;
@@ -73,9 +73,19 @@ $tertiary-color: #9c62a12c;
     font-family: "Mukta", sans-serif;
     font-family: "Overpass", sans-serif;
     font-weight: 800;
-    line-height: 80px;
+    // line-height: 80px;
     border-radius: 0 0 10px 10px;
     position: relative;
+    &-title {
+      display: flex;
+      @include justify-align-center();
+      gap: 20px;
+      position: relative;
+      img {
+        position: relative;
+        top: -15px;
+      }
+    }
     &-side {
       height: 50px;
       width: 150px;
