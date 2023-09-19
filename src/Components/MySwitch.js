@@ -1,6 +1,6 @@
 import { useState } from "react";
-import hideSVG from "./img/hide.svg";
-import showSVG from "./img/show.svg";
+import hideSVG from "../img/hide.svg";
+import showSVG from "../img/show.svg";
 
 const MySwitch = (props) => {
   const [isAnimating, setIsAnimating] = useState(false);

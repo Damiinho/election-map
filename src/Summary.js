@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import MySwitch from "./MySwitch";
+import MySwitch from "./Components/MySwitch";
 import { AppContext } from "./contexts/AppContext";
-import SummaryTable from "./SummaryTable";
-import MySmallInfoBox from "./MySmallInfoBox";
-import MyBar from "./MyBar";
-import SummaryParliament from "./SummaryParliament";
+import SummaryTable from "./Summary/SummaryTable";
+import MySmallInfoBox from "./Components/MySmallInfoBox";
+import MyBar from "./Components/MyBar";
+import SummaryParliament from "./Summary/SummaryParliament";
 
 const Summary = () => {
   const {

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { AppContext } from "./contexts/AppContext";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { randomColor } from "randomcolor";
 import StartButton from "./District/StartButton";
@@ -9,7 +8,8 @@ import AddLocalParty from "./District/AddLocalParty";
 import TopButtons from "./District/TopButtons";
 import DoughnutDescription from "./District/DoughnutDescription";
 import DistrictTitle from "./District/DistrictTitle";
-import MyBar from "./MyBar";
+import MyBar from "../Components/MyBar";
+import { AppContext } from "../contexts/AppContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

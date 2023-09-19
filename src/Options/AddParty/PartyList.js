@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { AppContext } from "./contexts/AppContext";
+import { AppContext } from "../../contexts/AppContext";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Button, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import MySwitch from "./MySwitch";
+import MySwitch from "../../Components/MySwitch";
 
 const PartyList = () => {
   const { parties, setParties, showAddPartyList, setShowAddPartyList } =

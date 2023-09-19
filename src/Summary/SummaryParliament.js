@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { AppContext } from "./contexts/AppContext";
-import MySwitch from "./MySwitch";
+import { AppContext } from "../contexts/AppContext";
+import MySwitch from "../Components/MySwitch";
 
 const SummaryParliament = () => {
   const [hoveredElement, setHoveredElement] = useState(null);

@@ -1,21 +1,26 @@
 import React, { useContext } from "react";
 import ArrowDropDownSharpIcon from "@mui/icons-material/ArrowDropDownSharp";
 import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
-import { AppContext } from "./contexts/AppContext";
-
-const SummaryTable = (props) => {
-  const { finalResultSummary, setFinalResultSummary } = useContext(AppContext);
+import { AppContext } from "../../contexts/AppContext";
+const DoughnutDescription = (props) => {
+  const { districts, setDistricts } = useContext(AppContext);
 
   const handleArrowClick = (currentIndex, targetIndex) => {
-    const finalResultCopy = [...finalResultSummary];
+    const updatedDistricts = [...districts];
+    const currentDistrict = props.currentDistrict;
+    const finalResultCopy = [...currentDistrict.finalResult];
+
+    // Swap the items in finalResultCopy
     const temp = finalResultCopy[currentIndex];
     finalResultCopy[currentIndex] = finalResultCopy[targetIndex];
     finalResultCopy[targetIndex] = temp;
-    setFinalResultSummary(finalResultCopy);
+
+    currentDistrict.finalResult = finalResultCopy;
+    setDistricts(updatedDistricts);
   };
 
   return (
-    <table className="presentation__description-table">
+    <table className="list__element-doughnut__description">
       <thead>
         <tr>
           <th>nazwa</th>
@@ -25,7 +30,7 @@ const SummaryTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {finalResultSummary.map((item, index) => (
+        {props.finalResult.map((item, index) => (
           <tr style={{ backgroundColor: `${item.color}aa` }} key={item.name}>
             <td>{item.name}</td>
             <td>{item.result}</td>
@@ -45,27 +50,24 @@ const SummaryTable = (props) => {
                     handleArrowClick(index, index - 1);
                   }
                 }}
-                aria-label="Przesuń w górę"
               />
               <ArrowDropDownSharpIcon
                 fontSize="small"
                 style={{
-                  cursor:
-                    index < finalResultSummary.length - 1 ? "pointer" : "",
+                  cursor: index < props.finalResult.length - 1 ? "pointer" : "",
                   backgroundColor: "#061a8b46",
                   borderRadius: 5,
                   color:
-                    index < finalResultSummary.length - 1
+                    index < props.finalResult.length - 1
                       ? "white"
                       : "#061a8b46",
                   margin: "0 auto",
                 }}
                 onClick={() => {
-                  if (index < finalResultSummary.length - 1) {
+                  if (index < props.finalResult.length - 1) {
                     handleArrowClick(index, index + 1);
                   }
                 }}
-                aria-label="Przesuń w dół"
               />
             </td>
           </tr>
@@ -75,4 +77,4 @@ const SummaryTable = (props) => {
   );
 };
 
-export default SummaryTable;
+export default DoughnutDescription;

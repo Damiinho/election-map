@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { AppContext } from "./contexts/AppContext";
-import District from "./District";
-import MySwitch from "./MySwitch";
-import SearchDistrict from "./SearchDistrict";
+import District from "./DistrictList/District";
+import MySwitch from "./Components/MySwitch";
+import SearchDistrict from "./DistrictList/SearchDistrict";
 import { Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SvgComponent from "./SvgComponent";

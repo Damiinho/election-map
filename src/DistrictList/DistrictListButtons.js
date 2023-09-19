@@ -1,4 +1,4 @@
-import MySwitch from "./MySwitch";
+import MySwitch from "../Components/MySwitch";
 
 const DistrictListButton = () => {
   return (

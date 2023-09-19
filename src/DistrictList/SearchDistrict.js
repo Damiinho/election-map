@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, TextField } from "@mui/material";
 import { useContext, useState } from "react";
-import { AppContext } from "./contexts/AppContext";
+import { AppContext } from "../contexts/AppContext";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import CancelIcon from "@mui/icons-material/Cancel";
 

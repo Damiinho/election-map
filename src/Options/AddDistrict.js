@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AppContext } from "./contexts/AppContext";
+import { AppContext } from "../contexts/AppContext";
 import {
   Alert,
   Button,
@@ -9,7 +9,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import MySwitch from "./MySwitch";
+import MySwitch from "../Components/MySwitch";
 
 const AddDistrict = () => {
   const [name, setName] = useState("");

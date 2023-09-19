@@ -1,4 +1,4 @@
-import MySwitch from "./MySwitch";
+import MySwitch from "./Components/MySwitch";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useContext } from "react";

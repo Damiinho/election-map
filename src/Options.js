@@ -1,5 +1,5 @@
-import AddParty from "./AddParty";
-import AddDistrict from "./AddDistrict";
+import AddParty from "./Options/AddParty";
+import AddDistrict from "./Options/AddDistrict";
 // import { useContext } from "react";
 // import { AppContext } from "./contexts/AppContext";
 // import MySwitch from "./MySwitch";

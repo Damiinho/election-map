@@ -1,29 +1,21 @@
 import React, { useContext } from "react";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ArrowDropDownSharpIcon from "@mui/icons-material/ArrowDropDownSharp";
 import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
 import { AppContext } from "../contexts/AppContext";
 
-const DoughnutDescription = (props) => {
-  const { districts, setDistricts } = useContext(AppContext);
+const SummaryTable = (props) => {
+  const { finalResultSummary, setFinalResultSummary } = useContext(AppContext);
 
   const handleArrowClick = (currentIndex, targetIndex) => {
-    const updatedDistricts = [...districts];
-    const currentDistrict = props.currentDistrict;
-    const finalResultCopy = [...currentDistrict.finalResult];
-
-    // Swap the items in finalResultCopy
+    const finalResultCopy = [...finalResultSummary];
     const temp = finalResultCopy[currentIndex];
     finalResultCopy[currentIndex] = finalResultCopy[targetIndex];
     finalResultCopy[targetIndex] = temp;
-
-    currentDistrict.finalResult = finalResultCopy;
-    setDistricts(updatedDistricts);
+    setFinalResultSummary(finalResultCopy);
   };
 
   return (
-    <table className="list__element-doughnut__description">
+    <table className="presentation__description-table">
       <thead>
         <tr>
           <th>nazwa</th>
@@ -33,7 +25,7 @@ const DoughnutDescription = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.finalResult.map((item, index) => (
+        {finalResultSummary.map((item, index) => (
           <tr style={{ backgroundColor: `${item.color}aa` }} key={item.name}>
             <td>{item.name}</td>
             <td>{item.result}</td>
@@ -53,24 +45,27 @@ const DoughnutDescription = (props) => {
                     handleArrowClick(index, index - 1);
                   }
                 }}
+                aria-label="Przesuń w górę"
               />
               <ArrowDropDownSharpIcon
                 fontSize="small"
                 style={{
-                  cursor: index < props.finalResult.length - 1 ? "pointer" : "",
+                  cursor:
+                    index < finalResultSummary.length - 1 ? "pointer" : "",
                   backgroundColor: "#061a8b46",
                   borderRadius: 5,
                   color:
-                    index < props.finalResult.length - 1
+                    index < finalResultSummary.length - 1
                       ? "white"
                       : "#061a8b46",
                   margin: "0 auto",
                 }}
                 onClick={() => {
-                  if (index < props.finalResult.length - 1) {
+                  if (index < finalResultSummary.length - 1) {
                     handleArrowClick(index, index + 1);
                   }
                 }}
+                aria-label="Przesuń w dół"
               />
             </td>
           </tr>
@@ -80,4 +75,4 @@ const DoughnutDescription = (props) => {
   );
 };
 
-export default DoughnutDescription;
+export default SummaryTable;

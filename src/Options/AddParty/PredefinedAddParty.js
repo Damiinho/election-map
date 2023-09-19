@@ -1,4 +1,4 @@
-const AddPartyPredefined = (props) => {
+const PredefinedAddParty = (props) => {
   return (
     <div className="addparty__main-predefined">
       <p>Predefiniowane:</p>
@@ -22,4 +22,4 @@ const AddPartyPredefined = (props) => {
   );
 };
 
-export default AddPartyPredefined;
+export default PredefinedAddParty;
