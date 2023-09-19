@@ -5,16 +5,17 @@ import SummaryTable from "./Summary/SummaryTable";
 import MySmallInfoBox from "./Components/MySmallInfoBox";
 import MyBar from "./Components/MyBar";
 import SummaryParliament from "./Summary/SummaryParliament";
+import { DataContext } from "./contexts/DataContext";
 
 const Summary = () => {
   const {
-    districts,
     showSummary,
     setShowSummary,
     finalResultSummary,
     setFinalResultSummary,
     strictSejm,
   } = useContext(AppContext);
+  const { districts } = useContext(DataContext);
 
   const [unassignedSeats, setUnassignedSeats] = useState(0);
 

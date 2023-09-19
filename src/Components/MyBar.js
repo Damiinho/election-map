@@ -56,7 +56,7 @@ const MyBar = (props) => {
       <div className="myBar-wrapper" style={wrapperStyle}>
         <div
           className="myBar-wrapper__center"
-          data-tooltip-id="my-tooltip"
+          data-tooltip-id="myBar-tooltip"
           data-tooltip-content="50%"
           style={wrapperCenterStyle}
         ></div>

@@ -10,11 +10,13 @@ import DoughnutDescription from "./District/DoughnutDescription";
 import DistrictTitle from "./District/DistrictTitle";
 import MyBar from "../Components/MyBar";
 import { AppContext } from "../contexts/AppContext";
+import { DataContext } from "../contexts/DataContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const District = (props) => {
-  const { districts, setDistricts, setStrictSejm } = useContext(AppContext);
+  const { setStrictSejm } = useContext(AppContext);
+  const { districts, setDistricts } = useContext(DataContext);
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
   const [currentResults, setCurrentResults] = useState(

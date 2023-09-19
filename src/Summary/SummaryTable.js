@@ -3,7 +3,7 @@ import ArrowDropDownSharpIcon from "@mui/icons-material/ArrowDropDownSharp";
 import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
 import { AppContext } from "../contexts/AppContext";
 
-const SummaryTable = (props) => {
+const SummaryTable = () => {
   const { finalResultSummary, setFinalResultSummary } = useContext(AppContext);
 
   const handleArrowClick = (currentIndex, targetIndex) => {

@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import MySwitch from "../Components/MySwitch";
-import { AppContext } from "../contexts/AppContext";
+import { AppContext } from "../../contexts/AppContext";
+import MySwitch from "../../Components/MySwitch";
 
 const HeaderAddParty = () => {
   const { showAddParty, setShowAddParty } = useContext(AppContext);

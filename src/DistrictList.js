@@ -6,17 +6,17 @@ import SearchDistrict from "./DistrictList/SearchDistrict";
 import { Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SvgComponent from "./SvgComponent";
+import { DataContext } from "./contexts/DataContext";
 
 const DistrictList = () => {
   const {
-    districts,
     showDistricts,
     setShowDistricts,
     searchDistrictValue,
-    setDistricts,
     setShowAddDistrict,
     setShowAddParty,
   } = useContext(AppContext);
+  const { districts, setDistricts } = useContext(DataContext);
 
   const handleShowDistricts = (event, value) => {
     if (value === "switch") {

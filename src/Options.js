@@ -1,11 +1,12 @@
 import AddParty from "./Options/AddParty";
 import AddDistrict from "./Options/AddDistrict";
-// import { useContext } from "react";
-// import { AppContext } from "./contexts/AppContext";
+import { useContext } from "react";
+import { AppContext } from "./contexts/AppContext";
+import SimpleOptions from "./Options/SimpleOptions";
 // import MySwitch from "./MySwitch";
 
 const Options = () => {
-  // const { showOptions, setShowOptions } = useContext(AppContext);
+  const { advancedVersion } = useContext(AppContext);
 
   // const handleShowOptions = () => {
   //   setShowOptions(!showOptions);
@@ -24,10 +25,14 @@ const Options = () => {
           />
         </div>
       </div> */}
-      <div className={`App__options-main`}>
-        <AddParty />
-        <AddDistrict />
-      </div>
+      {advancedVersion ? (
+        <div className={`App__options-main`}>
+          <AddParty />
+          <AddDistrict />
+        </div>
+      ) : (
+        <SimpleOptions />
+      )}
     </div>
   );
 };

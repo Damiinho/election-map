@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import ArrowDropDownSharpIcon from "@mui/icons-material/ArrowDropDownSharp";
 import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
-import { AppContext } from "../../contexts/AppContext";
+import { DataContext } from "../../contexts/DataContext";
 const DoughnutDescription = (props) => {
-  const { districts, setDistricts } = useContext(AppContext);
+  const { districts, setDistricts } = useContext(DataContext);
 
   const handleArrowClick = (currentIndex, targetIndex) => {
     const updatedDistricts = [...districts];

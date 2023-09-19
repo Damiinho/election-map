@@ -10,6 +10,7 @@ import {
   TextField,
 } from "@mui/material";
 import MySwitch from "../Components/MySwitch";
+import { DataContext } from "../contexts/DataContext";
 
 const AddDistrict = () => {
   const [name, setName] = useState("");
@@ -21,12 +22,11 @@ const AddDistrict = () => {
     showAddDistrict,
     setShowAddDistrict,
     setShowAddParty,
-    districts,
-    setDistricts,
-    parties,
+
     setShowDistricts,
     setStrictSejm,
   } = useContext(AppContext);
+  const { districts, setDistricts, parties } = useContext(DataContext);
 
   const polishDistricts = [
     {

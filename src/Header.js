@@ -9,21 +9,41 @@ import Logo3 from "./img/calculatorlogo3.png";
 import SimpleLogo3 from "./img/calculatorsimplelogo3.png";
 import SimpleLogo from "./img/calculatorsimplelogo.png";
 import SimpleLogo2 from "./img/calculatorsimplelogo2.png";
+import { DataContext } from "./contexts/DataContext";
 
 const Header = () => {
-  const { advancedVersion, setAdvancedVersion } = useContext(AppContext);
+  const {
+    advancedVersion,
+    setAdvancedVersion,
+    setShowAddDistrict,
+
+    setShowAddParty,
+  } = useContext(AppContext);
+  const { setParties, setDistricts } = useContext(DataContext);
+
+  const handleAdvancedVersion = () => {
+    setAdvancedVersion(!advancedVersion);
+    setParties([]);
+    setDistricts([]);
+    if (!advancedVersion) {
+      setShowAddDistrict(true);
+      setShowAddParty(true);
+    }
+  };
 
   return (
     <div className="App__header">
       <div className="App__header-title">
         <span>kalkulator wyborczy</span>
-        <img src={SimpleLogo2} alt="" style={{ width: 80 }} />
+        <img
+          src={advancedVersion ? Logo3 : SimpleLogo2}
+          alt=""
+          style={{ width: 80 }}
+        />
       </div>
       <div className="App__header-side">
         <MySwitch
-          onClick={() => {
-            setAdvancedVersion(!advancedVersion);
-          }}
+          onClick={handleAdvancedVersion}
           checkedObject={
             <CheckCircleIcon
               style={{

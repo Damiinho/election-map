@@ -8,11 +8,11 @@ import {
 } from "@mui/material";
 import PredefinedAddParty from "./PredefinedAddParty";
 import { useContext, useState } from "react";
-import { AppContext } from "../contexts/AppContext";
 import randomColor from "randomcolor";
+import { DataContext } from "../../contexts/DataContext";
 
 const HandlerAddParty = () => {
-  const { parties, setParties } = useContext(AppContext);
+  const { parties, setParties } = useContext(DataContext);
   const [name, setName] = useState("");
   const [isOverThreshold, setIsOverThreshold] = useState(true);
   const [chosenColor, setChosenColor] = useState(randomColor());

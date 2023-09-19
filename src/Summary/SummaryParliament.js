@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../contexts/AppContext";
 import MySwitch from "../Components/MySwitch";
+import { DataContext } from "../contexts/DataContext";
 
 const SummaryParliament = () => {
   const [hoveredElement, setHoveredElement] = useState(null);
-  const { districts, showMapByResults, setShowMapByResults } =
-    useContext(AppContext);
+  const { showMapByResults, setShowMapByResults } = useContext(AppContext);
+  const { districts } = useContext(DataContext);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
   const handleShowByResults = () => {

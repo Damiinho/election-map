@@ -5,10 +5,11 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { Button, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import MySwitch from "../../Components/MySwitch";
+import { DataContext } from "../../contexts/DataContext";
 
 const PartyList = () => {
-  const { parties, setParties, showAddPartyList, setShowAddPartyList } =
-    useContext(AppContext);
+  const { showAddPartyList, setShowAddPartyList } = useContext(AppContext);
+  const { parties, setParties } = useContext(DataContext);
   const [doubleClickedIndex, setdoubleClickedIndex] = useState("");
   const [newPartyName, setNewPartyName] = useState("");
 
