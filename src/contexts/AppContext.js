@@ -16,6 +16,7 @@ export const AppProvider = ({ children }) => {
   const [searchDistrictValue, setSearchDistrictValue] = useState("");
   const [showMapByResults, setShowMapByResults] = useState(false);
   const [advancedVersion, setAdvancedVersion] = useState(false);
+  const [showSimpleSummary, setShowSimpleSummary] = useState(false);
 
   const providerValue = {
     showOptions,
@@ -40,6 +41,8 @@ export const AppProvider = ({ children }) => {
     setShowMapByResults,
     advancedVersion,
     setAdvancedVersion,
+    showSimpleSummary,
+    setShowSimpleSummary,
   };
 
   return (

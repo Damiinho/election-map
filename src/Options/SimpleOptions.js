@@ -4,9 +4,12 @@ import { DataContext } from "../contexts/DataContext";
 import { Tooltip } from "react-tooltip";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import UndoRoundedIcon from "@mui/icons-material/UndoRounded";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { AppContext } from "../contexts/AppContext";
 
 const SimpleOptions = () => {
   const { simpleParties, setSimpleParties } = useContext(DataContext);
+  const { setShowSimpleSummary } = useContext(AppContext);
   const [results2019, setResults2019] = useState(false);
   const [resultsSurvey, setResultsSurvey] = useState(false);
   const [correction, setCorrection] = useState(true);
@@ -22,8 +25,7 @@ const SimpleOptions = () => {
     simpleParties.map((item) => (sum = sum + parseFloat(item.result)));
 
     const newSimpleParties = [...simpleParties];
-    if (sum.toFixed(2) === "100.00") return null;
-    else if (sum.toFixed(2) < "100.00") {
+    if (sum.toFixed(2) < "100.00") {
       const diff = 100 - sum;
       newSimpleParties[6].result = (
         parseFloat(newSimpleParties[6].result) + diff
@@ -45,6 +47,7 @@ const SimpleOptions = () => {
       newSimpleParties[6].result = (100 - diff).toFixed(2);
     }
     setSimpleParties(newSimpleParties);
+    setShowSimpleSummary(true);
   };
 
   const handleResultChange = (index, value) => {
@@ -136,6 +139,9 @@ const SimpleOptions = () => {
           </p>
         </div>
       </Tooltip>
+      <Tooltip style={{ zIndex: 1 }} id="td-tooltip">
+        <div>Koalicja, próg wyborczy 8%</div>
+      </Tooltip>
       <Tooltip style={{ zIndex: 1, width: 440 }} id="options-tooltip">
         <div style={{ marginBottom: 10 }}>
           1. Wyniki z 2019: Trzeciej Drodze przypisuje się głosy PSL-u,
@@ -197,10 +203,17 @@ const SimpleOptions = () => {
                   className="simpleOptions-handler__list-table__element-name"
                   style={{
                     backgroundColor: item.color,
-                    cursor: item.shortName === "inne" ? "help" : "auto",
+                    cursor:
+                      item.shortName === "inne" || item.shortName === "TD"
+                        ? "help"
+                        : "auto",
                   }}
                   data-tooltip-id={
-                    item.shortName === "inne" ? "other-tooltip" : null
+                    item.shortName === "inne"
+                      ? "other-tooltip"
+                      : item.shortName === "TD"
+                      ? "td-tooltip"
+                      : null
                   }
                 >
                   {item.name}
@@ -213,6 +226,16 @@ const SimpleOptions = () => {
                       }}
                     >
                       <HelpOutlineOutlinedIcon />
+                    </span>
+                  ) : item.shortName === "TD" ? (
+                    <span
+                      style={{
+                        marginLeft: 10,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <InfoOutlinedIcon />
                     </span>
                   ) : null}
                 </div>

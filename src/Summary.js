@@ -6,6 +6,7 @@ import MySmallInfoBox from "./Components/MySmallInfoBox";
 import MyBar from "./Components/MyBar";
 import SummaryParliament from "./Summary/SummaryParliament";
 import { DataContext } from "./contexts/DataContext";
+import SimpleSummary from "./Summary/SimpleSummary";
 
 const Summary = () => {
   const {
@@ -14,6 +15,7 @@ const Summary = () => {
     finalResultSummary,
     setFinalResultSummary,
     strictSejm,
+    showSimpleSummary,
   } = useContext(AppContext);
   const { districts } = useContext(DataContext);
 
@@ -161,6 +163,8 @@ const Summary = () => {
         </div>
       </div>
     </div>
+  ) : showSimpleSummary ? (
+    <SimpleSummary />
   ) : null;
 };
 
