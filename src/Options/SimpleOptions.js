@@ -1,12 +1,51 @@
-import { Button, Slider, TextField } from "@mui/material";
+import { Button, ButtonGroup, Slider, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { Tooltip } from "react-tooltip";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import UndoRoundedIcon from "@mui/icons-material/UndoRounded";
 
 const SimpleOptions = () => {
   const { simpleParties, setSimpleParties } = useContext(DataContext);
   const [results2019, setResults2019] = useState(false);
   const [resultsSurvey, setResultsSurvey] = useState(false);
+  const [correction, setCorrection] = useState(true);
+  const [resultError, setResultError] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  const handleCorrection = () => {
+    setCorrection(!correction);
+  };
+
+  const handleStart = () => {
+    let sum = 0;
+    simpleParties.map((item) => (sum = sum + parseFloat(item.result)));
+
+    const newSimpleParties = [...simpleParties];
+    if (sum.toFixed(2) === "100.00") return null;
+    else if (sum.toFixed(2) < "100.00") {
+      const diff = 100 - sum;
+      newSimpleParties[6].result = (
+        parseFloat(newSimpleParties[6].result) + diff
+      ).toFixed(2);
+    } else if (sum.toFixed(2) > "100.00") {
+      if (parseFloat(sum) - parseFloat(simpleParties[6].result) > 100) {
+        console.log("błąd");
+        setResultError(true);
+        setShowError(true);
+        setTimeout(() => {
+          setResultError(false);
+        }, 500);
+        setTimeout(() => {
+          setShowError(false);
+        }, 2500);
+        return null;
+      }
+      const diff = sum - parseFloat(simpleParties[6].result);
+      newSimpleParties[6].result = (100 - diff).toFixed(2);
+    }
+    setSimpleParties(newSimpleParties);
+  };
 
   const handleResultChange = (index, value) => {
     const newSimpleParties = [...simpleParties];
@@ -26,27 +65,103 @@ const SimpleOptions = () => {
       setResultsSurvey(false);
     }
   };
-  const optionsInfo = () => (
-    <div>
-      <p>
-        1. Wyniki z 2019: Trzeciej Drodze przypisuję głosy PSL-u, Bezpartyjni
-        Samorządowcy jako wynik dostają średni wynik z okręgów, w których
-        startowali w 2019
-      </p>
-    </div>
-  );
+
+  const handleSurvey = () => {
+    const results = [
+      { name: "Prawo i Sprawiedliwość", result: 36.0 },
+      { name: "Koalicja Obywatelska", result: 28.7 },
+      { name: "Konfederacja", result: 9.9 },
+      { name: "Trzecia Droga", result: 9.0 },
+      { name: "Lewica", result: 8.5 },
+      { name: "Bezpartyjni Samorządowcy", result: 1.1 },
+      { name: "Pozostałe komitety", result: 6.8 },
+    ];
+
+    const newSimpleParties = simpleParties.map((party) => {
+      const result = results.find((item) => item.name === party.name);
+      if (result) {
+        return { ...party, result: result.result };
+      }
+      return party;
+    });
+    setSimpleParties(newSimpleParties);
+    setResultsSurvey(true);
+    if (results2019) {
+      setResults2019(false);
+    }
+  };
+  const handle2019 = () => {
+    const results = [
+      { name: "Prawo i Sprawiedliwość", result: 43.32 },
+      { name: "Koalicja Obywatelska", result: 27.23 },
+      { name: "Konfederacja", result: 6.76 },
+      { name: "Trzecia Droga", result: 8.49 },
+      { name: "Lewica", result: 12.48 },
+      { name: "Bezpartyjni Samorządowcy", result: 1.71 },
+      { name: "Pozostałe komitety", result: 0.01 },
+    ];
+
+    const newSimpleParties = simpleParties.map((party) => {
+      const result = results.find((item) => item.name === party.name);
+      if (result) {
+        return { ...party, result: result.result };
+      }
+      return party;
+    });
+    setSimpleParties(newSimpleParties);
+
+    setResults2019(true);
+    if (resultsSurvey) {
+      setResultsSurvey(false);
+    }
+  };
 
   return (
     <div className="simpleOptions">
-      <Tooltip style={{ zIndex: 999 }} id="options-tooltip" />
+      <Tooltip style={{ zIndex: 1, width: 440 }} id="correction-tooltip">
+        <div>
+          <p style={{ marginBottom: 10 }}>
+            1. Poparcie w poszczególnych okręgach korygowane jest na podstawie
+            wyników z 2019.
+          </p>
+          <p style={{ marginBottom: 10 }}>
+            2. Wyniki Bezpartyjnych Samorządowców nie są korygowane w okręgach,
+            w których nie startowali w 2019.
+          </p>
+          <p>
+            3. Trzecia Droga ma wynik korygowany o głosy PSL-u oraz o ważoną
+            sumę wyników z poszczególnych okręgów wszystkich komitetów, od
+            których wyborców przejęła Polska2050 na podstawie sondażu o
+            przepływie wyborców.
+          </p>
+        </div>
+      </Tooltip>
+      <Tooltip style={{ zIndex: 1, width: 440 }} id="options-tooltip">
+        <div style={{ marginBottom: 10 }}>
+          1. Wyniki z 2019: Trzeciej Drodze przypisuje się głosy PSL-u,
+          Bezpartyjni Samorządowcy jako wynik dostają średni wynik z okręgów, w
+          których startowali w 2019. Jako że suma przekracza 100%, zostaje
+          dopasowana.
+        </div>
+        <div>2. Średnia sondażowa na podstawie ewybory.eu</div>
+      </Tooltip>
+      <Tooltip style={{ zIndex: 1, width: 500 }} id="other-tooltip">
+        <p style={{ marginBottom: 10 }}>
+          Jeśli suma wyników wszystkich komitetów wyniesie mniej niż 100%,
+          brakujące głosy zostaną dodane do pozostałych.
+        </p>
+        <p style={{ marginBottom: 10 }}>
+          Jeśli suma wyników wszystkich komitetów wyniesie więcej niż 100%, a
+          głosy na pozostałe komitety wynoszą więcej niż 0, wynik pozostałych
+          komitetów zostanie dopasowany tak, by suma wszystkich wynosiła 100
+        </p>
+        <p>
+          Jeśli mimo odjęcia wszystkich głosów na pozostałe komitety suma
+          wyników nadal wynosi ponad 100%, należy poprawić wyniki.
+        </p>
+      </Tooltip>
 
-      <div
-        className="simpleOptions-info"
-        data-tooltip-id="options-tooltip"
-        data-tooltip-content="1. Wyniki z 2019: Trzeciej Drodze przypisuję głosy PSL-u,
-              Bezpartyjni Samorządowcy jako wynik dostają średni wynik z
-              okręgów, w których startowali w 2019, 2. Poparcie w poszczególnych okręgach korygowane jest na podstawie wyników z 2019. Wyniki Bezpartyjnych Samorządowców nie są korygowane w okręgach, w których nie startowali w 2019. Trzecia Droga jest korygowana o wynik PSL-u oraz o ważoną sumę wyników z poszczególnych okręgów wszystkich komitetów, od których wyborców przejęła Polska2050 na podstawie sondażu o przepływie wyborców"
-      >
+      <div className="simpleOptions-info" data-tooltip-id="options-tooltip">
         info
       </div>
       <div className="simpleOptions-handler">
@@ -54,12 +169,7 @@ const SimpleOptions = () => {
           <span>wpisz wyniki lub</span>
           <Button
             color="primary"
-            onClick={() => {
-              setResultsSurvey(true);
-              if (results2019) {
-                setResults2019(false);
-              }
-            }}
+            onClick={handleSurvey}
             variant="contained"
             style={{ fontFamily: "Mukta" }}
             disabled={resultsSurvey ? true : false}
@@ -68,12 +178,7 @@ const SimpleOptions = () => {
           </Button>
           <Button
             color="secondary"
-            onClick={() => {
-              setResults2019(true);
-              if (resultsSurvey) {
-                setResultsSurvey(false);
-              }
-            }}
+            onClick={handle2019}
             variant="contained"
             style={{ fontFamily: "Mukta" }}
             disabled={results2019 ? true : false}
@@ -92,9 +197,24 @@ const SimpleOptions = () => {
                   className="simpleOptions-handler__list-table__element-name"
                   style={{
                     backgroundColor: item.color,
+                    cursor: item.shortName === "inne" ? "help" : "auto",
                   }}
+                  data-tooltip-id={
+                    item.shortName === "inne" ? "other-tooltip" : null
+                  }
                 >
                   {item.name}
+                  {item.shortName === "inne" ? (
+                    <span
+                      style={{
+                        marginLeft: 10,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <HelpOutlineOutlinedIcon />
+                    </span>
+                  ) : null}
                 </div>
                 <div className="simpleOptions-handler__list-table__element-number">
                   <TextField
@@ -193,22 +313,56 @@ const SimpleOptions = () => {
       </div>
       <div className="simpleOptions-other">
         <Button
-          color="success"
+          size="small"
+          color="warning"
           onClick={function () {}}
           variant="contained"
           style={{ fontFamily: "Mukta" }}
         >
           stwórz koalicje
         </Button>
-        <Button
-          color="info"
-          onClick={function () {}}
-          variant="contained"
-          style={{ fontFamily: "Mukta" }}
-        >
-          nie koryguj poparcia
-        </Button>
+        <ButtonGroup>
+          <Button
+            size="small"
+            color="info"
+            onClick={handleCorrection}
+            variant="contained"
+            style={{ fontFamily: "Mukta" }}
+            endIcon={<HelpOutlineOutlinedIcon style={{ cursor: "help" }} />}
+            disabled={correction ? false : true}
+            data-tooltip-id="correction-tooltip"
+          >
+            nie koryguj poparcia
+          </Button>
+          <Button
+            color="error"
+            variant="contained"
+            disabled={correction ? true : false}
+            onClick={handleCorrection}
+          >
+            <UndoRoundedIcon />
+          </Button>
+        </ButtonGroup>
       </div>
+      <div className="simpleOptions-error">
+        {showError ? (
+          <div className="simpleOptions-error__text">
+            Suma wyników wszystkich partii nie może przekraczać 100%
+          </div>
+        ) : null}
+      </div>
+      <Button
+        color={resultError ? "error" : "success"}
+        onClick={handleStart}
+        size="large"
+        variant="contained"
+        style={{
+          fontFamily: "Mukta",
+          fontSize: 20,
+        }}
+      >
+        oblicz
+      </Button>
     </div>
   );
 };

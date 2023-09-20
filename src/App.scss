@@ -473,7 +473,7 @@ $tertiary-color: #9c62a12c;
       width: 100%;
       display: flex;
       flex-direction: column;
-      @include justify-align-center();
+      // @include justify-align-center();
       background-color: #8855555b;
       border-radius: $default-border-radius;
       position: relative;
@@ -536,6 +536,22 @@ $tertiary-color: #9c62a12c;
               }
             }
           }
+        }
+      }
+      &-other {
+        display: flex;
+        @include justify-align-center();
+        gap: 20px;
+        margin: 20px 0;
+      }
+      &-error {
+        height: 27px;
+        &__text {
+          text-align: center;
+          background-color: #cf303a;
+          color: white;
+          font-family: "Overpass", sans-serif;
+          font-family: "Mukta", sans-serif;
         }
       }
     }
