@@ -9,55 +9,92 @@ import { AppContext } from "../contexts/AppContext";
 
 const SimpleOptions = () => {
   const { simpleParties, setSimpleParties } = useContext(DataContext);
-  const { setShowSimpleSummary } = useContext(AppContext);
+  const { setShowSimpleSummary, showSimpleSummary } = useContext(AppContext);
   const [results2019, setResults2019] = useState(false);
   const [resultsSurvey, setResultsSurvey] = useState(false);
   const [correction, setCorrection] = useState(true);
   const [resultError, setResultError] = useState(false);
+  const [thresholdError, setThresholdError] = useState(false);
   const [showError, setShowError] = useState(false);
 
   const handleCorrection = () => {
     setCorrection(!correction);
   };
 
-  const handleStart = () => {
-    let sum = 0;
-    simpleParties.map((item) => (sum = sum + parseFloat(item.result)));
-
-    const newSimpleParties = [...simpleParties];
-    if (sum.toFixed(2) < "100.00") {
-      const diff = 100 - sum;
-      newSimpleParties[6].result = (
-        parseFloat(newSimpleParties[6].result) + diff
-      ).toFixed(2);
-    } else if (sum.toFixed(2) > "100.00") {
-      if (parseFloat(sum) - parseFloat(simpleParties[6].result) > 100) {
-        console.log("błąd");
-        setResultError(true);
-        setShowError(true);
-        setTimeout(() => {
-          setResultError(false);
-        }, 500);
-        setTimeout(() => {
-          setShowError(false);
-        }, 2500);
-        return null;
-      }
-      const diff = sum - parseFloat(simpleParties[6].result);
-      newSimpleParties[6].result = (100 - diff).toFixed(2);
-    }
-    setSimpleParties(newSimpleParties);
-    setShowSimpleSummary(true);
+  const handleRestart = () => {
+    setShowSimpleSummary(false);
   };
 
+  const handleStart = () => {
+    let sum = 0;
+    simpleParties.forEach((item) => (sum += parseFloat(item.result)));
+
+    const newSimpleParties = [...simpleParties];
+    if (sum.toFixed(2) < 100.0) {
+      const diff = 100 - sum;
+
+      newSimpleParties[6].result = parseFloat(
+        (newSimpleParties[6].result + diff).toFixed(2)
+      );
+    } else if (sum.toFixed(2) > 100.0) {
+      if (parseFloat(sum) - parseFloat(simpleParties[6].result) > 100) {
+        setShowError(true);
+        setResultError(true);
+        setTimeout(() => {
+          setShowError(false);
+        }, 500);
+        setTimeout(() => {
+          setResultError(false);
+        }, 2500);
+        return null;
+      } else {
+        const diff = sum - simpleParties[6].result;
+        newSimpleParties[6].result = parseFloat((100 - diff).toFixed(2));
+      }
+    }
+    newSimpleParties.forEach((party) => {
+      party.isOverThreshold = true;
+      if (party.result < 5) {
+        party.isOverThreshold = false;
+      }
+      if (party.result < 8 && party.shortName === "TD") {
+        party.isOverThreshold = false;
+      }
+      if (party.shortName === "inne") {
+        party.isOverThreshold = false;
+      }
+    });
+
+    const isAnyPartyOverThreshold = newSimpleParties.some(
+      (party) => party.isOverThreshold
+    );
+
+    if (isAnyPartyOverThreshold) {
+      setSimpleParties(newSimpleParties);
+      setShowSimpleSummary(true);
+    }
+    if (!isAnyPartyOverThreshold) {
+      setShowError(true);
+      setThresholdError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 500);
+      setTimeout(() => {
+        setThresholdError(false);
+      }, 2500);
+      return null;
+    }
+  };
   const handleResultChange = (index, value) => {
     const newSimpleParties = [...simpleParties];
-    if (value < 0) {
+    value = parseFloat(value);
+    if (isNaN(value)) {
+      value = 0;
+    } else if (value < 0) {
       value = 0;
     } else if (value > 100) {
       value = 100;
     }
-
     newSimpleParties[index].result = value;
 
     setSimpleParties(newSimpleParties);
@@ -167,216 +204,231 @@ const SimpleOptions = () => {
         </p>
       </Tooltip>
 
-      <div className="simpleOptions-info" data-tooltip-id="options-tooltip">
-        info
-      </div>
-      <div className="simpleOptions-handler">
-        <div className="simpleOptions-handler__header">
-          <span>wpisz wyniki lub</span>
-          <Button
-            color="primary"
-            onClick={handleSurvey}
-            variant="contained"
-            style={{ fontFamily: "Mukta" }}
-            disabled={resultsSurvey ? true : false}
-          >
-            wczytaj średnią sondażową
-          </Button>
-          <Button
-            color="secondary"
-            onClick={handle2019}
-            variant="contained"
-            style={{ fontFamily: "Mukta" }}
-            disabled={results2019 ? true : false}
-          >
-            wczytaj wyniki z 2019
-          </Button>
-        </div>
-        <div className="simpleOptions-handler__list">
-          <div className="simpleOptions-handler__list-table">
-            {simpleParties.map((item, index) => (
-              <div
-                key={index}
-                className="simpleOptions-handler__list-table__element"
+      {showSimpleSummary ? null : (
+        <>
+          {" "}
+          <div className="simpleOptions-info" data-tooltip-id="options-tooltip">
+            info
+          </div>
+          <div className="simpleOptions-handler">
+            <div className="simpleOptions-handler__header">
+              <span>wpisz wyniki lub</span>
+              <Button
+                color="primary"
+                onClick={handleSurvey}
+                variant="contained"
+                style={{ fontFamily: "Mukta" }}
+                disabled={resultsSurvey ? true : false}
               >
-                <div
-                  className="simpleOptions-handler__list-table__element-name"
-                  style={{
-                    backgroundColor: item.color,
-                    cursor:
-                      item.shortName === "inne" || item.shortName === "TD"
-                        ? "help"
-                        : "auto",
-                  }}
-                  data-tooltip-id={
-                    item.shortName === "inne"
-                      ? "other-tooltip"
-                      : item.shortName === "TD"
-                      ? "td-tooltip"
-                      : null
-                  }
-                >
-                  {item.name}
-                  {item.shortName === "inne" ? (
-                    <span
+                wczytaj średnią sondażową
+              </Button>
+              <Button
+                color="secondary"
+                onClick={handle2019}
+                variant="contained"
+                style={{ fontFamily: "Mukta" }}
+                disabled={results2019 ? true : false}
+              >
+                wczytaj wyniki z 2019
+              </Button>
+            </div>
+            <div className="simpleOptions-handler__list">
+              <div className="simpleOptions-handler__list-table">
+                {simpleParties.map((item, index) => (
+                  <div
+                    key={index}
+                    className="simpleOptions-handler__list-table__element"
+                  >
+                    <div
+                      className="simpleOptions-handler__list-table__element-name"
                       style={{
-                        marginLeft: 10,
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <HelpOutlineOutlinedIcon />
-                    </span>
-                  ) : item.shortName === "TD" ? (
-                    <span
-                      style={{
-                        marginLeft: 10,
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <InfoOutlinedIcon />
-                    </span>
-                  ) : null}
-                </div>
-                <div className="simpleOptions-handler__list-table__element-number">
-                  <TextField
-                    color="info"
-                    type="number"
-                    InputProps={{
-                      inputProps: {
-                        style: {
-                          textAlign: "center",
-                          color: "#cccccc",
-                        },
-                      },
-                    }}
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        "&.Mui-focused fieldset": {
-                          borderColor: "white",
-                        },
-                      },
-                      input: {
-                        backgroundColor: "#66708bea",
-                        borderRadius: 1,
-                      },
-                    }}
-                    size="small"
-                    onChange={(e) => handleResultChange(index, e.target.value)}
-                    value={item.result}
-                    variant="outlined"
-                    style={{ width: 70 }}
-                  />{" "}
-                  <span>%</span>
-                </div>
-                <div
-                  className="simpleOptions-handler__list-table__element-slider"
-                  style={{ width: 300 }}
-                >
-                  <Slider
-                    defaultValue={item.result}
-                    value={item.result}
-                    valueLabelDisplay="auto"
-                    step={0.01}
-                    min={0}
-                    max={100}
-                    sx={{
-                      color: item.color,
-
-                      height: 8,
-                      "span.MuiSlider-valueLabel": {
                         backgroundColor: item.color,
-                      },
-                      "& .MuiSlider-thumb": {
-                        height: 24,
-                        width: 24,
-                        backgroundColor: "#fff",
-                        border: "2px solid currentColor",
-                        "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
-                          boxShadow: "inherit",
-                        },
-                        "&:before": {
-                          display: "none",
-                        },
-                      },
-                      "& .MuiSlider-track": {
-                        border: "none",
-                      },
+                        cursor:
+                          item.shortName === "inne" || item.shortName === "TD"
+                            ? "help"
+                            : "auto",
+                      }}
+                      data-tooltip-id={
+                        item.shortName === "inne"
+                          ? "other-tooltip"
+                          : item.shortName === "TD"
+                          ? "td-tooltip"
+                          : null
+                      }
+                    >
+                      {item.name}
+                      {item.shortName === "inne" ? (
+                        <span
+                          style={{
+                            marginLeft: 10,
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <HelpOutlineOutlinedIcon />
+                        </span>
+                      ) : item.shortName === "TD" ? (
+                        <span
+                          style={{
+                            marginLeft: 10,
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <InfoOutlinedIcon />
+                        </span>
+                      ) : null}
+                    </div>
+                    <div className="simpleOptions-handler__list-table__element-number">
+                      <TextField
+                        color="info"
+                        type="number"
+                        InputProps={{
+                          inputProps: {
+                            style: {
+                              textAlign: "center",
+                              color: "#cccccc",
+                            },
+                          },
+                        }}
+                        sx={{
+                          "& .MuiOutlinedInput-root": {
+                            "&.Mui-focused fieldset": {
+                              borderColor: "white",
+                            },
+                          },
+                          input: {
+                            backgroundColor: "#66708bea",
+                            borderRadius: 1,
+                          },
+                        }}
+                        size="small"
+                        onChange={(e) =>
+                          handleResultChange(index, e.target.value)
+                        }
+                        value={item.result}
+                        variant="outlined"
+                        style={{ width: 70 }}
+                      />{" "}
+                      <span>%</span>
+                    </div>
+                    <div
+                      className="simpleOptions-handler__list-table__element-slider"
+                      style={{ width: 300 }}
+                    >
+                      <Slider
+                        // defaultValue={item.result}
+                        value={item.result}
+                        valueLabelDisplay="auto"
+                        step={0.01}
+                        min={0}
+                        max={100}
+                        sx={{
+                          color: item.color,
 
-                      "& .MuiSlider-valueLabel": {
-                        lineHeight: 1.2,
-                        fontSize: 12,
-                        background: "unset",
-                        padding: 0,
-                        width: 40,
-                        height: 40,
-                        borderRadius: "50% 50% 50% 0",
-                        backgroundColor: "#52af77",
-                        transformOrigin: "bottom left",
-                        transform:
-                          "translate(50%, -100%) rotate(-45deg) scale(0)",
-                        "&:before": { display: "none" },
-                        "&.MuiSlider-valueLabelOpen": {
-                          transform:
-                            "translate(50%, -100%) rotate(-45deg) scale(1)",
-                        },
-                        "& > *": {
-                          transform: "rotate(45deg)",
-                        },
-                      },
-                    }}
-                    onChange={(e) => handleResultChange(index, e.target.value)}
-                  />
-                </div>
+                          height: 8,
+                          "span.MuiSlider-valueLabel": {
+                            backgroundColor: item.color,
+                          },
+                          "& .MuiSlider-thumb": {
+                            height: 24,
+                            width: 24,
+                            backgroundColor: "#fff",
+                            border: "2px solid currentColor",
+                            "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible":
+                              {
+                                boxShadow: "inherit",
+                              },
+                            "&:before": {
+                              display: "none",
+                            },
+                          },
+                          "& .MuiSlider-track": {
+                            border: "none",
+                          },
+
+                          "& .MuiSlider-valueLabel": {
+                            lineHeight: 1.2,
+                            fontSize: 12,
+                            background: "unset",
+                            padding: 0,
+                            width: 40,
+                            height: 40,
+                            borderRadius: "50% 50% 50% 0",
+                            backgroundColor: "#52af77",
+                            transformOrigin: "bottom left",
+                            transform:
+                              "translate(50%, -100%) rotate(-45deg) scale(0)",
+                            "&:before": { display: "none" },
+                            "&.MuiSlider-valueLabelOpen": {
+                              transform:
+                                "translate(50%, -100%) rotate(-45deg) scale(1)",
+                            },
+                            "& > *": {
+                              transform: "rotate(45deg)",
+                            },
+                          },
+                        }}
+                        onChange={(e) =>
+                          handleResultChange(index, e.target.value)
+                        }
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="simpleOptions-other">
-        <Button
-          size="small"
-          color="warning"
-          onClick={function () {}}
-          variant="contained"
-          style={{ fontFamily: "Mukta" }}
-        >
-          stwórz koalicje
-        </Button>
-        <ButtonGroup>
-          <Button
-            size="small"
-            color="info"
-            onClick={handleCorrection}
-            variant="contained"
-            style={{ fontFamily: "Mukta" }}
-            endIcon={<HelpOutlineOutlinedIcon style={{ cursor: "help" }} />}
-            disabled={correction ? false : true}
-            data-tooltip-id="correction-tooltip"
-          >
-            nie koryguj poparcia
-          </Button>
-          <Button
-            color="error"
-            variant="contained"
-            disabled={correction ? true : false}
-            onClick={handleCorrection}
-          >
-            <UndoRoundedIcon />
-          </Button>
-        </ButtonGroup>
-      </div>
-      <div className="simpleOptions-error">
-        {showError ? (
-          <div className="simpleOptions-error__text">
-            Suma wyników wszystkich partii nie może przekraczać 100%
+          <div className="simpleOptions-other">
+            <Button
+              size="small"
+              color="warning"
+              onClick={function () {}}
+              variant="contained"
+              style={{ fontFamily: "Mukta" }}
+            >
+              stwórz koalicje
+            </Button>
+            <ButtonGroup>
+              <Button
+                size="small"
+                color="info"
+                onClick={handleCorrection}
+                variant="contained"
+                style={{ fontFamily: "Mukta" }}
+                endIcon={<HelpOutlineOutlinedIcon style={{ cursor: "help" }} />}
+                disabled={correction ? false : true}
+                data-tooltip-id="correction-tooltip"
+              >
+                nie koryguj poparcia
+              </Button>
+              <Button
+                color="error"
+                variant="contained"
+                disabled={correction ? true : false}
+                onClick={handleCorrection}
+              >
+                <UndoRoundedIcon />
+              </Button>
+            </ButtonGroup>
           </div>
-        ) : null}
-      </div>
+          <div className="simpleOptions-error">
+            {resultError ? (
+              <div className="simpleOptions-error__text">
+                Suma wyników wszystkich partii nie może przekraczać 100%
+              </div>
+            ) : thresholdError ? (
+              <div className="simpleOptions-error__text">
+                Co najmniej jedna partia musi przekroczyć próg wyborczy
+              </div>
+            ) : null}
+          </div>
+        </>
+      )}
+
       <Button
-        color={resultError ? "error" : "success"}
-        onClick={handleStart}
+        color={showError ? "error" : showSimpleSummary ? "warning" : "success"}
+        onClick={showSimpleSummary ? handleRestart : handleStart}
         size="large"
         variant="contained"
         style={{
@@ -384,7 +436,7 @@ const SimpleOptions = () => {
           fontSize: 20,
         }}
       >
-        oblicz
+        {showSimpleSummary ? "zmień wyniki" : "oblicz"}
       </Button>
     </div>
   );

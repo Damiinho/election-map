@@ -3,10 +3,11 @@ const SimpleSummaryDistrict = (props) => {
 
   return (
     <div>
-      {parties.map((party) => {
+      {parties.map((party, index) => {
         return (
-          <div>
-            {party.name}, {party.result}
+          <div key={index}>
+            {party.name}, {party.result},{" "}
+            {party.isOverThreshold ? "ponad progiem" : "pod progiem"}
           </div>
         );
       })}
