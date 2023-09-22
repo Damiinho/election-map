@@ -8,7 +8,7 @@ const MyBar = (props) => {
 
   const myBarStyle = {
     margin: "0 auto",
-    width: "90%",
+    width: "100%",
     borderRadius: 7,
     display: "flex",
     flexDirection: "column",

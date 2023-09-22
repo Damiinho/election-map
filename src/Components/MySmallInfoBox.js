@@ -1,3 +1,5 @@
+import { Tooltip } from "react-tooltip";
+
 const MySmallInfoBox = (props) => {
   const backgroundTop = props.backgroundTop || "#000";
   const backgroundBottom = props.backgroundBottom || "#fff";
@@ -10,9 +12,12 @@ const MySmallInfoBox = (props) => {
   const paddingBottom = props.paddingBottom || 0;
   const radius = props.radius || "7px";
   const allWidth = props.allWidth || 120;
+  const cursor = props.cursor || "auto";
+  const title = props.title || "ee";
+
   return (
     <div
-      className="presentation__description-item"
+      // className="presentation__description-item"
       style={{
         marginTop: 10,
         width: allWidth,
@@ -26,10 +31,12 @@ const MySmallInfoBox = (props) => {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
+        cursor: cursor,
       }}
+      title={title}
     >
       <div
-        className="presentation__description-item__txt"
+        // className="presentation__description-item__txt"
         style={{
           width: "100%",
           color: colorTop,
@@ -43,7 +50,7 @@ const MySmallInfoBox = (props) => {
         {props.txt}
       </div>
       <div
-        className="presentation__description-item__value"
+        // className="presentation__description-item__value"
         style={{
           fontSize: fontSizeBottom,
           padding: paddingBottom,

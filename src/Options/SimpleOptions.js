@@ -8,7 +8,12 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { AppContext } from "../contexts/AppContext";
 
 const SimpleOptions = () => {
-  const { simpleParties, setSimpleParties } = useContext(DataContext);
+  const {
+    simpleParties,
+    setSimpleParties,
+    setSimpleDistricts,
+    simpleDistricts,
+  } = useContext(DataContext);
   const { setShowSimpleSummary, showSimpleSummary } = useContext(AppContext);
   const [results2019, setResults2019] = useState(false);
   const [resultsSurvey, setResultsSurvey] = useState(false);
@@ -72,6 +77,42 @@ const SimpleOptions = () => {
     if (isAnyPartyOverThreshold) {
       setSimpleParties(newSimpleParties);
       setShowSimpleSummary(true);
+
+      const newSimpleDistricts = [...simpleDistricts];
+
+      newSimpleDistricts.forEach((district, index) => {
+        // Zaktualizuj parties w danym okręgu
+        district.parties = newSimpleParties.map((party) => {
+          // Wyszukaj partię o tej samej nazwie
+          const matchingParty = district.parties.find(
+            (districtParty) => districtParty.name === party.name
+          );
+
+          if (matchingParty) {
+            // Zaktualizuj wynik partii w okręgu
+            matchingParty.result = party.result;
+            // Tutaj możesz również zaktualizować inne właściwości partii w okręgu, jeśli są takie
+          }
+
+          return party;
+        });
+
+        if (district.id === "op") {
+          district.parties.push({
+            name: "Mniejszość Niemiecka",
+            shortName: "MN",
+            isOverThreshold: true,
+            color: "#b1bb20",
+            result: 0,
+          });
+        }
+
+        // Teraz zaktualizuj element w simpleDistricts
+        newSimpleDistricts[index] = district;
+      });
+
+      // Teraz możesz zaktualizować simpleDistricts
+      setSimpleDistricts(newSimpleDistricts);
     }
     if (!isAnyPartyOverThreshold) {
       setShowError(true);
@@ -85,6 +126,7 @@ const SimpleOptions = () => {
       return null;
     }
   };
+
   const handleResultChange = (index, value) => {
     const newSimpleParties = [...simpleParties];
     value = parseFloat(value);
