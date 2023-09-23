@@ -14,10 +14,10 @@ const SimpleOptions = () => {
     setSimpleDistricts,
     simpleDistricts,
   } = useContext(DataContext);
-  const { setShowSimpleSummary, showSimpleSummary } = useContext(AppContext);
+  const { setShowSimpleSummary, showSimpleSummary, correction, setCorrection } =
+    useContext(AppContext);
   const [results2019, setResults2019] = useState(false);
   const [resultsSurvey, setResultsSurvey] = useState(false);
-  const [correction, setCorrection] = useState(true);
   const [resultError, setResultError] = useState(false);
   const [thresholdError, setThresholdError] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -62,7 +62,10 @@ const SimpleOptions = () => {
       if (party.result < 5) {
         party.isOverThreshold = false;
       }
-      if (party.result < 8 && party.shortName === "TD") {
+      if (
+        party.result < 8 &&
+        (party.shortName === "TD" || party.shortName === "KO")
+      ) {
         party.isOverThreshold = false;
       }
       if (party.shortName === "inne") {
@@ -102,7 +105,7 @@ const SimpleOptions = () => {
             name: "Mniejszość Niemiecka",
             shortName: "MN",
             isOverThreshold: true,
-            color: "#b1bb20",
+            color: "#fcd031",
             result: 0,
           });
         }
@@ -286,14 +289,16 @@ const SimpleOptions = () => {
                       style={{
                         backgroundColor: item.color,
                         cursor:
-                          item.shortName === "inne" || item.shortName === "TD"
+                          item.shortName === "inne" ||
+                          item.shortName === "TD" ||
+                          item.shortName === "KO"
                             ? "help"
                             : "auto",
                       }}
                       data-tooltip-id={
                         item.shortName === "inne"
                           ? "other-tooltip"
-                          : item.shortName === "TD"
+                          : item.shortName === "TD" || item.shortName === "KO"
                           ? "td-tooltip"
                           : null
                       }
@@ -309,7 +314,7 @@ const SimpleOptions = () => {
                         >
                           <HelpOutlineOutlinedIcon />
                         </span>
-                      ) : item.shortName === "TD" ? (
+                      ) : item.shortName === "TD" || item.shortName === "KO" ? (
                         <span
                           style={{
                             marginLeft: 10,

@@ -5,11 +5,18 @@ const MyBar = (props) => {
     (total, item) => total + item[props.value],
     0
   );
+  const tooltip = props.tooltip === false ? false : true || true;
+  const borderRadius =
+    props.borderRadius || props.borderRadius === 0 ? props.borderRadius : 12;
+  const barWidth = props.barWidth || "90%";
+  const boxShadow =
+    props.boxShadow === true
+      ? "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)"
+      : "";
 
   const myBarStyle = {
     margin: "0 auto",
-    width: "100%",
-    borderRadius: 7,
+    width: barWidth,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -24,7 +31,8 @@ const MyBar = (props) => {
     flexDirection: "row",
     justifyContent: "flex-end",
     overflow: "hidden",
-    borderRadius: 12,
+    borderRadius: borderRadius,
+    boxShadow: boxShadow,
   };
   const wrapperCenterStyle = {
     width: "3px",
@@ -36,7 +44,7 @@ const MyBar = (props) => {
     top: "0%",
     left: "50%",
     transform: "translateX(-50%)",
-    cursor: "pointer",
+    cursor: tooltip ? "pointer" : "auto",
   };
 
   const itemColor = {
@@ -56,8 +64,8 @@ const MyBar = (props) => {
       <div className="myBar-wrapper" style={wrapperStyle}>
         <div
           className="myBar-wrapper__center"
-          data-tooltip-id="myBar-tooltip"
-          data-tooltip-content="50%"
+          data-tooltip-id={tooltip ? "myBar-tooltip" : ""}
+          data-tooltip-content={tooltip ? "50%" : ""}
           style={wrapperCenterStyle}
         ></div>
         {props.result.map((item) => {
@@ -73,10 +81,10 @@ const MyBar = (props) => {
               className="myBar-wrapper__item"
               style={{
                 width: `${(item[props.value] / sum) * 100}%`,
-                cursor: "pointer",
+                cursor: tooltip ? "pointer" : "auto",
               }}
-              data-tooltip-id="myBar-tooltip"
-              data-tooltip-content={`${item.name}, ${itemValue}`}
+              data-tooltip-id={tooltip ? "myBar-tooltip" : ""}
+              data-tooltip-content={tooltip ? `${item.name}, ${itemValue}` : ""}
             >
               <div
                 className="myBar-wrapper__item-color"

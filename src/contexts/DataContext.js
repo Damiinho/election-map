@@ -268,7 +268,7 @@ export const DataProvider = ({ children }) => {
           name: "Mniejszość Niemiecka",
           shortName: "MN",
           isOverThreshold: true,
-          color: "#b1bb20",
+          color: "#fcd031",
           result: 0,
         },
       ],

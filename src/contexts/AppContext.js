@@ -12,11 +12,13 @@ export const AppProvider = ({ children }) => {
   const [showSummary, setShowSummary] = useState(true);
   const [showAddPartyList, setShowAddPartyList] = useState(true);
   const [finalResultSummary, setFinalResultSummary] = useState([]);
+  const [simpleFinalResultSummary, setSimpleFinalResultSummary] = useState([]);
   const [strictSejm, setStrictSejm] = useState(false);
   const [searchDistrictValue, setSearchDistrictValue] = useState("");
   const [showMapByResults, setShowMapByResults] = useState(false);
   const [advancedVersion, setAdvancedVersion] = useState(false);
   const [showSimpleSummary, setShowSimpleSummary] = useState(false);
+  const [correction, setCorrection] = useState(true);
 
   const providerValue = {
     showOptions,
@@ -43,6 +45,10 @@ export const AppProvider = ({ children }) => {
     setAdvancedVersion,
     showSimpleSummary,
     setShowSimpleSummary,
+    correction,
+    setCorrection,
+    simpleFinalResultSummary,
+    setSimpleFinalResultSummary,
   };
 
   return (

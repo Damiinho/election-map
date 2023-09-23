@@ -1,5 +1,3 @@
-import { Tooltip } from "react-tooltip";
-
 const MySmallInfoBox = (props) => {
   const backgroundTop = props.backgroundTop || "#000";
   const backgroundBottom = props.backgroundBottom || "#fff";
@@ -13,7 +11,7 @@ const MySmallInfoBox = (props) => {
   const radius = props.radius || "7px";
   const allWidth = props.allWidth || 120;
   const cursor = props.cursor || "auto";
-  const title = props.title || "ee";
+  const title = props.title || "";
 
   return (
     <div

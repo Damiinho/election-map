@@ -879,6 +879,19 @@ $tertiary-color: #9c62a12c;
 
   .simpleSummary {
     &-main {
+      &__summary {
+        &-box {
+          width: 100%;
+          display: flex;
+          // gap: 5px;
+          justify-content: space-around;
+          &__item {
+            display: flex;
+            @include justify-align-center();
+            position: relative;
+          }
+        }
+      }
       &__details {
         &-element {
           padding: 10px 0;
@@ -890,7 +903,7 @@ $tertiary-color: #9c62a12c;
             background-color: rgba(190, 190, 190, 0.452);
           }
           &__title {
-            width: 300px;
+            width: 250px;
             padding-left: 40px;
             // font-family: "Mukta", sans-serif;
             // font-family: "Overpass", sans-serif;
@@ -906,7 +919,7 @@ $tertiary-color: #9c62a12c;
           }
           &__results {
             &-box {
-              width: 600px;
+              width: 700px;
               margin: 0 auto;
               display: flex;
               gap: 5px;

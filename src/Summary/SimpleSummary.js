@@ -1,9 +1,54 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../contexts/DataContext";
 import SimpleSummaryDistrict from "./SimpleSummaryDistrict";
+import { AppContext } from "../contexts/AppContext";
+import MySmallInfoBox from "../Components/MySmallInfoBox";
+import ArrowDropDownSharpIcon from "@mui/icons-material/ArrowDropDownSharp";
+import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
+import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
+import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
+import MyBar from "../Components/MyBar";
 
 const SimpleSummary = () => {
   const { simpleDistricts } = useContext(DataContext);
+  const { simpleFinalResultSummary, setSimpleFinalResultSummary } =
+    useContext(AppContext);
+
+  const handleArrowClick = (currentIndex, targetIndex) => {
+    const finalResultCopy = [...simpleFinalResultSummary];
+    const temp = finalResultCopy[currentIndex];
+    finalResultCopy[currentIndex] = finalResultCopy[targetIndex];
+    finalResultCopy[targetIndex] = temp;
+    setSimpleFinalResultSummary(finalResultCopy);
+  };
+
+  useEffect(() => {
+    const updatedFinalResultSummary = [];
+    const nameColorMap = {};
+
+    simpleDistricts.forEach((district) => {
+      if (district.finalResult && Array.isArray(district.finalResult)) {
+        district.finalResult.forEach((item) => {
+          if (item.name && item.color) {
+            const key = `${item.name}_${item.color}`;
+
+            if (nameColorMap[key]) {
+              nameColorMap[key].result += item.result;
+              nameColorMap[key].seats += item.seats;
+            } else {
+              nameColorMap[key] = { ...item };
+              updatedFinalResultSummary.push(nameColorMap[key]);
+            }
+          }
+        });
+      }
+    });
+
+    // Sortowanie tablicy według wartości seats od największej do najmniejszej
+    updatedFinalResultSummary.sort((a, b) => b.seats - a.seats);
+
+    setSimpleFinalResultSummary(updatedFinalResultSummary);
+  }, [simpleDistricts, setSimpleFinalResultSummary]);
 
   // useEffect(() => {
   //   districtsWithResults.forEach((district) => {
@@ -92,7 +137,77 @@ const SimpleSummary = () => {
     <div className="simpleSummary">
       <div className="simpleSummary-header">Podsumowanie</div>
       <div className="simpleSummary-main">
-        <div className="simpleSummary-main__summary">ogólne wyniki</div>
+        <div className="simpleSummary-main__summary">
+          <div className="simpleSummary-main__summary-box">
+            {simpleFinalResultSummary.map((party, index) => {
+              // if (party.shortName === "inne") return null;
+
+              return (
+                <div className="simpleSummary-main__summary-box__item">
+                  <ArrowLeftRoundedIcon
+                    onClick={() => {
+                      if (index > 0) {
+                        handleArrowClick(index, index - 1);
+                      }
+                    }}
+                    style={{
+                      cursor: index > 0 ? "pointer" : "",
+                      borderRadius: 5,
+                      color: index > 0 ? "#777777" : "transparent",
+                      margin: "0 auto",
+                      position: "absolute",
+                      top: "50%",
+                      left: "-10px",
+                    }}
+                    fontSize="large"
+                  />
+                  <MySmallInfoBox
+                    key={index}
+                    txt={party.shortName}
+                    value={party.seats}
+                    backgroundTop={party.isOverThreshold ? party.color : "grey"}
+                    allWidth={70}
+                    radius="0px"
+                    title={party.name}
+                  />
+                  <ArrowRightRoundedIcon
+                    onClick={() => {
+                      if (index < simpleFinalResultSummary.length - 1) {
+                        handleArrowClick(index, index + 1);
+                      }
+                    }}
+                    style={{
+                      cursor:
+                        index < simpleFinalResultSummary.length - 1
+                          ? "pointer"
+                          : "",
+                      borderRadius: 5,
+                      color:
+                        index < simpleFinalResultSummary.length - 1
+                          ? "#777777"
+                          : "transparent",
+                      margin: "0 auto",
+                      position: "absolute",
+                      top: "50%",
+                      right: "-10px",
+                    }}
+                    fontSize="large"
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          <MyBar
+            result={simpleFinalResultSummary}
+            value="seats"
+            name="Liczba mandatów"
+            tooltip={false}
+            barWidth="100%"
+            borderRadius={0}
+            boxShadow
+          />
+        </div>
         <div className="simpleSummary-main__details">
           {simpleDistricts.map((item, index) => {
             return <SimpleSummaryDistrict key={index} district={item} />;
