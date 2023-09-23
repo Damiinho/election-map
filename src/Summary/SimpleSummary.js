@@ -8,15 +8,18 @@ import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
 import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
 import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
 import MyBar from "../Components/MyBar";
+import SimpleMap from "./SimpleMap";
 
 const SimpleSummary = () => {
-  const { simpleDistricts } = useContext(DataContext);
+  const { simpleDistricts, simpleParties, setSimpleParties } =
+    useContext(DataContext);
   const { simpleFinalResultSummary, setSimpleFinalResultSummary } =
     useContext(AppContext);
 
-  const handleArrowClick = (currentIndex, targetIndex) => {
+  const handleArrowClick = (currentIndex, targetIndex, shortName) => {
     const finalResultCopy = [...simpleFinalResultSummary];
     const temp = finalResultCopy[currentIndex];
+
     finalResultCopy[currentIndex] = finalResultCopy[targetIndex];
     finalResultCopy[targetIndex] = temp;
     setSimpleFinalResultSummary(finalResultCopy);
@@ -143,11 +146,14 @@ const SimpleSummary = () => {
               // if (party.shortName === "inne") return null;
 
               return (
-                <div className="simpleSummary-main__summary-box__item">
+                <div
+                  key={index}
+                  className="simpleSummary-main__summary-box__item"
+                >
                   <ArrowLeftRoundedIcon
                     onClick={() => {
                       if (index > 0) {
-                        handleArrowClick(index, index - 1);
+                        handleArrowClick(index, index - 1, party.shortName);
                       }
                     }}
                     style={{
@@ -162,7 +168,6 @@ const SimpleSummary = () => {
                     fontSize="large"
                   />
                   <MySmallInfoBox
-                    key={index}
                     txt={party.shortName}
                     value={party.seats}
                     backgroundTop={party.isOverThreshold ? party.color : "grey"}
@@ -173,7 +178,7 @@ const SimpleSummary = () => {
                   <ArrowRightRoundedIcon
                     onClick={() => {
                       if (index < simpleFinalResultSummary.length - 1) {
-                        handleArrowClick(index, index + 1);
+                        handleArrowClick(index, index + 1, party.shortName);
                       }
                     }}
                     style={{
@@ -206,7 +211,22 @@ const SimpleSummary = () => {
             barWidth="100%"
             borderRadius={0}
             boxShadow
+            fontSize={20}
+            height={70}
           />
+          <MyBar
+            result={simpleParties}
+            value="result"
+            name="Wynik procentowy"
+            barWidth="100%"
+            borderRadius={0}
+            boxShadow
+            fontSize={20}
+            height={70}
+          />
+        </div>
+        <div className="simpleSummary-main__summary-map">
+          <SimpleMap />
         </div>
         <div className="simpleSummary-main__details">
           {simpleDistricts.map((item, index) => {

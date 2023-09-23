@@ -13,6 +13,8 @@ const MyBar = (props) => {
     props.boxShadow === true
       ? "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)"
       : "";
+  const fontSize = props.fontSize || "12px";
+  const height = props.height || "30px";
 
   const myBarStyle = {
     margin: "0 auto",
@@ -49,8 +51,8 @@ const MyBar = (props) => {
 
   const itemColor = {
     display: "flex",
-    height: "30px",
-    fontSize: "12px",
+    height: height,
+    fontSize: fontSize,
     fontFamily: '"MuseoModerno", cursive',
     color: "rgb(235, 235, 235)",
     justifyContent: "center",

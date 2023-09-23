@@ -60,7 +60,7 @@ $tertiary-color: #9c62a12c;
 }
 .App {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 1200px;
 
   &__header {
     padding: 20px 0 0 0;
@@ -879,6 +879,7 @@ $tertiary-color: #9c62a12c;
 
   .simpleSummary {
     &-main {
+      background-color: #b4b4b44d;
       &__summary {
         &-box {
           width: 100%;
@@ -890,6 +891,13 @@ $tertiary-color: #9c62a12c;
             @include justify-align-center();
             position: relative;
           }
+        }
+        &-map {
+          margin: 0 auto;
+
+          height: 650px;
+          width: 650px;
+          overflow: hidden;
         }
       }
       &__details {
@@ -918,9 +926,9 @@ $tertiary-color: #9c62a12c;
             }
           }
           &__results {
+            margin: 0 auto;
             &-box {
-              width: 700px;
-              margin: 0 auto;
+              width: 800px;
               display: flex;
               gap: 5px;
               justify-content: space-between;
