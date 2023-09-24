@@ -9,6 +9,7 @@ import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
 import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
 import MyBar from "../Components/MyBar";
 import SimpleMap from "./SimpleMap";
+import SimpleCircus from "../SimpleCircus";
 
 const SimpleSummary = () => {
   const { simpleDistricts, simpleParties, setSimpleParties } =
@@ -228,6 +229,7 @@ const SimpleSummary = () => {
         <div className="simpleSummary-main__summary-map">
           <SimpleMap />
         </div>
+        <SimpleCircus />
         <div className="simpleSummary-main__details">
           {simpleDistricts.map((item, index) => {
             return <SimpleSummaryDistrict key={index} district={item} />;
