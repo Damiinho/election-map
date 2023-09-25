@@ -893,11 +893,20 @@ $tertiary-color: #9c62a12c;
           }
         }
         &-map {
-          margin: 0 auto;
+          display: flex;
 
-          height: 650px;
-          width: 650px;
+          width: 100%;
           overflow: hidden;
+          &__item {
+            width: 50%;
+          }
+          &__table {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+          }
         }
       }
       &__details {

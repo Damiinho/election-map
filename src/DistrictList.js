@@ -5,7 +5,6 @@ import MySwitch from "./Components/MySwitch";
 import SearchDistrict from "./DistrictList/SearchDistrict";
 import { Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import SvgComponent from "./SvgComponent";
 import { DataContext } from "./contexts/DataContext";
 
 const DistrictList = () => {
@@ -81,7 +80,6 @@ const DistrictList = () => {
         </Button>
         {/* <Button>Pokaż tylko nieuzupełnione</Button> */}
       </div>
-      {/* <SvgComponent /> */}
       <div className={`App__districtlist-main ${showDistricts ? "" : "hide"}`}>
         {/* <DistrictListButton /> */}
         <div className="list">

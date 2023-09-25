@@ -575,7 +575,6 @@ const SimpleSummaryDistrict = (props) => {
       (party) => party.isOverThreshold
     );
 
-    // Inicjalizuj partie z miejscami
     const partiesWithSeats = eligibleParties.map((party) => ({
       ...party,
       seats: 0,
@@ -593,20 +592,16 @@ const SimpleSummaryDistrict = (props) => {
         adjustedResults[0]
       );
 
-      // Znajdź partie na podstawie nazwy w oryginalnej liście partii (nie tylko tych, które są eligible)
       const matchingParty = parties.find(
         (party) => party.name === nextMandateParty.name
       );
 
-      // Znajdź partie w partiesWithSeats na podstawie nazwy
       const partyWithSeat = partiesWithSeats.find(
         (party) => party.name === nextMandateParty.name
       );
 
-      // Zaktualizuj partie z miejscami w partiesWithSeats
       partyWithSeat.seats++;
 
-      // Zaktualizuj partie w oryginalnej liście partii
       matchingParty.seats = partyWithSeat.seats;
     }
 
@@ -627,13 +622,30 @@ const SimpleSummaryDistrict = (props) => {
     const districtToUpdate = newSimpleDistricts.find(
       (district) => district.id === props.district.id
     );
-    // console.log(districtToUpdate);
 
     if (districtToUpdate) {
-      districtToUpdate.finalResult = distributeSeats(
+      const nextSeats = totalMandates + 1;
+
+      const currentResults = distributeSeats(
         props.district.parties,
         totalMandates
       );
+      const nextResults = distributeSeats(props.district.parties, nextSeats);
+
+      const potentialNextSeat = props.district.parties.find((party) => {
+        const currentParty = currentResults.find(
+          (resultParty) => resultParty.shortName === party.shortName
+        );
+        const nextParty = nextResults.find(
+          (resultParty) => resultParty.shortName === party.shortName
+        );
+
+        return currentParty.seats !== nextParty.seats;
+      });
+
+      districtToUpdate.potentialNextSeat = potentialNextSeat;
+      districtToUpdate.finalResult = currentResults;
+
       setSimpleDistricts(newSimpleDistricts);
     }
 
@@ -652,11 +664,11 @@ const SimpleSummaryDistrict = (props) => {
       <div className="simpleSummary-main__details-element">
         <div className="simpleSummary-main__details-element__title">
           {props.district.name}
-
           <div className="simpleSummary-main__details-element__title-subtitle">
             mandatów:{" "}
             <span style={{ fontWeight: "bold" }}>{totalMandates}</span>
           </div>
+          {/* następny mandat: {props.district.potentialNextSeat.name} */}
         </div>
 
         <div className="simpleSummary-main__details-element__results">

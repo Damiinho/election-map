@@ -479,6 +479,7 @@ export const DataProvider = ({ children }) => {
       id: "zs",
     },
   ]);
+  const [selectedSimpleDistrict, setSelectedSimpleDistrict] = useState("");
 
   const providerValue = {
     parties,
@@ -489,6 +490,8 @@ export const DataProvider = ({ children }) => {
     setSimpleParties,
     simpleDistricts,
     setSimpleDistricts,
+    selectedSimpleDistrict,
+    setSelectedSimpleDistrict,
   };
 
   return (

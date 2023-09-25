@@ -5,7 +5,6 @@ const SimpleCircus = () => {
   const { simpleFinalResultSummary } = useContext(AppContext);
   const [circleFill, setCircleFill] = useState([]);
 
-  console.log(simpleFinalResultSummary);
   useEffect(() => {
     const newCircleFill = [];
 
@@ -20,8 +19,6 @@ const SimpleCircus = () => {
 
     setCircleFill(newCircleFill);
   }, [simpleFinalResultSummary, setCircleFill]);
-
-  console.log(circleFill);
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={360} height={185}>
