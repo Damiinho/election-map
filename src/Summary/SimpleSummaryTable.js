@@ -15,19 +15,19 @@ const SimpleSummaryTable = () => {
           className="simpleSummary-main__summary-map__table-item"
           style={{
             width: "80%",
-            height: 300,
+            height: 200,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
             fontSize: 30,
-            backgroundColor: "#77777755",
-            textShadow: "1px 1px grey",
+            backgroundColor: "#00000099",
+            // textShadow: "1px 1px grey",
+            color: "white",
             fontWeight: 700,
             letterSpacing: 2,
             padding: 20,
-            borderRadius: 10,
-            marginTop: 40,
+            marginTop: 50,
             boxShadow:
               "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
           }}
@@ -38,23 +38,24 @@ const SimpleSummaryTable = () => {
         <div
           className="simpleSummary-main__summary-map__table-item"
           style={{
-            width: "80%",
-            backgroundColor: "#77777755",
-            padding: 20,
-            borderRadius: 10,
-            marginTop: 20,
+            width: "95%",
+            marginTop: 5,
             boxShadow:
               "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
           }}
         >
           <div
             style={{
-              fontSize: 25,
+              fontSize: 30,
               textAlign: "center",
               margin: "0 auto",
-              marginBottom: 20,
               fontWeight: "bold",
-              textShadow: "1px 1px white",
+              color: "white",
+              letterSpacing: 1.5,
+              fontFamily: "Ysabeau Office, sans-serif",
+              backgroundColor: "#00000099",
+              boxShadow:
+                "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
             }}
           >
             {currentDistrict.name}
@@ -66,11 +67,14 @@ const SimpleSummaryTable = () => {
               gap: 10,
               height: 30,
               fontSize: 18,
+              backgroundColor: "#4747478f",
+              boxShadow:
+                "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
             }}
           >
             <div></div>
-            <div style={{ textAlign: "center" }}>miejsca</div>
-            <div style={{ textAlign: "center" }}>wynik</div>
+            <div style={{ textAlign: "center", color: "white" }}>miejsca</div>
+            <div style={{ textAlign: "center", color: "white" }}>wynik</div>
           </div>
           {currentDistrict?.finalResult.map((party, index) => (
             <div
@@ -79,13 +83,16 @@ const SimpleSummaryTable = () => {
                 display: "grid",
                 gridTemplateColumns: "4fr 1fr 1fr",
                 gap: 10,
-                height: 30,
+                // height: 30,
+                padding: "5px 0",
                 fontSize: 20,
                 backgroundColor: `${tinycolor(party.color)
                   .lighten(0)
-                  .toString()}33`,
+                  .toString()}aa`,
                 color: "white",
                 textShadow: "1px 1px black",
+                boxShadow:
+                  "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
               }}
             >
               <div style={{ marginLeft: 20 }}>{party.name}</div>

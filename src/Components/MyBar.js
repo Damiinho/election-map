@@ -7,7 +7,7 @@ const MyBar = (props) => {
   );
   const tooltip = props.tooltip === false ? false : true || true;
   const borderRadius =
-    props.borderRadius || props.borderRadius === 0 ? props.borderRadius : 12;
+    props.borderRadius || props.borderRadius === 0 ? props.borderRadius : 0;
   const barWidth = props.barWidth || "90%";
   const boxShadow =
     props.boxShadow === true

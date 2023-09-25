@@ -237,13 +237,15 @@ const SimpleMap = () => {
             className="tooltip"
             style={{
               position: "fixed",
-              left: tooltipPosition.x,
+              left: tooltipPosition.x + 30,
               top: tooltipPosition.y,
               backgroundColor: "#00000099",
-              borderRadius: 10,
-              zIndex: 999,
+              // borderRadius: 10,
+              zIndex: 1,
               color: "white",
-              padding: 2,
+              padding: 5,
+              boxShadow:
+                "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
             }}
           >
             <div style={{ textAlign: "center", fontSize: 20 }}>
@@ -253,40 +255,6 @@ const SimpleMap = () => {
                 ).name
               }
             </div>
-            <div
-              style={{
-                padding: 2,
-                display: "grid",
-                gridTemplateColumns: "3fr 1fr 1fr",
-                gap: 5,
-              }}
-            >
-              <div></div>
-              <div style={{ margin: "0 auto" }}>mandaty</div>
-              <div style={{ margin: "0 auto" }}>wynik</div>
-            </div>
-            {simpleDistricts.find((district) => district.id === hoveredElement)
-              ?.finalResult.length > 0
-              ? simpleDistricts
-                  .find((district) => district.id === hoveredElement)
-                  .finalResult.map((item, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        padding: 2,
-                        display: "grid",
-                        gridTemplateColumns: "3fr 1fr 1fr",
-                        gap: 15,
-                      }}
-                    >
-                      <div>{item.name}</div>
-                      <div style={{ margin: "0 auto" }}>{item.seats}</div>
-                      <div style={{ margin: "0 auto" }}>
-                        {item.result.toFixed(2)}%
-                      </div>
-                    </div>
-                  ))
-              : ""}
           </div>
         )}
       <svg

@@ -3,11 +3,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useContext } from "react";
 import { AppContext } from "./contexts/AppContext";
-import Logo from "./img/calculatorlogo.png";
-import Logo2 from "./img/calculatorlogo2.png";
 import Logo3 from "./img/calculatorlogo3.png";
-import SimpleLogo3 from "./img/calculatorsimplelogo3.png";
-import SimpleLogo from "./img/calculatorsimplelogo.png";
 import SimpleLogo2 from "./img/calculatorsimplelogo2.png";
 import { DataContext } from "./contexts/DataContext";
 
@@ -34,7 +30,7 @@ const Header = () => {
   return (
     <div className="App__header">
       <div className="App__header-title">
-        <span>kalkulator wyborczy</span>
+        <span>Kalkulator wyborczy</span>
         <img
           src={advancedVersion ? Logo3 : SimpleLogo2}
           alt=""

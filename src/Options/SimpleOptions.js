@@ -257,7 +257,7 @@ const SimpleOptions = () => {
           </div>
           <div className="simpleOptions-handler">
             <div className="simpleOptions-handler__header">
-              <span>wpisz wyniki lub</span>
+              <span>Wpisz wyniki lub</span>
               <Button
                 color="primary"
                 onClick={handleSurvey}

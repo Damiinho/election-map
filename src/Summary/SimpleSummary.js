@@ -3,8 +3,6 @@ import { DataContext } from "../contexts/DataContext";
 import SimpleSummaryDistrict from "./SimpleSummaryDistrict";
 import { AppContext } from "../contexts/AppContext";
 import MySmallInfoBox from "../Components/MySmallInfoBox";
-import ArrowDropDownSharpIcon from "@mui/icons-material/ArrowDropDownSharp";
-import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
 import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
 import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
 import MyBar from "../Components/MyBar";
@@ -13,8 +11,7 @@ import SimpleCircus from "../SimpleCircus";
 import SimpleSummaryTable from "./SimpleSummaryTable";
 
 const SimpleSummary = () => {
-  const { simpleDistricts, simpleParties, setSimpleParties } =
-    useContext(DataContext);
+  const { simpleDistricts, simpleParties } = useContext(DataContext);
   const { simpleFinalResultSummary, setSimpleFinalResultSummary } =
     useContext(AppContext);
 
@@ -140,9 +137,58 @@ const SimpleSummary = () => {
 
   return (
     <div className="simpleSummary">
-      <div className="simpleSummary-header">Podsumowanie</div>
       <div className="simpleSummary-main">
         <div className="simpleSummary-main__summary">
+          {" "}
+          <div className="simpleSummary-main__summary-bars">
+            <div className="simpleSummary-main__summary-bars__bar">
+              <MyBar
+                result={simpleParties}
+                value="result"
+                name={
+                  <span
+                    style={{
+                      color: "white",
+                      fontSize: 25,
+                      margin: 5,
+                      textShadow: "1px 1px black",
+                    }}
+                  >
+                    Procent głosów
+                  </span>
+                }
+                barWidth="100%"
+                borderRadius={0}
+                boxShadow
+                fontSize={20}
+                height={70}
+              />
+            </div>
+            <div className="simpleSummary-main__summary-bars__bar">
+              <MyBar
+                result={simpleFinalResultSummary}
+                value="seats"
+                name={
+                  <span
+                    style={{
+                      color: "white",
+                      fontSize: 25,
+                      margin: 5,
+                      textShadow: "1px 1px black",
+                    }}
+                  >
+                    Mandaty
+                  </span>
+                }
+                tooltip={false}
+                barWidth="100%"
+                borderRadius={0}
+                boxShadow
+                fontSize={20}
+                height={70}
+              />
+            </div>
+          </div>
           <div className="simpleSummary-main__summary-box">
             {simpleFinalResultSummary.map((party, index) => {
               // if (party.shortName === "inne") return null;
@@ -173,7 +219,7 @@ const SimpleSummary = () => {
                     txt={party.shortName}
                     value={party.seats}
                     backgroundTop={party.isOverThreshold ? party.color : "grey"}
-                    allWidth={70}
+                    allWidth={80}
                     radius="0px"
                     title={party.name}
                   />
@@ -204,38 +250,21 @@ const SimpleSummary = () => {
               );
             })}
           </div>
-
-          <MyBar
-            result={simpleFinalResultSummary}
-            value="seats"
-            name="Liczba mandatów"
-            tooltip={false}
-            barWidth="100%"
-            borderRadius={0}
-            boxShadow
-            fontSize={20}
-            height={70}
-          />
-          <MyBar
-            result={simpleParties}
-            value="result"
-            name="Wynik procentowy"
-            barWidth="100%"
-            borderRadius={0}
-            boxShadow
-            fontSize={20}
-            height={70}
-          />
         </div>
         <div className="simpleSummary-main__summary-map">
           <div className="simpleSummary-main__summary-map__item">
-            <SimpleMap />
+            <div className="simpleSummary-main__summary-map__item-map">
+              <SimpleMap />
+            </div>
           </div>
           <div className="simpleSummary-main__summary-map__table">
-            <SimpleCircus />
+            <div className="simpleSummary-main__summary-map__table-circus">
+              <SimpleCircus />
+            </div>
             <SimpleSummaryTable />
           </div>
         </div>
+
         <div className="simpleSummary-main__details">
           {simpleDistricts.map((item, index) => {
             return <SimpleSummaryDistrict key={index} district={item} />;

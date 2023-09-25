@@ -238,11 +238,13 @@ const District = (props) => {
               result={currentDistrict.finalResult}
               value="seats"
               name="Liczba mandatów z listy"
+              boxShadow="true"
             />
             <MyBar
               result={currentDistrict.finalResult}
               value="result"
               name="Wynik procentowy na liscie"
+              boxShadow="true"
             />
           </div>
         </>

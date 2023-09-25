@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;400;700;800&family=Overpass:ital@0;1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=MuseoModerno:wght@100;400;500;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ysabeau+Office:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
   margin: 0;
@@ -23,9 +25,12 @@ $tertiary-color: #9c62a12c;
   padding: $default-padding;
   font-family: "MuseoModerno", cursive;
   font-weight: 500;
-  background-color: #46004641;
+  background-color: #2363b6a1;
+  color: white;
+  text-shadow: 1px 1px black;
   margin: 5px 5px 0;
-  border-radius: $default-border-radius;
+  box-shadow: $material-box-shadow;
+  // border-radius: $default-border-radius;
 }
 @mixin default-margin($top: 0, $right: 5px, $bottom: 0, $left: 5px) {
   margin: $top $right $bottom $left;
@@ -72,10 +77,12 @@ $tertiary-color: #9c62a12c;
     text-align: center;
     font-family: "Mukta", sans-serif;
     font-family: "Overpass", sans-serif;
+    font-family: "Ysabeau Office", sans-serif;
     font-weight: 800;
     // line-height: 80px;
-    border-radius: 0 0 10px 10px;
+    // border-radius: 0 0 10px 10px;
     position: relative;
+    box-shadow: $material-box-shadow;
     &-title {
       display: flex;
       @include justify-align-center();
@@ -112,7 +119,7 @@ $tertiary-color: #9c62a12c;
       flex-direction: row;
       @include justify-align-center;
       height: 40px;
-      border-radius: 10px;
+      // border-radius: 10px;
       margin-top: 5px;
       background-color: #808080dd;
       position: relative;
@@ -137,7 +144,8 @@ $tertiary-color: #9c62a12c;
     &-main {
       background-color: #ffc36a3a;
       display: grid;
-      border-radius: $default-border-radius;
+      // border-radius: $default-border-radius;
+      box-shadow: $material-box-shadow;
       padding-bottom: $default-padding;
 
       grid-template-columns: repeat(2, 1fr);
@@ -182,14 +190,16 @@ $tertiary-color: #9c62a12c;
 
           &-label {
             background-color: $primary-color;
-            border-radius: $default-border-radius;
+            // border-radius: $default-border-radius;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             grid-template-rows: 50px;
             grid-column-gap: 0px;
             grid-row-gap: 0px;
             padding: 10px;
+            box-shadow: $material-box-shadow;
             @include default-margin;
+            margin-bottom: 5px;
             @include justify-align-center;
 
             &__color {
@@ -231,8 +241,10 @@ $tertiary-color: #9c62a12c;
           &-predefined {
             @include default-margin;
             padding: $default-padding;
-            border-radius: $default-border-radius;
+            // border-radius: $default-border-radius;
+            box-shadow: $material-box-shadow;
             background-color: $secondary-color;
+            margin-bottom: 5px;
             display: flex;
             @include justify-align-center;
             button {
@@ -241,7 +253,7 @@ $tertiary-color: #9c62a12c;
               padding: $default-padding;
               margin-left: 20px;
               cursor: pointer;
-              border-radius: $default-border-radius;
+              // border-radius: $default-border-radius;
               border: none;
               box-shadow: $material-box-shadow;
               font-family: "MuseoModerno", cursive;
@@ -279,23 +291,29 @@ $tertiary-color: #9c62a12c;
             }
           }
           &-list {
-            background-color: $tertiary-color;
+            color: white;
+            text-shadow: 1px 1px black;
             @include default-margin;
-            padding: $default-padding;
-            border-radius: $default-border-radius;
+            // padding: $default-padding;
+            // border-radius: $default-border-radius;
             display: flex;
             flex-direction: column;
 
             &__title {
+              background-color: #2363b6a1;
+              box-shadow: $material-box-shadow;
               position: relative;
-              width: 100%;
+              // width: 100%;
               cursor: pointer;
               text-align: center;
               font-size: 20px;
               padding: $default-padding;
+              margin-bottom: 5px;
+              font-family: "MuseoModerno", cursive;
               > div {
                 position: absolute;
-                top: 0;
+                top: 50%;
+                transform: translateY(-50%);
                 right: 0;
               }
             }
@@ -303,6 +321,7 @@ $tertiary-color: #9c62a12c;
             &__ul {
               display: grid;
               grid-template-rows: 1fr;
+              background-color: #8f8f8f;
 
               transition: 0.5s;
               > div {
@@ -312,19 +331,23 @@ $tertiary-color: #9c62a12c;
                 grid-template-rows: 0fr;
               }
               &-element {
+                background-color: #ffffff3a;
                 min-height: 34px;
                 display: grid;
                 grid-template-columns: 3fr 1fr 1fr 1fr;
                 gap: $default-gap;
                 @include justify-align-center;
-                border-bottom: 1px solid rgb(145, 145, 145);
+                // border-bottom: 1px solid rgb(145, 145, 145);
+                padding: 2px;
+                box-shadow: $material-box-shadow;
 
                 &:hover {
                   background-color: #9c62a111;
                 }
                 &.legend {
-                  background-color: #ca7a7aaf;
-                  border-radius: $default-border-radius;
+                  background-color: #969696ad;
+                  // border-radius: $default-border-radius;
+                  box-shadow: $material-box-shadow;
                   height: 26px;
                   font-family: "MuseoModerno", cursive;
                   div {
@@ -332,7 +355,7 @@ $tertiary-color: #9c62a12c;
                   }
                 }
                 &.active {
-                  background-color: #ebd51777;
+                  background-color: #ffed4977;
                 }
                 div:first-of-type {
                   padding: 2px 5px;
@@ -407,19 +430,26 @@ $tertiary-color: #9c62a12c;
           }
           &-label {
             background-color: $primary-color;
-            border-radius: $default-border-radius;
+            box-shadow: $material-box-shadow;
+            // border-radius: $default-border-radius;
             @include default-margin;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             @include justify-align-center;
+            margin-bottom: 5px;
+            padding-top: 5px;
+            gap: 10px;
             &-name {
-              margin-top: 10px;
+              display: flex;
+              @include justify-align-center();
             }
             &-deputies {
-              margin-top: 10px;
+              display: flex;
+              @include justify-align-center();
             }
             &-method {
-              margin-top: 10px;
+              display: flex;
+              @include justify-align-center();
             }
             input[type="number"]::-webkit-inner-spin-button {
               -webkit-appearance: none;
@@ -428,13 +458,14 @@ $tertiary-color: #9c62a12c;
             button {
               margin: 10px auto;
               @include add-button;
-              width: 100px;
+              // width: 100px;
             }
           }
           &-predefined {
             @include default-margin;
             padding: $default-padding;
-            border-radius: $default-border-radius;
+            // border-radius: $default-border-radius;
+            box-shadow: $material-box-shadow;
             background-color: $secondary-color;
             display: flex;
             @include justify-align-center;
@@ -469,14 +500,16 @@ $tertiary-color: #9c62a12c;
       }
     }
     .simpleOptions {
-      margin-top: 10px;
+      margin-top: 5px;
+      padding-top: 15px;
       width: 100%;
       display: flex;
       flex-direction: column;
       // @include justify-align-center();
       background-color: #8855555b;
-      border-radius: $default-border-radius;
+      // border-radius: $default-border-radius;
       position: relative;
+      box-shadow: $material-box-shadow;
       &-info {
         position: absolute;
         top: 10px;
@@ -497,9 +530,12 @@ $tertiary-color: #9c62a12c;
           flex-direction: row;
           @include justify-align-center();
           gap: 20px;
+          margin-bottom: 30px;
           span {
-            font-size: 30px;
+            font-size: 35px;
             font-family: "MuseoModerno", cursive;
+            font-family: "Noto Sans", sans-serif;
+            font-family: "Ysabeau Office", sans-serif;
           }
         }
         &__list {
@@ -558,7 +594,6 @@ $tertiary-color: #9c62a12c;
   }
 
   &__districtlist {
-    background-color: #b1bb20;
     margin-top: 5px;
     width: 100%;
     border-radius: $default-border-radius;
@@ -580,12 +615,15 @@ $tertiary-color: #9c62a12c;
       }
     }
     &-handler {
-      margin-top: 10px;
+      background-color: #b9b9b9a1;
+      padding: 10px;
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
       gap: 20px;
+      box-shadow: $material-box-shadow;
+      margin-bottom: 5px;
       &__text {
         font-size: 15px;
         &-number {
@@ -595,6 +633,8 @@ $tertiary-color: #9c62a12c;
     }
 
     &-main {
+      background-color: #b9b9b979;
+      box-shadow: $material-box-shadow;
       display: grid;
       grid-template-rows: 1fr;
       transition: grid-template-rows 1s ease-out;
@@ -610,18 +650,21 @@ $tertiary-color: #9c62a12c;
         grid-template-columns: 1fr 1fr 1fr;
         align-items: flex-start;
         color: white;
+        text-shadow: 1px 1px black;
         overflow: hidden;
 
         &__element {
           grid-column: span 1;
           margin: 10px auto;
-          background-color: #504f45ad;
-          border-radius: $default-border-radius;
+          background-color: #4b4b4b56;
+          // border-radius: $default-border-radius;
+          box-shadow: $material-box-shadow;
           display: flex;
           flex-direction: column;
           @include justify-align-center();
-          width: 280px;
+          // width: 280px;
           transition: width 0.5s ease;
+          // padding: 10px 20px;
           &.withresults {
             grid-column: span 3;
             width: 900px;
@@ -630,6 +673,9 @@ $tertiary-color: #9c62a12c;
             grid-template-columns: 1fr 1fr 1fr;
           }
           &-title {
+            background-color: #555555;
+            box-shadow: $material-box-shadow;
+            width: 100%;
             font-family: "MuseoModerno", cursive;
             font-weight: 500;
             display: flex;
@@ -641,16 +687,20 @@ $tertiary-color: #9c62a12c;
               font-weight: 500;
             }
             p {
-              font-size: 12px;
+              font-size: 10px;
 
               font-weight: 400;
               span {
-                font-size: 15px;
+                font-size: 12px;
               }
             }
           }
           &-buttons {
-            margin-top: 5px;
+            background-color: #888888;
+            width: 100%;
+            padding: 5px;
+            display: flex;
+            @include justify-align-center();
             button {
               font-family: "MuseoModerno", cursive;
               font-weight: 500;
@@ -664,7 +714,7 @@ $tertiary-color: #9c62a12c;
             @include justify-align-center();
           }
           &-parties {
-            margin-top: 10px;
+            // margin-top: 10px;
 
             &__item {
               display: flex;
@@ -672,6 +722,8 @@ $tertiary-color: #9c62a12c;
               gap: $default-gap;
               padding: $default-padding;
               align-items: center;
+              // box-shadow: $material-box-shadow;
+              border-bottom: 1px solid #797979;
 
               p {
                 max-width: 150px;
@@ -687,7 +739,11 @@ $tertiary-color: #9c62a12c;
             }
           }
           &-start {
-            margin: 10px 0;
+            background-color: #555555a4;
+            width: 100%;
+            display: flex;
+            @include justify-align-center();
+            padding: 10px 0;
             button {
               font-family: "MuseoModerno", cursive;
               font-weight: 500;
@@ -880,12 +936,28 @@ $tertiary-color: #9c62a12c;
   .simpleSummary {
     &-main {
       background-color: #b4b4b44d;
+      box-shadow: $material-box-shadow;
       &__summary {
-        &-box {
+        &-bars {
+          margin: 10px auto;
           width: 100%;
+          &__bar {
+            background-color: #4d4d4d8e;
+            // margin-bottom: 5px;
+            box-shadow: $material-box-shadow;
+            // padding-bottom: 2px;
+          }
+        }
+        &-box {
+          margin: 10px auto 10px;
+          width: 95%;
           display: flex;
           // gap: 5px;
           justify-content: space-around;
+          box-shadow: $material-box-shadow;
+          padding: 10px 0;
+          background-color: #c0c0c08e;
+
           &__item {
             display: flex;
             @include justify-align-center();
@@ -896,16 +968,34 @@ $tertiary-color: #9c62a12c;
           display: flex;
 
           width: 100%;
+          // height: 620px;
           overflow: hidden;
+          margin-bottom: 20px;
           &__item {
-            width: 50%;
+            width: 60%;
+            margin-top: 20px;
+            height: 622px;
+            &-map {
+              margin: 0 40px;
+              background-color: #ffffff6e;
+              box-shadow: $material-box-shadow;
+              height: 620px;
+            }
           }
           &__table {
-            width: 50%;
+            width: 40%;
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
+            &-circus {
+              width: 95%;
+              display: flex;
+              @include justify-align-center();
+              background-color: #ffffffb4;
+              box-shadow: $material-box-shadow;
+              padding: 20px;
+            }
           }
         }
       }
