@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { AppContext } from "../contexts/AppContext";
-import MySwitch from "../Components/MySwitch";
-import { DataContext } from "../contexts/DataContext";
+import { AppContext } from "../../contexts/AppContext";
+import MySwitch from "../../Components/MySwitch";
+import { DataContext } from "../../contexts/DataContext";
 import tinycolor from "tinycolor2";
 
-const SimpleMap = () => {
+const MapSimple = () => {
   const [hoveredElement, setHoveredElement] = useState(null);
   const { showMapByResults, setShowMapByResults } = useContext(AppContext);
   const { simpleDistricts, selectedSimpleDistrict, setSelectedSimpleDistrict } =
@@ -866,4 +866,4 @@ const SimpleMap = () => {
     </div>
   );
 };
-export default SimpleMap;
+export default MapSimple;

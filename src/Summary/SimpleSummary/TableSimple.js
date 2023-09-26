@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { DataContext } from "../contexts/DataContext";
+import { DataContext } from "../../contexts/DataContext";
 import tinycolor from "tinycolor2";
 
-const SimpleSummaryTable = () => {
+const TableSimple = () => {
   const { simpleDistricts, selectedSimpleDistrict } = useContext(DataContext);
   const currentDistrict = simpleDistricts.find(
     (district) => district.id === selectedSimpleDistrict
@@ -12,7 +12,7 @@ const SimpleSummaryTable = () => {
     <>
       {selectedSimpleDistrict === "" ? (
         <div
-          className="simpleSummary-main__summary-map__table-item"
+          className="simpleSummary-main__summary-graph__table-item"
           style={{
             width: "80%",
             height: 200,
@@ -36,7 +36,7 @@ const SimpleSummaryTable = () => {
         </div>
       ) : (
         <div
-          className="simpleSummary-main__summary-map__table-item"
+          className="simpleSummary-main__summary-graph__table-item"
           style={{
             width: "95%",
             marginTop: 5,
@@ -108,4 +108,4 @@ const SimpleSummaryTable = () => {
   );
 };
 
-export default SimpleSummaryTable;
+export default TableSimple;

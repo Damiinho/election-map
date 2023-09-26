@@ -15,12 +15,15 @@ export const AppProvider = ({ children }) => {
   const [simpleFinalResultSummary, setSimpleFinalResultSummary] = useState([]);
   const [strictSejm, setStrictSejm] = useState(false);
   const [searchDistrictValue, setSearchDistrictValue] = useState("");
+  const [simpleSearchValue, setSimpleSearchValue] = useState("");
   const [showMapByResults, setShowMapByResults] = useState(false);
   const [advancedVersion, setAdvancedVersion] = useState(false);
   const [showSimpleSummary, setShowSimpleSummary] = useState(false);
   const [correction, setCorrection] = useState(true);
 
   const providerValue = {
+    simpleSearchValue,
+    setSimpleSearchValue,
     showOptions,
     setShowOptions,
     showAddDistrict,

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { DataContext } from "../contexts/DataContext";
-import MySmallInfoBox from "../Components/MySmallInfoBox";
-import MyBar from "../Components/MyBar";
-import { AppContext } from "../contexts/AppContext";
+import { DataContext } from "../../contexts/DataContext";
+import MySmallInfoBox from "../../Components/MySmallInfoBox";
+import MyBar from "../../Components/MyBar";
+import { AppContext } from "../../contexts/AppContext";
 
-const SimpleSummaryDistrict = (props) => {
+const DistrictSimple = (props) => {
   const { simpleDistricts, setSimpleDistricts } = useContext(DataContext);
   const { correction } = useContext(AppContext);
 
@@ -659,62 +659,57 @@ const SimpleSummaryDistrict = (props) => {
     // simpleDistricts,
   ]);
 
-  const ResultBox = () => {
-    return (
-      <div className="simpleSummary-main__details-element">
-        <div className="simpleSummary-main__details-element__title">
-          {props.district.name}
-          <div className="simpleSummary-main__details-element__title-subtitle">
-            mandatów:{" "}
-            <span style={{ fontWeight: "bold" }}>{totalMandates}</span>
-          </div>
-          {/* następny mandat: {props.district.potentialNextSeat.name} */}
+  return (
+    <div className="simpleSummary-main__details-element">
+      <div className="simpleSummary-main__details-element__title">
+        {props.district.name}
+        <div className="simpleSummary-main__details-element__title-subtitle">
+          mandatów: <span style={{ fontWeight: "bold" }}>{totalMandates}</span>
         </div>
-
-        <div className="simpleSummary-main__details-element__results">
-          <div className="simpleSummary-main__details-element__results-box">
-            {simpleDistricts
-              .find((district) => district.id === props.district.id)
-              .finalResult.map((party, index) => {
-                if (party.shortName === "inne") return null;
-
-                return (
-                  <MySmallInfoBox
-                    key={index}
-                    txt={party.shortName}
-                    value={party.seats}
-                    backgroundTop={party.isOverThreshold ? party.color : "grey"}
-                    allWidth={70}
-                    radius="0px"
-                    title={party.name}
-                  />
-                );
-              })}
-          </div>
-          <MyBar
-            result={props.district.finalResult}
-            value="seats"
-            name="Liczba mandatów z listy"
-            tooltip={false}
-            barWidth="100%"
-            borderRadius={0}
-            boxShadow
-          />
-          <MyBar
-            result={props.district.finalResult}
-            value="result"
-            name="Procent głosów na liście"
-            tooltip={false}
-            barWidth="100%"
-            borderRadius={0}
-            boxShadow
-          />
-        </div>
+        {/* następny mandat: {props.district.potentialNextSeat.name} */}
       </div>
-    );
-  };
 
-  return <ResultBox />;
+      <div className="simpleSummary-main__details-element__results">
+        <div className="simpleSummary-main__details-element__results-box">
+          {simpleDistricts
+            .find((district) => district.id === props.district.id)
+            .finalResult.map((party, index) => {
+              if (party.shortName === "inne") return null;
+
+              return (
+                <MySmallInfoBox
+                  key={index}
+                  txt={party.shortName}
+                  value={party.seats}
+                  backgroundTop={party.isOverThreshold ? party.color : "grey"}
+                  allWidth={70}
+                  radius="0px"
+                  title={party.name}
+                />
+              );
+            })}
+        </div>
+        <MyBar
+          result={props.district.finalResult}
+          value="seats"
+          name="Liczba mandatów z listy"
+          tooltip={false}
+          barWidth="100%"
+          borderRadius={0}
+          boxShadow
+        />
+        <MyBar
+          result={props.district.finalResult}
+          value="result"
+          name="Procent głosów na liście"
+          tooltip={false}
+          barWidth="100%"
+          borderRadius={0}
+          boxShadow
+        />
+      </div>
+    </div>
+  );
 };
 
-export default SimpleSummaryDistrict;
+export default DistrictSimple;

@@ -427,7 +427,7 @@ const SimpleOptions = () => {
             </div>
           </div>
           <div className="simpleOptions-other">
-            <Button
+            {/* <Button
               size="small"
               color="warning"
               onClick={function () {}}
@@ -435,7 +435,7 @@ const SimpleOptions = () => {
               style={{ fontFamily: "Mukta" }}
             >
               stwórz koalicje
-            </Button>
+            </Button> */}
             <ButtonGroup>
               <Button
                 size="small"

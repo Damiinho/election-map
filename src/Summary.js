@@ -17,6 +17,7 @@ const Summary = () => {
     setFinalResultSummary,
     strictSejm,
     showSimpleSummary,
+    advancedVersion,
   } = useContext(AppContext);
   const { districts } = useContext(DataContext);
 
@@ -212,7 +213,7 @@ const Summary = () => {
         </div>
       </div>
     </div>
-  ) : showSimpleSummary ? (
+  ) : !advancedVersion && showSimpleSummary ? (
     <SimpleSummary />
   ) : null;
 };

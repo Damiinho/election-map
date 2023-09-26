@@ -453,6 +453,17 @@ $tertiary-color: #9c62a12c;
             }
             input[type="number"]::-webkit-inner-spin-button {
               -webkit-appearance: none;
+              appearance: none;
+              -moz-appearance: textfield;
+            }
+            input[type="number"] {
+              appearance: textfield;
+              -moz-appearance: textfield;
+            }
+            input[type="number"]:hover,
+            input[type="number"]:focus {
+              appearance: textfield;
+              -moz-appearance: number-input;
             }
 
             button {
@@ -541,6 +552,17 @@ $tertiary-color: #9c62a12c;
         &__list {
           input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
+            appearance: none;
+            -moz-appearance: textfield;
+          }
+          input[type="number"] {
+            appearance: textfield;
+            -moz-appearance: textfield;
+          }
+          input[type="number"]:hover,
+          input[type="number"]:focus {
+            appearance: textfield;
+            -moz-appearance: number-input;
           }
           &-table {
             font-family: "MuseoModerno", cursive;
@@ -731,6 +753,17 @@ $tertiary-color: #9c62a12c;
               }
               input[type="number"]::-webkit-inner-spin-button {
                 -webkit-appearance: none;
+                appearance: none;
+                -moz-appearance: textfield;
+              }
+              input[type="number"] {
+                appearance: textfield;
+                -moz-appearance: textfield;
+              }
+              input[type="number"]:hover,
+              input[type="number"]:focus {
+                appearance: textfield;
+                -moz-appearance: number-input;
               }
               &-handle {
                 display: flex;
@@ -995,7 +1028,7 @@ $tertiary-color: #9c62a12c;
             position: relative;
           }
         }
-        &-map {
+        &-graph {
           display: flex;
 
           width: 100%;
