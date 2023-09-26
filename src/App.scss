@@ -512,12 +512,11 @@ $tertiary-color: #9c62a12c;
     }
     .simpleOptions {
       margin-top: 5px;
-      padding-top: 15px;
       width: 100%;
       display: flex;
       flex-direction: column;
       // @include justify-align-center();
-      background-color: #8855555b;
+      background-color: #8f8f8f5b;
       // border-radius: $default-border-radius;
       position: relative;
       box-shadow: $material-box-shadow;
@@ -536,6 +535,7 @@ $tertiary-color: #9c62a12c;
         font-size: 15px;
       }
       &-handler {
+        margin-top: 15px;
         &__header {
           display: flex;
           flex-direction: row;
@@ -1002,6 +1002,20 @@ $tertiary-color: #9c62a12c;
       background-color: #b4b4b44d;
       box-shadow: $material-box-shadow;
       &__summary {
+        &-header {
+          background-color: #ffffff98;
+          padding: 10px;
+          margin: 10px;
+          box-shadow: $material-box-shadow;
+          &__title {
+            // width: 100%;
+            // margin: 0 auto;
+            text-align: center;
+            font-size: 40px;
+            margin: 10px;
+            font-family: "MuseoModerno", cursive;
+          }
+        }
         &-bars {
           margin: 10px auto;
           width: 100%;
@@ -1064,6 +1078,25 @@ $tertiary-color: #9c62a12c;
         }
       }
       &__details {
+        &-header {
+          background-color: #ffffff98;
+          padding: 0 0 10px;
+          margin: 10px;
+          box-shadow: $material-box-shadow;
+          &__title {
+            // width: 100%;
+            // margin: 0 auto;
+            text-align: center;
+            font-size: 40px;
+            margin: 10px;
+            font-family: "MuseoModerno", cursive;
+          }
+          &__search {
+            display: flex;
+            @include justify-align-center();
+            gap: 20px;
+          }
+        }
         &-element {
           padding: 10px 0;
           border-bottom: 1px solid #00000027;
