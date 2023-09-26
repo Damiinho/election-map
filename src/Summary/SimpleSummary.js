@@ -43,13 +43,23 @@ const SimpleSummary = () => {
     <div className="simpleSummary">
       <div className="simpleSummary-main">
         <div className="simpleSummary-main__summary">
-          <BarsSimpleSummary />
+          <div className="simpleSummary-main__summary-header">
+            <div className="simpleSummary-main__summary-header__title">
+              wyniki ogólne
+            </div>
+          </div>
           <BoxSimpleSummary />
+          <BarsSimpleSummary />
           <GraphSimpleSummary />
         </div>
 
         <div className="simpleSummary-main__details">
-          <SearchDistrictSimple />
+          <div className="simpleSummary-main__details-header">
+            <div className="simpleSummary-main__details-header__title">
+              wyniki szczegółowe
+            </div>
+            <SearchDistrictSimple />
+          </div>
           <DistrictListSimple />
         </div>
       </div>

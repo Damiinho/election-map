@@ -474,13 +474,14 @@ const SimpleOptions = () => {
       )}
 
       <Button
-        color={showError ? "error" : showSimpleSummary ? "warning" : "success"}
+        color={showError ? "error" : showSimpleSummary ? "info" : "success"}
         onClick={showSimpleSummary ? handleRestart : handleStart}
         size="large"
-        variant="contained"
+        variant={showSimpleSummary ? "outlined" : "contained"}
         style={{
           fontFamily: "Mukta",
           fontSize: 20,
+          fontWeight: "bold",
         }}
       >
         {showSimpleSummary ? "zmień wyniki" : "oblicz"}

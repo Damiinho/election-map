@@ -20,8 +20,14 @@ export const AppProvider = ({ children }) => {
   const [advancedVersion, setAdvancedVersion] = useState(false);
   const [showSimpleSummary, setShowSimpleSummary] = useState(false);
   const [correction, setCorrection] = useState(true);
+  const [simpleByNumbers, setSimpleByNumbers] = useState(true);
+  const [simpleByName, setSimpleByName] = useState(false);
 
   const providerValue = {
+    simpleByNumbers,
+    setSimpleByNumbers,
+    simpleByName,
+    setSimpleByName,
     simpleSearchValue,
     setSimpleSearchValue,
     showOptions,
