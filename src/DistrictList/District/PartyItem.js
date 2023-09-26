@@ -32,7 +32,8 @@ const PartyItem = (props) => {
             inputProps: {
               style: {
                 textAlign: "center",
-                color: "#cccccc",
+                color: "#ffffff",
+                textShadow: "1px 1px black",
               },
             },
           }}
@@ -43,11 +44,11 @@ const PartyItem = (props) => {
               },
             },
             input: {
-              backgroundColor: "#d6c93855",
+              backgroundColor: "#dfdfdf86",
               borderRadius: 1,
             },
             label: {
-              color: "#cccccc",
+              color: "#ffffff",
               "&.Mui-focused": {
                 color: "#ffffff",
                 letterSpacing: 1.5,

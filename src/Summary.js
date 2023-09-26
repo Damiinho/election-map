@@ -7,6 +7,7 @@ import MyBar from "./Components/MyBar";
 import SummaryParliament from "./Summary/SummaryParliament";
 import { DataContext } from "./contexts/DataContext";
 import SimpleSummary from "./Summary/SimpleSummary";
+import SummaryCircus from "./Summary/SummaryCircus";
 
 const Summary = () => {
   const {
@@ -120,9 +121,7 @@ const Summary = () => {
       </div>
       <div className={`App__summary-main ${showSummary ? "" : "hide"}`}>
         <div className="presentation">
-          <div className="presentation__description">
-            <SummaryTable />
-          </div>
+          {" "}
           <div className="presentation__block">
             <div className="presentation__block-boxes">
               <div className="presentation__block-boxes__item">
@@ -139,27 +138,77 @@ const Summary = () => {
                 />
               </div>
             </div>
-
-            <div className="presentation__block-set">
-              {finalResultSummary.map((item, index) => renderSeatDivs(item))}
-              {unassignedSeats > 0 && renderUnassignedSeatDivs()}
-            </div>
+            {strictSejm ? (
+              <div className="presentation__block-circus">
+                <SummaryCircus />
+              </div>
+            ) : (
+              <div className="presentation__block-set">
+                {finalResultSummary.map((item, index) => renderSeatDivs(item))}
+                {unassignedSeats > 0 && renderUnassignedSeatDivs()}
+              </div>
+            )}
+          </div>
+          <div className="presentation__description">
+            <SummaryTable />
           </div>
           <div className="presentation__bar">
             <MyBar
               result={finalResultSummary}
               value="seats"
-              name="łączba liczba mandatów"
+              barWidth="95%"
+              name={
+                <span
+                  style={{
+                    color: "white",
+                    fontSize: 25,
+                    margin: 5,
+                    textShadow: "1px 1px black",
+                  }}
+                >
+                  Mandaty łącznie
+                </span>
+              }
+              boxShadow={true}
+              fontSize={20}
+              height={50}
             />
             <MyBar
               result={finalResultSummary}
               value="result"
-              name="łączny wynik procentowy"
+              barWidth="95%"
+              name={
+                <span
+                  style={{
+                    color: "white",
+                    fontSize: 25,
+                    margin: 5,
+                    textShadow: "1px 1px black",
+                  }}
+                >
+                  Średni wynik
+                </span>
+              }
+              boxShadow={true}
+              fontSize={20}
+              height={50}
             />
-            <div style={{ width: 900, height: 850, margin: "0 auto" }}>
-              {strictSejm ? <SummaryParliament /> : null}
+          </div>{" "}
+          {strictSejm ? (
+            <div
+              style={{
+                width: 900,
+                height: 850,
+                margin: "0px auto 20px",
+                gridColumn: "span 2",
+                backgroundColor: "#8b8b8b8a",
+                boxShadow:
+                  "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+              }}
+            >
+              <SummaryParliament />
             </div>
-          </div>
+          ) : null}
         </div>
       </div>
     </div>

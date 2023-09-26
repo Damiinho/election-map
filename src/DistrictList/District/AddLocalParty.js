@@ -17,13 +17,22 @@ const AddLocalParty = (props) => {
             props.handleSubmitAddLocalParty();
           }
         }}
+        InputProps={{
+          inputProps: {
+            style: {
+              // textAlign: "center",
+              color: "#ffffff",
+              textShadow: "1px 1px black",
+            },
+          },
+        }}
         sx={{
           input: {
             backgroundColor: "#50402923",
             borderRadius: 1,
           },
         }}
-        style={{ width: 150 }}
+        style={{ width: 200 }}
       />
       <Button
         variant="contained"

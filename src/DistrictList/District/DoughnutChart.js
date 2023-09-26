@@ -5,16 +5,21 @@ const DoughnutChart = (props) => {
     <div className="list__element-doughnut__item">
       <Doughnut
         data={props.data}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", width: 200 }}
         options={{
           responsive: true,
           plugins: {
             legend: {
-              position: "left", // Ustaw pozycję legendy na lewo
-              align: "center", // Ustawienie align na "start" pozwoli umieścić legendę po lewej
+              display: false,
+              // width: "200px",
+              position: "bottom", // Ustaw pozycję legendy na lewo
+              // align: "center", // Ustawienie align na "start" pozwoli umieścić legendę po lewej
               labels: {
                 color: "white",
-                letterSpacing: "10px",
+                style: {
+                  fontSize: 10,
+                },
+                // letterSpacing: "10px",
               },
             },
           },

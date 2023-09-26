@@ -671,6 +671,7 @@ $tertiary-color: #9c62a12c;
             transition: width 0.5s ease;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
+            padding: 0 0 20px 0;
           }
           &-title {
             background-color: #555555;
@@ -725,7 +726,7 @@ $tertiary-color: #9c62a12c;
               // box-shadow: $material-box-shadow;
               border-bottom: 1px solid #797979;
 
-              p {
+              background-color: #dfdfdf86 p {
                 max-width: 150px;
               }
               input[type="number"]::-webkit-inner-spin-button {
@@ -753,7 +754,9 @@ $tertiary-color: #9c62a12c;
           &-doughnut {
             margin-top: 10px;
             display: flex;
-            @include justify-align-center();
+            // @include justify-align-center();
+            justify-content: space-around;
+            align-items: center;
             grid-column: span 3;
             // &__item {
             //   // width: 250px;
@@ -770,7 +773,8 @@ $tertiary-color: #9c62a12c;
               border: 2px dotted rgba(43, 43, 43, 0.253);
               thead {
                 // background-color: #ffffff49;
-                color: black;
+                color: white;
+                letter-spacing: 1px;
                 th {
                   width: 50px;
                   // border-radius: $default-border-radius;
@@ -805,6 +809,9 @@ $tertiary-color: #9c62a12c;
                 }
               }
             }
+            &__item {
+              // width: 400px;
+            }
           }
           &-bars {
             grid-column: span 3;
@@ -818,7 +825,8 @@ $tertiary-color: #9c62a12c;
   }
   &__summary {
     margin-top: 10px;
-    background-color: $tertiary-color;
+    background-color: #b9b9b979;
+    box-shadow: $material-box-shadow;
     margin-bottom: 20px;
     &-title {
       position: relative;
@@ -854,21 +862,24 @@ $tertiary-color: #9c62a12c;
           @include justify-align-center();
 
           &-table {
+            margin-top: 10px;
             color: rgb(255, 255, 255);
             padding: 2px;
-            font-size: 12px;
+            font-size: 18px;
 
             font-family: "Mukta", sans-serif;
-            border: 2px dotted rgba(43, 43, 43, 0.253);
+            background-color: #8f8f8f75;
+            box-shadow: $material-box-shadow;
             thead {
               // background-color: #ffffff49;
-              color: black;
+              // color: black;
+              text-shadow: 1px 1px black;
               th {
-                width: 50px;
+                width: 70px;
                 // border-radius: $default-border-radius;
               }
               th:first-of-type {
-                width: 180px;
+                width: 250px;
               }
             }
             tbody {
@@ -886,9 +897,14 @@ $tertiary-color: #9c62a12c;
                   font-weight: bold;
                 }
                 td:last-of-type {
-                  display: grid;
-                  gap: 2px;
-                  grid-template-columns: 1fr 1fr;
+                  // display: grid;
+                  // gap: 2px;
+                  // grid-template-columns: 1fr 1fr;
+
+                  display: flex;
+
+                  position: relative;
+                  top: 4px;
                   @include justify-align-center();
                 }
               }
@@ -899,17 +915,20 @@ $tertiary-color: #9c62a12c;
           }
         }
         &__block {
+          margin-top: 10px;
+          margin-left: 50px;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          background-color: #8f8f8f38;
+          box-shadow: $material-box-shadow;
           &-boxes {
             display: flex;
             justify-content: center;
             gap: 20px;
           }
           &-set {
-            margin: 10px auto 0;
-            width: 250px;
+            margin: 10px auto 10px;
             display: grid;
             grid-auto-flow: column;
             grid-template-rows: repeat(20, 1fr);
@@ -925,8 +944,20 @@ $tertiary-color: #9c62a12c;
               }
             }
           }
+          &-circus {
+            margin-top: 20px;
+            display: flex;
+            @include justify-align-center();
+          }
         }
         &__bar {
+          background-color: #4d4d4d8e;
+          // background-color: #8b8b8b8a;
+          margin: 10px auto 10px;
+
+          width: 95%;
+          padding-bottom: 10px;
+          box-shadow: $material-box-shadow;
           grid-column: span 2;
         }
       }

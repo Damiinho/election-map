@@ -18,10 +18,10 @@ const SummaryTable = () => {
     <table className="presentation__description-table">
       <thead>
         <tr>
-          <th>nazwa</th>
+          <th></th>
           <th>wynik</th>
           <th>miejsca</th>
-          <th>pozycja</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -32,7 +32,7 @@ const SummaryTable = () => {
             <td>{item.seats}</td>
             <td>
               <ArrowDropUpSharpIcon
-                fontSize="small"
+                fontSize="medium"
                 style={{
                   cursor: index > 0 ? "pointer" : "",
                   backgroundColor: "#061a8b46",
@@ -48,7 +48,7 @@ const SummaryTable = () => {
                 aria-label="Przesuń w górę"
               />
               <ArrowDropDownSharpIcon
-                fontSize="small"
+                fontSize="medium"
                 style={{
                   cursor:
                     index < finalResultSummary.length - 1 ? "pointer" : "",

@@ -9,12 +9,36 @@ const DoughnutDescription = (props) => {
     const updatedDistricts = [...districts];
     const currentDistrict = props.currentDistrict;
     const finalResultCopy = [...currentDistrict.finalResult];
+    const forChartCopy = { ...currentDistrict.forChart }; // Skopiuj obiekt forChart
 
     // Swap the items in finalResultCopy
     const temp = finalResultCopy[currentIndex];
     finalResultCopy[currentIndex] = finalResultCopy[targetIndex];
     finalResultCopy[targetIndex] = temp;
 
+    // Swap the items in forChartCopy.datasets[0]
+    const datasetsCopy = [...forChartCopy.datasets];
+    const datasetCopy = { ...datasetsCopy[0] }; // Skopiuj pierwszy (i jedyny) zestaw danych
+    const tempData = datasetCopy.data[currentIndex];
+    datasetCopy.data[currentIndex] = datasetCopy.data[targetIndex];
+    datasetCopy.data[targetIndex] = tempData;
+    const tempBgc = datasetCopy.backgroundColor[currentIndex];
+    datasetCopy.backgroundColor[currentIndex] =
+      datasetCopy.backgroundColor[targetIndex];
+    datasetCopy.backgroundColor[targetIndex] = tempBgc;
+
+    datasetsCopy[0] = datasetCopy; // Umieść zaktualizowany zestaw danych w kopii
+
+    forChartCopy.datasets = datasetsCopy; // Umieść zaktualizowane dane w kopii forChart
+
+    // Aktualizuj również kolejność etykiet
+    const labelsCopy = [...forChartCopy.labels];
+    const tempLabel = labelsCopy[currentIndex];
+    labelsCopy[currentIndex] = labelsCopy[targetIndex];
+    labelsCopy[targetIndex] = tempLabel;
+    forChartCopy.labels = labelsCopy;
+
+    currentDistrict.forChart = forChartCopy;
     currentDistrict.finalResult = finalResultCopy;
     setDistricts(updatedDistricts);
   };

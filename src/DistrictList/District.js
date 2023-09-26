@@ -143,10 +143,11 @@ const District = (props) => {
       labels: chartLabels,
       datasets: [
         {
-          label: "Wynik",
+          label: "miejsca",
           data: chartData,
           backgroundColor: chartColors,
-          borderColor: chartColors,
+          borderColor: "grey",
+          borderWidth: 1,
         },
       ],
     };
@@ -226,11 +227,11 @@ const District = (props) => {
       {currentDistrict.showFinalResult && (
         <>
           <div className="list__element-doughnut">
+            <DoughnutChart data={currentDistrict.forChart} />
             <DoughnutDescription
               currentDistrict={currentDistrict}
               finalResult={currentDistrict.finalResult}
             />
-            <DoughnutChart data={currentDistrict.forChart} />
           </div>
 
           <div className="list__element-bars">
@@ -238,13 +239,13 @@ const District = (props) => {
               result={currentDistrict.finalResult}
               value="seats"
               name="Liczba mandatów z listy"
-              boxShadow="true"
+              boxShadow={true}
             />
             <MyBar
               result={currentDistrict.finalResult}
               value="result"
               name="Wynik procentowy na liscie"
-              boxShadow="true"
+              boxShadow={true}
             />
           </div>
         </>
