@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { DataContext } from "../contexts/DataContext";
 import MySmallInfoBox from "../Components/MySmallInfoBox";
 import MyBar from "../Components/MyBar";
