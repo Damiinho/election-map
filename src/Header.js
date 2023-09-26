@@ -1,11 +1,12 @@
 import MySwitch from "./Components/MySwitch";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import Logo3 from "./img/calculatorlogo3.png";
 import SimpleLogo2 from "./img/calculatorsimplelogo2.png";
 import { DataContext } from "./contexts/DataContext";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   const {
@@ -16,6 +17,7 @@ const Header = () => {
     setShowAddParty,
   } = useContext(AppContext);
   const { setParties, setDistricts } = useContext(DataContext);
+  const [hamburgerActive, setHamburgerActive] = useState(false);
 
   const handleAdvancedVersion = () => {
     setAdvancedVersion(!advancedVersion);
@@ -27,15 +29,15 @@ const Header = () => {
     }
   };
 
+  const handleHamburger = () => {
+    setHamburgerActive(!hamburgerActive);
+  };
+
   return (
     <div className="App__header">
       <div className="App__header-title">
         <span>Kalkulator wyborczy</span>
-        <img
-          src={advancedVersion ? Logo3 : SimpleLogo2}
-          alt=""
-          style={{ width: 80 }}
-        />
+        <img src={advancedVersion ? Logo3 : SimpleLogo2} alt="" />
       </div>
       <div className="App__header-side">
         <MySwitch
@@ -74,6 +76,27 @@ const Header = () => {
           value={advancedVersion}
         />
         <span>wersja zaawansowana</span>
+      </div>
+      <div
+        className="App__header-hamburger"
+        onMouseLeave={() => {
+          setHamburgerActive(false);
+        }}
+      >
+        <div className="App__header-hamburger__icon" onClick={handleHamburger}>
+          <MenuIcon fontSize="large" />
+        </div>
+        {hamburgerActive ? (
+          <div
+            onClick={() => {
+              setAdvancedVersion(!advancedVersion);
+              handleHamburger();
+            }}
+            className="App__header-hamburger__advanced"
+          >
+            {advancedVersion ? "wersja uproszczona?" : "wersja zaawansowana?"}
+          </div>
+        ) : null}
       </div>
     </div>
   );

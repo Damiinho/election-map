@@ -359,10 +359,7 @@ const SimpleOptions = () => {
                       />{" "}
                       <span>%</span>
                     </div>
-                    <div
-                      className="simpleOptions-handler__list-table__element-slider"
-                      style={{ width: 300 }}
-                    >
+                    <div className="simpleOptions-handler__list-table__element-slider">
                       <Slider
                         // defaultValue={item.result}
                         value={item.result}
