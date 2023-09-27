@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../contexts/AppContext";
 
 const SimpleCircus = () => {
-  const { simpleFinalResultSummary } = useContext(AppContext);
+  const { simpleFinalResultSummary, windowWidth } = useContext(AppContext);
   const [circleFill, setCircleFill] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,20 @@ const SimpleCircus = () => {
   }, [simpleFinalResultSummary, setCircleFill]);
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={360} height={185}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      // width={360}
+      // height={185}
+      viewBox={
+        windowWidth > 460
+          ? ""
+          : windowWidth > 410
+          ? "80 0 200 200"
+          : windowWidth > 350
+          ? "50 -30 250 250"
+          : "15 -70 325 325"
+      }
+    >
       <text
         x={175}
         y={175}

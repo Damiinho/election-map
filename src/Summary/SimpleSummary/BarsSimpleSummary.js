@@ -16,10 +16,11 @@ const BarsSimpleSummary = () => {
           name={
             <span
               style={{
-                color: "white",
-                fontSize: 25,
+                color: "black",
+                fontSize: 30,
                 margin: 5,
-                textShadow: "1px 1px black",
+                fontFamily: "MuseoModerno, cursive",
+                // textShadow: "1px 1px white",
               }}
             >
               Procent głosów
@@ -39,10 +40,10 @@ const BarsSimpleSummary = () => {
           name={
             <span
               style={{
-                color: "white",
-                fontSize: 25,
+                color: "black",
+                fontSize: 30,
                 margin: 5,
-                textShadow: "1px 1px black",
+                fontFamily: "MuseoModerno, cursive",
               }}
             >
               Mandaty

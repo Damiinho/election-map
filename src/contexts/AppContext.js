@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AppContext = createContext();
 
@@ -22,6 +22,7 @@ export const AppProvider = ({ children }) => {
   const [correction, setCorrection] = useState(true);
   const [simpleByNumbers, setSimpleByNumbers] = useState(true);
   const [simpleByName, setSimpleByName] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const providerValue = {
     simpleByNumbers,
@@ -58,7 +59,21 @@ export const AppProvider = ({ children }) => {
     setCorrection,
     simpleFinalResultSummary,
     setSimpleFinalResultSummary,
+    windowWidth,
+    setWindowWidth,
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <AppContext.Provider value={providerValue}>{children}</AppContext.Provider>

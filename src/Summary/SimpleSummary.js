@@ -7,10 +7,12 @@ import BarsSimpleSummary from "./SimpleSummary/BarsSimpleSummary";
 import BoxSimpleSummary from "./SimpleSummary/BoxSimpleSummary";
 import GraphSimpleSummary from "./SimpleSummary/GraphSimpleSummary";
 import SearchDistrictSimple from "./SimpleSummary/SearchDistrictSimple";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 const SimpleSummary = () => {
   const { simpleDistricts } = useContext(DataContext);
-  const { setSimpleFinalResultSummary } = useContext(AppContext);
+  const { setSimpleFinalResultSummary, setShowSimpleSummary } =
+    useContext(AppContext);
 
   useEffect(() => {
     const updatedFinalResultSummary = [];
@@ -39,13 +41,20 @@ const SimpleSummary = () => {
     setSimpleFinalResultSummary(updatedFinalResultSummary);
   }, [simpleDistricts, setSimpleFinalResultSummary]);
 
+  const handleRestart = () => {
+    setShowSimpleSummary(false);
+  };
+
   return (
     <div className="simpleSummary">
       <div className="simpleSummary-main">
         <div className="simpleSummary-main__summary">
           <div className="simpleSummary-main__summary-header">
             <div className="simpleSummary-main__summary-header__title">
-              wyniki ogólne
+              wyniki ogólne{" "}
+              <span onClick={handleRestart}>
+                zmień <ChangeCircleIcon fontSize="large" />
+              </span>
             </div>
           </div>
           <BoxSimpleSummary />

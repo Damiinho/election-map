@@ -470,19 +470,21 @@ const SimpleOptions = () => {
         </>
       )}
 
-      <Button
-        color={showError ? "error" : showSimpleSummary ? "info" : "success"}
-        onClick={showSimpleSummary ? handleRestart : handleStart}
-        size="large"
-        variant={showSimpleSummary ? "outlined" : "contained"}
-        style={{
-          fontFamily: "Mukta",
-          fontSize: 20,
-          fontWeight: "bold",
-        }}
-      >
-        {showSimpleSummary ? "zmień wyniki" : "oblicz"}
-      </Button>
+      {showSimpleSummary ? null : (
+        <Button
+          color={showError ? "error" : "success"}
+          onClick={showSimpleSummary ? handleRestart : handleStart}
+          size="large"
+          variant={showSimpleSummary ? "outlined" : "contained"}
+          style={{
+            fontFamily: "Mukta",
+            fontSize: 20,
+            fontWeight: "bold",
+          }}
+        >
+          {showSimpleSummary ? "zmień wyniki" : "oblicz"}
+        </Button>
+      )}
     </div>
   );
 };

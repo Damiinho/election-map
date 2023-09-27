@@ -1,6 +1,35 @@
 import { Tooltip } from "react-tooltip";
+import { useEffect, useState } from "react"; // Dodajemy useState i useEffect do monitorowania szerokości ekranu
 
 const MyBar = (props) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const calculateFontSize = () => {
+    if (props.fontSize) {
+      return props.fontSize; // Jeśli fontSize jest już dostarczone przez props, użyj go
+    } else {
+      // W przeciwnym razie dostosuj fontSize w zależności od szerokości ekranu
+      if (windowWidth <= 380) {
+        return "8px";
+      } else if (windowWidth <= 500) {
+        return "10px";
+      } else {
+        return "12px";
+      }
+    }
+  };
+
   const sum = props.result.reduce(
     (total, item) => total + item[props.value],
     0
@@ -13,7 +42,7 @@ const MyBar = (props) => {
     props.boxShadow === true
       ? "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)"
       : "";
-  const fontSize = props.fontSize || "12px";
+  const fontSize = props.fontSize || calculateFontSize();
   const height = props.height || "30px";
 
   const myBarStyle = {
