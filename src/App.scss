@@ -1211,7 +1211,7 @@ $tertiary-color: #9c62a12c;
           // width: 100%;
           margin: 0 20px 20px;
           // height: 620px;
-          overflow: hidden;
+          // overflow: hidden;
           margin-bottom: 20px;
           &__item {
             width: 60%;
@@ -1222,6 +1222,13 @@ $tertiary-color: #9c62a12c;
               background-color: #ffffff6e;
               box-shadow: $material-box-shadow;
               height: 650px;
+              > div {
+                > div {
+                  span {
+                    font-size: 20px;
+                  }
+                }
+              }
             }
           }
           &__table {
@@ -1378,6 +1385,7 @@ $tertiary-color: #9c62a12c;
           &-element {
             flex-direction: column;
             &__title {
+              padding-left: 0;
               width: auto;
               flex-direction: row;
               @include justify-align-center();
@@ -1388,6 +1396,8 @@ $tertiary-color: #9c62a12c;
         &__summary {
           &-graph {
             flex-direction: column-reverse;
+
+            margin: 0 0px 20px;
             @include justify-align-center();
 
             &__item {
@@ -1434,6 +1444,23 @@ $tertiary-color: #9c62a12c;
     .simpleSummary {
       &-main {
         &__details {
+          &-header {
+            margin: 0;
+            &__title {
+              font-size: 30px;
+            }
+            &__search {
+              gap: 10px;
+              margin: 0 auto;
+              width: 280px;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              > div {
+                order: 1;
+                grid-column: span 2;
+              }
+            }
+          }
           &-element {
             &__results {
               width: 90%;
@@ -1444,9 +1471,55 @@ $tertiary-color: #9c62a12c;
           }
         }
         &__summary {
+          &-header {
+            margin: 0;
+            &__title {
+              font-size: 30px;
+              span {
+                font-size: 15px;
+                display: flex;
+                flex-direction: column-reverse;
+              }
+            }
+          }
+          &-bars {
+            // margin: 0 3px;
+            width: 100%;
+          }
+          &-box {
+            // margin: 0 3px;
+            width: 100%;
+          }
           &-graph {
             &__table {
               flex-direction: column;
+              &-circus {
+                max-width: 400px;
+              }
+              &-item {
+                &.empty {
+                  height: auto;
+                  // width: auto;
+                  font-size: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 670px) {
+    .simpleSummary {
+      &-main {
+        &__summary {
+          &-box {
+            display: grid;
+            grid-template-columns: (1fr 1fr 1fr 1fr);
+            &__item {
+              margin: 0 auto;
+              width: 80px;
+              position: relative;
             }
           }
         }
@@ -1462,6 +1535,53 @@ $tertiary-color: #9c62a12c;
               // width: 90%;
               &-box {
                 // width: 100%;
+              }
+            }
+          }
+        }
+        &__summary {
+          &-graph {
+            &__table {
+              &-item {
+                &.empty {
+                  width: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .simpleSummary {
+      &-main {
+        &__summary {
+          &-graph {
+            &__table {
+              &-item {
+                &.empty {
+                  height: auto;
+                  width: auto;
+                  font-size: 20px;
+                }
+              }
+            }
+            &__item {
+              width: 100%;
+              height: auto;
+              &-map {
+                background-color: transparent;
+                height: auto;
+                box-shadow: none;
+                > div {
+                  > div {
+                    span {
+                      font-size: 14px;
+                      text-align: center;
+                    }
+                  }
+                }
               }
             }
           }
@@ -1505,8 +1625,24 @@ $tertiary-color: #9c62a12c;
     .simpleSummary {
       &-main {
         &__summary {
+          &-header {
+            &__title {
+              display: flex;
+              @include justify-align-center();
+              gap: 10px;
+              span {
+                position: static;
+                transform: translateY(0%);
+              }
+            }
+          }
           &-graph {
             &__table {
+              &-item {
+                &__row {
+                  font-size: 12px;
+                }
+              }
               &-circus {
                 height: 180px;
               }
@@ -1520,6 +1656,17 @@ $tertiary-color: #9c62a12c;
     .simpleSummary {
       &-main {
         &__details {
+          &-header {
+            &__title {
+              font-size: 24px;
+            }
+            &__search {
+              width: auto;
+              display: flex;
+              flex-direction: column;
+            }
+          }
+
           &-element {
             &__title {
               gap: 0px;
@@ -1531,8 +1678,30 @@ $tertiary-color: #9c62a12c;
           }
         }
         &__summary {
+          &-header {
+            &__title {
+              font-size: 24px;
+              gap: 8px;
+              span {
+                font-size: 10px;
+              }
+            }
+          }
+
+          &-box {
+            &__item {
+              width: 50px;
+            }
+          }
           &-graph {
             &__table {
+              &-item {
+                &__row {
+                  div:nth-of-type(3) {
+                    width: 43px;
+                  }
+                }
+              }
               &-circus {
                 height: 130px;
               }

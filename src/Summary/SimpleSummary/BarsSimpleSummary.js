@@ -5,7 +5,7 @@ import { AppContext } from "../../contexts/AppContext";
 
 const BarsSimpleSummary = () => {
   const { simpleParties } = useContext(DataContext);
-  const { simpleFinalResultSummary } = useContext(AppContext);
+  const { simpleFinalResultSummary, windowWidth } = useContext(AppContext);
 
   return (
     <div className="simpleSummary-main__summary-bars">
@@ -17,7 +17,7 @@ const BarsSimpleSummary = () => {
             <span
               style={{
                 color: "black",
-                fontSize: 30,
+                fontSize: windowWidth > 810 ? 30 : 20,
                 margin: 5,
                 fontFamily: "MuseoModerno, cursive",
                 // textShadow: "1px 1px white",
@@ -26,11 +26,33 @@ const BarsSimpleSummary = () => {
               Procent głosów
             </span>
           }
-          barWidth="100%"
+          barWidth={
+            windowWidth > 810 ? "100%" : windowWidth > 410 ? "95%" : "100%"
+          }
           borderRadius={0}
           boxShadow
-          fontSize={20}
-          height={70}
+          fontSize={
+            windowWidth > 810
+              ? 20
+              : windowWidth > 660
+              ? 15
+              : windowWidth > 510
+              ? 12
+              : windowWidth > 410
+              ? 10
+              : 8
+          }
+          height={
+            windowWidth > 810
+              ? 70
+              : windowWidth > 660
+              ? 60
+              : windowWidth > 510
+              ? 50
+              : windowWidth > 410
+              ? 40
+              : 30
+          }
         />
       </div>
       <div className="simpleSummary-main__summary-bars__bar">
@@ -41,7 +63,7 @@ const BarsSimpleSummary = () => {
             <span
               style={{
                 color: "black",
-                fontSize: 30,
+                fontSize: windowWidth > 810 ? 30 : 20,
                 margin: 5,
                 fontFamily: "MuseoModerno, cursive",
               }}
@@ -50,11 +72,33 @@ const BarsSimpleSummary = () => {
             </span>
           }
           tooltip={false}
-          barWidth="100%"
+          barWidth={
+            windowWidth > 810 ? "100%" : windowWidth > 410 ? "95%" : "100%"
+          }
           borderRadius={0}
           boxShadow
-          fontSize={20}
-          height={70}
+          fontSize={
+            windowWidth > 810
+              ? 20
+              : windowWidth > 660
+              ? 15
+              : windowWidth > 510
+              ? 12
+              : windowWidth > 410
+              ? 10
+              : 8
+          }
+          height={
+            windowWidth > 810
+              ? 70
+              : windowWidth > 660
+              ? 60
+              : windowWidth > 510
+              ? 50
+              : windowWidth > 410
+              ? 40
+              : 30
+          }
         />
       </div>
     </div>

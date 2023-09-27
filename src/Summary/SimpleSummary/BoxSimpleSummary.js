@@ -5,7 +5,7 @@ import { AppContext } from "../../contexts/AppContext";
 import MySmallInfoBox from "../../Components/MySmallInfoBox";
 
 const BoxSimpleSummary = () => {
-  const { simpleFinalResultSummary, setSimpleFinalResultSummary } =
+  const { simpleFinalResultSummary, setSimpleFinalResultSummary, windowWidth } =
     useContext(AppContext);
 
   const handleArrowClick = (currentIndex, targetIndex, shortName) => {
@@ -45,9 +45,11 @@ const BoxSimpleSummary = () => {
               txt={party.shortName}
               value={party.seats}
               backgroundTop={party.isOverThreshold ? party.color : "grey"}
-              allWidth={80}
+              allWidth={windowWidth > 350 ? 80 : 50}
               radius="0px"
               title={party.name}
+              fontSizeTop={windowWidth > 350 ? "" : 10}
+              fontSizeBottom={windowWidth > 350 ? "" : 15}
             />
             <ArrowRightRoundedIcon
               onClick={() => {

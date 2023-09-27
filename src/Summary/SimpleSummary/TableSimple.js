@@ -12,7 +12,7 @@ const TableSimple = () => {
     <>
       {selectedSimpleDistrict === "" ? (
         <div className="simpleSummary-main__summary-graph__table-item empty">
-          Kliknij w okręg wyborczy, aby zobaczyć szczegóły
+          Kliknij w okręg na mapie, aby zobaczyć szczegóły
         </div>
       ) : (
         <div className="simpleSummary-main__summary-graph__table-item">

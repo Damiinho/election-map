@@ -4,7 +4,7 @@ import { AppContext } from "../../contexts/AppContext";
 
 const SearchDistrictSimple = () => {
   const [searchValue, setSearchValue] = useState("");
-  const { setSimpleSearchValue, simpleByName, setSimpleByName } =
+  const { setSimpleSearchValue, simpleByName, setSimpleByName, windowWidth } =
     useContext(AppContext);
   const handleSubmit = () => {
     setSimpleSearchValue(searchValue);
@@ -15,13 +15,17 @@ const SearchDistrictSimple = () => {
       <Button
         color="primary"
         variant="contained"
-        style={{ fontFamily: "Mukta" }}
+        style={{
+          fontFamily: "Mukta",
+          fontSize: windowWidth > 810 ? "" : windowWidth > 500 ? 12 : 10,
+          width: windowWidth > 500 ? "" : 145,
+        }}
         disabled={simpleByName ? false : true}
         onClick={() => {
           setSimpleByName(false);
         }}
       >
-        uszereguj według numerów list
+        {windowWidth > 810 ? "uszereguj" : ""} według numerów list
       </Button>
       <TextField
         color="error"
@@ -46,13 +50,17 @@ const SearchDistrictSimple = () => {
       <Button
         color="primary"
         variant="contained"
-        style={{ fontFamily: "Mukta" }}
+        style={{
+          fontFamily: "Mukta",
+
+          fontSize: windowWidth > 810 ? "" : windowWidth > 500 ? 12 : 10,
+        }}
         disabled={simpleByName ? true : false}
         onClick={() => {
           setSimpleByName(true);
         }}
       >
-        uszereguj według alfabetu
+        {windowWidth > 810 ? "uszereguj" : ""} według alfabetu
       </Button>
     </div>
   );

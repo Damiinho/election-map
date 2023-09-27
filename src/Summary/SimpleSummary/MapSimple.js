@@ -6,7 +6,8 @@ import tinycolor from "tinycolor2";
 
 const MapSimple = () => {
   const [hoveredElement, setHoveredElement] = useState(null);
-  const { showMapByResults, setShowMapByResults } = useContext(AppContext);
+  const { showMapByResults, setShowMapByResults, windowWidth } =
+    useContext(AppContext);
   const { simpleDistricts, selectedSimpleDistrict, setSelectedSimpleDistrict } =
     useContext(DataContext);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
@@ -222,13 +223,13 @@ const MapSimple = () => {
           fontFamily: "Mukta, sans-serif",
         }}
       >
-        <span style={{ fontSize: 20 }}>uzyskane mandaty</span>
+        <span>uzyskane mandaty</span>
         <MySwitch
-          size={1.5}
+          size={windowWidth > 500 ? 1.5 : 1}
           value={showMapByResults}
           onClick={handleShowByResults}
         />
-        <span style={{ fontSize: 20 }}>uzyskany wynik</span>
+        <span>uzyskany wynik</span>
       </div>
       {hoveredElement &&
         simpleDistricts.find((district) => district.id === hoveredElement)
