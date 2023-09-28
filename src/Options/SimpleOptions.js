@@ -153,13 +153,13 @@ const SimpleOptions = () => {
 
   const handleSurvey = () => {
     const results = [
-      { name: "Prawo i Sprawiedliwość", result: 36.0 },
-      { name: "Koalicja Obywatelska", result: 28.7 },
-      { name: "Konfederacja", result: 9.9 },
-      { name: "Trzecia Droga", result: 9.0 },
-      { name: "Lewica", result: 8.5 },
-      { name: "Bezpartyjni Samorządowcy", result: 1.1 },
-      { name: "Pozostałe komitety", result: 6.8 },
+      { name: "Prawo i Sprawiedliwość", result: 37.9 },
+      { name: "Koalicja Obywatelska", result: 30.2 },
+      { name: "Konfederacja", result: 10.3 },
+      { name: "Trzecia Droga", result: 9.7 },
+      { name: "Lewica", result: 9.2 },
+      { name: "Bezpartyjni Samorządowcy", result: 1.7 },
+      { name: "Pozostałe komitety", result: 1 },
     ];
 
     const newSimpleParties = simpleParties.map((party) => {
