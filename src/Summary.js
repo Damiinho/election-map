@@ -18,6 +18,7 @@ const Summary = () => {
     strictSejm,
     showSimpleSummary,
     advancedVersion,
+    windowWidth,
   } = useContext(AppContext);
   const { districts } = useContext(DataContext);
 
@@ -104,13 +105,13 @@ const Summary = () => {
   };
 
   return shouldShowSummary ? (
-    <div className="App__summary">
+    <div className={`App__summary ${strictSejm ? "strictSejm" : ""}`}>
       <div
         className="App__summary-title"
         style={{ cursor: "pointer" }}
         onClick={handleShowSummary}
       >
-        4. zobacz podsumowanie
+        4. podsumowanie
         <div className="App__summary-title__side">
           <MySwitch
             onClick={handleShowSummary}
@@ -126,12 +127,17 @@ const Summary = () => {
           <div className="presentation__block">
             <div className="presentation__block-boxes">
               <div className="presentation__block-boxes__item">
-                <MySmallInfoBox txt="liczba miejsc" value={deputiesSum} />
+                <MySmallInfoBox
+                  radius={windowWidth > 600 ? "" : "0px"}
+                  txt="liczba miejsc"
+                  value={deputiesSum}
+                />
               </div>
               <div className="presentation__block-boxes__item">
                 <MySmallInfoBox
                   txt="nieprzydzielone"
                   value={unassignedSeats}
+                  radius={windowWidth > 600 ? "" : "0px"}
                   backgroundTop="grey"
                   fontSizeTop={13}
                   fontSizeBottom={20}
@@ -157,12 +163,13 @@ const Summary = () => {
             <MyBar
               result={finalResultSummary}
               value="seats"
-              barWidth="95%"
+              barWidth={windowWidth > 800 ? "95%" : "100%"}
               name={
                 <span
                   style={{
                     color: "white",
-                    fontSize: 25,
+                    fontSize:
+                      windowWidth > 800 ? 25 : windowWidth > 600 ? 20 : 15,
                     margin: 5,
                     textShadow: "1px 1px black",
                   }}
@@ -171,18 +178,33 @@ const Summary = () => {
                 </span>
               }
               boxShadow={true}
-              fontSize={20}
-              height={50}
+              fontSize={
+                windowWidth > 800
+                  ? 20
+                  : windowWidth > 600
+                  ? 15
+                  : windowWidth > 550
+                  ? 12
+                  : windowWidth > 500
+                  ? 10
+                  : windowWidth > 400
+                  ? 8
+                  : windowWidth > 350
+                  ? 6
+                  : 5
+              }
+              height={windowWidth > 800 ? 50 : 40}
             />
             <MyBar
               result={finalResultSummary}
               value="result"
-              barWidth="95%"
+              barWidth={windowWidth > 800 ? "95%" : "100%"}
               name={
                 <span
                   style={{
                     color: "white",
-                    fontSize: 25,
+                    fontSize:
+                      windowWidth > 800 ? 25 : windowWidth > 600 ? 20 : 15,
                     margin: 5,
                     textShadow: "1px 1px black",
                   }}
@@ -191,15 +213,29 @@ const Summary = () => {
                 </span>
               }
               boxShadow={true}
-              fontSize={20}
-              height={50}
+              fontSize={
+                windowWidth > 800
+                  ? 20
+                  : windowWidth > 600
+                  ? 15
+                  : windowWidth > 550
+                  ? 12
+                  : windowWidth > 500
+                  ? 10
+                  : windowWidth > 400
+                  ? 8
+                  : windowWidth > 350
+                  ? 6
+                  : 5
+              }
+              height={windowWidth > 800 ? 50 : 40}
             />
           </div>{" "}
           {strictSejm ? (
             <div
               style={{
-                width: 900,
-                height: 850,
+                width: windowWidth > 900 ? 900 : "100%",
+                height: windowWidth > 900 ? 850 : "100%",
                 margin: "0px auto 20px",
                 gridColumn: "span 2",
                 backgroundColor: "#8b8b8b8a",

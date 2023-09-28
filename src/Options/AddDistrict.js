@@ -27,6 +27,7 @@ const AddDistrict = () => {
     setStrictSejm,
   } = useContext(AppContext);
   const { districts, setDistricts, parties } = useContext(DataContext);
+  const { windowWidth } = useContext(AppContext);
 
   const polishDistricts = [
     {
@@ -640,7 +641,7 @@ const AddDistrict = () => {
               borderRadius: 0,
               boxShadow:
                 "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-              margin: "0 5px 5px",
+              margin: windowWidth > 600 ? "0 5px 5px" : "0",
               backgroundColor: `${
                 error
                   ? "#9c00008c"

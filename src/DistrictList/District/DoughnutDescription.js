@@ -47,10 +47,10 @@ const DoughnutDescription = (props) => {
     <table className="list__element-doughnut__description">
       <thead>
         <tr>
-          <th>nazwa</th>
+          <th></th>
           <th>wynik</th>
           <th>miejsca</th>
-          <th>pozycja</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

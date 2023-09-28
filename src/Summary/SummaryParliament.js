@@ -5,7 +5,8 @@ import { DataContext } from "../contexts/DataContext";
 
 const SummaryParliament = () => {
   const [hoveredElement, setHoveredElement] = useState(null);
-  const { showMapByResults, setShowMapByResults } = useContext(AppContext);
+  const { showMapByResults, setShowMapByResults, windowWidth } =
+    useContext(AppContext);
   const { districts } = useContext(DataContext);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
@@ -192,13 +193,21 @@ const SummaryParliament = () => {
           fontFamily: "Mukta, sans-serif",
         }}
       >
-        <span style={{ fontSize: 20 }}>uzyskane mandaty</span>
+        <span
+          style={{ fontSize: windowWidth > 500 ? 20 : 15, textAlign: "center" }}
+        >
+          uzyskane mandaty
+        </span>
         <MySwitch
-          size={1.5}
+          size={windowWidth > 500 ? 1.5 : 1}
           value={showMapByResults}
           onClick={handleShowByResults}
         />
-        <span style={{ fontSize: 20 }}>uzyskany wynik</span>
+        <span
+          style={{ fontSize: windowWidth > 500 ? 20 : 15, textAlign: "center" }}
+        >
+          uzyskany wynik
+        </span>
       </div>
       {hoveredElement &&
         districts.find((district) => district.id === hoveredElement)
@@ -258,7 +267,7 @@ const SummaryParliament = () => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlSpace="preserve"
-        viewBox="0 0 1050 1050"
+        viewBox={windowWidth > 900 ? "0 0 1050 1050" : "0 0 1050 1050"}
         preserveAspectRatio="xMidYMid meet"
       >
         {showMapByResults ? <GradientsByResult /> : <GradientsBySeats />}

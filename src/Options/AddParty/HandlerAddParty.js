@@ -10,9 +10,11 @@ import PredefinedAddParty from "./PredefinedAddParty";
 import { useContext, useState } from "react";
 import randomColor from "randomcolor";
 import { DataContext } from "../../contexts/DataContext";
+import { AppContext } from "../../contexts/AppContext";
 
 const HandlerAddParty = () => {
   const { parties, setParties } = useContext(DataContext);
+  const { windowWidth } = useContext(AppContext);
   const [name, setName] = useState("");
   const [isOverThreshold, setIsOverThreshold] = useState(true);
   const [chosenColor, setChosenColor] = useState(randomColor());
@@ -209,7 +211,7 @@ const HandlerAddParty = () => {
           borderRadius: 0,
           boxShadow:
             "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-          margin: "0 5px 5px",
+          margin: windowWidth > 600 ? "0 5px 5px" : "0",
           backgroundColor: `${
             duplicateError || emptyError
               ? "#9c00008c"
