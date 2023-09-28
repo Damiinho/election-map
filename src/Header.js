@@ -15,6 +15,7 @@ const Header = () => {
     setShowAddDistrict,
 
     setShowAddParty,
+    setIsTest,
   } = useContext(AppContext);
   const { setParties, setDistricts } = useContext(DataContext);
   const [hamburgerActive, setHamburgerActive] = useState(false);
@@ -77,6 +78,10 @@ const Header = () => {
         />
         <span>wersja zaawansowana</span>
       </div>
+      <div className="App__header-test" onClick={() => setIsTest(true)}>
+        test?
+      </div>
+
       <div
         className="App__header-hamburger"
         onMouseLeave={() => {

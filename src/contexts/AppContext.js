@@ -23,6 +23,7 @@ export const AppProvider = ({ children }) => {
   const [simpleByNumbers, setSimpleByNumbers] = useState(true);
   const [simpleByName, setSimpleByName] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isTest, setIsTest] = useState(false);
 
   const providerValue = {
     simpleByNumbers,
@@ -61,6 +62,8 @@ export const AppProvider = ({ children }) => {
     setSimpleFinalResultSummary,
     windowWidth,
     setWindowWidth,
+    isTest,
+    setIsTest,
   };
 
   useEffect(() => {

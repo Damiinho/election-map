@@ -115,6 +115,13 @@ $tertiary-color: #9c62a12c;
     &-hamburger {
       display: none;
     }
+    &-test {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 30px;
+      font-size: 30px;
+    }
   }
   @media screen and (max-width: 800px) {
     &__header {
@@ -1400,8 +1407,6 @@ $tertiary-color: #9c62a12c;
         .presentation {
           margin: 0;
           &__block {
-            &-boxes {
-            }
             &-set {
               max-width: 500px;
               width: 100%;
@@ -1497,11 +1502,6 @@ $tertiary-color: #9c62a12c;
           width: 95%;
           background-color: #ffffff98;
           box-shadow: $material-box-shadow;
-          &__bar {
-            // background-color: #a1a1a18e;
-            // margin-bottom: 5px;
-            // padding-bottom: 2px;
-          }
         }
         &-box {
           margin: 10px auto 10px;
@@ -1710,10 +1710,6 @@ $tertiary-color: #9c62a12c;
               height: 500px;
               &-map {
                 height: 500px;
-                div {
-                }
-                svg {
-                }
               }
             }
             &__table {
@@ -1828,16 +1824,6 @@ $tertiary-color: #9c62a12c;
     }
     @media screen and (max-width: 610px) {
       &-main {
-        &__details {
-          &-element {
-            &__results {
-              // width: 90%;
-              &-box {
-                // width: 100%;
-              }
-            }
-          }
-        }
         &__summary {
           &-graph {
             &__table {
@@ -1903,11 +1889,6 @@ $tertiary-color: #9c62a12c;
             &__table {
               &-circus {
                 width: 100%;
-                // height: 100%;
-                // height: 100px;
-                svg {
-                  // view-box: 80 0 200 200;
-                }
               }
             }
           }
