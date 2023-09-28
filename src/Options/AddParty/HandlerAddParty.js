@@ -135,7 +135,7 @@ const HandlerAddParty = () => {
 
   return (
     <div className="addparty__main-handler">
-      <label className="addparty__main-label">
+      <div className="addparty__main-label">
         <TextField
           color="warning"
           label="Nazwa komitetu"
@@ -158,10 +158,7 @@ const HandlerAddParty = () => {
           }}
         />
 
-        <label
-          label="overThreshold"
-          className="addparty__main-label__threshold"
-        >
+        <div label="overThreshold" className="addparty__main-label__threshold">
           <FormControlLabel
             className="addparty__label-threshold__form"
             control={
@@ -187,7 +184,7 @@ const HandlerAddParty = () => {
             }
             labelPlacement="start"
           />
-        </label>
+        </div>
         <div className="addparty__main-label__color">
           <input
             type="color"
@@ -205,7 +202,7 @@ const HandlerAddParty = () => {
         >
           dodaj
         </Button>
-      </label>
+      </div>
 
       <Alert
         style={{

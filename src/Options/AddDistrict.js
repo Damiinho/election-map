@@ -542,7 +542,7 @@ const AddDistrict = () => {
       </div>
       <div className={`adddistrict__main ${showAddDistrict ? "" : "hide"}`}>
         <div>
-          <label className="adddistrict__main-label">
+          <div className="adddistrict__main-label">
             <div className="adddistrict__main-label-name">
               <TextField
                 color="error"
@@ -634,7 +634,7 @@ const AddDistrict = () => {
             >
               dodaj
             </Button>
-          </label>
+          </div>
           <Alert
             style={{
               borderRadius: 0,

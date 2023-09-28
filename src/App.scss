@@ -201,6 +201,10 @@ $tertiary-color: #9c62a12c;
       transition: grid-template-rows 1s ease-out;
 
       overflow: hidden;
+
+      @media screen and (max-width: 600px) {
+        display: block;
+      }
       &.hide {
         grid-template-rows: 0fr;
         overflow: hidden;
@@ -445,6 +449,30 @@ $tertiary-color: #9c62a12c;
             }
           }
         }
+
+        @media screen and (max-width: 800px) {
+          &__title {
+            text-align: left;
+            padding-left: 20px;
+            font-size: 20px;
+          }
+          &__main {
+            &-label {
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr;
+              @include justify-align-center();
+              > div:first-of-type {
+                grid-column: span 3;
+              }
+              > button {
+                margin: 0 auto;
+              }
+              &__threshold {
+                margin-left: 0 auto;
+              }
+            }
+          }
+        }
       }
 
       .adddistrict {
@@ -485,7 +513,7 @@ $tertiary-color: #9c62a12c;
             grid-template-columns: 1fr 1fr;
             @include justify-align-center;
             margin-bottom: 5px;
-            padding-top: 5px;
+            padding: 10px;
             gap: 10px;
             &-name {
               display: flex;
@@ -552,6 +580,74 @@ $tertiary-color: #9c62a12c;
                   rgba(255, 255, 255, 1) 50%,
                   rgba(255, 25, 0, 1) 50%
                 );
+              }
+            }
+          }
+        }
+
+        @media screen and (max-width: 800px) {
+          &__title {
+            text-align: left;
+            padding-left: 20px;
+            font-size: 20px;
+          }
+          &__main {
+            &-label {
+              &-name {
+                grid-column: span 2;
+                order: 1;
+              }
+              &-method {
+                grid-column: span 2;
+                order: 2;
+              }
+              &-deputies {
+                order: 3;
+              }
+              button {
+                order: 4;
+              }
+            }
+          }
+        }
+        @media screen and (max-width: 600px) {
+          &__main {
+            &-label {
+              &-name {
+                grid-column: span 1;
+                order: 1;
+              }
+              &-method {
+                grid-column: span 1;
+                order: 3;
+              }
+              &-deputies {
+                order: 2;
+              }
+              button {
+                order: 4;
+              }
+            }
+          }
+        }
+        @media screen and (max-width: 400px) {
+          &__main {
+            &-label {
+              &-name {
+                grid-column: span 2;
+                order: 1;
+              }
+              &-method {
+                grid-column: span 2;
+                order: 3;
+              }
+              &-deputies {
+                grid-column: span 2;
+                order: 2;
+              }
+              button {
+                grid-column: span 2;
+                order: 4;
               }
             }
           }
@@ -662,17 +758,13 @@ $tertiary-color: #9c62a12c;
           font-family: "Mukta", sans-serif;
         }
       }
-    }
-    @media screen and (max-width: 900px) {
-      .simpleOptions {
+      @media screen and (max-width: 900px) {
         &-info {
           top: auto;
           bottom: 70px;
         }
       }
-    }
-    @media screen and (max-width: 700px) {
-      .simpleOptions {
+      @media screen and (max-width: 700px) {
         &-info {
           top: auto;
           bottom: 70px;
@@ -702,9 +794,7 @@ $tertiary-color: #9c62a12c;
           }
         }
       }
-    }
-    @media screen and (max-width: 500px) {
-      .simpleOptions {
+      @media screen and (max-width: 500px) {
         &-info {
           z-index: 1;
           bottom: 120px;
@@ -1369,17 +1459,8 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
-  }
 
-  @media screen and (max-width: 1200px) {
-    .simpleSummary {
-      &-main {
-      }
-    }
-  }
-
-  @media screen and (max-width: 1102px) {
-    .simpleSummary {
+    @media screen and (max-width: 1102px) {
       &-main {
         &__details {
           &-element {
@@ -1439,9 +1520,7 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
-  }
-  @media screen and (max-width: 810px) {
-    .simpleSummary {
+    @media screen and (max-width: 810px) {
       &-main {
         &__details {
           &-header {
@@ -1508,9 +1587,7 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
-  }
-  @media screen and (max-width: 670px) {
-    .simpleSummary {
+    @media screen and (max-width: 670px) {
       &-main {
         &__summary {
           &-box {
@@ -1525,9 +1602,7 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
-  }
-  @media screen and (max-width: 610px) {
-    .simpleSummary {
+    @media screen and (max-width: 610px) {
       &-main {
         &__details {
           &-element {
@@ -1552,9 +1627,7 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
-  }
-  @media screen and (max-width: 500px) {
-    .simpleSummary {
+    @media screen and (max-width: 500px) {
       &-main {
         &__summary {
           &-graph {
@@ -1588,9 +1661,7 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
-  }
-  @media screen and (max-width: 460px) {
-    .simpleSummary {
+    @media screen and (max-width: 460px) {
       &-main {
         &__details {
           &-element {
@@ -1619,10 +1690,7 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
-  }
-
-  @media screen and (max-width: 410px) {
-    .simpleSummary {
+    @media screen and (max-width: 410px) {
       &-main {
         &__summary {
           &-header {
@@ -1651,9 +1719,7 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
-  }
-  @media screen and (max-width: 350px) {
-    .simpleSummary {
+    @media screen and (max-width: 350px) {
       &-main {
         &__details {
           &-header {
