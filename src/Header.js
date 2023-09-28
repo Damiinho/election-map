@@ -7,6 +7,7 @@ import Logo3 from "./img/calculatorlogo3.png";
 import SimpleLogo2 from "./img/calculatorsimplelogo2.png";
 import { DataContext } from "./contexts/DataContext";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const {
@@ -78,9 +79,11 @@ const Header = () => {
         />
         <span>wersja zaawansowana</span>
       </div>
-      <div className="App__header-test" onClick={() => setIsTest(true)}>
-        test?
-      </div>
+      <Link to="/test" style={{ color: "white" }}>
+        <div className="App__header-test" onClick={() => setIsTest(true)}>
+          test?
+        </div>
+      </Link>
 
       <div
         className="App__header-hamburger"
