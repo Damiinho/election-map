@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../contexts/AppContext";
 import MySwitch from "../Components/MySwitch";
 import { DataContext } from "../contexts/DataContext";
+import tinycolor from "tinycolor2";
 
 const SummaryParliament = () => {
   const [hoveredElement, setHoveredElement] = useState(null);
@@ -51,11 +52,21 @@ const SummaryParliament = () => {
             }
           }
         } else if (numColors === 1) {
+          const baseColor = partiesWithMaxSeats[0].color;
+          const baseColorObj = tinycolor(baseColor);
+
+          let finalColor;
+
+          if (sortedParties[0].result - sortedParties[1].result < 5) {
+            finalColor = baseColorObj.lighten(15).toString();
+          } else {
+            finalColor = baseColor;
+          }
           stops.push(
             <stop
               key={`${offset}_${district.id}_result`}
               offset={`${offset}`}
-              stopColor={partiesWithMaxSeats[0].color}
+              stopColor={finalColor}
             />
           );
         }
@@ -112,7 +123,9 @@ const SummaryParliament = () => {
         if (numColors > 1) {
           while (offset < 1) {
             for (let i = 0; i < numColors && offset < 1; i++) {
-              const color = partiesWithMaxSeats[i].color;
+              const color = tinycolor(partiesWithMaxSeats[i].color)
+                .lighten(15)
+                .toString();
 
               stops.push(
                 <stop
@@ -130,11 +143,21 @@ const SummaryParliament = () => {
             }
           }
         } else if (numColors === 1) {
+          const baseColor = partiesWithMaxSeats[0].color;
+          const baseColorObj = tinycolor(baseColor);
+
+          let finalColor;
+
+          if (sortedParties[0].seats - sortedParties[1].seats < 2) {
+            finalColor = baseColorObj.lighten(15).toString();
+          } else {
+            finalColor = baseColor;
+          }
           stops.push(
             <stop
               key={`${offset}_${district.id}_seats`}
               offset={`${offset}`}
-              stopColor={partiesWithMaxSeats[0].color}
+              stopColor={finalColor}
             />
           );
         }
