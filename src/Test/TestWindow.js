@@ -9,7 +9,7 @@ const TestWindow = () => {
   console.log(params);
 
   return (
-    <div onClick={setParametr("eee")}>
+    <div onClick={() => setParametr("eee")}>
       test window {parametr === "window" ? "z buttona" : "z palca"}
     </div>
   );
