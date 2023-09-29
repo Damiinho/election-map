@@ -7,6 +7,8 @@ import AppProvider from "./contexts/AppContext";
 import { Tooltip } from "react-tooltip";
 import DataProvider from "./contexts/DataContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Test from "./Test/Test";
+import TestWindow from "./Test/TestWindow";
 
 function App() {
   return (
@@ -27,7 +29,20 @@ function App() {
                 </div>
               }
             ></Route>
-            <Route path="/test" element={<div>test</div>}/>
+            <Route
+              exact
+              path="/:variant"
+              element={
+                <div className="App">
+                  <Header />
+                  <Options />
+                  <DistrictList />
+                  <Summary />
+                </div>
+              }
+            ></Route>
+            <Route path="/test" element={<Test />} />
+            <Route path="/test/:search" element={<TestWindow />} />
           </Routes>
         </DataProvider>
       </AppProvider>
