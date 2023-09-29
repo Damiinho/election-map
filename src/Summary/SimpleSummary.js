@@ -8,11 +8,14 @@ import BoxSimpleSummary from "./SimpleSummary/BoxSimpleSummary";
 import GraphSimpleSummary from "./SimpleSummary/GraphSimpleSummary";
 import SearchDistrictSimple from "./SimpleSummary/SearchDistrictSimple";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import { useNavigate } from "react-router-dom";
 
 const SimpleSummary = () => {
   const { simpleDistricts } = useContext(DataContext);
   const { setSimpleFinalResultSummary, setShowSimpleSummary } =
     useContext(AppContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updatedFinalResultSummary = [];
@@ -43,6 +46,7 @@ const SimpleSummary = () => {
 
   const handleRestart = () => {
     setShowSimpleSummary(false);
+    navigate("/prosty");
   };
 
   return (

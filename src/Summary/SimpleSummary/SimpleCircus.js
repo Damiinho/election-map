@@ -27,7 +27,7 @@ const SimpleCircus = () => {
       // height={185}
       viewBox={
         windowWidth > 460
-          ? ""
+          ? null
           : windowWidth > 410
           ? "80 0 200 200"
           : windowWidth > 350

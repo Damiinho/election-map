@@ -1,13 +1,17 @@
 import { Button, ButtonGroup, Slider, TextField } from "@mui/material";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { Tooltip } from "react-tooltip";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import UndoRoundedIcon from "@mui/icons-material/UndoRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { AppContext } from "../contexts/AppContext";
+import { useNavigate, useParams } from "react-router-dom";
 
 const SimpleOptions = () => {
+  const navigate = useNavigate();
+  const params = useParams();
+
   const {
     simpleParties,
     setSimpleParties,
@@ -30,7 +34,7 @@ const SimpleOptions = () => {
     setShowSimpleSummary(false);
   };
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
     let sum = 0;
     simpleParties.forEach((item) => (sum += parseFloat(item.result)));
 
@@ -116,6 +120,13 @@ const SimpleOptions = () => {
 
       // Teraz możesz zaktualizować simpleDistricts
       setSimpleDistricts(newSimpleDistricts);
+      const partyResults = simpleParties.map((party) => {
+        return `${party.shortName.toLowerCase()}+${party.result}`;
+      });
+
+      const path = partyResults.join("+");
+
+      navigate(`/prosty/${path}`);
     }
     if (!isAnyPartyOverThreshold) {
       setShowError(true);
@@ -128,7 +139,47 @@ const SimpleOptions = () => {
       }, 2500);
       return null;
     }
-  };
+  }, [
+    navigate,
+    simpleParties,
+    simpleDistricts,
+    setSimpleDistricts,
+    setSimpleParties,
+    setShowSimpleSummary,
+  ]);
+
+  useEffect(() => {
+    if (params.result && !showSimpleSummary) {
+      // Rozdziel params.result na tablicę wyników
+      const resultArray = params.result.split("+");
+
+      // Utwórz tablicę obiektów partii na podstawie wyników
+      const resultsFromParams = [];
+      for (let i = 0; i < resultArray.length; i += 2) {
+        const name = resultArray[i];
+        const result = parseFloat(resultArray[i + 1]);
+        resultsFromParams.push({ name, result });
+      }
+
+      // Aktualizacja simpleParties
+      setSimpleParties((prevSimpleParties) => {
+        const updatedSimpleParties = [...prevSimpleParties];
+        resultsFromParams.forEach((item) => {
+          const matchingParty = updatedSimpleParties.find(
+            (party) => party.shortName.toLowerCase() === item.name
+          );
+          if (matchingParty) {
+            matchingParty.result = item.result;
+          }
+        });
+        return updatedSimpleParties;
+      });
+
+      handleStart(); // Wywołaj handleStart po aktualizacji simpleParties, ale tylko jeśli showSimpleSummary jest fałszywe
+    }
+
+    // Tu możesz umieścić inne zależności, jeśli są potrzebne
+  }, [params.result, setSimpleParties, showSimpleSummary, handleStart]);
 
   const handleResultChange = (index, value) => {
     const newSimpleParties = [...simpleParties];

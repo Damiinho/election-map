@@ -1,13 +1,13 @@
 import MySwitch from "./Components/MySwitch";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import Logo3 from "./img/calculatorlogo3.png";
 import SimpleLogo2 from "./img/calculatorsimplelogo2.png";
 import { DataContext } from "./contexts/DataContext";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const {
@@ -20,6 +20,17 @@ const Header = () => {
   } = useContext(AppContext);
   const { setParties, setDistricts } = useContext(DataContext);
   const [hamburgerActive, setHamburgerActive] = useState(false);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (params.variant === "zaawansowany") {
+      setAdvancedVersion(true);
+    }
+    if (params.variant === "prosty") {
+      setAdvancedVersion(false);
+    }
+  }, [params, setAdvancedVersion]);
 
   const handleAdvancedVersion = () => {
     setAdvancedVersion(!advancedVersion);
@@ -28,6 +39,9 @@ const Header = () => {
     if (!advancedVersion) {
       setShowAddDistrict(true);
       setShowAddParty(true);
+      navigate("/zaawansowany");
+    } else {
+      navigate("/prosty");
     }
   };
 
@@ -79,11 +93,15 @@ const Header = () => {
         />
         <span>wersja zaawansowana</span>
       </div>
-      <Link to="/test" style={{ color: "white" }}>
-        <div className="App__header-test" onClick={() => setIsTest(true)}>
-          test?
-        </div>
-      </Link>
+      <div
+        className="App__header-test"
+        onClick={() => {
+          setIsTest(true);
+          navigate("/test");
+        }}
+      >
+        test?
+      </div>
 
       <div
         className="App__header-hamburger"
@@ -97,7 +115,7 @@ const Header = () => {
         {hamburgerActive ? (
           <div
             onClick={() => {
-              setAdvancedVersion(!advancedVersion);
+              handleAdvancedVersion();
               handleHamburger();
             }}
             className="App__header-hamburger__advanced"

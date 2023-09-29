@@ -18,7 +18,6 @@ function App() {
           <Tooltip id="my-tooltip" />
           <Routes>
             <Route
-              exact
               path="/"
               element={
                 <div className="App">
@@ -30,8 +29,18 @@ function App() {
               }
             ></Route>
             <Route
-              exact
               path="/:variant"
+              element={
+                <div className="App">
+                  <Header />
+                  <Options />
+                  <DistrictList />
+                  <Summary />
+                </div>
+              }
+            ></Route>
+            <Route
+              path="/:variant/:result"
               element={
                 <div className="App">
                   <Header />
