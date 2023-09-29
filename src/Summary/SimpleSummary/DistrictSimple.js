@@ -606,7 +606,7 @@ const DistrictSimple = (props) => {
     }
 
     const fullResults = partiesWithSeats.concat(
-      parties
+      partiesWithCorrection
         .filter((party) => !party.isOverThreshold)
         .map((party) => ({
           ...party,

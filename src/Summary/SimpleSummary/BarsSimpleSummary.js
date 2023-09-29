@@ -5,13 +5,14 @@ import { AppContext } from "../../contexts/AppContext";
 
 const BarsSimpleSummary = () => {
   const { simpleParties } = useContext(DataContext);
-  const { simpleFinalResultSummary, windowWidth } = useContext(AppContext);
+  const { simpleFinalResultSummary, windowWidth, correction } =
+    useContext(AppContext);
 
   return (
     <div className="simpleSummary-main__summary-bars">
       <div className="simpleSummary-main__summary-bars__bar">
         <MyBar
-          result={simpleParties}
+          result={correction ? simpleParties : simpleFinalResultSummary}
           value="result"
           name={
             <span
