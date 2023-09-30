@@ -9,6 +9,7 @@ import GraphSimpleSummary from "./SimpleSummary/GraphSimpleSummary";
 import SearchDistrictSimple from "./SimpleSummary/SearchDistrictSimple";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useNavigate } from "react-router-dom";
+import VerticalSimpleSummary from "./SimpleSummary/VerticalSimpleSummary";
 
 const SimpleSummary = () => {
   const { simpleDistricts } = useContext(DataContext);
@@ -61,6 +62,7 @@ const SimpleSummary = () => {
               </span>
             </div>
           </div>
+          <VerticalSimpleSummary />
           <BoxSimpleSummary />
           <BarsSimpleSummary />
           <GraphSimpleSummary />
