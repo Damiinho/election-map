@@ -1,15 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../contexts/DataContext";
 import { AppContext } from "../../contexts/AppContext";
+import { Tooltip } from "react-tooltip";
 
 const VerticalSimpleSummary = () => {
   const { simpleParties } = useContext(DataContext);
-  const { simpleFinalResultSummary, windowWidth, correction } =
-    useContext(AppContext);
+  const { simpleFinalResultSummary, windowWidth } = useContext(AppContext);
   const [barCorrection, setBarCorrection] = useState(1.5);
 
   useEffect(() => {
-    // Sprawdź warunki, które mają prowadzić do zmiany barCorrection
     const shouldUpdateBarCorrection = simpleParties.some((party) => {
       const item = simpleFinalResultSummary.find(
         (summaryItem) => summaryItem.name === party.name
@@ -33,16 +32,36 @@ const VerticalSimpleSummary = () => {
   }, [simpleParties, simpleFinalResultSummary]);
 
   return (
-    <div className="simpleSummary-main__summary-vertical">
+    <div
+      style={{ position: "relative" }}
+      className="simpleSummary-main__summary-vertical"
+    >
+      <Tooltip style={{ zIndex: 1 }} id="VerticalBar-tooltip" />
+      <span
+        style={{
+          position: "absolute",
+          top: 10,
+          color: "#ffffff77",
+          fontSize: windowWidth > 450 ? 40 : 30,
+          width: "100%",
+          textAlign: "center",
+          fontFamily: '"MuseoModerno", cursive',
+        }}
+      >
+        Liczba mandatów / wynik procentowy
+      </span>
       <div
         style={{
           backgroundColor: "#55577788",
           height: 300,
-          margin: "10px",
+          width: "95%",
+          margin: "0 auto",
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
           alignItems: "flex-end",
+          boxShadow:
+            "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
         }}
       >
         {simpleFinalResultSummary.map((item) => {
@@ -68,7 +87,9 @@ const VerticalSimpleSummary = () => {
               }}
             >
               <div
-                title={item.name}
+                onMouse
+                data-tooltip-id="VerticalBar-tooltip"
+                data-tooltip-content={`${item.name}, mandaty: ${item.seats}`}
                 style={{
                   width: 70,
                   height: `${(item.seats / 460) * 100 * barCorrection}%`,
@@ -76,6 +97,7 @@ const VerticalSimpleSummary = () => {
                   margin: "0 10px 0 10px",
                   position: "relative",
                   backgroundColor: item.color,
+                  cursor: "pointer",
                   boxShadow:
                     "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
                 }}
@@ -83,10 +105,22 @@ const VerticalSimpleSummary = () => {
                 <span
                   style={{
                     position: "absolute",
-                    top: -35,
+                    top:
+                      windowWidth > 550 ? -35 : windowWidth > 400 ? -25 : -15,
                     left: "50%",
                     transform: "translateX(-50%)",
-                    fontSize: 22,
+                    fontSize:
+                      windowWidth > 600
+                        ? 22
+                        : windowWidth > 550
+                        ? 18
+                        : windowWidth > 500
+                        ? 16
+                        : windowWidth > 450
+                        ? 14
+                        : windowWidth > 400
+                        ? 12
+                        : 10,
                     fontFamily: '"MuseoModerno", cursive',
                     color: "white",
                     textShadow: "2px 2px black",
@@ -96,6 +130,8 @@ const VerticalSimpleSummary = () => {
                 </span>
               </div>
               <div
+                data-tooltip-id="VerticalBar-tooltip"
+                data-tooltip-content={`${item.name}, wynik: ${thisPartyHeight}%`}
                 style={{
                   width: 70,
                   height: `${thisPartyHeight * barCorrection}%`,
@@ -105,15 +141,28 @@ const VerticalSimpleSummary = () => {
                     "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
                   margin: " 0 10px 0 10px",
                   position: "relative",
+                  cursor: "pointer",
                 }}
               >
                 <span
                   style={{
                     position: "absolute",
-                    top: -35,
+                    top:
+                      windowWidth > 550 ? -35 : windowWidth > 400 ? -25 : -15,
                     left: "50%",
                     transform: "translateX(-50%)",
-                    fontSize: 22,
+                    fontSize:
+                      windowWidth > 600
+                        ? 22
+                        : windowWidth > 550
+                        ? 18
+                        : windowWidth > 500
+                        ? 16
+                        : windowWidth > 450
+                        ? 14
+                        : windowWidth > 400
+                        ? 12
+                        : 10,
                     fontFamily: '"MuseoModerno", cursive',
                     color: "white",
                     textShadow: "2px 2px black",
@@ -126,14 +175,22 @@ const VerticalSimpleSummary = () => {
                 style={{
                   color: "white",
                   textShadow: "2px 2px black",
-                  fontSize: 22,
+                  fontSize:
+                    windowWidth > 700
+                      ? 16
+                      : windowWidth > 600
+                      ? 14
+                      : windowWidth > 500
+                      ? 12
+                      : 10,
                   fontFamily: '"MuseoModerno", cursive',
-                  position: "absolute",
-                  bottom: -70,
-                  left: "50%",
-                  transform: "translateX(-50%)",
+                  display: windowWidth > 400 ? "inline" : "none",
+                  // transform: "translateX(-50%)",
                   width: "100%",
                   textAlign: "center",
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
                 }}
               >
                 {item.name}

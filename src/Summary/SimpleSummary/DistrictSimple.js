@@ -693,7 +693,6 @@ const DistrictSimple = (props) => {
           result={props.district.finalResult}
           value="seats"
           name="Liczba mandatów z listy"
-          tooltip={false}
           barWidth="100%"
           borderRadius={0}
           boxShadow
@@ -702,7 +701,6 @@ const DistrictSimple = (props) => {
           result={props.district.finalResult}
           value="result"
           name="Procent głosów na liście"
-          tooltip={false}
           barWidth="100%"
           borderRadius={0}
           boxShadow

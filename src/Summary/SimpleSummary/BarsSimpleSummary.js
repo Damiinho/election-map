@@ -72,7 +72,7 @@ const BarsSimpleSummary = () => {
               Mandaty
             </span>
           }
-          tooltip={false}
+          // tooltip={false}
           barWidth={
             windowWidth > 810 ? "100%" : windowWidth > 410 ? "95%" : "100%"
           }
