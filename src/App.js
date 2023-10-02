@@ -9,6 +9,7 @@ import DataProvider from "./contexts/DataContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Test from "./Test/Test";
 import TestWindow from "./Test/TestWindow";
+import TestProvider from "./contexts/TestContext";
 
 function App() {
   return (
@@ -16,43 +17,47 @@ function App() {
       <AppProvider>
         <DataProvider>
           <Tooltip id="my-tooltip" />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="App">
-                  <Header />
-                  <Options />
-                  <DistrictList />
-                  <Summary />
-                </div>
-              }
-            ></Route>
-            <Route
-              path="/:variant"
-              element={
-                <div className="App">
-                  <Header />
-                  <Options />
-                  <DistrictList />
-                  <Summary />
-                </div>
-              }
-            ></Route>
-            <Route
-              path="/:variant/:result"
-              element={
-                <div className="App">
-                  <Header />
-                  <Options />
-                  <DistrictList />
-                  <Summary />
-                </div>
-              }
-            ></Route>
-            <Route path="/test" element={<Test />} />
-            <Route path="/test/:search" element={<TestWindow />} />
-          </Routes>
+
+          <TestProvider>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <div className="App">
+                    <Header />
+                    <Options />
+                    <DistrictList />
+                    <Summary />
+                  </div>
+                }
+              ></Route>
+              <Route
+                path="/:variant"
+                element={
+                  <div className="App">
+                    <Header />
+                    <Options />
+                    <DistrictList />
+                    <Summary />
+                  </div>
+                }
+              ></Route>
+              <Route
+                path="/:variant/:result"
+                element={
+                  <div className="App">
+                    <Header />
+                    <Options />
+                    <DistrictList />
+                    <Summary />
+                  </div>
+                }
+              ></Route>
+              <Route path="/test" element={<Test />} />
+              <Route path="/test/:result" element={<TestWindow />} />
+              <Route path="/test/:result/:values" element={<TestWindow />} />
+            </Routes>
+          </TestProvider>
         </DataProvider>
       </AppProvider>
     </Router>

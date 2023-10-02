@@ -8,6 +8,7 @@ import SimpleLogo2 from "./img/calculatorsimplelogo2.png";
 import { DataContext } from "./contexts/DataContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useParams, useNavigate } from "react-router-dom";
+import { TestContext } from "./contexts/TestContext";
 
 const Header = () => {
   const {
@@ -18,6 +19,7 @@ const Header = () => {
     setShowAddParty,
     setIsTest,
   } = useContext(AppContext);
+  const { setIsTestStart } = useContext(TestContext);
   const { setParties, setDistricts } = useContext(DataContext);
   const [hamburgerActive, setHamburgerActive] = useState(false);
   const params = useParams();
@@ -98,6 +100,7 @@ const Header = () => {
         onClick={() => {
           setIsTest(true);
           navigate("/test");
+          setIsTestStart(false);
         }}
       >
         test?

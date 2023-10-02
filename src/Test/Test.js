@@ -1,17 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { TestContext } from "../contexts/TestContext";
+import TestStartPanel from "./TestStartPanel";
+import QuestionsPanel from "./QuestionsPanel";
 
 const Test = () => {
-  const navigate = useNavigate();
+  const { isTestStart } = useContext(TestContext);
+
   return (
-    <div>
-      test
-      <button
-        onClick={() => {
-          navigate("/test/window/");
-        }}
-      >
-        test window
-      </button>
+    <div className="test">
+      <div className="test__title">Test – bryła polityczna</div>
+      {!isTestStart ? <TestStartPanel /> : <QuestionsPanel />}
     </div>
   );
 };
