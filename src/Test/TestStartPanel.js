@@ -6,7 +6,14 @@ import CubeIMG from "../img/cube.png";
 
 const TestStartPanel = () => {
   const navigate = useNavigate();
-  const { questions, setIsTestStart } = useContext(TestContext);
+  const { questions, setIsTestStart, setResult, setCurrentQuestion } =
+    useContext(TestContext);
+
+  const handleStart = () => {
+    setIsTestStart(true);
+    setResult({ prog: 0, auth: 0, right: 0 });
+    setCurrentQuestion(0);
+  };
   return (
     <div className="test__main">
       <p>
@@ -50,7 +57,7 @@ const TestStartPanel = () => {
         // onClick={() => {
         //   navigate("/test/window/");
         // }}
-        onClick={() => setIsTestStart(true)}
+        onClick={handleStart}
       >
         Rozpocznij test
       </Button>

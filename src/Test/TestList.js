@@ -6,28 +6,30 @@ import { useNavigate } from "react-router-dom";
 const TestList = () => {
   const navigate = useNavigate();
   return (
-    <div className="test__list">
-      <div className="test__list-title">
-        Test – lista pytań
-        <Button
-          variant="contained"
-          color="info"
-          size="small"
-          style={{
-            textTransform: "lowercase",
-            position: "absolute",
-            bottom: 10,
-            right: 10,
-          }}
-          onClick={() => {
-            navigate("/test");
-          }}
-          startIcon={<ReplySharpIcon />}
-        >
-          Wróć do testu
-        </Button>
+    <div className="test">
+      <div className="test__list">
+        <div className="test__list-title">
+          Test – lista pytań
+          <Button
+            variant="contained"
+            color="info"
+            size="small"
+            style={{
+              textTransform: "lowercase",
+              position: "absolute",
+              bottom: 10,
+              right: 10,
+            }}
+            onClick={() => {
+              navigate(-1);
+            }}
+            startIcon={<ReplySharpIcon />}
+          >
+            powrót
+          </Button>
+        </div>
+        <Questions />
       </div>
-      <Questions />
     </div>
   );
 };

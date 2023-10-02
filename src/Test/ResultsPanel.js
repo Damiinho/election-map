@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { TestContext } from "../contexts/TestContext";
+import { Button } from "@mui/material";
 
 const ResultsPanel = () => {
   const [officialResult, setOfficialResult] = useState([]);
-  const { result } = useContext(TestContext);
+  const { result, setIsTestStart, setCurrentQuestion } =
+    useContext(TestContext);
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (params.values) {
@@ -35,24 +38,65 @@ const ResultsPanel = () => {
     }
   }, [result.auth, result.prog, result.right, params.values]);
 
-  console.log(officialResult);
-  console.log(officialResult);
   return (
-    <div>
-      <div>
-        <span>Socjalizm</span>
-        <span>{officialResult.right}</span>
-        <span>Kapitalizm</span>
-      </div>
-      <div>
-        <span>Anarchizm</span>
-        <span>{officialResult.auth}</span>
-        <span>Autorytaryzm</span>
-      </div>
-      <div>
-        <span>Konserwatyzm</span>
-        <span>{officialResult.prog}</span>
-        <span>Progresywizm</span>
+    <div className="test">
+      <div className="test__title">Test – bryła polityczna</div>
+      <div className="test__result">
+        <div className="test__result-buttons">
+          <Button
+            variant="contained"
+            // style={{ backgroundColor: "#f03b3b" }}
+            color="info"
+            size="medium"
+            onClick={() => {
+              navigate("/test/lista");
+            }}
+          >
+            lista pytań
+          </Button>
+          <Button
+            variant="contained"
+            // style={{ backgroundColor: "#f03b3b" }}
+            color="info"
+            size="medium"
+            onClick={() => {
+              navigate("/test/");
+
+              setIsTestStart(false);
+              setCurrentQuestion(0);
+            }}
+          >
+            strona główna testu
+          </Button>
+          <Button
+            variant="contained"
+            // style={{ backgroundColor: "#f03b3b" }}
+            color="info"
+            size="medium"
+            onClick={() => {
+              navigate("/prosty/");
+            }}
+          >
+            kalkulator
+          </Button>
+        </div>
+        <div>
+          <div>
+            <span>Socjalizm</span>
+            <span>{officialResult.right}</span>
+            <span>Kapitalizm</span>
+          </div>
+          <div>
+            <span>Anarchizm</span>
+            <span>{officialResult.auth}</span>
+            <span>Autorytaryzm</span>
+          </div>
+          <div>
+            <span>Konserwatyzm</span>
+            <span>{officialResult.prog}</span>
+            <span>Progresywizm</span>
+          </div>
+        </div>
       </div>
     </div>
   );

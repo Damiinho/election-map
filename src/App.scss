@@ -2004,6 +2004,20 @@ $tertiary-color: #9c62a12c;
     box-shadow: $material-box-shadow;
     margin: 0 0 20px 0;
   }
+  &__result {
+    background-color: #9e9e9e3a;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: $material-box-shadow;
+    padding: 20px;
+    &-buttons {
+      display: flex;
+      flex-direction: row;
+      @include justify-align-center();
+      gap: 20px;
+    }
+  }
   &__main {
     background-color: #9e9e9e3a;
     display: flex;
@@ -2011,7 +2025,6 @@ $tertiary-color: #9c62a12c;
     gap: 20px;
     // border-radius: $default-border-radius;
     box-shadow: $material-box-shadow;
-    padding-bottom: $default-padding;
     font-family: "Ysabeau Office", sans-serif;
     padding: 20px;
     font-size: 25px;
@@ -2034,6 +2047,13 @@ $tertiary-color: #9c62a12c;
     text-align: center;
     padding: 30px 20px;
     position: relative;
+    &-buttons {
+      display: flex;
+      flex-direction: row;
+      @include justify-align-center();
+      gap: 20px;
+      margin-bottom: 30px;
+    }
     &-side {
       position: absolute;
       top: 10px;
@@ -2043,7 +2063,7 @@ $tertiary-color: #9c62a12c;
       &__effect {
         position: absolute;
         top: 10px;
-        left: 20px;
+        right: 20px;
         cursor: help;
       }
       &__text {
@@ -2119,6 +2139,55 @@ $tertiary-color: #9c62a12c;
         background-color: #9797978f;
         box-shadow: $material-box-shadow;
         text-align: center;
+      }
+    }
+  }
+  @media screen and (max-width: 800px) {
+    &__questions {
+      font-size: 20px;
+      &-item {
+        &__buttons {
+          flex-wrap: wrap;
+          max-width: 600px;
+          margin: 20px auto;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 600px) {
+    &__title {
+      font-size: 30px;
+    }
+    &__main {
+      font-size: 20px;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    &__questions {
+      &-item {
+        &__effect {
+          position: static;
+          font-size: 15px;
+        }
+        &__text {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    &__title {
+      font-size: 25px;
+    }
+    &__main {
+      font-size: 16px;
+    }
+    &__questions {
+      &-item {
+        &__text {
+          font-size: 25px;
+        }
       }
     }
   }
