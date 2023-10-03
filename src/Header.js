@@ -95,6 +95,7 @@ const Header = () => {
         />
         <span>wersja zaawansowana</span>
       </div>
+
       <div
         className="App__header-test"
         onClick={() => {
@@ -116,15 +117,27 @@ const Header = () => {
           <MenuIcon fontSize="large" />
         </div>
         {hamburgerActive ? (
-          <div
-            onClick={() => {
-              handleAdvancedVersion();
-              handleHamburger();
-            }}
-            className="App__header-hamburger__advanced"
-          >
-            {advancedVersion ? "wersja uproszczona?" : "wersja zaawansowana?"}
-          </div>
+          <>
+            <div
+              onClick={() => {
+                handleAdvancedVersion();
+                handleHamburger();
+              }}
+              className="App__header-hamburger__advanced"
+            >
+              {advancedVersion ? "wersja uproszczona" : "wersja zaawansowana"}
+            </div>
+            <div
+              className="App__header-hamburger__test"
+              onClick={() => {
+                setIsTest(true);
+                navigate("/test");
+                setIsTestStart(false);
+              }}
+            >
+              test
+            </div>
+          </>
         ) : null}
       </div>
     </div>

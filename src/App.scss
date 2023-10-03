@@ -147,12 +147,32 @@ $tertiary-color: #9c62a12c;
           top: 60%;
           right: 0;
           z-index: 1;
-          padding: 5px;
+          width: 150px;
+          height: 25px;
           background-color: #00498ddd;
-          box-shadow: $material-box-shadow;
           position: absolute;
           font-size: 15px;
+          box-shadow: $material-box-shadow;
+          // border-bottom: 2px solid black;
+          display: flex;
+          @include justify-align-center();
         }
+        &__test {
+          top: 122%;
+          width: 150px;
+          height: 25px;
+          right: 0;
+          z-index: 1;
+          background-color: #00498ddd;
+          position: absolute;
+          font-size: 15px;
+          box-shadow: $material-box-shadow;
+          display: flex;
+          @include justify-align-center();
+        }
+      }
+      &-test {
+        display: none;
       }
     }
   }
