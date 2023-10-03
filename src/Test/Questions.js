@@ -6,11 +6,6 @@ const Questions = () => {
 
   return (
     <>
-      <div className="test__list-item">
-        <div className="test__list-item__category">kategoria</div>
-        <div className="test__list-item__result">rezultat na osi</div>
-        <div className="test__list-item__question">pytanie</div>
-      </div>
       {questions.map((item, index) => {
         // Zakładamy, że `xxx` jest dostępne w obiekcie `item.effects`
         // Przykład wartości `xxx`

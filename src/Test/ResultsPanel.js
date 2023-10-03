@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { TestContext } from "../contexts/TestContext";
+import { AppContext } from "../contexts/AppContext";
 import { Button } from "@mui/material";
 
 const ResultsPanel = () => {
   const [officialResult, setOfficialResult] = useState({});
   const { result, setIsTestStart, setCurrentQuestion } =
     useContext(TestContext);
+  const { windowWidth } = useContext(AppContext);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -47,7 +49,7 @@ const ResultsPanel = () => {
             variant="contained"
             // style={{ backgroundColor: "#f03b3b" }}
             color="info"
-            size="medium"
+            size={windowWidth > 550 ? "medium" : "small"}
             onClick={() => {
               navigate("/test/lista");
             }}
@@ -58,7 +60,7 @@ const ResultsPanel = () => {
             variant="contained"
             // style={{ backgroundColor: "#f03b3b" }}
             color="info"
-            size="medium"
+            size={windowWidth > 550 ? "medium" : "small"}
             onClick={() => {
               navigate("/test/");
 
@@ -72,7 +74,7 @@ const ResultsPanel = () => {
             variant="contained"
             // style={{ backgroundColor: "#f03b3b" }}
             color="info"
-            size="medium"
+            size={windowWidth > 550 ? "medium" : "small"}
             onClick={() => {
               navigate("/prosty/");
             }}
@@ -80,7 +82,7 @@ const ResultsPanel = () => {
             kalkulator
           </Button>
         </div>
-        <div>
+        {/* <div>
           <div>
             <span>Socjalizm</span>
             <span>{officialResult.right}</span>
@@ -96,7 +98,7 @@ const ResultsPanel = () => {
             <span>{officialResult.prog}</span>
             <span>Progresywizm</span>
           </div>
-        </div>
+        </div> */}
         <div className="boxes">
           <div className="box">
             <div className="bottom-side"></div>
@@ -112,73 +114,73 @@ const ResultsPanel = () => {
             <div
               className="result-dott-bottom"
               style={{
-                width: "1rem",
-                height: "1rem",
+                width: "1em",
+                height: "1em",
                 transform: `rotateY(0deg) rotateX(90deg) rotateZ(0deg) translateZ(${
                   officialResult.auth - 0.5
-                }rem) translateY(${-officialResult.prog}rem) translateX(${
+                }em) translateY(${-officialResult.prog}em) translateX(${
                   officialResult.right
-                }rem)`,
+                }em)`,
               }}
             ></div>
             <div
               className="result-dott-top"
               style={{
-                width: "1rem",
-                height: "1rem",
+                width: "1em",
+                height: "1em",
                 transform: `rotateY(0deg) rotateX(90deg) rotateZ(0deg) translateZ(${
                   officialResult.auth + 0.5
-                }rem)translateY(${-officialResult.prog}rem) translateX(${
+                }em)translateY(${-officialResult.prog}em) translateX(${
                   officialResult.right
-                }rem)`,
+                }em)`,
               }}
             ></div>
             <div
               className="result-dott-front"
               style={{
-                width: "1rem",
-                height: "1rem",
+                width: "1em",
+                height: "1em",
                 transform: `rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(${
                   -officialResult.prog + 0.5
-                }rem) translateY(${-officialResult.auth}rem) translateX(${
+                }em) translateY(${-officialResult.auth}em) translateX(${
                   officialResult.right
-                }rem)`,
+                }em)`,
               }}
             ></div>
             <div
               className="result-dott-back"
               style={{
-                width: "1rem",
-                height: "1rem",
+                width: "1em",
+                height: "1em",
                 transform: `rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(${
                   -officialResult.prog - 0.5
-                }rem) translateY(${-officialResult.auth}rem) translateX(${
+                }em) translateY(${-officialResult.auth}em) translateX(${
                   officialResult.right
-                }rem)`,
+                }em)`,
               }}
             ></div>
             <div
               className="result-dott-right"
               style={{
-                width: "1rem",
-                height: "1rem",
+                width: "1em",
+                height: "1em",
                 transform: `rotateY(90deg) rotateX(0deg) rotateZ(0deg) translateZ(${
                   officialResult.right + 0.5
-                }rem) translateY(${-officialResult.auth}rem) translateX(${
+                }em) translateY(${-officialResult.auth}em) translateX(${
                   officialResult.prog
-                }rem)`,
+                }em)`,
               }}
             ></div>
             <div
               className="result-dott-left"
               style={{
-                width: "1rem",
-                height: "1rem",
+                width: "1em",
+                height: "1em",
                 transform: `rotateY(90deg) rotateX(0deg) rotateZ(0deg) translateZ(${
                   officialResult.right - 0.5
-                }rem) translateY(${-officialResult.auth}rem) translateX(${
+                }em) translateY(${-officialResult.auth}em) translateX(${
                   officialResult.prog
-                }rem)`,
+                }em)`,
               }}
             ></div>
           </div>

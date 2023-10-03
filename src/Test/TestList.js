@@ -9,7 +9,7 @@ const TestList = () => {
     <div className="test">
       <div className="test__list">
         <div className="test__list-title">
-          Test – lista pytań
+          <p>Test – lista pytań</p>
           <Button
             variant="contained"
             color="info"
