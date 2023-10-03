@@ -2158,7 +2158,7 @@ $tertiary-color: #9c62a12c;
         box-shadow: $material-box-shadow;
       }
       &__category {
-        // width: 100px;
+        min-width: 80px;
         text-align: center;
         box-shadow: $material-box-shadow;
       }
