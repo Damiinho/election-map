@@ -36,27 +36,62 @@ export const TestProvider = ({ children }) => {
       effects: { right: 1 },
     },
     {
-      question: "Opodatkowanie dochodu to zły pomysł.",
-      effects: { right: 1 },
+      question: "Opodatkowanie dochodu to dobry pomysł.",
+      effects: { right: -1 },
     },
     {
       question:
         "Ciężką pracą zawsze doprowadzisz się do awansu w hierarchii społecznej.",
-      effects: { right: 1 },
+      effects: { right: 1, prog: 0.3 },
     },
     {
       question: "Duże organizacje i korporacje potrzebują regulacji.",
+      effects: { right: -0.5 },
+    },
+    {
+      question:
+        "W idealnym świecie prywatne przedsiębiorstwa nie powinny istnieć.",
       effects: { right: -1 },
+    },
+    {
+      question:
+        "Każdy ma prawo indywidualnie decydować o tym, co chce robić w życiu.",
+      effects: { right: 0.2, prog: 1 },
+    },
+    {
+      question:
+        "Priorytetem powinno być raczej gromadzenie wspólnego majątku mogącego służyć wszystkim obywatelom, niż oszczędności indywidualne.",
+      effects: { right: -0.5, prog: -0.5 },
     },
     {
       question:
         "Rząd, który zapewnia opiekę wszystkim, to z założenia dobry rząd.",
-      effects: { right: -1 },
+      effects: { right: -0.5 },
     },
     {
       question:
-        "Rozszerzanie systemu opieki społecznej to dobry sposób na walkę z nierównościami.",
+        "Istnieją produkty, których wycena na wolnym rynku jest niemożliwa.",
+      effects: { right: -0.7 },
+    },
+    {
+      question: "Rząd powinien mieć odgórną możliwość ustalania cen.",
       effects: { right: -1 },
+      answers: ["W ogóle", "Nie wiem", "Każdej ceny"],
+    },
+    {
+      question: "To władza powinna decydować o wysokości wynagrodzenia.",
+      effects: { right: -1 },
+      answers: ["Żadnego", "Nie wiem", "Każdego"],
+    },
+    {
+      question: "Państwo nie powinno zajmować się opieką społeczną",
+      effects: { right: 1, auth: -1, prog: -0.2 },
+      answers: ["Tylko państwo", "System mieszany", "Tylko obywatele"],
+    },
+    {
+      question: "Opieka społeczna powinna",
+      effects: { right: 1, auth: -1, prog: -0.2 },
+      answers: ["nie istnieć", "System mieszany", "być bardzo szeroka"],
     },
     {
       question: "Związki zawodowe powinny być istotne dla gospodarki",
@@ -76,7 +111,11 @@ export const TestProvider = ({ children }) => {
     },
     {
       question:
-        "Nadzór rządu nad obywatelami jest uzasadnionym środkiem zwalczania terroryzmu.",
+        "Do skutecznej walki z terroryzmem trzeba ograniczyć wolność obywateli.",
+      effects: { auth: 1 },
+    },
+    {
+      question: "Każdy obywatel powinien być stale monitorowany",
       effects: { auth: 1 },
     },
     {
@@ -156,6 +195,21 @@ export const TestProvider = ({ children }) => {
     },
     {
       question:
+        "Prawo wyboru władzy może zostać ograniczone pod pewnymi warunkami.",
+      effects: { prog: 0.1, auth: -0.5 },
+    },
+    {
+      question:
+        "Starsi ludzie, ze względu na swoje doświadczenie, powinni mieć w życiu publicznym więdcej do powiedzenia od młodych.",
+      effects: { prog: -0.7 },
+    },
+    {
+      question:
+        "Osoby bogatsze lub inteligentniejsze powinny mieć większy wpływ na wybór władzy od innych ludzi",
+      effects: { prog: 0.7 },
+    },
+    {
+      question:
         "Ciało jednostki to jej własność, i powinna mieć prawo do robienia z nim wszystkiego, na co ma ochotę.",
       effects: { prog: 1 },
     },
@@ -168,8 +222,13 @@ export const TestProvider = ({ children }) => {
       effects: { prog: 1 },
     },
     {
-      question: "Aborcja powinna być zabójstwo.",
+      question: "Aborcja to zabójstwo.",
       effects: { prog: -1 },
+    },
+    {
+      question:
+        "Władza powinna być obejmowana na bardzo długi okres lub nawet całe życie.",
+      effects: { prog: -1, auth: 1 },
     },
     {
       question:
@@ -230,13 +289,51 @@ export const TestProvider = ({ children }) => {
     },
     {
       question:
-        "Niektóre narkotyki powinny być legalne do użytku nieleczniczego.",
-      effects: { prog: -1 },
+        "Posiadania używek (takich jak narkotyki, alkohol, papierosy) powinno być legalne.",
+      effects: { prog: -1, right: 1, auth: -1 },
+      answers: ["Żadnych", "Niektórych", "Każdych"],
     },
     {
       question: "Kara śmierci powinna istnieć.",
       effects: { prog: -1 },
     },
+    {
+      question: "Wszelkie podmioty policyjne powinny być państwowe",
+      effects: { prog: -0.2, auth: 0.5, right: -0.2 },
+      answers: ["Wyłącznie", "Mogą istnieć prywatne", "Żaden"],
+    },
+    {
+      question: "Służby ratunkowe powinny być państwowe",
+      effects: { prog: -0.2, auth: 0.5, right: -0.2 },
+      answers: ["Wyłącznie", "Mogą istnieć prywatne", "Żaden"],
+    },
+    {
+      question: "Wszelkie podmioty wojskowe powinny być państwowe",
+      effects: { prog: -0.2, auth: 0.5, right: -0.2 },
+      answers: ["Wyłącznie", "Mogą istnieć prywatne", "Żaden"],
+    },
+    {
+      question:
+        "Rząd powinien móc wpływać na gospodarkę dotacjami, obniżkami kosztów, dotacjami i cłami",
+      effects: { right: -1 },
+      answers: ["Żadnym", "Nie wiem", "Wszystkimi"],
+    },
+    {
+      question: "Wszelkie instytucje sądownicze powinny być państwowe",
+      effects: { prog: -0.2, auth: 0.5, right: -0.2 },
+      answers: ["Wyłącznie", "Prywatne z licencją", "Tylko prywatne"],
+    },
+    {
+      question: "W sądzie o winie powinien decydować",
+      effects: { prog: -0.5, auth: 0.5 },
+      answers: ["Ława przysięgłych", "Nie wiem", "Niezawisły sędzia"],
+    },
+    {
+      question: "W więzieniu ważniejsza jest",
+      effects: { prog: -0.5, auth: 0.5 },
+      answers: ["Resocjalizacja", "Nie wiem", "Kara"],
+    },
+
     {
       question: "Dzieci z różnych kultur powinny uczyć się oddzielnie.",
       effects: { prog: -1 },
@@ -251,14 +348,56 @@ export const TestProvider = ({ children }) => {
       effects: { prog: -1 },
     },
     {
+      question:
+        "Sprawowanie władzy lub posiadanie prawa własności nad dorosłymi ludźmi jest dopuszczalne.",
+      effects: { prog: 0.5, auth: 1, right: 0.5 },
+    },
+    {
+      question: "Broń powinna być oficjalnie dostępna.",
+      effects: { prog: 0.5, auth: -1 },
+      answers: ["Dla nikogo", "Za przyzwoleniem rządu", "Dla każdego"],
+    },
+    {
+      question: "Pornografia powinna być zakazana",
+      effects: { prog: -0.5, auth: 1 },
+    },
+
+    {
       question: "Państwa narodowe są ideą, którą trzeba chronić.",
       effects: { prog: -1 },
+    },
+
+    {
+      question:
+        "Podstawa struktura władzy powinna składać się z jak najmniejszych społeczności.",
+      effects: { prog: 1, auth: -1 },
+    },
+    {
+      question:
+        "Przynależność do danej struktuiry samorządowej lub rządowej powinna być kwestią dobrowolną.",
+      effects: { prog: 1, auth: -1 },
+    },
+    {
+      question: "W najlepszym przypadku rząd centralny nie powinien istnieć.",
+      effects: { auth: -1 },
+    },
+    {
+      question: "Rząd światowy to dobry pomysł.",
+      effects: { auth: 1, prog: 0.3 },
+    },
+    {
+      question: "Rządy jednej osoby to dobry pomysł.",
+      effects: { auth: 1 },
+    },
+    {
+      question: "Władza jest nam dana przez boga.",
+      effects: { auth: 1, prog: -1 },
     },
   ];
   const [isTestStart, setIsTestStart] = useState(false);
   const [result, setResult] = useState({ prog: 0, auth: 0, right: 0 });
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
+  const [answerValue, setAnswerValue] = useState(0);
   const providerValue = {
     questions,
     isTestStart,
@@ -267,6 +406,8 @@ export const TestProvider = ({ children }) => {
     setResult,
     currentQuestion,
     setCurrentQuestion,
+    answerValue,
+    setAnswerValue,
   };
 
   return (

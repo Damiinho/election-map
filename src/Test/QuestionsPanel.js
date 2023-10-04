@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { TestContext } from "../contexts/TestContext";
-import { Button } from "@mui/material";
+import { Button, Slider } from "@mui/material";
 import CubeIMG from "../img/cube.png";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
@@ -21,6 +21,8 @@ const QuestionsPanel = () => {
 
   const [hamburgerActive, setHamburgerActive] = useState(false);
 
+  // const defaultValue = 0;
+  const sliderRef = useRef(null);
   const handleClick = (value, effects) => {
     console.log(value, effects);
     const newResult = result;
@@ -77,8 +79,134 @@ const QuestionsPanel = () => {
         <div className="test__questions-item__text">
           {questions[currentQuestion].question}
         </div>
+        <div className="test__questions-item__slider">
+          <Slider
+            defaultValue={0}
+            max={1}
+            min={-1}
+            step={0.01}
+            valueLabelDisplay="auto"
+            marks={[
+              {
+                value: -0.99,
+                label: (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 10,
+                      left: 0,
+                      fontSize:
+                        windowWidth > 450 ? 20 : windowWidth > 350 ? 16 : 12,
+                    }}
+                  >
+                    {questions[currentQuestion].answers
+                      ? questions[currentQuestion].answers[0]
+                      : "Nie zgadzam się"}
+                  </div>
+                ),
+              },
+              {
+                value: 0,
+                label: (
+                  <div
+                    style={{
+                      position: "relative",
+                      top: 10,
+                      fontSize:
+                        windowWidth > 450 ? 20 : windowWidth > 350 ? 16 : 12,
+                    }}
+                  >
+                    {questions[currentQuestion].answers
+                      ? questions[currentQuestion].answers[1]
+                      : "Nie wiem"}
+                  </div>
+                ),
+              },
+              {
+                value: 0.99,
+                label: (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 10,
+                      right: 0,
+                      fontSize:
+                        windowWidth > 450 ? 20 : windowWidth > 350 ? 16 : 12,
+                    }}
+                  >
+                    {questions[currentQuestion].answers
+                      ? questions[currentQuestion].answers[2]
+                      : "Zgadzam się"}
+                  </div>
+                ),
+              },
+            ]}
+            ref={sliderRef}
+            sx={{
+              // color: "black",
+
+              height: 12,
+              "span.MuiSlider-valueLabel": {
+                // backgroundColor: "green",
+              },
+              position: "relative",
+              "& .MuiSlider-markLabel": {
+                fontFamily: "Ysabeau Office, sans-serif",
+              },
+
+              "& .MuiSlider-thumb": {
+                height: 30,
+                width: 30,
+                backgroundColor: "#fff",
+                border: "3px solid currentColor",
+                "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
+                  boxShadow: "inherit",
+                },
+                "&:before": {
+                  display: "none",
+                },
+              },
+              "& .MuiSlider-track": {
+                border: "none",
+              },
+
+              "& .MuiSlider-valueLabel": {
+                lineHeight: 1.2,
+                fontSize: 12,
+                background: "unset",
+                padding: 0,
+                width: 40,
+                height: 40,
+                borderRadius: "50% 50% 50% 0",
+                backgroundColor: "#52af77",
+                transformOrigin: "bottom left",
+                transform: "translate(50%, -100%) rotate(-45deg) scale(0)",
+                "&:before": { display: "none" },
+                "&.MuiSlider-valueLabelOpen": {
+                  transform: "translate(50%, -100%) rotate(-45deg) scale(1)",
+                },
+                "& > *": {
+                  transform: "rotate(45deg)",
+                },
+              },
+            }}
+          />
+        </div>
         <div className="test__questions-item__buttons">
           <Button
+            variant="contained"
+            color="success"
+            size="large"
+            onClick={() =>
+              handleClick(
+                sliderRef.current.querySelector('input[type="range"]').value,
+                effects
+              )
+            }
+          >
+            Potwierdź
+          </Button>
+          {/* <Button
             variant="contained"
             style={{ backgroundColor: "#a02626" }}
             size={windowWidth > 910 ? "medium" : "small"}
@@ -117,7 +245,7 @@ const QuestionsPanel = () => {
             onClick={() => handleClick(1, effects)}
           >
             Zgadzam się
-          </Button>
+          </Button> */}
         </div>
       </div>
     );

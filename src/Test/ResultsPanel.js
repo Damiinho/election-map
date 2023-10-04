@@ -147,6 +147,10 @@ const ResultsPanel = () => {
           </Button>
         </div>
         <div className="test__result-description">
+          {" "}
+          <div className="test__result-description__title">
+            Spektrum ekonomiczne
+          </div>
           <div className="test__result-description__item">
             <span>Socjalizm</span>
             <ResultSlider
@@ -154,17 +158,23 @@ const ResultsPanel = () => {
               color="#f0494960"
             />
 
-            <span>Kapitalizm</span>
+            <span>Wolny rynek</span>
+          </div>
+          <div className="test__result-description__title">
+            Spektrum zarządcze
           </div>
           <div className="test__result-description__item">
             <span>Anarchizm</span>
             <ResultSlider value={officialResult.authForBox} color="#8349f060" />
             <span>Autorytaryzm</span>
           </div>
+          <div className="test__result-description__title">
+            Spektrum cywilizacyjne
+          </div>
           <div className="test__result-description__item">
-            <span>Konserwatyzm</span>
+            <span>Tradycja</span>
             <ResultSlider value={officialResult.progForBox} color="#fdfb7f60" />
-            <span>Progresywizm</span>
+            <span>Postęp</span>
           </div>
         </div>
         <div className="test__result-boxbuttons">
