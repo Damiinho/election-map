@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import TestList from "./TestList";
 import ResultsPanel from "./ResultsPanel";
+import Concept from "./Concept";
 
 const TestWindow = () => {
   const params = useParams();
@@ -35,6 +36,8 @@ const TestWindow = () => {
         <TestList />
       ) : params.result === "wynik" ? (
         <ResultsPanel />
+      ) : params.result === "koncepcja" ? (
+        <Concept />
       ) : (
         "błąd"
       )}

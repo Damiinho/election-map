@@ -8,7 +8,7 @@ const Test = () => {
 
   return (
     <div className="test">
-      <div className="test__title">Test – bryła polityczna</div>
+      <div className="test__title">Polityczna bryła</div>
       {!isTestStart ? <TestStartPanel /> : <QuestionsPanel />}
     </div>
   );

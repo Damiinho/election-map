@@ -106,7 +106,7 @@ const ResultsPanel = () => {
 
   return (
     <div className="test">
-      <div className="test__title">Test – bryła polityczna</div>
+      <div className="test__title">Polityczna bryła – wynik</div>
       <div className="test__result">
         <div className="test__result-buttons">
           <Button

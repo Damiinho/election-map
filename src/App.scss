@@ -2271,10 +2271,10 @@ $tertiary-color: #9c62a12c;
     &__list {
       &-title {
         font-size: 25px;
+        display: flex;
+        flex-direction: column;
         p {
-          max-width: 150px;
-          text-align: center;
-          margin: 0 auto;
+          margin-bottom: 10px;
         }
       }
     }
