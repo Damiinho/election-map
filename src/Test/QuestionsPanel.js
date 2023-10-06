@@ -82,65 +82,117 @@ const QuestionsPanel = () => {
         <div className="test__questions-item__slider">
           <Slider
             defaultValue={0}
-            max={1}
-            min={-1}
+            min={
+              questions[currentQuestion].min ||
+              questions[currentQuestion].min === 0
+                ? questions[currentQuestion].min
+                : -1
+            }
+            max={
+              questions[currentQuestion].max ||
+              questions[currentQuestion].max === 0
+                ? questions[currentQuestion].max
+                : 1
+            }
             step={0.01}
             valueLabelDisplay="auto"
-            marks={[
-              {
-                value: -0.99,
-                label: (
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 10,
-                      left: 0,
-                      fontSize:
-                        windowWidth > 450 ? 20 : windowWidth > 350 ? 16 : 12,
-                    }}
-                  >
-                    {questions[currentQuestion].answers
-                      ? questions[currentQuestion].answers[0]
-                      : "Nie zgadzam się"}
-                  </div>
-                ),
-              },
-              {
-                value: 0,
-                label: (
-                  <div
-                    style={{
-                      position: "relative",
-                      top: 10,
-                      fontSize:
-                        windowWidth > 450 ? 20 : windowWidth > 350 ? 16 : 12,
-                    }}
-                  >
-                    {questions[currentQuestion].answers
-                      ? questions[currentQuestion].answers[1]
-                      : "Nie wiem"}
-                  </div>
-                ),
-              },
-              {
-                value: 0.99,
-                label: (
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 10,
-                      right: 0,
-                      fontSize:
-                        windowWidth > 450 ? 20 : windowWidth > 350 ? 16 : 12,
-                    }}
-                  >
-                    {questions[currentQuestion].answers
-                      ? questions[currentQuestion].answers[2]
-                      : "Zgadzam się"}
-                  </div>
-                ),
-              },
-            ]}
+            marks={
+              questions[currentQuestion].marks
+                ? questions[currentQuestion].marks?.map((item) => {
+                    return {
+                      value: item.value,
+                      label: (
+                        <div
+                          style={{
+                            position: item.position
+                              ? item.position
+                              : "relative",
+                            top: item.top || item.top === 0 ? item.top : 10,
+                            left:
+                              item.left || item.left === 0 ? item.left : "auto",
+                            right:
+                              item.right || item.right === 0
+                                ? item.right
+                                : "auto",
+                            bottom:
+                              item.bottom || item.bottom === 0
+                                ? item.bottom
+                                : "auto",
+                            fontSize:
+                              windowWidth > 450
+                                ? 20
+                                : windowWidth > 350
+                                ? 16
+                                : 12,
+                          }}
+                        >
+                          {item.answer}
+                        </div>
+                      ),
+                    };
+                  })
+                : [
+                    {
+                      value: -0.99,
+                      label: (
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: 10,
+                            left: 0,
+                            fontSize:
+                              windowWidth > 450
+                                ? 20
+                                : windowWidth > 350
+                                ? 16
+                                : 12,
+                          }}
+                        >
+                          Nie zgadzam się
+                        </div>
+                      ),
+                    },
+                    {
+                      value: 0,
+                      label: (
+                        <div
+                          style={{
+                            position: "relative",
+                            top: 10,
+                            fontSize:
+                              windowWidth > 450
+                                ? 20
+                                : windowWidth > 350
+                                ? 16
+                                : 12,
+                          }}
+                        >
+                          Nie wiem
+                        </div>
+                      ),
+                    },
+                    {
+                      value: 0.99,
+                      label: (
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: 10,
+                            right: 0,
+                            fontSize:
+                              windowWidth > 450
+                                ? 20
+                                : windowWidth > 350
+                                ? 16
+                                : 12,
+                          }}
+                        >
+                          Zgadzam się
+                        </div>
+                      ),
+                    },
+                  ]
+            }
             ref={sliderRef}
             sx={{
               // color: "black",
@@ -206,46 +258,6 @@ const QuestionsPanel = () => {
           >
             Potwierdź
           </Button>
-          {/* <Button
-            variant="contained"
-            style={{ backgroundColor: "#a02626" }}
-            size={windowWidth > 910 ? "medium" : "small"}
-            onClick={() => handleClick(-1, effects)}
-          >
-            Nie zgadzam się
-          </Button>
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "#f03b3b" }}
-            size={windowWidth > 910 ? "medium" : "small"}
-            onClick={() => handleClick(-0.5, effects)}
-          >
-            Raczej się nie zgadzam
-          </Button>
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "#838383" }}
-            size={windowWidth > 910 ? "medium" : "small"}
-            onClick={() => handleClick(0, effects)}
-          >
-            Nie wiem
-          </Button>
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "#60c700" }}
-            size={windowWidth > 910 ? "medium" : "small"}
-            onClick={() => handleClick(0.5, effects)}
-          >
-            Raczej się zgadzam
-          </Button>
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "#0f7901" }}
-            size={windowWidth > 910 ? "medium" : "small"}
-            onClick={() => handleClick(1, effects)}
-          >
-            Zgadzam się
-          </Button> */}
         </div>
       </div>
     );

@@ -5,23 +5,74 @@ export const TestContext = createContext();
 export const TestProvider = ({ children }) => {
   const questions = [
     {
-      question: "Wolny rynek to najlepsze rozwiązanie dla ekonomii.",
+      question:
+        "Ekonomia powinna opierać się najbardziej jak to możliwe na zasadach wolnego rynku.",
       effects: { right: 1 },
+      min: -1,
+      max: 1,
+      marks: [
+        {
+          value: -0.99,
+          answer: "Nie zgadzam się",
+          left: 0,
+          position: "absolute",
+        },
+        {
+          value: 0,
+          answer: "Nie wiem",
+        },
+        {
+          value: 0.99,
+          answer: "Zgadzam się",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
-      question:
-        "Monopol państwowego zakładu ubezpieczeń społecznych nie powinien istnieć.",
-      effects: { right: 1 },
+      question: "Ubezpieczenia zdrowotne powinny być",
+      effects: { right: 1, auth: -0.2, prog: -0.3 },
+      marks: [
+        {
+          value: -0.99,
+          answer: "Tylko państwowe",
+          left: 0,
+          position: "absolute",
+        },
+        {
+          value: 0.99,
+          answer: "Tylko prywatne",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question:
         "Pracodawcy najlepiej znają wartość pracy zatrudnionego, dlatego też uczciwie go wynagradzają.",
-      effects: { right: 1 },
-    },
-    {
-      question:
-        "Wyzysk to przestarzały termin, nie żyjemy w XIX-wiecznym kapitalizmie.",
-      effects: { right: 1 },
+      effects: { right: 1, auth: -0.2 },
+      min: -0.2,
+      max: 1,
+      marks: [
+        {
+          value: -0.2,
+          position: "absolute",
+          answer: "Nie",
+          left: 0,
+        },
+        {
+          value: 0,
+          answer: "Nie wiem",
+          left: 0,
+        },
+
+        {
+          value: 0.99,
+          answer: "Tak",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question: "Człowiek jest z natury zachłanny",
@@ -29,7 +80,7 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "Komunizm nigdy nie zadziała w praktyce.",
-      effects: { right: 1 },
+      effects: { right: 1, auth: -0.3 },
     },
     {
       question: "Podatki powinny być jak najmniejsze.",
@@ -37,21 +88,21 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "Opodatkowanie dochodu to dobry pomysł.",
-      effects: { right: -1 },
-    },
-    {
-      question:
-        "Ciężką pracą zawsze doprowadzisz się do awansu w hierarchii społecznej.",
-      effects: { right: 1, prog: 0.3 },
-    },
-    {
-      question: "Duże organizacje i korporacje potrzebują regulacji.",
       effects: { right: -0.5 },
     },
     {
       question:
+        "Ciężką pracą zawsze doprowadzisz się do awansu w hierarchii społecznej.",
+      effects: { right: 0.5, prog: 1 },
+    },
+    {
+      question: "Duże organizacje i korporacje potrzebują regulacji.",
+      effects: { right: -0.5, auth: 1 },
+    },
+    {
+      question:
         "W idealnym świecie prywatne przedsiębiorstwa nie powinny istnieć.",
-      effects: { right: -1 },
+      effects: { right: -1, auth: 1 },
     },
     {
       question:
@@ -59,31 +110,194 @@ export const TestProvider = ({ children }) => {
       effects: { right: 0.2, prog: 1 },
     },
     {
-      question:
-        "Priorytetem powinno być raczej gromadzenie wspólnego majątku mogącego służyć wszystkim obywatelom, niż oszczędności indywidualne.",
-      effects: { right: -0.5, prog: -0.5 },
+      question: "Gromadzenie majątku nie powinno być dozwolone.",
+      effects: { right: -1, prog: -1 },
+      min: 0,
+      max: 1,
+      marks: [
+        {
+          value: 0.01,
+          position: "absolute",
+          answer: "Nie zgadzam się",
+          left: 0,
+        },
+        {
+          value: 0.99,
+          answer: "Zgadzam się",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
-      question:
-        "Rząd, który zapewnia opiekę wszystkim, to z założenia dobry rząd.",
-      effects: { right: -0.5 },
+      question: "Czy rząd powinien zapewniać opiekę socjalną?",
+      effects: { right: -1, auth: 0.3 },
+
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Żadnej",
+          left: 0,
+        },
+        {
+          value: -0.7,
+          position: "absolute",
+          answer: "Dla niepełnosprawnych",
+          left: -60,
+          top: -50,
+        },
+        {
+          value: -0.4,
+          answer: "Dla najuboższych",
+          left: 0,
+        },
+        {
+          value: 0.2,
+          position: "absolute",
+          answer: "Prodemograficzną",
+          right: -30,
+          top: -50,
+        },
+        {
+          value: 0.6,
+          answer: "Aktywizacyjną",
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Bezwarunkowy dochód podstawowy",
+          right: 0,
+          position: "absolute",
+        },
+      ],
+      info: (
+        <div>
+          W pytaniu chodzi przede wszystkim o stopień pomocy socjalnej, którego
+          ma udzielać władza. Podpowiedzi na osi mają charakter wyłącznie
+          pomocniczy i ich za zadaniem jest przede wszystkim pomóc mniej więcej
+          uświadomić sobie o jaki poziom socjalnej pomocy chodzi. Możesz
+          oczywiście popierać np. pomoc prodemograficzną, a nie popierać dla
+          najuboższych, powinieneś wtedy jednak skorygować swój wynik
+          odpowiednio w lewo, nawet jeśli oznaczałoby to teoretycznie na skali
+          zgodę na coś odwrotnego.
+        </div>
+      ),
     },
     {
-      question:
-        "Istnieją produkty, których wycena na wolnym rynku jest niemożliwa.",
-      effects: { right: -0.7 },
+      question: "Małżeństwa państwowe powinny istnieć",
+      effects: { prog: -0.2 },
     },
+    {
+      question: "Jeśli małżeństwa powinny istnieć, to w jakiej konfiguracji.",
+      effects: { prog: 1, auth: -0.2 },
+      min: 0,
+      max: 1,
+      marks: [
+        {
+          value: 0,
+          position: "absolute",
+          answer: "Kobieta i mężczyzna",
+          left: 0,
+        },
+        {
+          value: 0.4,
+          // position: "absolute",
+          answer: "Pary homoseksualne",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.7,
+          answer: "Poligamia",
+          // left: 0,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Wszystkie możliwe",
+          right: 0,
+          position: "absolute",
+        },
+      ],
+      info: (
+        <div>
+          Jak w każdym pytaniu, tak i w tym, nasza odpowiedź znajduje się w
+          pewnym spektrum. Być może akceptujemy poligamię, natomiast związków
+          jednopłciowych nie. Podobnie jak przy pytaniu o pomoc socjalną, w
+          takim przypadku należałoby odpowiednio skorygować swoją odpowiedź na
+          osi w lewo, mimo że sugerowałoby to odpowiedź odwrotną. Wszystkie
+          możliwe konfiguracje zawierają w sobie nawet takie skrajności jak
+          prawna dopuszczalność małżeństw ze zwierzętami lub rzeczami.
+        </div>
+      ),
+    },
+
     {
       question: "Rząd powinien mieć odgórną możliwość ustalania cen.",
       effects: { right: -1 },
-      answers: ["W ogóle", "Nie wiem", "Każdej ceny"],
+      min: -0.2,
+      max: 1,
+      marks: [
+        {
+          value: -0.19,
+          position: "absolute",
+          answer: "Żadnej ceny",
+          left: 0,
+        },
+        {
+          value: 0.4,
+          // position: "absolute",
+          answer: "Istnieją takie produkty",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Powinien ustalać wszystkie",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question: "To władza powinna decydować o wysokości wynagrodzenia.",
       effects: { right: -1 },
-      answers: ["Żadnego", "Nie wiem", "Każdego"],
+      min: -0.2,
+      max: 1,
+      marks: [
+        {
+          value: -0.19,
+          position: "absolute",
+          answer: "Żadnego wynagrodzenia",
+          left: 0,
+        },
+        {
+          value: 0,
+          // position: "absolute",
+          answer: "W biurokracji państwowej",
+          // left: -60,
+          left: 50,
+          top: -50,
+        },
+        {
+          value: 0.5,
+          // position: "absolute",
+          answer: "W pewnych gałęziach gospodarki",
+          // left: -60,
+          left: 50,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Powinna ustalać wszystkie",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
+      // fundacje
       question: "Państwo nie powinno zajmować się opieką społeczną",
       effects: { right: 1, auth: -1, prog: -0.2 },
       answers: ["Tylko państwo", "System mieszany", "Tylko obywatele"],
@@ -261,14 +475,7 @@ export const TestProvider = ({ children }) => {
       question: "Płeć jest wyłącznie konstruktem społecznym.",
       effects: { prog: 1 },
     },
-    {
-      question: "Małżeństwa to sprawa religii.",
-      effects: { prog: 1 },
-    },
-    {
-      question: "Małżeństwa cywilne powinny istnieć.",
-      effects: { prog: -1 },
-    },
+
     {
       question:
         "Autonomia ciała dotyczy nawet nieletnich, osób chorych psychicznie i poważnych przestępców.",
