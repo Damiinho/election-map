@@ -185,9 +185,21 @@ export const TestProvider = ({ children }) => {
       ),
     },
     {
+      // fundacje
+      question:
+        "Instytucje charytatywne są skuteczniejsze w pomocy potrzebującym niż państwo",
+      effects: { right: 1, auth: -1, prog: 1 },
+    },
+    {
+      question: "Każdy ma prawo wyznawać jakąkolwiek religię",
+      effects: { prog: 0.5, auth: -1 },
+    },
+
+    {
       question: "Małżeństwa państwowe powinny istnieć",
       effects: { prog: -0.2 },
     },
+
     {
       question: "Jeśli małżeństwa powinny istnieć, to w jakiej konfiguracji.",
       effects: { prog: 1, auth: -0.2 },
@@ -296,53 +308,40 @@ export const TestProvider = ({ children }) => {
         },
       ],
     },
+
     {
-      // fundacje
-      question: "Państwo nie powinno zajmować się opieką społeczną",
-      effects: { right: 1, auth: -1, prog: -0.2 },
-      answers: ["Tylko państwo", "System mieszany", "Tylko obywatele"],
-    },
-    {
-      question: "Opieka społeczna powinna",
-      effects: { right: 1, auth: -1, prog: -0.2 },
-      answers: ["nie istnieć", "System mieszany", "być bardzo szeroka"],
-    },
-    {
-      question: "Związki zawodowe powinny być istotne dla gospodarki",
-      effects: { right: -1 },
+      question: "Związki zawodowe powinny mieć istotny wpływ na gospodarkę",
+      effects: { right: -0.5 },
     },
     {
       question: "Wszystkie przemysły i banki powinny być upaństwowione.",
       effects: { right: -1 },
     },
     {
-      question: "Najtrafniejszy podział społeczeństwa to podział klasowy.",
-      effects: { right: -1 },
-    },
-    {
-      question: "W Europie nierówności ekonomiczne są zbyt duże.",
-      effects: { right: -1 },
+      question:
+        "Zadaniem państwa powinno być między innymi przeciwdziałanie nierównościom ekonomicznym.",
+      effects: { right: -0.5 },
     },
     {
       question:
-        "Do skutecznej walki z terroryzmem trzeba ograniczyć wolność obywateli.",
-      effects: { auth: 1 },
+        "Nie da się skutecznie walczyć z terroryzmem bez ograniczania wolności obywateli.",
+      effects: { auth: 0.5 },
     },
     {
       question: "Każdy obywatel powinien być stale monitorowany",
       effects: { auth: 1 },
     },
     {
-      question: "Szanowanie autorytetów jest korzystne społecznie.",
-      effects: { auth: 1 },
+      question: "Każdy autorytet można poddać w wątpliwość.",
+      effects: { auth: -0.2 },
     },
     {
       question: "Silny rząd jest niezbędny do osiągnięcia sukcesu przez kraj.",
-      effects: { auth: 1 },
+      effects: { auth: 0.5 },
     },
     {
       question: "Tylko rząd może uczciwie i skutecznie regulować organizacje.",
-      effects: { auth: 1 },
+      effects: { prog: -1 },
     },
     {
       question:
@@ -355,11 +354,6 @@ export const TestProvider = ({ children }) => {
       effects: { auth: 1 },
     },
     {
-      question:
-        "Nawet jeśli oznacza to ograniczenie wolności obywatelskich, może zaistnieć konieczność rządów wojskowych.",
-      effects: { auth: 1 },
-    },
-    {
       question: "Jeśli nie masz nic do ukrycia, nie masz czego się bać.",
       effects: { auth: 1 },
     },
@@ -369,12 +363,8 @@ export const TestProvider = ({ children }) => {
       effects: { auth: -1 },
     },
     {
-      question: "Społeczeństwo nie znaczy nic bez demokracji.",
-      effects: { auth: -1 },
-    },
-    {
       question: "Aresztowanie bez procesu powinno być zakazane.",
-      effects: { auth: -1 },
+      effects: { auth: -0.3 },
     },
     {
       question: "Im mniej regulacji, tym wolniejsi ludzie.",
@@ -387,11 +377,11 @@ export const TestProvider = ({ children }) => {
     {
       question:
         "Aby skutecznie pilnować porządku, policja powinna mieć bardzo duże uprawnienia.",
-      effects: { auth: 1 },
+      effects: { auth: 1, prog: -0.2 },
     },
     {
       question:
-        "Wybór szkoły powinien być dokonywany przez rodziców, a nie przez władze lokalne.",
+        "Wybór szkoły powinien być dokonywany przez rodziców, a nie przez władze.",
       effects: { auth: -1 },
     },
     {
@@ -400,12 +390,12 @@ export const TestProvider = ({ children }) => {
     },
     {
       question:
-        "Powinien istnieć zunifikowany system sprawdzający wiedzę i umiejętności obywateli (np. matura).",
+        "Powinien istnieć zunifikowany system sprawdzający wiedzę i umiejętności obywateli.",
       effects: { auth: -1 },
     },
     {
       question: "Każda dorosła osoba powinna mieć prawo wyboru władzy.",
-      effects: { prog: 1 },
+      effects: { prog: 1, auth: -0.2 },
     },
     {
       question:
@@ -429,14 +419,52 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "Eutanazja powinna być legalna.",
-      effects: { prog: 1 },
+      effects: { prog: 0.5 },
     },
     {
       question: "Aborcja powinna być legalna.",
-      effects: { prog: 1 },
+      effects: { prog: 0.5 },
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Nigdy",
+          left: 0,
+        },
+        {
+          value: -0.5,
+          // position: "absolute",
+          answer: "Przy zagrożeniu życia matki",
+          // left: -60,
+          left: 50,
+          top: -50,
+        },
+        {
+          value: 0,
+          // position: "absolute",
+          answer: "W przypadku gwałtów",
+          // left: -60,
+          left: 50,
+          top: -50,
+        },
+        {
+          value: 0.3,
+          // position: "absolute",
+          answer: "Przy chorobie płodu",
+          // left: -60,
+          left: 50,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Zawsze",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
-      question: "Aborcja to zabójstwo.",
+      question: "Podczas ciąży w łonie matki znajduje się człowiek",
       effects: { prog: -1 },
     },
     {
@@ -498,26 +526,100 @@ export const TestProvider = ({ children }) => {
       question:
         "Posiadania używek (takich jak narkotyki, alkohol, papierosy) powinno być legalne.",
       effects: { prog: -1, right: 1, auth: -1 },
-      answers: ["Żadnych", "Niektórych", "Każdych"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Żadnej",
+          left: 0,
+        },
+        {
+          value: 0,
+          // position: "absolute",
+          answer: "Niektórych",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Wszystkich",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question: "Kara śmierci powinna istnieć.",
-      effects: { prog: -1 },
+      effects: { prog: -0.2 },
     },
     {
-      question: "Wszelkie podmioty policyjne powinny być państwowe",
+      question: "Policja powinna być państwowa",
       effects: { prog: -0.2, auth: 0.5, right: -0.2 },
-      answers: ["Wyłącznie", "Mogą istnieć prywatne", "Żaden"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Nie",
+          left: 0,
+        },
+        {
+          value: -0.4,
+          // position: "absolute",
+          answer: "Policja prywatna",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.4,
+          // position: "absolute",
+          answer: "Różne systemy policyjne",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Wyłacznie państwowa",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
-      question: "Służby ratunkowe powinny być państwowe",
+      question: "Służby ratunkowe powinny być wyłacznie państwowe",
       effects: { prog: -0.2, auth: 0.5, right: -0.2 },
-      answers: ["Wyłącznie", "Mogą istnieć prywatne", "Żaden"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Nie",
+          left: 0,
+        },
+        {
+          value: -0.4,
+          // position: "absolute",
+          answer: "Policja prywatna",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.4,
+          // position: "absolute",
+          answer: "Różne systemy policyjne",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Wyłacznie państwowa",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question: "Wszelkie podmioty wojskowe powinny być państwowe",
       effects: { prog: -0.2, auth: 0.5, right: -0.2 },
-      answers: ["Wyłącznie", "Mogą istnieć prywatne", "Żaden"],
+      answers: ["Nie zgadzam się", "Mogą istnieć prywatne", "Zgadzam się"],
     },
     {
       question:
