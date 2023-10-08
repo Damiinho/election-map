@@ -553,94 +553,214 @@ export const TestProvider = ({ children }) => {
       effects: { prog: -0.2 },
     },
     {
-      question: "Policja powinna być państwowa",
+      question: "Policja powinna...",
       effects: { prog: -0.2, auth: 0.5, right: -0.2 },
       marks: [
         {
           value: -0.99,
           position: "absolute",
-          answer: "Nie",
+          answer: "nie istnieć",
           left: 0,
         },
         {
           value: -0.4,
           // position: "absolute",
-          answer: "Policja prywatna",
+          answer: "być prywatna",
           // left: -60,
           top: -50,
         },
         {
           value: 0.4,
           // position: "absolute",
-          answer: "Różne systemy policyjne",
+          answer: "być i prywatna, i państwowa",
           // left: -60,
           top: -50,
         },
         {
           value: 0.99,
-          answer: "Wyłacznie państwowa",
+          answer: "być państwowa",
           right: 0,
           position: "absolute",
         },
       ],
     },
     {
-      question: "Służby ratunkowe powinny być wyłacznie państwowe",
+      question: "Zorganizowane służby ratunkowe powinny...",
       effects: { prog: -0.2, auth: 0.5, right: -0.2 },
       marks: [
         {
           value: -0.99,
           position: "absolute",
-          answer: "Nie",
+          answer: "nie istnieć",
           left: 0,
         },
         {
           value: -0.4,
           // position: "absolute",
-          answer: "Policja prywatna",
+          answer: "być prywatne",
           // left: -60,
           top: -50,
         },
         {
           value: 0.4,
           // position: "absolute",
-          answer: "Różne systemy policyjne",
+          answer: "być i prywatne, i państwowe",
           // left: -60,
           top: -50,
         },
         {
           value: 0.99,
-          answer: "Wyłacznie państwowa",
+          answer: "być państwowe",
           right: 0,
           position: "absolute",
         },
       ],
     },
     {
-      question: "Wszelkie podmioty wojskowe powinny być państwowe",
+      question: "Wszelkie podmioty wojskowe powinny...",
       effects: { prog: -0.2, auth: 0.5, right: -0.2 },
-      answers: ["Nie zgadzam się", "Mogą istnieć prywatne", "Zgadzam się"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "nie istnieć",
+          left: 0,
+        },
+        {
+          value: -0.4,
+          // position: "absolute",
+          answer: "być i prywatna, i państwowa",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.4,
+          // position: "absolute",
+          answer: "mieć różne systemy",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "być państwowa",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
-      question:
-        "Rząd powinien móc wpływać na gospodarkę dotacjami, obniżkami kosztów, dotacjami i cłami",
+      question: "Czu rząd powinien móc wpływać na gospodarkę?",
       effects: { right: -1 },
-      answers: ["Żadnym", "Nie wiem", "Wszystkimi"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "W ogóle",
+          left: 0,
+        },
+        {
+          value: -0.4,
+          // position: "absolute",
+          answer: "Cłami i podatkami",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.4,
+          // position: "absolute",
+          answer: "W razie konieczności",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Powinien ją kontrolować",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
-      question: "Wszelkie instytucje sądownicze powinny być państwowe",
+      question: "Wszelkie instytucje sądownicze powinny...",
       effects: { prog: -0.2, auth: 0.5, right: -0.2 },
-      answers: ["Wyłącznie", "Prywatne z licencją", "Tylko prywatne"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "nie istnieć",
+          left: 0,
+        },
+        {
+          value: -0.4,
+          // position: "absolute",
+          answer: "być prywatne",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.4,
+          // position: "absolute",
+          answer: "być i prywatne, i państwowe",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "być państwowe",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question: "W sądzie o winie powinien decydować",
       effects: { prog: -0.5, auth: 0.5 },
-      answers: ["Ława przysięgłych", "Nie wiem", "Niezawisły sędzia"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Ława przysięgłych",
+          left: 0,
+        },
+        {
+          value: 0.0,
+          // position: "absolute",
+          answer: "Nie wiem",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Niezawisły sędzia",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question: "W więzieniu ważniejsza jest",
       effects: { prog: -0.5, auth: 0.5 },
-      answers: ["Resocjalizacja", "Nie wiem", "Kara"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Resocjalizacja",
+          left: 0,
+        },
+        {
+          value: 0.0,
+          // position: "absolute",
+          answer: "Nie wiem",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Kara",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
 
     {
@@ -648,7 +768,8 @@ export const TestProvider = ({ children }) => {
       effects: { prog: -1 },
     },
     {
-      question: "Zajęcia z religii powinny być obowiązkowe w szkołach.",
+      question:
+        "Właściwym moralnie byłoby, gdyby zajęcia z religii odbywały się we wszystkich szkołach.",
       effects: { prog: -1 },
     },
     {
@@ -664,11 +785,66 @@ export const TestProvider = ({ children }) => {
     {
       question: "Broń powinna być oficjalnie dostępna.",
       effects: { prog: 0.5, auth: -1 },
-      answers: ["Dla nikogo", "Za przyzwoleniem rządu", "Dla każdego"],
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Dla nikogo",
+          left: 0,
+        },
+        {
+          value: -0.5,
+          // position: "absolute",
+          answer: "Za zezwoleniem",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.5,
+          // position: "absolute",
+          answer: "Po zarejestrowaniu",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Dla każdego bez kontroli",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
-      question: "Pornografia powinna być zakazana",
+      question: "Pornografia powinna być dostępna?",
       effects: { prog: -0.5, auth: 1 },
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Dla nikogo",
+          left: 0,
+        },
+        {
+          value: 0.0,
+          // position: "absolute",
+          answer: "Za zezwoleniem",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.7,
+          // position: "absolute",
+          answer: "Dla dorosłych",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Dla wszystkich",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
 
     {
@@ -677,25 +853,72 @@ export const TestProvider = ({ children }) => {
     },
 
     {
-      question:
-        "Podstawa struktura władzy powinna składać się z jak najmniejszych społeczności.",
+      question: "Jaka powinna być najwyższa forma w strukturze rządzenia?",
       effects: { prog: 1, auth: -1 },
+      marks: [
+        {
+          value: -0.99,
+          position: "absolute",
+          answer: "Jedna osoba",
+          left: 0,
+        },
+        {
+          value: -0.5,
+          // position: "absolute",
+          answer: "Mała społeczność (np. wsie)",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.0,
+          // position: "absolute",
+          answer: "Średnia społeczność (np. samorządy)",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.5,
+          // position: "absolute",
+          answer: "Państwo",
+          // left: -60,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Cały świat",
+          right: 0,
+          position: "absolute",
+        },
+      ],
+      info: (
+        <div>
+          Pytanie stawia przed odpowiadającym pod rozwagę kwestię jak szeroką
+          społecznością zarządzać ma władza. Odpowiedź najbardziej na lewo
+          odpowiada anarchizmowi, w którym każdy rządzi sobą samodzielnie,
+          natomiast pomiędzy są przeróżne struktury lokalne, takie jak wsie,
+          kibuce, miasta, samorządy, a później państwa czy struktury
+          międzynarodowe typu Unii Europejskiej, natomiast najbardziej na prawo
+          jest tzw. rząd światowy.
+        </div>
+      ),
     },
     {
       question:
         "Przynależność do danej struktuiry samorządowej lub rządowej powinna być kwestią dobrowolną.",
       effects: { prog: 1, auth: -1 },
+      info: (
+        <div>
+          Pytanie dotyczy kwestii czy każdy sam powinien móc zdecydować o tym,
+          czy należy np. do danego państwa i w zamian za przywileje z tym
+          związane zobowiązywać się do przestrzegania obowiązującego w nim
+          prawa. Oczywiście takie rozwiązanie ma sens wyłącznie wtedy, gdy osoba
+          o tym decydująca ma jakąś sensowną alternatywę.
+        </div>
+      ),
     },
     {
-      question: "W najlepszym przypadku rząd centralny nie powinien istnieć.",
-      effects: { auth: -1 },
-    },
-    {
-      question: "Rząd światowy to dobry pomysł.",
-      effects: { auth: 1, prog: 0.3 },
-    },
-    {
-      question: "Rządy jednej osoby to dobry pomysł.",
+      question:
+        "Rządy jednej osoby nad całym społeczeństwem są lepsze od tych prowadzonych przez więcej osób.",
       effects: { auth: 1 },
     },
     {
