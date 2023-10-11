@@ -127,7 +127,7 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "Gromadzenie majątku nie powinno być dozwolone.",
-      effects: { right: -1, prog: -1 },
+      effects: { right: -1, auth: 0.2, prog: -0.1 },
       min: 0,
       max: 1,
       marks: [
@@ -147,7 +147,7 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "Czy rząd powinien zapewniać opiekę socjalną?",
-      effects: { right: -1, auth: 0.3 },
+      effects: { right: -1, auth: 0.3, prog: 0.2 },
 
       marks: [
         {
@@ -193,21 +193,21 @@ export const TestProvider = ({ children }) => {
       // fundacje
       question:
         "Instytucje charytatywne są skuteczniejsze w pomocy potrzebującym niż państwo",
-      effects: { right: 1, auth: -1, prog: 1 },
+      effects: { right: 0.5, auth: -0.5 },
     },
     {
       question: "Każdy ma prawo wyznawać jakąkolwiek religię",
-      effects: { prog: 0.5, auth: -1 },
+      effects: { prog: 0.75, auth: -1 },
     },
 
     {
       question: "Małżeństwa państwowe powinny istnieć",
-      effects: { prog: -0.2 },
+      effects: { prog: -0.6, auth: 0.3 },
     },
 
     {
       question: "Jeśli małżeństwa powinny istnieć, to w jakiej konfiguracji.",
-      effects: { prog: 1, auth: -0.2 },
+      effects: { prog: 1, auth: -1 },
       min: 0,
       max: 1,
       marks: [
@@ -252,18 +252,18 @@ export const TestProvider = ({ children }) => {
 
     {
       question: "Rząd powinien mieć odgórną możliwość ustalania cen.",
-      effects: { right: -1 },
-      min: -0.2,
+      effects: { right: -1, auth: 1 },
+      min: -0.5,
       max: 1,
       marks: [
         {
-          value: -0.19,
+          value: -0.49,
           position: "absolute",
           answer: "Żadnej ceny",
           left: 0,
         },
         {
-          value: 0.4,
+          value: 0.1,
           // position: "absolute",
           answer: "Istnieją takie produkty",
           // left: -60,
@@ -279,21 +279,25 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "To władza powinna decydować o wysokości wynagrodzenia.",
-      effects: { right: -1 },
-      min: -0.2,
+      effects: { right: -1, auth: 1 },
+      min: -0.5,
       max: 1,
       marks: [
         {
-          value: -0.19,
+          value: -0.49,
           position: "absolute",
           answer: "Żadnego wynagrodzenia",
           left: 0,
         },
         {
+          value: -0.3,
+          answer: "W rządzie / policji / wojsku",
+          left: 50,
+          top: -50,
+        },
+        {
           value: 0,
-          // position: "absolute",
           answer: "W biurokracji państwowej",
-          // left: -60,
           left: 50,
           top: -50,
         },
@@ -316,7 +320,26 @@ export const TestProvider = ({ children }) => {
 
     {
       question: "Związki zawodowe powinny mieć istotny wpływ na gospodarkę",
-      effects: { right: -0.5 },
+      effects: { right: -0.7, prog: 0.3 },
+      max: 0.8,
+      marks: [
+        {
+          value: -0.99,
+          answer: "Nie zgadzam się",
+          left: 0,
+          position: "absolute",
+        },
+        {
+          value: 0,
+          answer: "Nie wiem",
+        },
+        {
+          value: 0.79,
+          answer: "Zgadzam się",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question: "Wszystkie przemysły i banki powinny być upaństwowione.",
