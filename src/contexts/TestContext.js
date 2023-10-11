@@ -118,12 +118,12 @@ export const TestProvider = ({ children }) => {
     {
       question:
         "W idealnym świecie prywatne przedsiębiorstwa nie powinny istnieć.",
-      effects: { right: -1, auth: 1 },
+      effects: { right: -1, auth: 1, prog: 0.25 },
     },
     {
       question:
         "Każdy ma prawo indywidualnie decydować o tym, co chce robić w życiu.",
-      effects: { right: 0.2, prog: 1 },
+      effects: { right: 1, prog: 1, auth: -0.7 },
     },
     {
       question: "Gromadzenie majątku nie powinno być dozwolone.",

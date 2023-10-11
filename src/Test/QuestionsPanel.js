@@ -64,9 +64,9 @@ const QuestionsPanel = () => {
         ? "progresywizm +"
         : "konserwatyzm +"
       : "nie wiem";
-    const tooltipInfoContent = questions[currentQuestion].info
-      ? questions[currentQuestion].info
-      : "nic";
+    // const tooltipInfoContent = questions[currentQuestion].info
+    //   ? questions[currentQuestion].info
+    //   : "nic";
     return (
       <div className="test__questions-item">
         <Tooltip
