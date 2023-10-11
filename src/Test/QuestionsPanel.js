@@ -64,8 +64,16 @@ const QuestionsPanel = () => {
         ? "progresywizm +"
         : "konserwatyzm +"
       : "nie wiem";
+    const tooltipInfoContent = questions[currentQuestion].info
+      ? questions[currentQuestion].info
+      : "nic";
     return (
       <div className="test__questions-item">
+        <Tooltip
+          style={{ zIndex: 1, width: 440 }}
+          id="correction-tooltip"
+        ></Tooltip>
+        <Tooltip style={{ zIndex: 1, width: 440 }} id="info-tooltip"></Tooltip>
         <div className="test__questions-item__number">
           pytanie nr {currentQuestion + 1}/{questions.length}
         </div>
@@ -75,6 +83,12 @@ const QuestionsPanel = () => {
           data-tooltip-content={tooltipContent}
         >
           efekt?
+        </div>
+        <div
+          className="test__questions-item__info"
+          data-tooltip-id={"info-tooltip"}
+        >
+          info?
         </div>
         <div className="test__questions-item__text">
           {questions[currentQuestion].question}

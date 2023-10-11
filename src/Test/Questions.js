@@ -28,7 +28,7 @@ const Questions = () => {
                 <span>Wagi:</span>
                 <span> Socjalizm / Kapitalizm: {item.effects.right || 0}</span>
                 <span> Anarchizm / Autorytaryzm: {item.effects.auth || 0}</span>
-                <span> Tradycja / Indywidualizm: {item.effects.prog || 0}</span>
+                <span> Tradycja / Postęp: {item.effects.prog || 0}</span>
               </div>
               <div className="test__list-item__answers">
                 <span>Od {item.min || item.min === 0 || "-1"}</span>

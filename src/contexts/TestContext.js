@@ -7,7 +7,7 @@ export const TestProvider = ({ children }) => {
     {
       question:
         "Ekonomia powinna opierać się najbardziej jak to możliwe na zasadach wolnego rynku.",
-      effects: { right: 1 },
+      effects: { right: 1, auth: -0.2 },
       min: -1,
       max: 1,
       marks: [
@@ -31,7 +31,7 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "Ubezpieczenia zdrowotne powinny być",
-      effects: { right: 1, auth: -0.2, prog: -0.3 },
+      effects: { right: 1, auth: -0.2, prog: 0 },
       marks: [
         {
           value: -0.99,
@@ -50,7 +50,7 @@ export const TestProvider = ({ children }) => {
     {
       question:
         "Pracodawcy najlepiej znają wartość pracy zatrudnionego, dlatego też uczciwie go wynagradzają.",
-      effects: { right: 1, auth: -0.2 },
+      effects: { right: 1, auth: -0.3 },
       min: -0.2,
       max: 1,
       marks: [
@@ -76,19 +76,35 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "Człowiek jest z natury zachłanny",
-      effects: { right: 1 },
+      effects: { auth: 0.25 },
+      min: 0,
+      max: 1,
+      marks: [
+        {
+          value: 0.0,
+          position: "absolute",
+          answer: "Nie",
+          left: 0,
+        },
+        {
+          value: 0.99,
+          answer: "Tak",
+          right: 0,
+          position: "absolute",
+        },
+      ],
     },
     {
       question: "Komunizm nigdy nie zadziała w praktyce.",
-      effects: { right: 1, auth: -0.3 },
+      effects: { right: 1, auth: -0.3, prog: -0.1 },
     },
     {
       question: "Podatki powinny być jak najmniejsze.",
-      effects: { right: 1 },
+      effects: { right: 1, auth: -0.7 },
     },
     {
       question: "Opodatkowanie dochodu to dobry pomysł.",
-      effects: { right: -0.5 },
+      effects: { right: -0.5, prog: 0.2, auth: 0.2 },
     },
     {
       question:
@@ -97,7 +113,7 @@ export const TestProvider = ({ children }) => {
     },
     {
       question: "Duże organizacje i korporacje potrzebują regulacji.",
-      effects: { right: -0.5, auth: 1 },
+      effects: { right: -0.8, auth: 1 },
     },
     {
       question:
@@ -171,18 +187,7 @@ export const TestProvider = ({ children }) => {
           position: "absolute",
         },
       ],
-      info: (
-        <div>
-          W pytaniu chodzi przede wszystkim o stopień pomocy socjalnej, którego
-          ma udzielać władza. Podpowiedzi na osi mają charakter wyłącznie
-          pomocniczy i ich za zadaniem jest przede wszystkim pomóc mniej więcej
-          uświadomić sobie o jaki poziom socjalnej pomocy chodzi. Możesz
-          oczywiście popierać np. pomoc prodemograficzną, a nie popierać dla
-          najuboższych, powinieneś wtedy jednak skorygować swój wynik
-          odpowiednio w lewo, nawet jeśli oznaczałoby to teoretycznie na skali
-          zgodę na coś odwrotnego.
-        </div>
-      ),
+      info: "W pytaniu chodzi przede wszystkim o stopień pomocy socjalnej, którego           ma udzielać władza. Podpowiedzi na osi mają charakter wyłącznie pomocniczy i ich za zadaniem jest przede wszystkim pomóc mniej więcej świadomić sobie o jaki poziom socjalnej pomocy chodzi. Możesz    oczywiście popierać np. pomoc prodemograficzną, a nie popierać dla        najuboższych, powinieneś wtedy jednak skorygować swój wynik        odpowiednio w lewo, nawet jeśli oznaczałoby to teoretycznie na skali        zgodę na coś odwrotnego.",
     },
     {
       // fundacje
@@ -363,7 +368,7 @@ export const TestProvider = ({ children }) => {
       effects: { auth: -1 },
     },
     {
-      question: "Aresztowanie bez procesu powinno być zakazane.",
+      question: "Aresztowanie tymczasowe (bez procesu) powinno być zakazane.",
       effects: { auth: -0.3 },
     },
     {
