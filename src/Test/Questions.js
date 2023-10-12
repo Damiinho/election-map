@@ -31,7 +31,9 @@ const Questions = () => {
                 <span> Tradycja / Postęp: {item.effects.prog || 0}</span>
               </div>
               <div className="test__list-item__answers">
-                <span>Od {item.min || item.min === 0 || "-1"}</span>
+                <span>
+                  Od {item.min ? item.min : item.min === 0 ? "0" : "-1"}
+                </span>
                 <div>
                   {item.marks ? (
                     item.marks.map((mark) => (
@@ -47,7 +49,9 @@ const Questions = () => {
                     </>
                   )}
                 </div>
-                <span>do {item.max || item.max === 0 || 1}</span>
+                <span>
+                  do {item.max ? item.max : item.max === 0 ? "0" : "1"}
+                </span>
               </div>
             </div>
             {/* <div className="test__list-item">{item.answer.map}</div> */}
