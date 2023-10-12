@@ -94,9 +94,18 @@ const District = (props) => {
 
     const totalMandates = currentDistrict.deputies;
 
+    const eligibleParties = partiesWithResults.filter(
+      (party) => party.isOverThreshold
+    );
+
     // Funkcja do przydzielania mandatów
     const distributeSeats = (parties, totalSeats) => {
-      const partiesWithSeats = parties.map((party) => ({
+      if (eligibleParties.length === 0) {
+        // Żadna z partii nie przekroczyła progu wyborczego, więc nic się nie dzieje
+        return parties.map((party) => ({ ...party, seats: 0 }));
+      }
+
+      const partiesWithSeats = eligibleParties.map((party) => ({
         ...party,
         seats: 0,
       }));
@@ -124,11 +133,11 @@ const District = (props) => {
     const allPartiesHaveZeroResults = partiesWithResults.every(
       (party) => party.result === 0 || isNaN(party.result)
     );
-    if (allPartiesHaveZeroResults) {
+    if (allPartiesHaveZeroResults || eligibleParties.length === 0) {
       return;
     }
 
-    // Przydzielanie mandatów tylko jeśli nie wszystkie partie mają wynik 0
+    // Przydzielanie mandatów tylko jeśli nie wszystkie partie mają wyn ik 0
     const partiesWithMandates = allPartiesHaveZeroResults
       ? partiesWithResults.map((party) => ({ ...party, seats: 0 }))
       : distributeSeats(partiesWithResults, totalMandates);
