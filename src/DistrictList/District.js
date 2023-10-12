@@ -121,8 +121,11 @@ const District = (props) => {
 
     // Sprawdzenie, czy każda partia ma wynik 0 w results
     const allPartiesHaveZeroResults = partiesWithResults.every(
-      (party) => party.result === 0
+      (party) => party.result === 0 || isNaN(party.result)
     );
+    if (allPartiesHaveZeroResults) {
+      return;
+    }
 
     // Przydzielanie mandatów tylko jeśli nie wszystkie partie mają wynik 0
     const partiesWithMandates = allPartiesHaveZeroResults
