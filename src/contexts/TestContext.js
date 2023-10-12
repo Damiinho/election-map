@@ -187,7 +187,25 @@ export const TestProvider = ({ children }) => {
           position: "absolute",
         },
       ],
-      info: "W pytaniu chodzi przede wszystkim o stopień pomocy socjalnej, którego           ma udzielać władza. Podpowiedzi na osi mają charakter wyłącznie pomocniczy i ich za zadaniem jest przede wszystkim pomóc mniej więcej świadomić sobie o jaki poziom socjalnej pomocy chodzi. Możesz    oczywiście popierać np. pomoc prodemograficzną, a nie popierać dla        najuboższych, powinieneś wtedy jednak skorygować swój wynik        odpowiednio w lewo, nawet jeśli oznaczałoby to teoretycznie na skali        zgodę na coś odwrotnego.",
+      info: (
+        <div>
+          <p style={{ marginBottom: 10 }}>
+            W pytaniu chodzi przede wszystkim o stopień pomocy socjalnej,
+            którego ma udzielać władza.
+          </p>
+          <p style={{ marginBottom: 10 }}>
+            Podpowiedzi na osi mają charakter wyłącznie pomocniczy i ich za
+            zadaniem jest przede wszystkim pomóc mniej więcej świadomić sobie o
+            jaki poziom socjalnej pomocy chodzi.
+          </p>
+          <p>
+            Możesz oczywiście popierać np. pomoc prodemograficzną, a nie
+            popierać dla najuboższych, powinieneś wtedy jednak skorygować swój
+            wynik odpowiednio w lewo, nawet jeśli oznaczałoby to teoretycznie na
+            skali zgodę na coś odwrotnego.
+          </p>
+        </div>
+      ),
     },
     {
       // fundacje
