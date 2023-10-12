@@ -69,27 +69,58 @@ const QuestionsPanel = () => {
     //   : "nic";
     return (
       <div className="test__questions-item">
+        <Tooltip id="question-tooltip">
+          {!effects.right || effects.right === 0 ? (
+            ""
+          ) : effects.right > 0 ? (
+            <div>Kapitalizm: {effects.right}</div>
+          ) : (
+            <div>Socjalizm: {Math.abs(effects.right)}</div>
+          )}
+          {!effects.auth || effects.auth === 0 ? (
+            ""
+          ) : effects.auth > 0 ? (
+            <div>Autorytaryzm: {effects.auth}</div>
+          ) : (
+            <div>Anarchizm: {Math.abs(effects.auth)}</div>
+          )}
+          {!effects.prog || effects.prog === 0 ? (
+            ""
+          ) : effects.prog > 0 ? (
+            <div>Postęp: {effects.prog}</div>
+          ) : (
+            <div>Tradycja: {Math.abs(effects.prog)}</div>
+          )}
+        </Tooltip>
         <Tooltip
-          style={{ zIndex: 1, width: 440 }}
-          id="correction-tooltip"
-        ></Tooltip>
-        <Tooltip style={{ zIndex: 1, width: 440 }} id="info-tooltip"></Tooltip>
+          style={{
+            zIndex: 1,
+            width: 280,
+            fontSize: 14,
+            textAlign: "left",
+            ">p": { marginBottom: 10 },
+          }}
+          id="info-tooltip"
+        >
+          {questions[currentQuestion].info}
+        </Tooltip>
         <div className="test__questions-item__number">
           pytanie nr {currentQuestion + 1}/{questions.length}
         </div>
         <div
           className="test__questions-item__effect"
           data-tooltip-id={"question-tooltip"}
-          data-tooltip-content={tooltipContent}
         >
           efekt?
         </div>
-        <div
-          className="test__questions-item__info"
-          data-tooltip-id={"info-tooltip"}
-        >
-          info?
-        </div>
+        {questions[currentQuestion].info && (
+          <div
+            className="test__questions-item__info"
+            data-tooltip-id={"info-tooltip"}
+          >
+            info?
+          </div>
+        )}
         <div className="test__questions-item__text">
           {questions[currentQuestion].question}
         </div>
@@ -279,7 +310,6 @@ const QuestionsPanel = () => {
 
   return (
     <div className="test__questions">
-      <Tooltip id="question-tooltip" />
       {windowWidth > 400 ? (
         <div className="test__questions-buttons">
           <Button
