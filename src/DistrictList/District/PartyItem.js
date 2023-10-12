@@ -6,26 +6,28 @@ const PartyItem = (props) => {
     <div className="list__element-parties__item">
       <p>{props.item.name}</p>
       <div className="list__element-parties__item-handle">
-        <Button
-          variant="contained"
-          size="medium"
-          color="error"
-          sx={{
-            minWidth: "20px",
-            width: "20px",
-            height: "30px",
-            minHeight: "30px",
-            backgroundColor: "#cf2b34",
-            "&:hover": {
-              backgroundColor: "#c2232d",
-            },
-          }}
-          onClick={() =>
-            props.handleLocalDelete(props.index, props.currentDistrictIndex)
-          }
-        >
-          <CancelIcon />
-        </Button>
+        {props.item.deletable && (
+          <Button
+            variant="contained"
+            size="medium"
+            color="error"
+            sx={{
+              minWidth: "20px",
+              width: "20px",
+              height: "30px",
+              minHeight: "30px",
+              backgroundColor: "#cf2b34",
+              "&:hover": {
+                backgroundColor: "#c2232d",
+              },
+            }}
+            onClick={() =>
+              props.handleLocalDelete(props.index, props.currentDistrictIndex)
+            }
+          >
+            <CancelIcon />
+          </Button>
+        )}
         <TextField
           color="info"
           type="number"

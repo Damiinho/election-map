@@ -50,6 +50,7 @@ const District = (props) => {
       name,
       isOverThreshold: true,
       color: randomColor(),
+      deletable: true,
     };
 
     newParties.push(party);
