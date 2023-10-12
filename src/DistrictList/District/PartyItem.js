@@ -2,6 +2,7 @@ import { Button, TextField } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 const PartyItem = (props) => {
+  console.log(props);
   return (
     <div className="list__element-parties__item">
       <p>{props.item.name}</p>
@@ -20,7 +21,9 @@ const PartyItem = (props) => {
             },
             opacity: 0.6,
           }}
-          onClick={() => props.handleLocalDelete(props.index, props.index)}
+          onClick={() =>
+            props.handleLocalDelete(props.index, props.currentDistrictIndex)
+          }
         >
           <CancelIcon />
         </Button>

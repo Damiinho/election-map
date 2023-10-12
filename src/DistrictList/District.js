@@ -210,6 +210,7 @@ const District = (props) => {
               key={index}
               index={index}
               item={item}
+              currentDistrictIndex={props.index}
               currentResults={currentResults}
               handleLocalDelete={handleLocalDelete}
               handleResultChange={handleResultChange}
