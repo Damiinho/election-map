@@ -2,7 +2,6 @@ import { Button, TextField } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 const PartyItem = (props) => {
-  console.log(props);
   return (
     <div className="list__element-parties__item">
       <p>{props.item.name}</p>
