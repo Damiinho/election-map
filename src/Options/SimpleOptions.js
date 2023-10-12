@@ -199,14 +199,12 @@ const SimpleOptions = () => {
     }
     currentSum = currentSum + value;
     if (currentSum > 100) return null;
-
     newSimpleParties[index].result = value;
     let newSum = 0;
     for (let i = 0; i < 6; i++) {
       newSum = newSum + newSimpleParties[i].result;
     }
-    newSimpleParties[6].result = (100 - newSum).toFixed(2);
-
+    newSimpleParties[6].result = parseFloat((100 - newSum).toFixed(2));
     setSimpleParties(newSimpleParties);
     if (results2019) {
       setResults2019(false);
