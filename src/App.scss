@@ -2079,6 +2079,11 @@ $tertiary-color: #9c62a12c;
       // width: 100%;
       @include justify-align-center();
     }
+    &-resetbutton {
+      display: flex;
+      // width: 100%;
+      @include justify-align-center();
+    }
     &-description {
       width: 500px;
       margin: 0 auto;

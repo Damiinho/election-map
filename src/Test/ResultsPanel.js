@@ -18,6 +18,60 @@ const ResultsPanel = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [rotate, setRotate] = useState([-28, -16, 6]);
+  const [isDragging, setIsDragging] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseDown = (event) => {
+    if (event.button === 0) {
+      setIsDragging(true);
+    }
+  };
+  const handleTouchMove = (event) => {
+    const touch = event.touches[0];
+    const x = touch.clientX;
+    const y = touch.clientY;
+    const newRotate = [...rotate];
+    if (y > mousePosition.y) {
+      newRotate[1] = newRotate[1] - 1;
+    }
+    if (y < mousePosition.y) {
+      newRotate[1] = newRotate[1] + 1;
+    }
+    if (x > mousePosition.x) {
+      newRotate[0] = newRotate[0] - 1;
+    }
+    if (x < mousePosition.x) {
+      newRotate[0] = newRotate[0] + 1;
+    }
+    setRotate(newRotate);
+    setMousePosition({ x, y });
+  };
+  const handleMouseMove = (event) => {
+    if (isDragging) {
+      const x = event.clientX;
+      const y = event.clientY;
+      console.log(event);
+      const newRotate = [...rotate];
+      if (y > mousePosition.y) {
+        newRotate[1] = newRotate[1] - 1;
+      }
+      if (y < mousePosition.y) {
+        newRotate[1] = newRotate[1] + 1;
+      }
+      if (x > mousePosition.x) {
+        newRotate[0] = newRotate[0] - 1;
+      }
+      if (x < mousePosition.x) {
+        newRotate[0] = newRotate[0] + 1;
+      }
+
+      setRotate(newRotate);
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
 
   useEffect(() => {
     if (params.values) {
@@ -246,10 +300,30 @@ const ResultsPanel = () => {
             <RedoIcon />
           </Button>
         </div>
-        <div className="boxes">
+        <div className="test__result-resetbutton">
+          <Button
+            color="error"
+            size="small"
+            variant="contained"
+            style={{ textTransform: "lowercase" }}
+            onClick={() => {
+              setRotate([-28, -16, 6]);
+            }}
+          >
+            reset
+          </Button>
+        </div>
+        <div
+          className="boxes"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchMove={handleTouchMove}
+        >
           <div
             className="box"
             style={{
+              cursor: isDragging ? "grabbing" : "grab",
               transform: `rotateY(${rotate[0]}deg) rotateX(${rotate[1]}deg) rotateZ(${rotate[2]}deg)`,
             }}
           >

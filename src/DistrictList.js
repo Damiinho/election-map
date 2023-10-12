@@ -6,6 +6,7 @@ import SearchDistrict from "./DistrictList/SearchDistrict";
 import { Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { DataContext } from "./contexts/DataContext";
+// import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 const DistrictList = () => {
   const {
@@ -78,6 +79,16 @@ const DistrictList = () => {
         >
           Usuń wszystkie
         </Button>
+        {/* <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          style={{ textTransform: "lowercase" }}
+          startIcon={<PlayCircleOutlineIcon />}
+          onClick={handleGenerate}
+        >
+          generuj wszystkie
+        </Button> */}
         {/* <Button>Pokaż tylko nieuzupełnione</Button> */}
       </div>
       <div className={`App__districtlist-main ${showDistricts ? "" : "hide"}`}>
