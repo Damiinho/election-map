@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import { AppContext } from "../contexts/AppContext";
 import MenuSharpIcon from "@mui/icons-material/MenuSharp";
+import { DataContext } from "../contexts/DataContext";
 
 const QuestionsPanel = () => {
   const {
@@ -17,6 +18,7 @@ const QuestionsPanel = () => {
     setIsTestStart,
   } = useContext(TestContext);
   const { windowWidth } = useContext(AppContext);
+  const { setDistricts } = useContext(DataContext);
   const navigate = useNavigate();
 
   const [hamburgerActive, setHamburgerActive] = useState(false);
@@ -51,22 +53,7 @@ const QuestionsPanel = () => {
       return <div>Rozpocznij od nowa</div>;
     }
     const effects = questions[currentQuestion].effects;
-    const tooltipContent = effects.right
-      ? effects.right > 0
-        ? "kapitalizm +"
-        : "socjalizm +"
-      : effects.auth
-      ? effects.auth > 0
-        ? "autorytaryzm +"
-        : "anarchizm +"
-      : effects.prog
-      ? effects.prog > 0
-        ? "progresywizm +"
-        : "konserwatyzm +"
-      : "nie wiem";
-    // const tooltipInfoContent = questions[currentQuestion].info
-    //   ? questions[currentQuestion].info
-    //   : "nic";
+
     return (
       <div className="test__questions-item">
         <Tooltip id="question-tooltip">
@@ -343,6 +330,7 @@ const QuestionsPanel = () => {
             size={windowWidth > 910 ? "medium" : "small"}
             onClick={() => {
               navigate("/prosty/");
+              setDistricts([]);
             }}
           >
             kalkulator
