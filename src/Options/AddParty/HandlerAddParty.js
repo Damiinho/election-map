@@ -42,7 +42,6 @@ const HandlerAddParty = () => {
       isOverThreshold,
       color: chosenColor,
     };
-    console.log(party);
 
     newParties.push(party);
     setName("");

@@ -54,6 +54,9 @@ const District = (props) => {
     };
 
     newParties.push(party);
+    const newCurrentResults = [...currentResults];
+    newCurrentResults[currentResults.length] = 0;
+    setCurrentResults(newCurrentResults);
     setName("");
     setDistricts((prevDistricts) => {
       const updatedDistricts = [...prevDistricts];
