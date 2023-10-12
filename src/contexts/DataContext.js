@@ -53,7 +53,7 @@ export const DataProvider = ({ children }) => {
       shortName: "inne",
       isOverThreshold: false,
       color: "#999999",
-      result: 0,
+      result: 100,
     },
   ]);
   const [districts, setDistricts] = useState([]);

@@ -191,7 +191,21 @@ const SimpleOptions = () => {
     } else if (value > 100) {
       value = 100;
     }
+    let currentSum = 0;
+    for (let i = 0; i < 6; i++) {
+      if (i !== index) {
+        currentSum = currentSum + newSimpleParties[i].result;
+      }
+    }
+    currentSum = currentSum + value;
+    if (currentSum > 100) return null;
+
     newSimpleParties[index].result = value;
+    let newSum = 0;
+    for (let i = 0; i < 6; i++) {
+      newSum = newSum + newSimpleParties[i].result;
+    }
+    newSimpleParties[6].result = (100 - newSum).toFixed(2);
 
     setSimpleParties(newSimpleParties);
     if (results2019) {
