@@ -65,6 +65,7 @@ const ResultsPanel = () => {
       }
 
       setRotate(newRotate);
+      setMousePosition({ x, y });
     }
   };
 
