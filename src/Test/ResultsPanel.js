@@ -50,7 +50,6 @@ const ResultsPanel = () => {
     if (isDragging) {
       const x = event.clientX;
       const y = event.clientY;
-      console.log(event);
       const newRotate = [...rotate];
       if (y > mousePosition.y) {
         newRotate[1] = newRotate[1] - 1;
@@ -238,7 +237,6 @@ const ResultsPanel = () => {
               const newRotate = [...rotate];
               newRotate[0] = rotate[0] - 10;
               setRotate(newRotate);
-              console.log(rotate);
             }}
           >
             <ArrowCircleLeftTwoToneIcon />
@@ -249,7 +247,6 @@ const ResultsPanel = () => {
               const newRotate = [...rotate];
               newRotate[0] = rotate[0] + 10;
               setRotate(newRotate);
-              console.log(rotate);
             }}
           >
             <ArrowCircleRightTwoToneIcon />
@@ -260,7 +257,6 @@ const ResultsPanel = () => {
               const newRotate = [...rotate];
               newRotate[1] = rotate[1] + 10;
               setRotate(newRotate);
-              console.log(rotate);
             }}
           >
             <ArrowCircleUpTwoToneIcon />
@@ -271,7 +267,6 @@ const ResultsPanel = () => {
               const newRotate = [...rotate];
               newRotate[1] = rotate[1] - 10;
               setRotate(newRotate);
-              console.log(rotate);
             }}
           >
             <ArrowCircleDownTwoToneIcon />
@@ -283,7 +278,6 @@ const ResultsPanel = () => {
               const newRotate = [...rotate];
               newRotate[2] = rotate[2] - 10;
               setRotate(newRotate);
-              console.log(rotate);
             }}
           >
             <UndoIcon />
@@ -294,7 +288,6 @@ const ResultsPanel = () => {
               const newRotate = [...rotate];
               newRotate[2] = rotate[2] + 10;
               setRotate(newRotate);
-              console.log(rotate);
             }}
           >
             <RedoIcon />

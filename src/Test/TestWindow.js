@@ -15,10 +15,8 @@ const TestWindow = () => {
   ] = useState(params.result);
   // const navigate = useNavigate();
 
-  console.log(params);
   useEffect(() => {
     params.result = parametr;
-    console.log(params);
   }, [params, parametr]);
   return (
     // <div
