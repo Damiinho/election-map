@@ -15,10 +15,10 @@ const PartyItem = (props) => {
             width: "20px",
             height: "30px",
             minHeight: "30px",
+            backgroundColor: "#cf2b34",
             "&:hover": {
-              opacity: 1,
+              backgroundColor: "#c2232d",
             },
-            opacity: 0.6,
           }}
           onClick={() =>
             props.handleLocalDelete(props.index, props.currentDistrictIndex)
