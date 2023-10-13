@@ -1,46 +1,164 @@
-import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
-import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import MySmallInfoBox from "../../Components/MySmallInfoBox";
+import DragIndicatorRoundedIcon from "@mui/icons-material/DragIndicatorRounded";
 
 const BoxSimpleSummary = () => {
   const { simpleFinalResultSummary, setSimpleFinalResultSummary, windowWidth } =
     useContext(AppContext);
+  const [grabbedElement, setGrabbedElement] = useState(null);
+  const [grabbing, setGrabbing] = useState(false);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
 
-  const handleArrowClick = (currentIndex, targetIndex, shortName) => {
-    const finalResultCopy = [...simpleFinalResultSummary];
-    const temp = finalResultCopy[currentIndex];
+  const handleMouseDown = (e, index) => {
+    setGrabbedElement({ index });
+    setOffset({ x: e.clientX, y: e.clientY });
+    setGrabbing(true);
+  };
 
-    finalResultCopy[currentIndex] = finalResultCopy[targetIndex];
-    finalResultCopy[targetIndex] = temp;
-    setSimpleFinalResultSummary(finalResultCopy);
+  const handleMouseMove = (e) => {
+    if (grabbing) {
+      // Oblicz nową pozycję przesuwanego elementu na podstawie pozycji myszy i przesunięcia
+      const newLeft = e.clientX - offset.x;
+      const newTop = e.clientY - offset.y;
+
+      // Zaktualizuj pozycję przesuwanego elementu
+      setGrabbedElement((prevElement) => ({
+        ...prevElement,
+        left: newLeft,
+        top: newTop,
+      }));
+    }
+  };
+
+  const handleMouseUp = (index) => {
+    const elements = document.querySelectorAll(
+      ".simpleSummary-main__summary-box__item"
+    );
+    const positions = Array.from(elements).map((element, index) => {
+      const rect = element.getBoundingClientRect();
+      return {
+        left: rect.left,
+        order: index,
+      };
+    });
+    positions.sort((a, b) => a.left - b.left);
+
+    if (grabbing) {
+      // Zakończ przeciąganie - zresetuj stany
+      setGrabbedElement(null);
+      setGrabbing(false);
+      setOffset({ x: 0, y: 0 });
+
+      const newSimpleFinalResultSummary = positions.map((pos) => {
+        // Znajdź odpowiadający element na podstawie referencji do elementu DOM
+        const foundItem = simpleFinalResultSummary.find(
+          (item, index) => index === pos.order
+        );
+
+        return foundItem;
+      });
+      setSimpleFinalResultSummary(newSimpleFinalResultSummary);
+    }
+  };
+
+  const handleTouchStart = (e, index) => {
+    setGrabbedElement({ index });
+    setOffset({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    setGrabbing(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (grabbing) {
+      const newLeft = e.touches[0].clientX - offset.x;
+      const newTop = e.touches[0].clientY - offset.y;
+
+      setGrabbedElement((prevElement) => ({
+        ...prevElement,
+        left: newLeft,
+        top: newTop,
+      }));
+    }
+  };
+
+  const handleTouchEnd = (index) => {
+    const elements = document.querySelectorAll(
+      ".simpleSummary-main__summary-box__item"
+    );
+    const positions = Array.from(elements).map((element, idx) => {
+      const rect = element.getBoundingClientRect();
+      return {
+        left: rect.left,
+        order: idx,
+      };
+    });
+    positions.sort((a, b) => a.left - b.left);
+
+    if (grabbing) {
+      setGrabbedElement(null);
+      setGrabbing(false);
+      setOffset({ x: 0, y: 0 });
+
+      const newSimpleFinalResultSummary = positions.map((pos) => {
+        const foundItem = simpleFinalResultSummary.find(
+          (item, index) => index === pos.order
+        );
+
+        return foundItem;
+      });
+      setSimpleFinalResultSummary(newSimpleFinalResultSummary);
+    }
   };
 
   return (
     <div className="simpleSummary-main__summary-box">
       {simpleFinalResultSummary.map((party, index) => {
-        // if (party.shortName === "inne") return null;
-
         return (
-          <div key={index} className="simpleSummary-main__summary-box__item">
-            <ArrowLeftRoundedIcon
-              onClick={() => {
-                if (index > 0) {
-                  handleArrowClick(index, index - 1, party.shortName);
-                }
-              }}
-              style={{
-                cursor: index > 0 ? "pointer" : "",
-                borderRadius: 5,
-                color: index > 0 ? "#777777" : "transparent",
-                margin: "0 auto",
-                position: "absolute",
-                top: "50%",
-                left: "-10px",
-              }}
-              fontSize="large"
-            />
+          <div
+            key={index}
+            className="simpleSummary-main__summary-box__item"
+            onMouseDown={(e) => handleMouseDown(e, index)}
+            onMouseUp={() => handleMouseUp(index)}
+            onMouseMove={handleMouseMove}
+            onTouchStart={(e) => handleTouchStart(e, index)}
+            onTouchEnd={() => handleTouchEnd(index)}
+            onTouchMove={handleTouchMove}
+            style={{
+              top:
+                grabbing && index === grabbedElement.index
+                  ? grabbedElement.top
+                  : "auto",
+              left:
+                grabbing && index === grabbedElement.index
+                  ? grabbedElement.left
+                  : "auto",
+              zIndex: grabbing && index === grabbedElement.index ? 1 : "auto",
+            }}
+          >
+            {index > 0 && (
+              <DragIndicatorRoundedIcon
+                style={{
+                  left: -3,
+                  cursor:
+                    grabbing && index === grabbedElement.index
+                      ? "grabbing"
+                      : "grab",
+                }}
+                className="simpleSummary-main__summary-box__item-drag"
+              />
+            )}
+            {index < simpleFinalResultSummary.length - 1 && (
+              <DragIndicatorRoundedIcon
+                style={{
+                  right: -3,
+                  cursor:
+                    grabbing && index === grabbedElement.index
+                      ? "grabbing"
+                      : "grab",
+                }}
+                className="simpleSummary-main__summary-box__item-drag"
+              />
+            )}
             <MySmallInfoBox
               txt={party.shortName}
               value={party.seats}
@@ -50,27 +168,9 @@ const BoxSimpleSummary = () => {
               title={party.name}
               fontSizeTop={windowWidth > 350 ? "" : 10}
               fontSizeBottom={windowWidth > 350 ? "" : 15}
-            />
-            <ArrowRightRoundedIcon
-              onClick={() => {
-                if (index < simpleFinalResultSummary.length - 1) {
-                  handleArrowClick(index, index + 1, party.shortName);
-                }
-              }}
-              style={{
-                cursor:
-                  index < simpleFinalResultSummary.length - 1 ? "pointer" : "",
-                borderRadius: 5,
-                color:
-                  index < simpleFinalResultSummary.length - 1
-                    ? "#777777"
-                    : "transparent",
-                margin: "0 auto",
-                position: "absolute",
-                top: "50%",
-                right: "-10px",
-              }}
-              fontSize="large"
+              cursor={
+                grabbing && index === grabbedElement.index ? "grabbing" : "grab"
+              }
             />
           </div>
         );

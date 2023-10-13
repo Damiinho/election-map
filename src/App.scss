@@ -1536,6 +1536,17 @@ $tertiary-color: #9c62a12c;
             display: flex;
             @include justify-align-center();
             position: relative;
+            &-drag {
+              color: #dfdfdf;
+              transition: 0.5s;
+              position: absolute;
+              bottom: 5%;
+            }
+          }
+          &__item:hover {
+            .simpleSummary-main__summary-box__item-drag {
+              color: #707070;
+            }
           }
         }
         &-graph {
@@ -1688,6 +1699,7 @@ $tertiary-color: #9c62a12c;
             justify-content: center;
             &-subtitle {
               font-size: 15px;
+              background-color: #dfdfdf;
             }
           }
           &__results {
