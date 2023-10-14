@@ -39,19 +39,65 @@ const BoxSimpleSummary = () => {
       const rect = element.getBoundingClientRect();
       return {
         left: rect.left,
+        top: rect.top,
         order: index,
       };
     });
-    positions.sort((a, b) => a.left - b.left);
+
+    let newPositions = [];
+    let savedPosition = null;
+
+    for (let i = 0; i < positions.length; i++) {
+      if (positions[i].order !== grabbedElement.index) {
+        newPositions.push(positions[i]);
+      } else {
+        savedPosition = positions[i];
+      }
+    }
+    const firstGroup = [];
+    const secondGroup = [];
+
+    if (newPositions.every((item) => item.top === newPositions[0].top)) {
+      newPositions = [...positions.sort((a, b) => a.left - b.left)];
+    } else {
+      const referenceTop = newPositions[0].top;
+
+      newPositions.forEach((item) => {
+        if (item.top === referenceTop) {
+          firstGroup.push(item);
+        } else {
+          secondGroup.push(item);
+        }
+      });
+      if (firstGroup[0].top > secondGroup[0].top) {
+        if (savedPosition.top + 20 < firstGroup[0].top) {
+          secondGroup.push(savedPosition);
+        } else {
+          firstGroup.push(savedPosition);
+        }
+        newPositions = [
+          ...secondGroup.sort((a, b) => a.left - b.left),
+          ...firstGroup.sort((a, b) => a.left - b.left),
+        ];
+      } else {
+        if (savedPosition.top + 20 < secondGroup[0].top) {
+          firstGroup.push(savedPosition);
+        } else {
+          secondGroup.push(savedPosition);
+        }
+        newPositions = [
+          ...firstGroup.sort((a, b) => a.left - b.left),
+          ...secondGroup.sort((a, b) => a.left - b.left),
+        ];
+      }
+    }
 
     if (grabbing) {
-      // Zakończ przeciąganie - zresetuj stany
       setGrabbedElement(null);
       setGrabbing(false);
       setOffset({ x: 0, y: 0 });
 
-      const newSimpleFinalResultSummary = positions.map((pos) => {
-        // Znajdź odpowiadający element na podstawie referencji do elementu DOM
+      const newSimpleFinalResultSummary = newPositions.map((pos) => {
         const foundItem = simpleFinalResultSummary.find(
           (item, index) => index === pos.order
         );
@@ -89,17 +135,64 @@ const BoxSimpleSummary = () => {
       const rect = element.getBoundingClientRect();
       return {
         left: rect.left,
+        top: rect.top,
         order: idx,
       };
     });
-    positions.sort((a, b) => a.left - b.left);
+    let newPositions = [];
+    let savedPosition = null;
+
+    for (let i = 0; i < positions.length; i++) {
+      if (positions[i].order !== grabbedElement.index) {
+        newPositions.push(positions[i]);
+      } else {
+        savedPosition = positions[i];
+      }
+    }
+    const firstGroup = [];
+    const secondGroup = [];
+
+    if (newPositions.every((item) => item.top === newPositions[0].top)) {
+      newPositions = [...positions.sort((a, b) => a.left - b.left)];
+    } else {
+      const referenceTop = newPositions[0].top;
+
+      newPositions.forEach((item) => {
+        if (item.top === referenceTop) {
+          firstGroup.push(item);
+        } else {
+          secondGroup.push(item);
+        }
+      });
+      if (firstGroup[0].top > secondGroup[0].top) {
+        if (savedPosition.top + 20 < firstGroup[0].top) {
+          secondGroup.push(savedPosition);
+        } else {
+          firstGroup.push(savedPosition);
+        }
+        newPositions = [
+          ...secondGroup.sort((a, b) => a.left - b.left),
+          ...firstGroup.sort((a, b) => a.left - b.left),
+        ];
+      } else {
+        if (savedPosition.top + 20 < secondGroup[0].top) {
+          firstGroup.push(savedPosition);
+        } else {
+          secondGroup.push(savedPosition);
+        }
+        newPositions = [
+          ...firstGroup.sort((a, b) => a.left - b.left),
+          ...secondGroup.sort((a, b) => a.left - b.left),
+        ];
+      }
+    }
 
     if (grabbing) {
       setGrabbedElement(null);
       setGrabbing(false);
       setOffset({ x: 0, y: 0 });
 
-      const newSimpleFinalResultSummary = positions.map((pos) => {
+      const newSimpleFinalResultSummary = newPositions.map((pos) => {
         const foundItem = simpleFinalResultSummary.find(
           (item, index) => index === pos.order
         );

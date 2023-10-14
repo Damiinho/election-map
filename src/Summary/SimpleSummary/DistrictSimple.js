@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { DataContext } from "../../contexts/DataContext";
 import MySmallInfoBox from "../../Components/MySmallInfoBox";
-import MyBar from "../../Components/MyBar";
 import { AppContext } from "../../contexts/AppContext";
 import { Tooltip } from "react-tooltip";
 
@@ -672,10 +671,10 @@ const DistrictSimple = (props) => {
           Liczba mandatów z listy
         </div>
         <div className="simpleSummary-main__details-element__results-element__bar">
-          <Tooltip id="seatsBar" />
+          <Tooltip id="districtSeatsBar" />
           <div
             className="simpleSummary-main__details-element__results-element__bar-center"
-            data-tooltip-id="seatsBar"
+            data-tooltip-id="districtSeatsBar"
             data-tooltip-content={`50%`}
           ></div>
           {props.district.finalResult.map((item, index) => {
@@ -692,7 +691,7 @@ const DistrictSimple = (props) => {
                     alignItems: "center",
                   }}
                   key={index}
-                  data-tooltip-id="seatsBar"
+                  data-tooltip-id="districtSeatsBar"
                   data-tooltip-content={`${item.name}, miejsc: ${item.seats}`}
                 >
                   {item.seats}
@@ -716,10 +715,10 @@ const DistrictSimple = (props) => {
           Procent głosów na liście
         </div>
         <div className="simpleSummary-main__details-element__results-element__bar">
-          <Tooltip id="percentageBar" />
+          <Tooltip id="districtPercentageBar" />
           <div
             className="simpleSummary-main__details-element__results-element__bar-center"
-            data-tooltip-id="percentageBar"
+            data-tooltip-id="districtPercentageBar"
             data-tooltip-content={`50%`}
           ></div>
           {props.district.finalResult.map((item, index) => (
@@ -734,7 +733,7 @@ const DistrictSimple = (props) => {
                 alignItems: "center",
               }}
               key={index}
-              data-tooltip-id="percentageBar"
+              data-tooltip-id="districtPercentageBar"
               data-tooltip-content={`${item.name}, ${item.result.toFixed(2)}%`}
             >
               {item.result > 4.99 &&
