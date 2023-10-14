@@ -138,7 +138,7 @@ const BoxSimpleSummary = () => {
             {index > 0 && (
               <DragIndicatorRoundedIcon
                 style={{
-                  left: -3,
+                  left: windowWidth > 350 ? -3 : -1,
                   cursor:
                     grabbing && index === grabbedElement.index
                       ? "grabbing"
@@ -150,7 +150,7 @@ const BoxSimpleSummary = () => {
             {index < simpleFinalResultSummary.length - 1 && (
               <DragIndicatorRoundedIcon
                 style={{
-                  right: -3,
+                  right: windowWidth > 350 ? -3 : -1,
                   cursor:
                     grabbing && index === grabbedElement.index
                       ? "grabbing"

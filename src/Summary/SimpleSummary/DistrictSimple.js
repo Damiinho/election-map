@@ -3,6 +3,7 @@ import { DataContext } from "../../contexts/DataContext";
 import MySmallInfoBox from "../../Components/MySmallInfoBox";
 import MyBar from "../../Components/MyBar";
 import { AppContext } from "../../contexts/AppContext";
+import { Tooltip } from "react-tooltip";
 
 const DistrictSimple = (props) => {
   const { simpleDistricts, setSimpleDistricts } = useContext(DataContext);
@@ -659,6 +660,92 @@ const DistrictSimple = (props) => {
     // simpleDistricts,
   ]);
 
+  const SeatsBarSimpleSummary = () => {
+    const sum = props.district.finalResult.reduce(
+      (total, item) => total + item.seats,
+      0
+    );
+
+    return (
+      <div className="simpleSummary-main__details-element__results-element">
+        <div className="simpleSummary-main__details-element__results-element__title">
+          Liczba mandatów z listy
+        </div>
+        <div className="simpleSummary-main__details-element__results-element__bar">
+          <Tooltip id="seatsBar" />
+          <div
+            className="simpleSummary-main__details-element__results-element__bar-center"
+            data-tooltip-id="seatsBar"
+            data-tooltip-content={`50%`}
+          ></div>
+          {props.district.finalResult.map((item, index) => {
+            if (item.seats > 0) {
+              return (
+                <div
+                  style={{
+                    backgroundColor: item.color,
+                    height: "100%",
+                    color: "white",
+                    width: `${(item.seats / sum) * 100}%`,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  key={index}
+                  data-tooltip-id="seatsBar"
+                  data-tooltip-content={`${item.name}, miejsc: ${item.seats}`}
+                >
+                  {item.seats}
+                </div>
+              );
+            } else return null;
+          })}
+        </div>
+      </div>
+    );
+  };
+  const PercentageBarSimpleSummary = () => {
+    const sum = props.district.finalResult.reduce(
+      (total, item) => total + item.result,
+      0
+    );
+
+    return (
+      <div className="simpleSummary-main__details-element__results-element">
+        <div className="simpleSummary-main__details-element__results-element__title">
+          Procent głosów na liście
+        </div>
+        <div className="simpleSummary-main__details-element__results-element__bar">
+          <Tooltip id="percentageBar" />
+          <div
+            className="simpleSummary-main__details-element__results-element__bar-center"
+            data-tooltip-id="percentageBar"
+            data-tooltip-content={`50%`}
+          ></div>
+          {props.district.finalResult.map((item, index) => (
+            <div
+              style={{
+                backgroundColor: item.color,
+                height: "100%",
+                color: "white",
+                width: `${(item.result / sum) * 100}%`,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              key={index}
+              data-tooltip-id="percentageBar"
+              data-tooltip-content={`${item.name}, ${item.result.toFixed(2)}%`}
+            >
+              {item.result > 4.99 &&
+                `${((item.result / sum) * 100).toFixed(2)}%`}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="simpleSummary-main__details-element">
       <div className="simpleSummary-main__details-element__title">
@@ -689,7 +776,9 @@ const DistrictSimple = (props) => {
               );
             })}
         </div>
-        <MyBar
+        <SeatsBarSimpleSummary />
+        <PercentageBarSimpleSummary />
+        {/* <MyBar
           result={props.district.finalResult}
           value="seats"
           name="Liczba mandatów z listy"
@@ -704,7 +793,7 @@ const DistrictSimple = (props) => {
           barWidth="100%"
           borderRadius={0}
           boxShadow
-        />
+        /> */}
       </div>
     </div>
   );

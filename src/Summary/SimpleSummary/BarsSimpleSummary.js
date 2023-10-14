@@ -1,16 +1,12 @@
-import { useContext } from "react";
-import MyBar from "../../Components/MyBar";
-import { DataContext } from "../../contexts/DataContext";
-import { AppContext } from "../../contexts/AppContext";
+import PercentageBarSimpleSummary from "./PercentageBarSimpleSummary";
+import SeatsBarSimpleSummary from "./SeatsBarSimpleSummary";
 
 const BarsSimpleSummary = () => {
-  const { simpleParties } = useContext(DataContext);
-  const { simpleFinalResultSummary, windowWidth, correction } =
-    useContext(AppContext);
-
   return (
     <div className="simpleSummary-main__summary-bars">
-      <div className="simpleSummary-main__summary-bars__bar">
+      <PercentageBarSimpleSummary />
+      <SeatsBarSimpleSummary />
+      {/* <div className="simpleSummary-main__summary-bars__bar">
         <MyBar
           result={correction ? simpleParties : simpleFinalResultSummary}
           value="result"
@@ -55,8 +51,8 @@ const BarsSimpleSummary = () => {
               : 30
           }
         />
-      </div>
-      <div className="simpleSummary-main__summary-bars__bar">
+      </div> */}
+      {/* <div className="simpleSummary-main__summary-bars__bar">
         <MyBar
           result={simpleFinalResultSummary}
           value="seats"
@@ -101,7 +97,7 @@ const BarsSimpleSummary = () => {
               : 30
           }
         />
-      </div>
+      </div> */}
     </div>
   );
 };

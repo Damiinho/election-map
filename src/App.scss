@@ -1521,6 +1521,60 @@ $tertiary-color: #9c62a12c;
           width: 95%;
           background-color: #ffffff98;
           box-shadow: $material-box-shadow;
+          &__element {
+            font-family: "MuseoModerno", cursive;
+
+            @include justify-align-center();
+            flex-direction: column;
+            display: flex;
+            &-title {
+              font-size: 30px;
+            }
+            &-bar {
+              background-color: #999999;
+              position: relative;
+              margin: 0 auto;
+              font-size: 20px;
+              width: 100%;
+              display: flex;
+              flex-direction: row;
+              @include justify-align-center();
+              height: 70px;
+              box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+                0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+              cursor: pointer;
+              &__center {
+                width: 3px;
+                height: 100%;
+                background-color: #ffffff48;
+                background-image: linear-gradient(
+                  0deg,
+                  #ffffff33 0%,
+                  #ffffff33 12.5%,
+                  transparent 12.5%,
+                  transparent 25%,
+                  #ffffff33 25%,
+                  #ffffff33 37.5%,
+                  transparent 37.5%,
+                  transparent 50%,
+                  #ffffff33 50%,
+                  #ffffff33 62.5%,
+                  transparent 62.5%,
+                  transparent 75%,
+                  #ffffff33 75%,
+                  #ffffff33 87.5%,
+                  transparent 87.5%,
+                  transparent 100%
+                );
+                position: absolute;
+                top: 0%;
+                left: 50%;
+                transform: translateX(-50%);
+                cursor: pointer;
+              }
+            }
+          }
         }
         &-box {
           margin: 10px auto 10px;
@@ -1709,6 +1763,61 @@ $tertiary-color: #9c62a12c;
               gap: 5px;
               justify-content: space-between;
             }
+            &-element {
+              margin-top: 10px;
+              font-family: "MuseoModerno", cursive;
+
+              @include justify-align-center();
+              flex-direction: column;
+              display: flex;
+              &__title {
+                font-size: 15px;
+              }
+              &__bar {
+                background-color: #999999;
+                position: relative;
+                margin: 0 auto;
+                font-size: 12px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                @include justify-align-center();
+                height: 30px;
+                box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+                  0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+                  0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+                cursor: pointer;
+                &-center {
+                  width: 3px;
+                  height: 100%;
+                  background-color: #ffffff48;
+                  background-image: linear-gradient(
+                    0deg,
+                    #ffffff33 0%,
+                    #ffffff33 12.5%,
+                    transparent 12.5%,
+                    transparent 25%,
+                    #ffffff33 25%,
+                    #ffffff33 37.5%,
+                    transparent 37.5%,
+                    transparent 50%,
+                    #ffffff33 50%,
+                    #ffffff33 62.5%,
+                    transparent 62.5%,
+                    transparent 75%,
+                    #ffffff33 75%,
+                    #ffffff33 87.5%,
+                    transparent 87.5%,
+                    transparent 100%
+                  );
+                  position: absolute;
+                  top: 0%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  cursor: pointer;
+                }
+              }
+            }
           }
         }
       }
@@ -1770,6 +1879,34 @@ $tertiary-color: #9c62a12c;
         }
       }
     }
+    @media screen and (max-width: 1000px) {
+      &-main {
+        &__summary {
+          &-bars {
+            &__element {
+              &-bar {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 900px) {
+      &-main {
+        &__summary {
+          &-bars {
+            // margin: 0 3px;
+            &__element {
+              &-bar {
+                font-size: 15px;
+                height: 60px;
+              }
+            }
+          }
+        }
+      }
+    }
     @media screen and (max-width: 810px) {
       &-main {
         &__details {
@@ -1814,6 +1951,11 @@ $tertiary-color: #9c62a12c;
           &-bars {
             // margin: 0 3px;
             width: 100%;
+            &__element {
+              &-title {
+                font-size: 20px;
+              }
+            }
           }
           &-box {
             // margin: 0 3px;
@@ -1831,6 +1973,20 @@ $tertiary-color: #9c62a12c;
                   // width: auto;
                   font-size: 20px;
                 }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 710px) {
+      &-main {
+        &__summary {
+          &-bars {
+            &__element {
+              &-bar {
+                font-size: 12px;
+                height: 50px;
               }
             }
           }
@@ -1855,11 +2011,33 @@ $tertiary-color: #9c62a12c;
     @media screen and (max-width: 610px) {
       &-main {
         &__summary {
+          &-bars {
+            &__element {
+              &-title {
+                font-size: 18px;
+              }
+              &-bar {
+                font-size: 10px;
+                height: 40px;
+              }
+            }
+          }
           &-graph {
             &__table {
               &-item {
                 &.empty {
                   width: auto;
+                }
+              }
+            }
+          }
+        }
+        &__details {
+          &-element {
+            &__results {
+              &-element {
+                &__bar {
+                  font-size: 10px;
                 }
               }
             }
@@ -1899,6 +2077,17 @@ $tertiary-color: #9c62a12c;
             }
           }
         }
+        &__details {
+          &-element {
+            &__results {
+              &-element {
+                &__bar {
+                  font-size: 8px;
+                }
+              }
+            }
+          }
+        }
       }
     }
     @media screen and (max-width: 460px) {
@@ -1915,6 +2104,17 @@ $tertiary-color: #9c62a12c;
           }
         }
         &__summary {
+          &-bars {
+            &__element {
+              &-title {
+                font-size: 15px;
+              }
+              &-bar {
+                font-size: 8px;
+                height: 30px;
+              }
+            }
+          }
           &-graph {
             &__table {
               &-circus {
@@ -1992,6 +2192,9 @@ $tertiary-color: #9c62a12c;
           &-box {
             &__item {
               width: 50px;
+              &-drag {
+                font-size: 15px;
+              }
             }
           }
           &-graph {
