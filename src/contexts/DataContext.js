@@ -511,6 +511,15 @@ export const DataProvider = ({ children }) => {
   ]);
   const [selectedSimpleDistrict, setSelectedSimpleDistrict] = useState("");
 
+  const [simpleOptionsResults2019, setSimpleOptionsResults2019] =
+    useState(false);
+  const [simpleOptionsResultsSurvey, setSimpleOptionsResultsSurvey] =
+    useState(false);
+  const [simpleOptionsEuroResults2019, setSimpleOptionsEuroResults2019] =
+    useState(false);
+  const [simpleOptionsEuroResultsSurvey, setSimpleOptionsEuroResultsSurvey] =
+    useState(false);
+
   const providerValue = {
     parties,
     setParties,
@@ -524,6 +533,14 @@ export const DataProvider = ({ children }) => {
     setSelectedSimpleDistrict,
     euroParties,
     setEuroParties,
+    simpleOptionsResults2019,
+    setSimpleOptionsResults2019,
+    simpleOptionsResultsSurvey,
+    setSimpleOptionsResultsSurvey,
+    simpleOptionsEuroResults2019,
+    setSimpleOptionsEuroResults2019,
+    simpleOptionsEuroResultsSurvey,
+    setSimpleOptionsEuroResultsSurvey,
   };
 
   return (
