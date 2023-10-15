@@ -136,7 +136,7 @@ const SimpleOptions = () => {
 
       const path = partyResults.join("+");
 
-      navigate(`/prosty/${path}`);
+      navigate(`/prosty/${params.elections}/${path}`);
     }
     if (!isAnyPartyOverThreshold) {
       setShowError(true);
@@ -156,6 +156,7 @@ const SimpleOptions = () => {
     setSimpleDistricts,
     setSimpleParties,
     setShowSimpleSummary,
+    params.elections,
   ]);
 
   useEffect(() => {
@@ -207,6 +208,13 @@ const SimpleOptions = () => {
     simpleParties,
     navigate,
   ]);
+  useEffect(() => {
+    if (params.elections === "euro") {
+      setSimpleElectionsType({ value: "euro", label: "europarlamentu" });
+    } else if (params.elections === "sejm") {
+      setSimpleElectionsType({ value: "sejm", label: "sejmu" });
+    } else return null;
+  }, [setSimpleElectionsType, params.elections]);
 
   const handleResultChange = (index, value) => {
     const newSimpleParties = [...simpleParties];
@@ -365,9 +373,10 @@ const SimpleOptions = () => {
                 styles={selectStyles}
                 options={selectOptions}
                 value={simpleElectionsType}
-                onChange={(simpleElectionsType) =>
-                  setSimpleElectionsType(simpleElectionsType)
-                }
+                onChange={(simpleElectionsType) => {
+                  navigate(`/prosty/${simpleElectionsType.value}`);
+                  setSimpleElectionsType(simpleElectionsType);
+                }}
               />
             </div>
             <div className="simpleOptions-handler__header">

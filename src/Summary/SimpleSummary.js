@@ -13,8 +13,11 @@ import VerticalSimpleSummary from "./SimpleSummary/VerticalSimpleSummary";
 
 const SimpleSummary = () => {
   const { simpleDistricts } = useContext(DataContext);
-  const { setSimpleFinalResultSummary, setShowSimpleSummary } =
-    useContext(AppContext);
+  const {
+    setSimpleFinalResultSummary,
+    simpleElectionsType,
+    setShowSimpleSummary,
+  } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -47,7 +50,7 @@ const SimpleSummary = () => {
 
   const handleRestart = () => {
     setShowSimpleSummary(false);
-    navigate("/prosty");
+    navigate(`/prosty/${simpleElectionsType.value}`);
   };
 
   return (

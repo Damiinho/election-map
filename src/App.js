@@ -43,7 +43,18 @@ function App() {
                 }
               ></Route>
               <Route
-                path="/:variant/:result"
+                path="/:variant/:elections"
+                element={
+                  <div className="App">
+                    <Header />
+                    <Options />
+                    <DistrictList />
+                    <Summary />
+                  </div>
+                }
+              ></Route>
+              <Route
+                path="/:variant/:elections/:result"
                 element={
                   <div className="App">
                     <Header />
