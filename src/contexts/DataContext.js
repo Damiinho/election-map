@@ -56,6 +56,36 @@ export const DataProvider = ({ children }) => {
       result: 100,
     },
   ]);
+  const [euroParties, setEuroParties] = useState([
+    {
+      name: "Prawo i Sprawiedliwość",
+      shortName: "PiS",
+      isOverThreshold: true,
+      color: "#175aa7",
+      result: 0,
+    },
+    {
+      name: "Koalicja Europejska",
+      shortName: "KE",
+      isOverThreshold: true,
+      color: "#f9641d",
+      result: 0,
+    },
+    {
+      name: "Konfederacja",
+      shortName: "KWiN",
+      isOverThreshold: true,
+      color: "#1a2e4d",
+      result: 0,
+    },
+    {
+      name: "Pozostałe komitety",
+      shortName: "inne",
+      isOverThreshold: false,
+      color: "#999999",
+      result: 100,
+    },
+  ]);
   const [districts, setDistricts] = useState([]);
   const [simpleDistricts, setSimpleDistricts] = useState([
     {
@@ -492,6 +522,8 @@ export const DataProvider = ({ children }) => {
     setSimpleDistricts,
     selectedSimpleDistrict,
     setSelectedSimpleDistrict,
+    euroParties,
+    setEuroParties,
   };
 
   return (

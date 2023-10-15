@@ -742,6 +742,14 @@ $tertiary-color: #9c62a12c;
       }
       &-handler {
         margin-top: 15px;
+        &__title {
+          font-family: "Ysabeau Office", sans-serif;
+          display: flex;
+          @include justify-align-center();
+          gap: 20px;
+          font-size: 50px;
+          margin-bottom: 20px;
+        }
         &__header {
           display: flex;
           flex-direction: row;

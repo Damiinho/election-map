@@ -24,6 +24,13 @@ export const AppProvider = ({ children }) => {
   const [simpleByName, setSimpleByName] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isTest, setIsTest] = useState(false);
+  const selectOptions = [
+    { value: "sejm", label: "sejmu" },
+    { value: "euro", label: "europarlamentu" },
+  ];
+  const [simpleElectionsType, setSimpleElectionsType] = useState(
+    selectOptions[0]
+  );
 
   const providerValue = {
     simpleByNumbers,
@@ -64,6 +71,9 @@ export const AppProvider = ({ children }) => {
     setWindowWidth,
     isTest,
     setIsTest,
+    selectOptions,
+    simpleElectionsType,
+    setSimpleElectionsType,
   };
 
   useEffect(() => {

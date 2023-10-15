@@ -1,4 +1,6 @@
 import { Button, ButtonGroup, Slider, TextField } from "@mui/material";
+
+import Select from "react-select";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { Tooltip } from "react-tooltip";
@@ -11,6 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const SimpleOptions = () => {
   const navigate = useNavigate();
   const params = useParams();
+  console.log(params);
 
   const {
     simpleParties,
@@ -18,8 +21,15 @@ const SimpleOptions = () => {
     setSimpleDistricts,
     simpleDistricts,
   } = useContext(DataContext);
-  const { setShowSimpleSummary, showSimpleSummary, correction, setCorrection } =
-    useContext(AppContext);
+  const {
+    setShowSimpleSummary,
+    showSimpleSummary,
+    correction,
+    setCorrection,
+    selectOptions,
+    simpleElectionsType,
+    setSimpleElectionsType,
+  } = useContext(AppContext);
   const [results2019, setResults2019] = useState(false);
   const [resultsSurvey, setResultsSurvey] = useState(false);
   const [resultError, setResultError] = useState(false);
@@ -161,25 +171,42 @@ const SimpleOptions = () => {
         resultsFromParams.push({ name, result });
       }
 
-      // Aktualizacja simpleParties
-      setSimpleParties((prevSimpleParties) => {
-        const updatedSimpleParties = [...prevSimpleParties];
-        resultsFromParams.forEach((item) => {
-          const matchingParty = updatedSimpleParties.find(
+      const missingParties = resultsFromParams.filter(
+        (item) =>
+          !simpleParties.some(
             (party) => party.shortName.toLowerCase() === item.name
-          );
-          if (matchingParty) {
-            matchingParty.result = item.result;
-          }
+          )
+      );
+
+      if (missingParties.length === 0) {
+        setSimpleParties((prevSimpleParties) => {
+          const updatedSimpleParties = [...prevSimpleParties];
+          resultsFromParams.forEach((item) => {
+            const matchingParty = updatedSimpleParties.find(
+              (party) => party.shortName.toLowerCase() === item.name
+            );
+            if (matchingParty) {
+              matchingParty.result = item.result;
+            }
+          });
+          return updatedSimpleParties;
         });
-        return updatedSimpleParties;
-      });
+      } else {
+        navigate(`/prosty/`);
+      }
 
       handleStart(); // Wywołaj handleStart po aktualizacji simpleParties, ale tylko jeśli showSimpleSummary jest fałszywe
     }
 
     // Tu możesz umieścić inne zależności, jeśli są potrzebne
-  }, [params.result, setSimpleParties, showSimpleSummary, handleStart]);
+  }, [
+    params.result,
+    setSimpleParties,
+    showSimpleSummary,
+    handleStart,
+    simpleParties,
+    navigate,
+  ]);
 
   const handleResultChange = (index, value) => {
     const newSimpleParties = [...simpleParties];
@@ -264,6 +291,19 @@ const SimpleOptions = () => {
     }
   };
 
+  const selectStyles = {
+    control: (provided) => ({
+      ...provided,
+      cursor: "pointer",
+      backgroundColor: "rgba(255, 255, 255, 0.3)",
+    }),
+    option: (provided) => ({
+      ...provided,
+      fontSize: "20px", // Rozmiar liter
+      cursor: "pointer",
+    }),
+  };
+
   return (
     <div className="simpleOptions">
       <Tooltip style={{ zIndex: 1, width: 440 }} id="correction-tooltip">
@@ -319,6 +359,17 @@ const SimpleOptions = () => {
             info
           </div>
           <div className="simpleOptions-handler">
+            <div className="simpleOptions-handler__title">
+              <p>Wybory do</p>
+              <Select
+                styles={selectStyles}
+                options={selectOptions}
+                value={simpleElectionsType}
+                onChange={(simpleElectionsType) =>
+                  setSimpleElectionsType(simpleElectionsType)
+                }
+              />
+            </div>
             <div className="simpleOptions-handler__header">
               <span>Wpisz wyniki lub</span>
               <Button
