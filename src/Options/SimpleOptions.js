@@ -29,6 +29,7 @@ const SimpleOptions = () => {
     selectOptions,
     simpleElectionsType,
     setSimpleElectionsType,
+    setAdvancedVersion,
   } = useContext(AppContext);
   const [results2019, setResults2019] = useState(false);
   const [resultsSurvey, setResultsSurvey] = useState(false);
@@ -211,9 +212,9 @@ const SimpleOptions = () => {
   useEffect(() => {
     if (params.elections === "euro") {
       setSimpleElectionsType({ value: "euro", label: "europarlamentu" });
-    } else if (params.elections === "sejm") {
+    } else {
       setSimpleElectionsType({ value: "sejm", label: "sejmu" });
-    } else return null;
+    }
   }, [setSimpleElectionsType, params.elections]);
 
   const handleResultChange = (index, value) => {
@@ -248,6 +249,18 @@ const SimpleOptions = () => {
       setResultsSurvey(false);
     }
   };
+  useEffect(() => {
+    if (params.variant && params.variant === "zaawansowany") {
+      navigate("/zaawansowany");
+      setAdvancedVersion(true);
+    } else if (params.elections && params.elections === "euro") {
+      navigate("/prosty/euro");
+      setAdvancedVersion(false);
+    } else {
+      navigate("/prosty/sejm");
+      setAdvancedVersion(false);
+    }
+  }, [navigate, params.elections, params.variant, setAdvancedVersion]);
 
   const handleSurvey = () => {
     const results = [
