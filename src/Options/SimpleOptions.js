@@ -254,13 +254,23 @@ const SimpleOptions = () => {
       navigate("/zaawansowany");
       setAdvancedVersion(true);
     } else if (params.elections && params.elections === "euro") {
-      navigate("/prosty/euro");
-      setAdvancedVersion(false);
+      if (!params.result) {
+        navigate("/prosty/euro");
+        setAdvancedVersion(false);
+      }
     } else {
-      navigate("/prosty/sejm");
-      setAdvancedVersion(false);
+      if (!params.result) {
+        navigate("/prosty/sejm");
+        setAdvancedVersion(false);
+      }
     }
-  }, [navigate, params.elections, params.variant, setAdvancedVersion]);
+  }, [
+    navigate,
+    params.elections,
+    params.variant,
+    params.result,
+    setAdvancedVersion,
+  ]);
 
   const handleSurvey = () => {
     const results = [
