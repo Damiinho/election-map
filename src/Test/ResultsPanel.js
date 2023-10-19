@@ -420,7 +420,11 @@ const ResultsPanel = () => {
           </div>
         </div>
 
-        <TestResultBox />
+        <TestResultBox
+          right={officialResult.rightForBox}
+          auth={officialResult.authForBox}
+          prog={officialResult.progForBox}
+        />
       </div>{" "}
     </div>
   );

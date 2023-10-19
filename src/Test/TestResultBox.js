@@ -2,13 +2,22 @@ import React from "react";
 import ReactECharts from "echarts-for-react";
 import "echarts-gl";
 
-const TestResultBox = () => {
+const TestResultBox = (props) => {
+  const anaSocTraColor = "rgba(230, 130, 255, 0.36)";
+  const anaSocProColor = "rgba(255, 0, 135, 0.36)";
+  const autSocTraColor = "rgba(68, 0, 145, 0.36)";
+  const autSocProColor = "rgba(68, 0, 145, 0.5)";
+  const autCapProColor = "rgba(115, 255, 102, 0.36)";
+  const autCapTraColor = "rgba(232, 255, 102, 0.36)";
+  const anaCapProColor = "rgba(108, 255, 255, 0.5)";
+  const anaCapTraColor = "rgba(108, 109, 255, 0.36)";
+
   const option = {
     grid3D: {},
     xAxis3D: {
-      min: -1,
-      max: 1,
-      name: "oś ekopnomiczna",
+      min: -10,
+      max: 10,
+      name: "oś ekonomiczna",
       axisLine: {
         lineStyle: {
           color: "red",
@@ -17,13 +26,26 @@ const TestResultBox = () => {
       splitArea: {
         show: true,
         areaStyle: {
-          //   color: "#005544",
+          // color: "#ffff0001",
+        },
+      },
+      axisLabel: {
+        show: true,
+        formatter: (value) => {
+          // Mapuj wartość -1 na etykietę "socjalizm"
+          if (value === -5) {
+            return "socjalizm";
+          } else if (value === 5) {
+            return "kapitalizm";
+          }
+          // Domyślnie użyj wartości liczbowej
+          return value;
         },
       },
     },
     yAxis3D: {
-      min: -1,
-      max: 1,
+      min: -10,
+      max: 10,
       name: "oś cywilizacyjna",
       axisLine: {
         lineStyle: {
@@ -33,13 +55,26 @@ const TestResultBox = () => {
       splitArea: {
         show: true,
         areaStyle: {
-          //   color: "#ddffbb",
+          // color: "ff000001",
+        },
+      },
+      axisLabel: {
+        show: true,
+        formatter: (value) => {
+          // Mapuj wartość -1 na etykietę "socjalizm"
+          if (value === -5) {
+            return "tradycja";
+          } else if (value === 5) {
+            return "postęp";
+          }
+          // Domyślnie użyj wartości liczbowej
+          return value;
         },
       },
     },
     zAxis3D: {
-      min: -1,
-      max: 1,
+      min: -10,
+      max: 10,
       name: "oś zarządcza",
       axisLine: {
         lineStyle: {
@@ -49,661 +84,719 @@ const TestResultBox = () => {
       splitArea: {
         show: true,
         areaStyle: {
-          //   color: "#fffffddf",
+          // color: "#0000ff01",
+        },
+      },
+      axisLabel: {
+        show: true,
+        formatter: (value) => {
+          // Mapuj wartość -1 na etykietę "socjalizm"
+          if (value === -5) {
+            return "anarchizm";
+          } else if (value === 5) {
+            return "autorytaryzm";
+          }
+          // Domyślnie użyj wartości liczbowej
+          return value;
         },
       },
     },
     series: [
-      // BLUE BOX
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [0, 1, 0],
-      //       [1, 0, 0],
-      //       [1, 1, 0],
-      //     ],
-      //     itemStyle: {
-      //       color: mergeColors([capColor, autColor, proColor]),
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 1],
-      //       [0, 1, 1],
-      //       [1, 0, 1],
-      //       [1, 1, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: mergeColors([capColor, autColor, proColor]),
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [0, 1, 0],
-      //       [0, 0, 1],
-      //       [0, 1, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: mergeColors([capColor, autColor, proColor]),
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [1, 0, 0],
-      //       [1, 1, 0],
-      //       [1, 0, 1],
-      //       [1, 1, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: mergeColors([capColor, autColor, proColor]),
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [1, 0, 0],
-      //       [0, 0, 1],
-      //       [1, 0, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: mergeColors([capColor, autColor, proColor]),
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 1, 0],
-      //       [1, 1, 0],
-      //       [0, 1, 1],
-      //       [1, 1, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: mergeColors([capColor, autColor, proColor]),
-      //       opacity: 0.2,
-      //     },
-      //   },
-      // ANARCHISM, SOCIALISM< TRADITION BOX
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [0, -1, 0],
-          [-1, 0, 0],
-          [-1, -1, 0],
+          [0, 10, 0],
+          [10, 0, 0],
+          [10, 10, 0],
         ],
         itemStyle: {
-          color: "rgba(230, 130, 255, 0.36)",
+          color: autCapProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [0, 0, -1],
-          [0, -1, -1],
-          [-1, 0, -1],
-          [-1, -1, -1],
+          [0, 0, 10],
+          [0, 10, 10],
+          [10, 0, 10],
+          [10, 10, 10],
         ],
         itemStyle: {
-          color: "rgba(230, 130, 255, 0.36)",
+          color: autCapProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [0, -1, 0],
-          [0, 0, -1],
-          [0, -1, -1],
+          [0, 10, 0],
+          [0, 0, 10],
+          [0, 10, 10],
         ],
         itemStyle: {
-          color: "rgba(230, 130, 255, 0.36)",
+          color: autCapProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [-1, 0, 0],
-          [-1, -1, 0],
-          [-1, 0, -1],
-          [-1, -1, -1],
+          [10, 0, 0],
+          [10, 10, 0],
+          [10, 0, 10],
+          [10, 10, 10],
         ],
         itemStyle: {
-          color: "rgba(230, 130, 255, 0.36)",
+          color: autCapProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [-1, 0, 0],
-          [0, 0, -1],
-          [-1, 0, -1],
+          [10, 0, 0],
+          [0, 0, 10],
+          [10, 0, 10],
         ],
         itemStyle: {
-          color: "rgba(230, 130, 255, 0.36)",
+          color: autCapProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [0, -1, 0],
-          [-1, -1, 0],
-          [0, -1, -1],
-          [-1, -1, -1],
+          [0, 10, 0],
+          [10, 10, 0],
+          [0, 10, 10],
+          [10, 10, 10],
         ],
         itemStyle: {
-          color: "rgba(230, 130, 255, 0.36)",
+          color: autCapProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
+      },
+      // ANA, SOC, TRA BOX
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [0, -10, 0],
+          [-10, 0, 0],
+          [-10, -10, 0],
+        ],
+        itemStyle: {
+          color: anaSocTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, -10],
+          [0, -10, -10],
+          [-10, 0, -10],
+          [-10, -10, -10],
+        ],
+        itemStyle: {
+          color: anaSocTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [0, -10, 0],
+          [0, 0, -10],
+          [0, -10, -10],
+        ],
+        itemStyle: {
+          color: anaSocTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [-10, 0, 0],
+          [-10, -10, 0],
+          [-10, 0, -10],
+          [-10, -10, -10],
+        ],
+        itemStyle: {
+          color: anaSocTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [-10, 0, 0],
+          [0, 0, -10],
+          [-10, 0, -10],
+        ],
+        itemStyle: {
+          color: anaSocTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, -10, 0],
+          [-10, -10, 0],
+          [0, -10, -10],
+          [-10, -10, -10],
+        ],
+        itemStyle: {
+          color: anaSocTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
       },
       // AUT, SOC, TRA BOX
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [0, -1, 0],
-          [-1, 0, 0],
-          [-1, -1, 0],
+          [0, -10, 0],
+          [-10, 0, 0],
+          [-10, -10, 0],
         ],
         itemStyle: {
-          color: "rgba(68, 0, 145, 0.36)",
+          color: autSocTraColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [0, 0, 1],
-          [0, -1, 1],
-          [-1, 0, 1],
-          [-1, -1, 1],
+          [0, 0, 10],
+          [0, -10, 10],
+          [-10, 0, 10],
+          [-10, -10, 10],
         ],
         itemStyle: {
-          color: "rgba(68, 0, 145, 0.36)",
+          color: autSocTraColor,
           opacity: 0.2,
         },
-      },
-      {
-        type: "surface",
-        data: [
-          [0, 0, 0],
-          [0, -1, 0],
-          [0, 0, 1],
-          [0, -1, 1],
-        ],
-        itemStyle: {
-          color: "rgba(68, 0, 145, 0.36)",
-          opacity: 0.2,
-        },
-      },
-      {
-        type: "surface",
-        data: [
-          [-1, 0, 0],
-          [-1, -1, 0],
-          [-1, 0, 1],
-          [-1, -1, 1],
-        ],
-        itemStyle: {
-          color: "rgba(68, 0, 145, 0.36)",
-          opacity: 0.2,
-        },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [-1, 0, 0],
-          [0, 0, 1],
-          [-1, 0, 1],
+          [0, -10, 0],
+          [0, 0, 10],
+          [0, -10, 10],
         ],
         itemStyle: {
-          color: "rgba(68, 0, 145, 0.36)",
+          color: autSocTraColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [0, -1, 0],
-          [-1, -1, 0],
-          [0, -1, 1],
-          [-1, -1, 1],
+          [-10, 0, 0],
+          [-10, -10, 0],
+          [-10, 0, 10],
+          [-10, -10, 10],
         ],
         itemStyle: {
-          color: "rgba(68, 0, 145, 0.36)",
+          color: autSocTraColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [-10, 0, 0],
+          [0, 0, 10],
+          [-10, 0, 10],
+        ],
+        itemStyle: {
+          color: autSocTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, -10, 0],
+          [-10, -10, 0],
+          [0, -10, 10],
+          [-10, -10, 10],
+        ],
+        itemStyle: {
+          color: autSocTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
       },
       //   AUT, SOC, PRO BOX
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [0, 1, 0],
-          [-1, 0, 0],
-          [-1, 1, 0],
+          [0, 10, 0],
+          [-10, 0, 0],
+          [-10, 10, 0],
         ],
         itemStyle: {
-          color: "rgba(68, 0, 145, 0.5)",
+          color: autSocProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [0, 0, 1],
-          [0, 1, 1],
-          [-1, 0, 1],
-          [-1, 1, 1],
+          [0, 0, 10],
+          [0, 10, 10],
+          [-10, 0, 10],
+          [-10, 10, 10],
         ],
         itemStyle: {
-          color: "rgba(68, 0, 145, 0.5)",
+          color: autSocProColor,
           opacity: 0.2,
         },
-      },
-      {
-        type: "surface",
-        data: [
-          [0, 0, 0],
-          [0, 1, 0],
-          [0, 0, 1],
-          [0, 1, 1],
-        ],
-        itemStyle: {
-          color: "rgba(68, 0, 145, 0.5)",
-          opacity: 0.2,
-        },
-      },
-      {
-        type: "surface",
-        data: [
-          [-1, 0, 0],
-          [-1, 1, 0],
-          [-1, 0, 1],
-          [-1, 1, 1],
-        ],
-        itemStyle: {
-          color: "rgba(68, 0, 145, 0.5)",
-          opacity: 0.2,
-        },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [-1, 0, 0],
-          [0, 0, 1],
-          [-1, 0, 1],
+          [0, 10, 0],
+          [0, 0, 10],
+          [0, 10, 10],
         ],
         itemStyle: {
-          color: "rgba(68, 0, 145, 0.5)",
+          color: autSocProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [0, 1, 0],
-          [-1, 1, 0],
-          [0, 1, 1],
-          [-1, 1, 1],
+          [-10, 0, 0],
+          [-10, 10, 0],
+          [-10, 0, 10],
+          [-10, 10, 10],
         ],
         itemStyle: {
-          color: "rgba(68, 0, 145, 0.5)",
+          color: autSocProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [-10, 0, 0],
+          [0, 0, 10],
+          [-10, 0, 10],
+        ],
+        itemStyle: {
+          color: autSocProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 10, 0],
+          [-10, 10, 0],
+          [0, 10, 10],
+          [-10, 10, 10],
+        ],
+        itemStyle: {
+          color: autSocProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
       },
       // ANA, SOC, PRO BOX
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [0, 1, 0],
-          [-1, 0, 0],
-          [-1, 1, 0],
+          [0, 10, 0],
+          [-10, 0, 0],
+          [-10, 10, 0],
         ],
         itemStyle: {
-          color: "rgba(255, 0, 135, 0.36)",
+          color: anaSocProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [0, 0, -1],
-          [0, 1, -1],
-          [-1, 0, -1],
-          [-1, 1, -1],
+          [0, 0, -10],
+          [0, 10, -10],
+          [-10, 0, -10],
+          [-10, 10, -10],
         ],
         itemStyle: {
-          color: "rgba(255, 0, 135, 0.36)",
+          color: anaSocProColor,
           opacity: 0.2,
         },
-      },
-      {
-        type: "surface",
-        data: [
-          [0, 0, 0],
-          [0, 1, 0],
-          [0, 0, -1],
-          [0, 1, -1],
-        ],
-        itemStyle: {
-          color: "rgba(255, 0, 135, 0.36)",
-          opacity: 0.2,
-        },
-      },
-      {
-        type: "surface",
-        data: [
-          [-1, 0, 0],
-          [-1, 1, 0],
-          [-1, 0, -1],
-          [-1, 1, -1],
-        ],
-        itemStyle: {
-          color: "rgba(255, 0, 135, 0.36)",
-          opacity: 0.2,
-        },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
           [0, 0, 0],
-          [-1, 0, 0],
-          [0, 0, -1],
-          [-1, 0, -1],
+          [0, 10, 0],
+          [0, 0, -10],
+          [0, 10, -10],
         ],
         itemStyle: {
-          color: "rgba(255, 0, 135, 0.36)",
+          color: anaSocProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
       {
         type: "surface",
         data: [
-          [0, 1, 0],
-          [-1, 1, 0],
-          [0, 1, -1],
-          [-1, 1, -1],
+          [-10, 0, 0],
+          [-10, 10, 0],
+          [-10, 0, -10],
+          [-10, 10, -10],
         ],
         itemStyle: {
-          color: "rgba(255, 0, 135, 0.36)",
+          color: anaSocProColor,
           opacity: 0.2,
         },
+        dataShape: [2, 2],
       },
-      //   // ORANGE BOX
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [0, 1, 0],
-      //       [1, 0, 0],
-      //       [1, 1, 0],
-      //     ],
-      //     itemStyle: {
-      //       color: "orange",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, -1],
-      //       [0, 1, -1],
-      //       [1, 0, -1],
-      //       [1, 1, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "orange",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [0, 1, 0],
-      //       [0, 0, -1],
-      //       [0, 1, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "orange",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [1, 0, 0],
-      //       [1, 1, 0],
-      //       [1, 0, -1],
-      //       [1, 1, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "orange",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [1, 0, 0],
-      //       [0, 0, -1],
-      //       [1, 0, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "orange",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 1, 0],
-      //       [1, 1, 0],
-      //       [0, 1, -1],
-      //       [1, 1, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "orange",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   // PINK BOX
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [0, -1, 0],
-      //       [1, 0, 0],
-      //       [1, -1, 0],
-      //     ],
-      //     itemStyle: {
-      //       color: socColor,
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, -1],
-      //       [0, -1, -1],
-      //       [1, 0, -1],
-      //       [1, -1, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "pink",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [0, -1, 0],
-      //       [0, 0, -1],
-      //       [0, -1, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "pink",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [1, 0, 0],
-      //       [1, -1, 0],
-      //       [1, 0, -1],
-      //       [1, -1, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "pink",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [1, 0, 0],
-      //       [0, 0, -1],
-      //       [1, 0, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "pink",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, -1, 0],
-      //       [1, -1, 0],
-      //       [0, -1, -1],
-      //       [1, -1, -1],
-      //     ],
-      //     itemStyle: {
-      //       color: "pink",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   // BROWN BOX
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [0, -1, 0],
-      //       [1, 0, 0],
-      //       [1, -1, 0],
-      //     ],
-      //     itemStyle: {
-      //       color: "brown",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 1],
-      //       [0, -1, 1],
-      //       [1, 0, 1],
-      //       [1, -1, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: "brown",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [0, -1, 0],
-      //       [0, 0, 1],
-      //       [0, -1, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: "brown",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [1, 0, 0],
-      //       [1, -1, 0],
-      //       [1, 0, 1],
-      //       [1, -1, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: "brown",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, 0, 0],
-      //       [1, 0, 0],
-      //       [0, 0, 1],
-      //       [1, 0, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: "brown",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   {
-      //     type: "surface",
-      //     data: [
-      //       [0, -1, 0],
-      //       [1, -1, 0],
-      //       [0, -1, 1],
-      //       [1, -1, 1],
-      //     ],
-      //     itemStyle: {
-      //       color: "brown",
-      //       opacity: 0.2,
-      //     },
-      //   },
-      //   // DOTT
-      //   {
-      //     type: "scatter3D",
-      //     symbolSize: 20,
-      //     data: [[0, 0, 0]],
-      //     itemStyle: {
-      //       opacity: 1,
-      //       color: "black",
-      //     },
-      //   },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [-10, 0, 0],
+          [0, 0, -10],
+          [-10, 0, -10],
+        ],
+        itemStyle: {
+          color: anaSocProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 10, 0],
+          [-10, 10, 0],
+          [0, 10, -10],
+          [-10, 10, -10],
+        ],
+        itemStyle: {
+          color: anaSocProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      // ORANGE BOX
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [0, 10, 0],
+          [10, 0, 0],
+          [10, 10, 0],
+        ],
+        itemStyle: {
+          color: anaCapProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, -10],
+          [0, 10, -10],
+          [10, 0, -10],
+          [10, 10, -10],
+        ],
+        itemStyle: {
+          color: anaCapProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [0, 10, 0],
+          [0, 0, -10],
+          [0, 10, -10],
+        ],
+        itemStyle: {
+          color: anaCapProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [10, 0, 0],
+          [10, 10, 0],
+          [10, 0, -10],
+          [10, 10, -10],
+        ],
+        itemStyle: {
+          color: anaCapProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [10, 0, 0],
+          [0, 0, -10],
+          [10, 0, -10],
+        ],
+        itemStyle: {
+          color: anaCapProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 10, 0],
+          [10, 10, 0],
+          [0, 10, -10],
+          [10, 10, -10],
+        ],
+        itemStyle: {
+          color: anaCapProColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      // PINK BOX
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [0, -10, 0],
+          [10, 0, 0],
+          [10, -10, 0],
+        ],
+        itemStyle: {
+          color: anaCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, -10],
+          [0, -10, -10],
+          [10, 0, -10],
+          [10, -10, -10],
+        ],
+        itemStyle: {
+          color: anaCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [0, -10, 0],
+          [0, 0, -10],
+          [0, -10, -10],
+        ],
+        itemStyle: {
+          color: anaCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [10, 0, 0],
+          [10, -10, 0],
+          [10, 0, -10],
+          [10, -10, -10],
+        ],
+        itemStyle: {
+          color: anaCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [10, 0, 0],
+          [0, 0, -10],
+          [10, 0, -10],
+        ],
+        itemStyle: {
+          color: anaCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, -10, 0],
+          [10, -10, 0],
+          [0, -10, -10],
+          [10, -10, -10],
+        ],
+        itemStyle: {
+          color: anaCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      // BROWN BOX
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [0, -10, 0],
+          [10, 0, 0],
+          [10, -10, 0],
+        ],
+        itemStyle: {
+          color: autCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 10],
+          [0, -10, 10],
+          [10, 0, 10],
+          [10, -10, 10],
+        ],
+        itemStyle: {
+          color: autCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [0, -10, 0],
+          [0, 0, 10],
+          [0, -10, 10],
+        ],
+        itemStyle: {
+          color: autCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [10, 0, 0],
+          [10, -10, 0],
+          [10, 0, 10],
+          [10, -10, 10],
+        ],
+        itemStyle: {
+          color: autCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, 0, 0],
+          [10, 0, 0],
+          [0, 0, 10],
+          [10, 0, 10],
+        ],
+        itemStyle: {
+          color: autCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      {
+        type: "surface",
+        data: [
+          [0, -10, 0],
+          [10, -10, 0],
+          [0, -10, 10],
+          [10, -10, 10],
+        ],
+        itemStyle: {
+          color: autCapTraColor,
+          opacity: 0.2,
+        },
+        dataShape: [2, 2],
+      },
+      // DOTT
+      {
+        type: "scatter3D",
+        symbolSize: 10,
+        data: [[props.right, props.prog, props.auth]],
+        itemStyle: {
+          opacity: 1,
+          color: "black",
+        },
+      },
     ],
   };
 
   return (
     <>
       <ReactECharts option={option} style={{ height: 400 }} />
-
-      <div>eloelo</div>
     </>
   );
 };
