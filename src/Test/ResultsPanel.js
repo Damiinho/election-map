@@ -9,6 +9,7 @@ import ArrowCircleUpTwoToneIcon from "@mui/icons-material/ArrowCircleUpTwoTone";
 import ArrowCircleDownTwoToneIcon from "@mui/icons-material/ArrowCircleDownTwoTone";
 import UndoIcon from "@mui/icons-material/Undo";
 import RedoIcon from "@mui/icons-material/Redo";
+import TestResultBox from "./TestResultBox";
 
 const ResultsPanel = () => {
   const [officialResult, setOfficialResult] = useState({});
@@ -313,6 +314,7 @@ const ResultsPanel = () => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onTouchMove={handleTouchMove}
+          style={{ display: "none" }}
         >
           <div
             className="box"
@@ -416,7 +418,9 @@ const ResultsPanel = () => {
               }}
             ></div>
           </div>
-        </div>{" "}
+        </div>
+
+        <TestResultBox />
       </div>{" "}
     </div>
   );
