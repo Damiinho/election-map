@@ -13,7 +13,7 @@ import TestResultBox from "./TestResultBox";
 
 const ResultsPanel = () => {
   const [officialResult, setOfficialResult] = useState({});
-  const { result, setIsTestStart, setCurrentQuestion } =
+  const { result, setIsTestStart, setCurrentQuestion, extremeValues } =
     useContext(TestContext);
   const { windowWidth } = useContext(AppContext);
   const params = useParams();
@@ -87,6 +87,7 @@ const ResultsPanel = () => {
       const progValue =
         resultsFromParams.find((item) => item.name === "p")?.result ||
         (typeof result.prog === "number" ? result.prog : 0);
+
       const authValue =
         resultsFromParams.find((item) => item.name === "a")?.result ||
         (typeof result.auth === "number" ? result.auth : 0);
@@ -94,16 +95,35 @@ const ResultsPanel = () => {
         resultsFromParams.find((item) => item.name === "k")?.result ||
         (typeof result.right === "number" ? result.right : 0);
 
+      const rightForBox =
+        rightValue > 0
+          ? rightValue / (extremeValues.right.max / 10)
+          : rightValue < 0
+          ? rightValue / -(extremeValues.right.min / 10)
+          : 0;
+      const authForBox =
+        rightValue > 0
+          ? authValue / (extremeValues.auth.max / 10)
+          : authValue < 0
+          ? authValue / -(extremeValues.auth.min / 10)
+          : 0;
+      const progForBox =
+        progValue > 0
+          ? progValue / (extremeValues.prog.max / 10)
+          : progValue < 0
+          ? progValue / -(extremeValues.prog.min / 10)
+          : 0;
+
       setOfficialResult({
         prog: progValue,
         auth: authValue,
         right: rightValue,
-        rightForBox: (rightValue * 8) / 16,
-        authForBox: (authValue * 8) / 17,
-        progForBox: (progValue * 8) / 24,
+        rightForBox,
+        authForBox,
+        progForBox,
       });
     }
-  }, [result.auth, result.prog, result.right, params.values]);
+  }, [result.auth, result.prog, result.right, params.values, extremeValues]);
 
   const ResultSlider = (props) => (
     <Slider
@@ -419,12 +439,13 @@ const ResultsPanel = () => {
             ></div>
           </div>
         </div>
-
-        <TestResultBox
-          right={officialResult.rightForBox}
-          auth={officialResult.authForBox}
-          prog={officialResult.progForBox}
-        />
+        <div style={{ height: 420 }}>
+          <TestResultBox
+            right={officialResult.rightForBox}
+            auth={officialResult.authForBox}
+            prog={officialResult.progForBox}
+          />
+        </div>
       </div>{" "}
     </div>
   );

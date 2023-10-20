@@ -972,6 +972,106 @@ export const TestProvider = ({ children }) => {
       effects: { auth: 1, prog: -1 },
     },
   ];
+  const extremeValues = {
+    right: { min: 0, max: 0 },
+    auth: { min: 0, max: 0 },
+    prog: { min: 0, max: 0 },
+  };
+  questions.map((item) => {
+    if (item.effects.right) {
+      if (item.effects.right > 0) {
+        if (item.max || item.max === 0) {
+          extremeValues.right.max =
+            extremeValues.right.max + item.effects.right * item.max;
+        }
+        if (item.min || item.min === 0) {
+          extremeValues.right.min =
+            extremeValues.right.min + item.effects.right * item.min;
+        } else {
+          extremeValues.right.max =
+            extremeValues.right.max + item.effects.right;
+          extremeValues.right.min =
+            extremeValues.right.min - item.effects.right;
+        }
+      }
+      if (item.effects.right < 0) {
+        if (item.min || item.min === 0) {
+          extremeValues.right.max =
+            extremeValues.right.max + item.effects.right * item.min;
+        }
+        if (item.max || item.max === 0) {
+          extremeValues.right.min =
+            extremeValues.right.min + item.effects.right * item.max;
+        } else {
+          extremeValues.right.max =
+            extremeValues.right.max - item.effects.right;
+
+          extremeValues.right.min =
+            extremeValues.right.min + item.effects.right;
+        }
+      }
+    }
+    if (item.effects.auth) {
+      if (item.effects.auth > 0) {
+        if (item.max || item.max === 0) {
+          extremeValues.auth.max =
+            extremeValues.auth.max + item.effects.auth * item.max;
+        }
+        if (item.min || item.min === 0) {
+          extremeValues.auth.min =
+            extremeValues.auth.min + item.effects.auth * item.min;
+        } else {
+          extremeValues.auth.max = extremeValues.auth.max + item.effects.auth;
+          extremeValues.auth.min = extremeValues.auth.min - item.effects.auth;
+        }
+      }
+      if (item.effects.right < 0) {
+        if (item.min || item.min === 0) {
+          extremeValues.auth.max =
+            extremeValues.auth.max + item.effects.auth * item.min;
+        }
+        if (item.max || item.max === 0) {
+          extremeValues.auth.min =
+            extremeValues.auth.min + item.effects.auth * item.max;
+        } else {
+          extremeValues.auth.max = extremeValues.auth.max - item.effects.auth;
+
+          extremeValues.auth.min = extremeValues.auth.min + item.effects.auth;
+        }
+      }
+    }
+    if (item.effects.prog) {
+      if (item.effects.prog > 0) {
+        if (item.max || item.max === 0) {
+          extremeValues.prog.max =
+            extremeValues.prog.max + item.effects.prog * item.max;
+        }
+        if (item.min || item.min === 0) {
+          extremeValues.prog.min =
+            extremeValues.prog.min + item.effects.prog * item.min;
+        } else {
+          extremeValues.prog.max = extremeValues.prog.max + item.effects.prog;
+          extremeValues.prog.min = extremeValues.prog.min - item.effects.prog;
+        }
+      }
+      if (item.effects.prog < 0) {
+        if (item.min || item.min === 0) {
+          extremeValues.prog.max =
+            extremeValues.prog.max + item.effects.prog * item.min;
+        }
+        if (item.max || item.max === 0) {
+          extremeValues.prog.min =
+            extremeValues.prog.min + item.effects.prog * item.max;
+        } else {
+          extremeValues.prog.max = extremeValues.prog.max - item.effects.prog;
+
+          extremeValues.prog.min = extremeValues.prog.min + item.effects.prog;
+        }
+      }
+    }
+    return null;
+  });
+
   const [isTestStart, setIsTestStart] = useState(false);
   const [result, setResult] = useState({ prog: 0, auth: 0, right: 0 });
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -986,6 +1086,7 @@ export const TestProvider = ({ children }) => {
     setCurrentQuestion,
     answerValue,
     setAnswerValue,
+    extremeValues,
   };
 
   return (
