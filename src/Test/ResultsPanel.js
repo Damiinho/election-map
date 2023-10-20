@@ -97,21 +97,21 @@ const ResultsPanel = () => {
 
       const rightForBox =
         rightValue > 0
-          ? rightValue / (extremeValues.right.max / 10)
+          ? parseFloat(rightValue / (extremeValues.right.max / 10)).toFixed(2)
           : rightValue < 0
-          ? rightValue / -(extremeValues.right.min / 10)
+          ? parseFloat(rightValue / -(extremeValues.right.min / 10)).toFixed(2)
           : 0;
       const authForBox =
-        rightValue > 0
-          ? authValue / (extremeValues.auth.max / 10)
+        authValue > 0
+          ? parseFloat(authValue / (extremeValues.auth.max / 10)).toFixed(2)
           : authValue < 0
-          ? authValue / -(extremeValues.auth.min / 10)
+          ? parseFloat(authValue / -(extremeValues.auth.min / 10)).toFixed(2)
           : 0;
       const progForBox =
         progValue > 0
-          ? progValue / (extremeValues.prog.max / 10)
+          ? parseFloat(progValue / (extremeValues.prog.max / 10)).toFixed(2)
           : progValue < 0
-          ? progValue / -(extremeValues.prog.min / 10)
+          ? parseFloat(progValue / -(extremeValues.prog.min / 10)).toFixed(2)
           : 0;
 
       setOfficialResult({
@@ -131,8 +131,8 @@ const ResultsPanel = () => {
       value={props.value}
       valueLabelDisplay="auto"
       // step={0.01}
-      min={-8}
-      max={8}
+      min={-10}
+      max={10}
       sx={{
         color: props.color,
 

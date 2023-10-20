@@ -981,91 +981,125 @@ export const TestProvider = ({ children }) => {
     if (item.effects.right) {
       if (item.effects.right > 0) {
         if (item.max || item.max === 0) {
-          extremeValues.right.max =
-            extremeValues.right.max + item.effects.right * item.max;
+          extremeValues.right.max = parseFloat(
+            (extremeValues.right.max + item.effects.right * item.max).toFixed(2)
+          );
         }
         if (item.min || item.min === 0) {
-          extremeValues.right.min =
-            extremeValues.right.min + item.effects.right * item.min;
+          extremeValues.right.min = parseFloat(
+            (extremeValues.right.min + item.effects.right * item.min).toFixed(2)
+          );
         } else {
-          extremeValues.right.max =
-            extremeValues.right.max + item.effects.right;
-          extremeValues.right.min =
-            extremeValues.right.min - item.effects.right;
+          extremeValues.right.max = parseFloat(
+            (extremeValues.right.max + item.effects.right).toFixed(2)
+          );
+          extremeValues.right.min = parseFloat(
+            (extremeValues.right.min - item.effects.right).toFixed(2)
+          );
         }
       }
       if (item.effects.right < 0) {
         if (item.min || item.min === 0) {
-          extremeValues.right.max =
-            extremeValues.right.max + item.effects.right * item.min;
+          extremeValues.right.max = parseFloat(
+            (extremeValues.right.max + item.effects.right * item.min).toFixed(2)
+          );
         }
         if (item.max || item.max === 0) {
-          extremeValues.right.min =
-            extremeValues.right.min + item.effects.right * item.max;
+          extremeValues.right.min = parseFloat(
+            (extremeValues.right.min + item.effects.right * item.max).toFixed(2)
+          );
         } else {
-          extremeValues.right.max =
-            extremeValues.right.max - item.effects.right;
+          extremeValues.right.max = parseFloat(
+            (extremeValues.right.max - item.effects.right).toFixed(2)
+          );
 
-          extremeValues.right.min =
-            extremeValues.right.min + item.effects.right;
+          extremeValues.right.min = parseFloat(
+            (extremeValues.right.min + item.effects.right).toFixed(2)
+          );
         }
       }
     }
     if (item.effects.auth) {
       if (item.effects.auth > 0) {
         if (item.max || item.max === 0) {
-          extremeValues.auth.max =
-            extremeValues.auth.max + item.effects.auth * item.max;
+          extremeValues.auth.max = parseFloat(
+            (extremeValues.auth.max + item.effects.auth * item.max).toFixed(2)
+          );
         }
         if (item.min || item.min === 0) {
-          extremeValues.auth.min =
-            extremeValues.auth.min + item.effects.auth * item.min;
+          extremeValues.auth.min = parseFloat(
+            (extremeValues.auth.min + item.effects.auth * item.min).toFixed(2)
+          );
         } else {
-          extremeValues.auth.max = extremeValues.auth.max + item.effects.auth;
-          extremeValues.auth.min = extremeValues.auth.min - item.effects.auth;
+          parseFloat(
+            (extremeValues.auth.max =
+              extremeValues.auth.max + item.effects.auth).toFixed(2)
+          );
+          parseFloat(
+            (extremeValues.auth.min =
+              extremeValues.auth.min - item.effects.auth).toFixed(2)
+          );
         }
       }
       if (item.effects.right < 0) {
         if (item.min || item.min === 0) {
-          extremeValues.auth.max =
-            extremeValues.auth.max + item.effects.auth * item.min;
+          extremeValues.auth.max = parseFloat(
+            (extremeValues.auth.max + item.effects.auth * item.min).toFixed(2)
+          );
         }
         if (item.max || item.max === 0) {
-          extremeValues.auth.min =
-            extremeValues.auth.min + item.effects.auth * item.max;
+          extremeValues.auth.min = parseFloat(
+            (extremeValues.auth.min + item.effects.auth * item.max).toFixed(2)
+          );
         } else {
-          extremeValues.auth.max = extremeValues.auth.max - item.effects.auth;
+          extremeValues.auth.max = parseFloat(
+            (extremeValues.auth.max - item.effects.auth).toFixed(2)
+          );
 
-          extremeValues.auth.min = extremeValues.auth.min + item.effects.auth;
+          extremeValues.auth.min = parseFloat(
+            (extremeValues.auth.min + item.effects.auth).toFixed(2)
+          );
         }
       }
     }
     if (item.effects.prog) {
       if (item.effects.prog > 0) {
         if (item.max || item.max === 0) {
-          extremeValues.prog.max =
-            extremeValues.prog.max + item.effects.prog * item.max;
+          extremeValues.prog.max = parseFloat(
+            (extremeValues.prog.max + item.effects.prog * item.max).toFixed(2)
+          );
         }
         if (item.min || item.min === 0) {
-          extremeValues.prog.min =
-            extremeValues.prog.min + item.effects.prog * item.min;
+          extremeValues.prog.min = parseFloat(
+            (extremeValues.prog.min + item.effects.prog * item.min).toFixed(2)
+          );
         } else {
-          extremeValues.prog.max = extremeValues.prog.max + item.effects.prog;
-          extremeValues.prog.min = extremeValues.prog.min - item.effects.prog;
+          extremeValues.prog.max = parseFloat(
+            (extremeValues.prog.max + item.effects.prog).toFixed(2)
+          );
+          extremeValues.prog.min = parseFloat(
+            (extremeValues.prog.min - item.effects.prog).toFixed(2)
+          );
         }
       }
       if (item.effects.prog < 0) {
         if (item.min || item.min === 0) {
-          extremeValues.prog.max =
-            extremeValues.prog.max + item.effects.prog * item.min;
+          extremeValues.prog.max = parseFloat(
+            (extremeValues.prog.max + item.effects.prog * item.min).toFixed(2)
+          );
         }
         if (item.max || item.max === 0) {
-          extremeValues.prog.min =
-            extremeValues.prog.min + item.effects.prog * item.max;
+          extremeValues.prog.min = parseFloat(
+            (extremeValues.prog.min + item.effects.prog * item.max).toFixed(2)
+          );
         } else {
-          extremeValues.prog.max = extremeValues.prog.max - item.effects.prog;
+          extremeValues.prog.max = parseFloat(
+            (extremeValues.prog.max - item.effects.prog).toFixed(2)
+          );
 
-          extremeValues.prog.min = extremeValues.prog.min + item.effects.prog;
+          extremeValues.prog.min = parseFloat(
+            (extremeValues.prog.min + item.effects.prog).toFixed(2)
+          );
         }
       }
     }
