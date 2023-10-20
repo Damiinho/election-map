@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactECharts from "echarts-for-react";
 import "echarts-gl";
+import { AppContext } from "../contexts/AppContext";
 
 const TestResultBox = (props) => {
+  const { windowWidth } = useContext(AppContext);
   const anaSocTraColor = "rgba(230, 130, 255, 0.36)";
   const anaSocProColor = "rgba(255, 0, 135, 0.36)";
   const autSocTraColor = "rgba(68, 0, 145, 0.36)";
@@ -11,6 +13,20 @@ const TestResultBox = (props) => {
   const autCapTraColor = "rgba(232, 255, 102, 0.36)";
   const anaCapProColor = "rgba(108, 255, 255, 0.5)";
   const anaCapTraColor = "rgba(108, 109, 255, 0.36)";
+  const fontSizeForLabel = `${
+    windowWidth < 300
+      ? 7
+      : windowWidth < 400
+      ? 10
+      : windowWidth < 500
+      ? 12
+      : windowWidth < 650
+      ? 14
+      : 16
+  }`;
+  const fontSizeForAxis = `${
+    windowWidth < 300 ? 6 : windowWidth < 400 ? 8 : windowWidth < 500 ? 10 : 12
+  }`;
 
   const option = {
     grid3D: {},
@@ -18,6 +34,10 @@ const TestResultBox = (props) => {
       min: -10,
       max: 10,
       name: "oś ekonomiczna",
+      nameTextStyle: {
+        fontSize: fontSizeForLabel,
+      },
+
       axisLine: {
         lineStyle: {
           color: "red",
@@ -41,17 +61,24 @@ const TestResultBox = (props) => {
           // Domyślnie użyj wartości liczbowej
           return value;
         },
+        textStyle: {
+          fontSize: fontSizeForAxis, // Domyślny rozmiar czcionki
+        },
       },
     },
     yAxis3D: {
       min: -10,
       max: 10,
       name: "oś cywilizacyjna",
+      nameTextStyle: {
+        fontSize: fontSizeForLabel,
+      },
       axisLine: {
         lineStyle: {
           color: "green",
         },
       },
+
       splitArea: {
         show: true,
         areaStyle: {
@@ -70,12 +97,18 @@ const TestResultBox = (props) => {
           // Domyślnie użyj wartości liczbowej
           return value;
         },
+        textStyle: {
+          fontSize: fontSizeForAxis, // Domyślny rozmiar czcionki
+        },
       },
     },
     zAxis3D: {
       min: -10,
       max: 10,
       name: "oś zarządcza",
+      nameTextStyle: {
+        fontSize: fontSizeForLabel,
+      },
       axisLine: {
         lineStyle: {
           color: "blue",
@@ -98,6 +131,9 @@ const TestResultBox = (props) => {
           }
           // Domyślnie użyj wartości liczbowej
           return value;
+        },
+        textStyle: {
+          fontSize: fontSizeForAxis, // Domyślny rozmiar czcionki
         },
       },
     },
@@ -784,20 +820,36 @@ const TestResultBox = (props) => {
       // DOTT
       {
         type: "scatter3D",
-        symbolSize: 10,
+        symbolSize: windowWidth > 650 ? 15 : 12,
         data: [[props.right, props.prog, props.auth]],
         itemStyle: {
           opacity: 1,
-          color: "black",
+          color: "#ff0000bb",
+          borderWidth: 1, // Grubość krawędzi
+          borderColor: "#00000055", // Kolor krawędzi
+          borderType: "dotted", // Typ krawędzi
+          borderDashOffset: 5, // Przesunięcie przerywanej linii
+          borderCap: "round", // Styl zakończenia linii
         },
       },
     ],
   };
-
   return (
-    <>
-      <ReactECharts option={option} style={{ height: 400 }} />
-    </>
+    <div>
+      <ReactECharts
+        option={option}
+        style={{
+          height:
+            windowWidth < 400
+              ? 150
+              : windowWidth < 500
+              ? 200
+              : windowWidth < 650
+              ? 300
+              : 400,
+        }}
+      />
+    </div>
   );
 };
 

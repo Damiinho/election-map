@@ -3,12 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { TestContext } from "../contexts/TestContext";
 import { AppContext } from "../contexts/AppContext";
 import { Button, Slider } from "@mui/material";
-import ArrowCircleLeftTwoToneIcon from "@mui/icons-material/ArrowCircleLeftTwoTone";
-import ArrowCircleRightTwoToneIcon from "@mui/icons-material/ArrowCircleRightTwoTone";
-import ArrowCircleUpTwoToneIcon from "@mui/icons-material/ArrowCircleUpTwoTone";
-import ArrowCircleDownTwoToneIcon from "@mui/icons-material/ArrowCircleDownTwoTone";
-import UndoIcon from "@mui/icons-material/Undo";
-import RedoIcon from "@mui/icons-material/Redo";
 import TestResultBox from "./TestResultBox";
 
 const ResultsPanel = () => {
@@ -18,61 +12,6 @@ const ResultsPanel = () => {
   const { windowWidth } = useContext(AppContext);
   const params = useParams();
   const navigate = useNavigate();
-  const [rotate, setRotate] = useState([-28, -16, 6]);
-  const [isDragging, setIsDragging] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseDown = (event) => {
-    if (event.button === 0) {
-      setIsDragging(true);
-    }
-  };
-  const handleTouchMove = (event) => {
-    const touch = event.touches[0];
-    const x = touch.clientX;
-    const y = touch.clientY;
-    const newRotate = [...rotate];
-    if (y > mousePosition.y) {
-      newRotate[1] = newRotate[1] - 1;
-    }
-    if (y < mousePosition.y) {
-      newRotate[1] = newRotate[1] + 1;
-    }
-    if (x > mousePosition.x) {
-      newRotate[0] = newRotate[0] - 1;
-    }
-    if (x < mousePosition.x) {
-      newRotate[0] = newRotate[0] + 1;
-    }
-    setRotate(newRotate);
-    setMousePosition({ x, y });
-  };
-  const handleMouseMove = (event) => {
-    if (isDragging) {
-      const x = event.clientX;
-      const y = event.clientY;
-      const newRotate = [...rotate];
-      if (y > mousePosition.y) {
-        newRotate[1] = newRotate[1] - 1;
-      }
-      if (y < mousePosition.y) {
-        newRotate[1] = newRotate[1] + 1;
-      }
-      if (x > mousePosition.x) {
-        newRotate[0] = newRotate[0] - 1;
-      }
-      if (x < mousePosition.x) {
-        newRotate[0] = newRotate[0] + 1;
-      }
-
-      setRotate(newRotate);
-      setMousePosition({ x, y });
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
 
   useEffect(() => {
     if (params.values) {
@@ -97,21 +36,23 @@ const ResultsPanel = () => {
 
       const rightForBox =
         rightValue > 0
-          ? parseFloat(rightValue / (extremeValues.right.max / 10)).toFixed(2)
+          ? parseFloat((rightValue / (extremeValues.right.max / 10)).toFixed(2))
           : rightValue < 0
-          ? parseFloat(rightValue / -(extremeValues.right.min / 10)).toFixed(2)
+          ? parseFloat(
+              (rightValue / -(extremeValues.right.min / 10)).toFixed(2)
+            )
           : 0;
       const authForBox =
         authValue > 0
-          ? parseFloat(authValue / (extremeValues.auth.max / 10)).toFixed(2)
+          ? parseFloat((authValue / (extremeValues.auth.max / 10)).toFixed(2))
           : authValue < 0
-          ? parseFloat(authValue / -(extremeValues.auth.min / 10)).toFixed(2)
+          ? parseFloat((authValue / -(extremeValues.auth.min / 10)).toFixed(2))
           : 0;
       const progForBox =
         progValue > 0
-          ? parseFloat(progValue / (extremeValues.prog.max / 10)).toFixed(2)
+          ? parseFloat((progValue / (extremeValues.prog.max / 10)).toFixed(2))
           : progValue < 0
-          ? parseFloat(progValue / -(extremeValues.prog.min / 10)).toFixed(2)
+          ? parseFloat((progValue / -(extremeValues.prog.min / 10)).toFixed(2))
           : 0;
 
       setOfficialResult({
@@ -252,194 +193,7 @@ const ResultsPanel = () => {
             <span>Postęp</span>
           </div>
         </div>
-        <div className="test__result-boxbuttons">
-          <Button
-            fontSize="small"
-            onClick={() => {
-              const newRotate = [...rotate];
-              newRotate[0] = rotate[0] - 10;
-              setRotate(newRotate);
-            }}
-          >
-            <ArrowCircleLeftTwoToneIcon />
-          </Button>
-          <Button
-            fontSize="small"
-            onClick={() => {
-              const newRotate = [...rotate];
-              newRotate[0] = rotate[0] + 10;
-              setRotate(newRotate);
-            }}
-          >
-            <ArrowCircleRightTwoToneIcon />
-          </Button>
-          <Button
-            fontSize="small"
-            onClick={() => {
-              const newRotate = [...rotate];
-              newRotate[1] = rotate[1] + 10;
-              setRotate(newRotate);
-            }}
-          >
-            <ArrowCircleUpTwoToneIcon />
-          </Button>
-          <Button
-            fontSize="small"
-            onClick={() => {
-              const newRotate = [...rotate];
-              newRotate[1] = rotate[1] - 10;
-              setRotate(newRotate);
-            }}
-          >
-            <ArrowCircleDownTwoToneIcon />
-          </Button>
-
-          <Button
-            fontSize="small"
-            onClick={() => {
-              const newRotate = [...rotate];
-              newRotate[2] = rotate[2] - 10;
-              setRotate(newRotate);
-            }}
-          >
-            <UndoIcon />
-          </Button>
-          <Button
-            fontSize="small"
-            onClick={() => {
-              const newRotate = [...rotate];
-              newRotate[2] = rotate[2] + 10;
-              setRotate(newRotate);
-            }}
-          >
-            <RedoIcon />
-          </Button>
-        </div>
-        <div className="test__result-resetbutton">
-          <Button
-            color="error"
-            size="small"
-            variant="contained"
-            style={{ textTransform: "lowercase" }}
-            onClick={() => {
-              setRotate([-28, -16, 6]);
-            }}
-          >
-            reset
-          </Button>
-        </div>
-        <div
-          className="boxes"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onTouchMove={handleTouchMove}
-          style={{ display: "none" }}
-        >
-          <div
-            className="box"
-            style={{
-              cursor: isDragging ? "grabbing" : "grab",
-              transform: `rotateY(${rotate[0]}deg) rotateX(${rotate[1]}deg) rotateZ(${rotate[2]}deg)`,
-            }}
-          >
-            <div className="bottom-side"></div>
-            <div className="back-side"></div>
-            <div className="left-side"></div>
-            <div className="center-bar-one"></div>
-            <div className="center-bar-two"></div>
-            <div className="center-bar-three"></div>
-            <div className="right-front-bar"></div>
-            <div className="top-front-bar"></div>
-            <div className="top-right-bar"></div>
-            <div className="right-center-bar"></div>
-            <div className="left-center-bar"></div>
-            <div className="front-center-bar"></div>
-            <div className="back-center-bar"></div>
-            <div className="right-vert-center-bar"></div>
-            <div className="left-vert-center-bar"></div>
-            <div className="front-vert-center-bar"></div>
-            <div className="back-vert-center-bar"></div>
-            <div className="top-hor-center-bar"></div>
-            <div className="bottom-hor-center-bar"></div>
-            <div className="top-vert-center-bar"></div>
-            <div className="bottom-vert-center-bar"></div>
-            {/* prawo-lewo, góra-dół, przód-tył */}{" "}
-            <div
-              className="result-dott-bottom"
-              style={{
-                width: "1em",
-                height: "1em",
-                transform: `rotateY(0deg) rotateX(90deg) rotateZ(0deg) translateZ(${
-                  officialResult.authForBox - 0.5
-                }em) translateY(${-officialResult.progForBox}em) translateX(${
-                  officialResult.rightForBox
-                }em)`,
-              }}
-            ></div>
-            <div
-              className="result-dott-top"
-              style={{
-                width: "1em",
-                height: "1em",
-                transform: `rotateY(0deg) rotateX(90deg) rotateZ(0deg) translateZ(${
-                  officialResult.authForBox + 0.5
-                }em)translateY(${-officialResult.progForBox}em) translateX(${
-                  officialResult.rightForBox
-                }em)`,
-              }}
-            ></div>
-            <div
-              className="result-dott-front"
-              style={{
-                width: "1em",
-                height: "1em",
-                transform: `rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(${
-                  -officialResult.progForBox + 0.5
-                }em) translateY(${-officialResult.authForBox}em) translateX(${
-                  officialResult.rightForBox
-                }em)`,
-              }}
-            ></div>
-            <div
-              className="result-dott-back"
-              style={{
-                width: "1em",
-                height: "1em",
-                transform: `rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(${
-                  -officialResult.progForBox - 0.5
-                }em) translateY(${-officialResult.authForBox}em) translateX(${
-                  officialResult.rightForBox
-                }em)`,
-              }}
-            ></div>
-            <div
-              className="result-dott-right"
-              style={{
-                width: "1em",
-                height: "1em",
-                transform: `rotateY(90deg) rotateX(0deg) rotateZ(0deg) translateZ(${
-                  officialResult.rightForBox + 0.5
-                }em) translateY(${-officialResult.authForBox}em) translateX(${
-                  officialResult.progForBox
-                }em)`,
-              }}
-            ></div>
-            <div
-              className="result-dott-left"
-              style={{
-                width: "1em",
-                height: "1em",
-                transform: `rotateY(90deg) rotateX(0deg) rotateZ(0deg) translateZ(${
-                  officialResult.rightForBox - 0.5
-                }em) translateY(${-officialResult.authForBox}em) translateX(${
-                  officialResult.progForBox
-                }em)`,
-              }}
-            ></div>
-          </div>
-        </div>
-        <div style={{ height: 420 }}>
+        <div>
           <TestResultBox
             right={officialResult.rightForBox}
             auth={officialResult.authForBox}
