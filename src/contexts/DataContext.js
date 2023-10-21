@@ -12,6 +12,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: true,
       color: "#175aa7",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Koalicja Obywatelska",
@@ -19,6 +20,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: true,
       color: "#f9641d",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Konfederacja",
@@ -26,6 +28,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: true,
       color: "#1a2e4d",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Trzecia Droga",
@@ -33,6 +36,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: true,
       color: "#96cc22",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Lewica",
@@ -40,6 +44,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: true,
       color: "#e0002a",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Bezpartyjni Samorządowcy",
@@ -47,6 +52,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: false,
       color: "#000000",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Pozostałe komitety",
@@ -54,6 +60,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: false,
       color: "#999999",
       result: 100,
+      confirmed: false,
     },
   ]);
   const [euroParties, setEuroParties] = useState([
@@ -63,6 +70,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: true,
       color: "#175aa7",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Koalicja Europejska",
@@ -70,6 +78,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: true,
       color: "#f9641d",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Konfederacja",
@@ -77,6 +86,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: true,
       color: "#1a2e4d",
       result: 0,
+      confirmed: false,
     },
     {
       name: "Pozostałe komitety",
@@ -84,6 +94,7 @@ export const DataProvider = ({ children }) => {
       isOverThreshold: false,
       color: "#999999",
       result: 100,
+      confirmed: false,
     },
   ]);
   const [districts, setDistricts] = useState([]);

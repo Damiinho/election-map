@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { Slider, TextField } from "@mui/material";
+import { Checkbox, Slider, TextField } from "@mui/material";
 import { DataContext } from "../../contexts/DataContext";
 import { AppContext } from "../../contexts/AppContext";
-
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import LockIcon from "@mui/icons-material/Lock";
 const ListSimpleOptions = () => {
   const {
     simpleOptionsResults2019,
@@ -21,10 +22,18 @@ const ListSimpleOptions = () => {
     setSimpleOptionsEuroResultsSurvey,
   } = useContext(DataContext);
   const { simpleElectionsType } = useContext(AppContext);
-  console.log(simpleParties.length);
+
+  const handleChange = (index) => {
+    const newSimpleParties = [...simpleParties];
+    newSimpleParties[index].confirmed = !newSimpleParties[index].confirmed;
+    setSimpleParties(newSimpleParties);
+  };
 
   const handleResultChange = (index, value) => {
-    if (simpleElectionsType.value === "sejm") {
+    if (
+      simpleElectionsType.value === "sejm" &&
+      simpleParties[index].confirmed === false
+    ) {
       const newSimpleParties = [...simpleParties];
       value = parseFloat(value);
       if (isNaN(value)) {
@@ -40,8 +49,19 @@ const ListSimpleOptions = () => {
           currentSum = currentSum + newSimpleParties[i].result;
         }
       }
+      const newSimplePartiesWithoutIndex = newSimpleParties.filter(
+        (party, i) => i !== index && i !== simpleParties.length - 1
+      );
+
       currentSum = currentSum + value;
-      if (currentSum > 100) return null;
+      if (currentSum > 100) {
+        if (!newSimplePartiesWithoutIndex.every((party) => party.confirmed)) {
+          return console.log("nie wszystkie mają confirmed");
+        }
+
+        return null;
+      }
+
       newSimpleParties[index].result = value;
       let newSum = 0;
       for (let i = 0; i < simpleParties.length - 1; i++) {
@@ -231,6 +251,14 @@ const ListSimpleOptions = () => {
                   onChange={(e) => handleResultChange(index, e.target.value)}
                 />
               </div>
+              <Checkbox
+                checked={
+                  simpleParties[index].confirmed === false ? false : true
+                }
+                onChange={() => handleChange(index)}
+                icon={<LockOpenIcon />}
+                checkedIcon={<LockIcon />}
+              />
             </div>
           ))}
         {simpleElectionsType.value === "euro" &&
