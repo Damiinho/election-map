@@ -59,7 +59,7 @@ const PartyList = () => {
       {parties.length > 0 ? (
         <>
           <div className={`addparty__main-list__title`} onClick={handleHide}>
-            <span># lista komitetów</span>
+            <span># lista komitetów ogólnych</span>
             <MySwitch
               onClick={handleHide}
               imgDisplay

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { randomColor } from "randomcolor";
 import StartButton from "./District/StartButton";
@@ -16,7 +16,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const District = (props) => {
   const { setStrictSejm } = useContext(AppContext);
-  const { districts, setDistricts } = useContext(DataContext);
+  const { districts, setDistricts, parties } = useContext(DataContext);
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
   const [currentResults, setCurrentResults] = useState(
@@ -24,14 +24,24 @@ const District = (props) => {
   );
 
   const currentDistrict = districts[props.index];
+  useEffect(() => {
+    const newDistricts = [...districts];
+    newDistricts[props.index].parties = [
+      ...parties,
+      ...newDistricts[props.index].localParties,
+    ];
+    setDistricts(newDistricts);
+  }, [parties, districts, props.index, setDistricts]);
 
   const handleAddLocalParty = () => {
     setAddLocal(!addLocal);
   };
 
-  const handleLocalDelete = (index, districtIndex) => {
+  const handleLocalDelete = (districtIndex, name) => {
     const newDistricts = [...districts];
-    newDistricts[districtIndex].parties.splice(index, 1);
+    newDistricts[districtIndex].localParties = newDistricts[
+      districtIndex
+    ].localParties.filter((party) => party.name !== name);
     setDistricts(newDistricts);
   };
 
@@ -45,7 +55,7 @@ const District = (props) => {
 
     setAddLocal(!addLocal);
 
-    const newParties = [...currentDistrict.parties];
+    const newLocalParties = [...currentDistrict.localParties];
     const party = {
       name,
       isOverThreshold: true,
@@ -53,7 +63,8 @@ const District = (props) => {
       deletable: true,
     };
 
-    newParties.push(party);
+    newLocalParties.push(party);
+
     const newCurrentResults = [...currentResults];
     newCurrentResults[currentResults.length] = 0;
     setCurrentResults(newCurrentResults);
@@ -62,7 +73,7 @@ const District = (props) => {
       const updatedDistricts = [...prevDistricts];
       updatedDistricts[props.index] = {
         ...updatedDistricts[props.index],
-        parties: newParties,
+        localParties: newLocalParties,
       };
       return updatedDistricts;
     });
@@ -83,7 +94,12 @@ const District = (props) => {
 
       return updatedDistricts;
     });
-    const results = districts[props.index].parties.map((party) => party.result);
+    const results = currentDistrict.parties.map((party) => {
+      const finalParty = currentDistrict.finalResult.find(
+        (finalParty) => finalParty.name === party.name
+      );
+      return finalParty ? finalParty.result : null;
+    });
     setCurrentResults(results);
   };
 

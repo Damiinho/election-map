@@ -22,7 +22,10 @@ const PartyItem = (props) => {
               },
             }}
             onClick={() =>
-              props.handleLocalDelete(props.index, props.currentDistrictIndex)
+              props.handleLocalDelete(
+                props.currentDistrictIndex,
+                props.item.name
+              )
             }
           >
             <CancelIcon />
