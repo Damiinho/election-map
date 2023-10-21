@@ -24,15 +24,22 @@ const ListSimpleOptions = () => {
   const { simpleElectionsType } = useContext(AppContext);
 
   const handleChange = (index) => {
-    const newSimpleParties = [...simpleParties];
-    newSimpleParties[index].confirmed = !newSimpleParties[index].confirmed;
-    setSimpleParties(newSimpleParties);
+    if (simpleElectionsType.value === "sejm") {
+      const newSimpleParties = [...simpleParties];
+      newSimpleParties[index].confirmed = !newSimpleParties[index].confirmed;
+      setSimpleParties(newSimpleParties);
+    } else if (simpleElectionsType.value === "euro") {
+      const newEuroParties = [...euroParties];
+      newEuroParties[index].confirmed = !newEuroParties[index].confirmed;
+      setEuroParties(newEuroParties);
+    }
   };
 
   const handleResultChange = (index, value) => {
     if (
       simpleElectionsType.value === "sejm" &&
-      simpleParties[index].confirmed === false
+      simpleParties[index].confirmed === false &&
+      !(simpleParties[index] === simpleParties[simpleParties.length - 1])
     ) {
       const newSimpleParties = [...simpleParties];
       value = parseFloat(value);
@@ -59,16 +66,17 @@ const ListSimpleOptions = () => {
       currentSum = currentSum + value;
       if (currentSum > 100) {
         if (newSimplePartiesUnconfirmed.length > 0) {
-          let sumUnconfirmedParty = 0;
+          let sumUnconfirmedParties = 0;
           newSimplePartiesUnconfirmed.map(
             (party) =>
-              (sumUnconfirmedParty = sumUnconfirmedParty + party.result)
+              (sumUnconfirmedParties = sumUnconfirmedParties + party.result)
           );
 
           const differenceFrom100 = currentSum - 100;
           newSimplePartiesUnconfirmed.map(
             (party) =>
-              (party.percentageToSubtract = party.result / sumUnconfirmedParty)
+              (party.percentageToSubtract =
+                party.result / sumUnconfirmedParties)
           );
 
           newSimplePartiesUnconfirmed.forEach((partyUnconfirmed) => {
@@ -89,7 +97,11 @@ const ListSimpleOptions = () => {
                     partyUnconfirmed.percentageToSubtract * differenceFrom100
                   ).toFixed(2)
                 );
-              } else matchingParty.result = 0;
+              } else {
+                matchingParty.result = 0;
+
+                return null;
+              }
             }
           });
         } else return null;
@@ -103,14 +115,37 @@ const ListSimpleOptions = () => {
       }
       newCurrentSum = newCurrentSum + value;
       if (newCurrentSum > 100) return null;
-      newSimpleParties[index].result = value;
-      let newSum = 0;
-      for (let i = 0; i < simpleParties.length - 1; i++) {
-        newSum = newSum + newSimpleParties[i].result;
+
+      let sumConfirmedParties = 0;
+      sumConfirmedParties = simpleParties
+        .filter((party) => party.confirmed)
+        .reduce((sum, party) => sum + parseFloat(party.result), 0);
+      sumConfirmedParties = parseFloat(sumConfirmedParties.toFixed(2));
+      if (sumConfirmedParties + value > 100) {
+        newSimpleParties[index].result = parseFloat(
+          (100 - sumConfirmedParties).toFixed(2)
+        );
+        newSimpleParties[simpleParties.length - 1].result = 0;
+        newSimpleParties.forEach((party) => {
+          if (
+            party.confirmed === false &&
+            !(party === newSimpleParties[index])
+          ) {
+            party.result = 0;
+          }
+        });
+      } else {
+        newSimpleParties[index].result = value;
+
+        let newSum = 0;
+        for (let i = 0; i < simpleParties.length - 1; i++) {
+          newSum = newSum + newSimpleParties[i].result;
+        }
+        newSimpleParties[simpleParties.length - 1].result = parseFloat(
+          (100 - newSum).toFixed(2)
+        );
       }
-      newSimpleParties[simpleParties.length - 1].result = parseFloat(
-        (100 - newSum).toFixed(2)
-      );
+
       setSimpleParties(newSimpleParties);
       if (simpleOptionsResults2019) {
         setSimpleOptionsResults2019(false);
@@ -118,7 +153,37 @@ const ListSimpleOptions = () => {
       if (simpleOptionsResultsSurvey) {
         setSimpleOptionsResultsSurvey(false);
       }
-    } else if (simpleElectionsType.value === "euro") {
+    } else if (
+      simpleElectionsType.value === "euro" &&
+      euroParties[index].confirmed === false &&
+      !(euroParties[index] === euroParties[euroParties.length - 1])
+    ) {
+      // const newEuroParties = [...euroParties];
+      // value = parseFloat(value);
+      // if (isNaN(value)) {
+      //   value = 0;
+      // } else if (value < 0) {
+      //   value = 0;
+      // } else if (value > 100) {
+      //   value = 100;
+      // }
+      // let currentSum = 0;
+      // for (let i = 0; i < euroParties.length - 1; i++) {
+      //   if (i !== index) {
+      //     currentSum = currentSum + newEuroParties[i].result;
+      //   }
+      // }
+      // currentSum = currentSum + value;
+      // if (currentSum > 100) return null;
+      // newEuroParties[index].result = value;
+      // let newSum = 0;
+      // for (let i = 0; i < euroParties.length - 1; i++) {
+      //   newSum = newSum + newEuroParties[i].result;
+      // }
+      // newEuroParties[euroParties.length - 1].result = parseFloat(
+      //   (100 - newSum).toFixed(2)
+      // );
+
       const newEuroParties = [...euroParties];
       value = parseFloat(value);
       if (isNaN(value)) {
@@ -134,16 +199,93 @@ const ListSimpleOptions = () => {
           currentSum = currentSum + newEuroParties[i].result;
         }
       }
-      currentSum = currentSum + value;
-      if (currentSum > 100) return null;
-      newEuroParties[index].result = value;
-      let newSum = 0;
-      for (let i = 0; i < euroParties.length - 1; i++) {
-        newSum = newSum + newEuroParties[i].result;
-      }
-      newEuroParties[euroParties.length - 1].result = parseFloat(
-        (100 - newSum).toFixed(2)
+      const newEuroPartiesWithoutIndex = newEuroParties.filter(
+        (party, i) => i !== index && i !== euroParties.length - 1
       );
+
+      const newEuroPartiesUnconfirmed = newEuroPartiesWithoutIndex.filter(
+        (party) => !party.confirmed
+      );
+      currentSum = currentSum + value;
+      if (currentSum > 100) {
+        if (newEuroPartiesUnconfirmed.length > 0) {
+          let sumUnconfirmedParties = 0;
+          newEuroPartiesUnconfirmed.map(
+            (party) =>
+              (sumUnconfirmedParties = sumUnconfirmedParties + party.result)
+          );
+
+          const differenceFrom100 = currentSum - 100;
+          newEuroPartiesUnconfirmed.map(
+            (party) =>
+              (party.percentageToSubtract =
+                party.result / sumUnconfirmedParties)
+          );
+
+          newEuroPartiesUnconfirmed.forEach((partyUnconfirmed) => {
+            const matchingParty = newEuroParties.find(
+              (party) => party.name === partyUnconfirmed.name
+            );
+            if (matchingParty) {
+              if (
+                !(
+                  matchingParty.result -
+                    partyUnconfirmed.percentageToSubtract * differenceFrom100 <
+                  0
+                )
+              ) {
+                matchingParty.result = parseFloat(
+                  (
+                    matchingParty.result -
+                    partyUnconfirmed.percentageToSubtract * differenceFrom100
+                  ).toFixed(2)
+                );
+              } else {
+                matchingParty.result = 0;
+
+                return null;
+              }
+            }
+          });
+        } else return null;
+      }
+
+      let newCurrentSum = 0;
+      for (let i = 0; i < euroParties.length - 1; i++) {
+        if (i !== index) {
+          newCurrentSum = newCurrentSum + newEuroParties[i].result;
+        }
+      }
+      newCurrentSum = newCurrentSum + value;
+      if (newCurrentSum > 100) return null;
+
+      let sumConfirmedParties = 0;
+      sumConfirmedParties = euroParties
+        .filter((party) => party.confirmed)
+        .reduce((sum, party) => sum + parseFloat(party.result), 0);
+      sumConfirmedParties = parseFloat(sumConfirmedParties.toFixed(2));
+      if (sumConfirmedParties + value > 100) {
+        newEuroParties[index].result = parseFloat(
+          (100 - sumConfirmedParties).toFixed(2)
+        );
+        newEuroParties[euroParties.length - 1].result = 0;
+        newEuroParties.forEach((party) => {
+          if (party.confirmed === false && !(party === newEuroParties[index])) {
+            party.result = 0;
+          }
+        });
+      } else {
+        newEuroParties[index].result = value;
+
+        let newSum = 0;
+        for (let i = 0; i < euroParties.length - 1; i++) {
+          newSum = newSum + newEuroParties[i].result;
+        }
+        newEuroParties[euroParties.length - 1].result = parseFloat(
+          (100 - newSum).toFixed(2)
+        );
+      }
+
       setEuroParties(newEuroParties);
       if (simpleOptionsEuroResults2019) {
         setSimpleOptionsEuroResults2019(false);
@@ -299,6 +441,7 @@ const ListSimpleOptions = () => {
                 onChange={() => handleChange(index)}
                 icon={<LockOpenIcon />}
                 checkedIcon={<LockIcon />}
+                disabled={index === simpleParties.length - 1 ? true : false}
               />
             </div>
           ))}
@@ -437,6 +580,14 @@ const ListSimpleOptions = () => {
                   onChange={(e) => handleResultChange(index, e.target.value)}
                 />
               </div>
+
+              <Checkbox
+                checked={euroParties[index].confirmed === false ? false : true}
+                onChange={() => handleChange(index)}
+                icon={<LockOpenIcon />}
+                checkedIcon={<LockIcon />}
+                disabled={index === euroParties.length - 1 ? true : false}
+              />
             </div>
           ))}
       </div>
