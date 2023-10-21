@@ -89,7 +89,7 @@ const ListSimpleOptions = () => {
                     partyUnconfirmed.percentageToSubtract * differenceFrom100
                   ).toFixed(2)
                 );
-              }
+              } else matchingParty.result = 0;
             }
           });
         } else return null;
