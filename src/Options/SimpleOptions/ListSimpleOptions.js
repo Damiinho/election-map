@@ -53,15 +53,56 @@ const ListSimpleOptions = () => {
         (party, i) => i !== index && i !== simpleParties.length - 1
       );
 
+      const newSimplePartiesUnconfirmed = newSimplePartiesWithoutIndex.filter(
+        (party) => !party.confirmed
+      );
       currentSum = currentSum + value;
       if (currentSum > 100) {
-        if (!newSimplePartiesWithoutIndex.every((party) => party.confirmed)) {
-          return console.log("nie wszystkie mają confirmed");
-        }
+        if (newSimplePartiesUnconfirmed.length > 0) {
+          let sumUnconfirmedParty = 0;
+          newSimplePartiesUnconfirmed.map(
+            (party) =>
+              (sumUnconfirmedParty = sumUnconfirmedParty + party.result)
+          );
 
-        return null;
+          const differenceFrom100 = currentSum - 100;
+          newSimplePartiesUnconfirmed.map(
+            (party) =>
+              (party.percentageToSubtract = party.result / sumUnconfirmedParty)
+          );
+
+          newSimplePartiesUnconfirmed.forEach((partyUnconfirmed) => {
+            const matchingParty = newSimpleParties.find(
+              (party) => party.name === partyUnconfirmed.name
+            );
+            if (matchingParty) {
+              if (
+                !(
+                  matchingParty.result -
+                    partyUnconfirmed.percentageToSubtract * differenceFrom100 <
+                  0
+                )
+              ) {
+                matchingParty.result = parseFloat(
+                  (
+                    matchingParty.result -
+                    partyUnconfirmed.percentageToSubtract * differenceFrom100
+                  ).toFixed(2)
+                );
+              }
+            }
+          });
+        } else return null;
       }
 
+      let newCurrentSum = 0;
+      for (let i = 0; i < simpleParties.length - 1; i++) {
+        if (i !== index) {
+          newCurrentSum = newCurrentSum + newSimpleParties[i].result;
+        }
+      }
+      newCurrentSum = newCurrentSum + value;
+      if (newCurrentSum > 100) return null;
       newSimpleParties[index].result = value;
       let newSum = 0;
       for (let i = 0; i < simpleParties.length - 1; i++) {
