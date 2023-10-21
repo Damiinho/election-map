@@ -76,10 +76,10 @@ const ResultsPanel = () => {
       max={10}
       sx={{
         color: props.color,
-
         height: 8,
         "span.MuiSlider-valueLabel": {
           backgroundColor: props.color,
+          color: props.textColor ? props.textColor : "white",
         },
         "& .MuiSlider-thumb": {
           height: 24,
@@ -95,6 +95,10 @@ const ResultsPanel = () => {
         },
         "& .MuiSlider-track": {
           border: "none",
+          backgroundColor: "transparent",
+        },
+        "& .MuiSlider-rail": {
+          // Kolor nieaktywnego obszaru slidera
         },
 
         "& .MuiSlider-valueLabel": {
@@ -169,10 +173,7 @@ const ResultsPanel = () => {
           </div>
           <div className="test__result-description__item">
             <span>Socjalizm</span>
-            <ResultSlider
-              value={officialResult.rightForBox}
-              color="#f0494960"
-            />
+            <ResultSlider value={officialResult.rightForBox} color="#f04949" />
 
             <span>Wolny rynek</span>
           </div>
@@ -181,7 +182,7 @@ const ResultsPanel = () => {
           </div>
           <div className="test__result-description__item">
             <span>Anarchizm</span>
-            <ResultSlider value={officialResult.authForBox} color="#8349f060" />
+            <ResultSlider value={officialResult.authForBox} color="#8349f0" />
             <span>Autorytaryzm</span>
           </div>
           <div className="test__result-description__title">
@@ -189,7 +190,11 @@ const ResultsPanel = () => {
           </div>
           <div className="test__result-description__item">
             <span>Tradycja</span>
-            <ResultSlider value={officialResult.progForBox} color="#fdfb7f60" />
+            <ResultSlider
+              value={officialResult.progForBox}
+              color="#fdfb7f"
+              textColor="black"
+            />
             <span>Postęp</span>
           </div>
         </div>
