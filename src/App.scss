@@ -864,7 +864,14 @@ $tertiary-color: #9c62a12c;
           }
         }
       }
-      @media screen and (max-width: 500px) {
+      @media screen and (max-width: 650px) {
+        &-handler {
+          &__title {
+            font-size: 30px;
+          }
+        }
+      }
+      @media screen and (max-width: 550px) {
         &-info {
           z-index: 1;
           bottom: 120px;
@@ -886,7 +893,7 @@ $tertiary-color: #9c62a12c;
               &__element {
                 margin: 0 10px 10px;
                 display: grid;
-                grid-template-columns: 3fr 1fr;
+                grid-template-columns: 4fr 1fr;
                 &-name {
                   font-size: 12px;
                   width: auto;
@@ -895,7 +902,9 @@ $tertiary-color: #9c62a12c;
                 &-slider {
                   margin: 0 10px;
                   width: auto;
-                  grid-column: span 2;
+                }
+                &-number {
+                  margin-right: 0;
                 }
               }
             }
@@ -911,6 +920,15 @@ $tertiary-color: #9c62a12c;
           }
           @media screen and (max-width: 301px) {
             font-size: 11px;
+          }
+        }
+      }
+      @media screen and (max-width: 420px) {
+        &-handler {
+          &__title {
+            font-size: 30px;
+            flex-direction: column;
+            gap: 5px;
           }
         }
       }
