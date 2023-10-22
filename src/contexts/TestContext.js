@@ -1,8 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const TestContext = createContext();
 
 export const TestProvider = ({ children }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const questions = [
     {
       question:
@@ -153,36 +166,129 @@ export const TestProvider = ({ children }) => {
         {
           value: -0.99,
           position: "absolute",
-          answer: "Żadnej",
+          answer:
+            windowWidth > 550 ? (
+              "Żadnej"
+            ) : (
+              <div
+                style={{
+                  fontSize:
+                    windowWidth > 450 ? 16 : windowWidth > 400 ? 14 : 12,
+                }}
+              >
+                Żadnej
+              </div>
+            ),
           left: 0,
         },
         {
           value: -0.7,
           position: "absolute",
-          answer: "Dla niepełnosprawnych",
-          left: -60,
-          top: -50,
+          answer:
+            windowWidth > 630 ? (
+              "Dla niepełnosprawnych"
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  fontSize:
+                    windowWidth > 550
+                      ? 20
+                      : windowWidth > 450
+                      ? 16
+                      : windowWidth > 400
+                      ? 14
+                      : 12,
+                }}
+              >
+                <p>Dla</p>
+                <p>niepełnosprawnych</p>
+              </div>
+            ),
+          left: windowWidth > 630 ? -60 : windowWidth > 450 ? -80 : -55,
+          top: windowWidth > 630 ? -50 : -80,
         },
         {
           value: -0.4,
-          answer: "Dla najuboższych",
+          answer:
+            windowWidth > 550 ? (
+              "Dla najuboższych"
+            ) : (
+              <div
+                style={{
+                  fontSize:
+                    windowWidth > 450 ? 16 : windowWidth > 400 ? 14 : 12,
+                  display: windowWidth > 350 ? "block" : "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <span>Dla </span>
+                <span>najuboższych</span>
+              </div>
+            ),
           left: 0,
         },
         {
           value: 0.2,
           position: "absolute",
-          answer: "Prodemograficzną",
-          right: -30,
+          answer:
+            windowWidth > 550 ? (
+              "Prodemograficzną"
+            ) : (
+              <div
+                style={{
+                  fontSize:
+                    windowWidth > 450 ? 16 : windowWidth > 400 ? 14 : 12,
+                }}
+              >
+                Prodemograficzną
+              </div>
+            ),
+          right: windowWidth > 450 ? -30 : -10,
           top: -50,
         },
         {
           value: 0.6,
-          answer: "Aktywizacyjną",
+          answer:
+            windowWidth > 550 ? (
+              "Aktywizacyjną"
+            ) : (
+              <div
+                style={{
+                  fontSize:
+                    windowWidth > 450 ? 16 : windowWidth > 400 ? 14 : 12,
+                }}
+              >
+                Aktywizacyjną
+              </div>
+            ),
           top: -50,
         },
         {
           value: 0.99,
-          answer: "Bezwarunkowy dochód podstawowy",
+          answer:
+            windowWidth > 650 ? (
+              "Bezwarunkowy dochód podstawowy"
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  fontSize:
+                    windowWidth > 550
+                      ? 20
+                      : windowWidth > 450
+                      ? 16
+                      : windowWidth > 400
+                      ? 14
+                      : 12,
+                }}
+              >
+                <p>Bezwarunkowy</p>
+                <p>dochód podstawowy</p>
+              </div>
+            ),
           right: 0,
           position: "absolute",
         },
@@ -238,9 +344,17 @@ export const TestProvider = ({ children }) => {
         {
           value: 0.4,
           // position: "absolute",
-          answer: "Pary homoseksualne",
+          answer:
+            windowWidth > 310 ? (
+              "Pary homoseksualne"
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span>Pary</span>
+                <span>homoseksualne</span>
+              </div>
+            ),
           // left: -60,
-          top: -50,
+          top: windowWidth > 310 ? -50 : -60,
         },
         {
           value: 0.7,
