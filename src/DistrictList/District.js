@@ -15,7 +15,8 @@ import { DataContext } from "../contexts/DataContext";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const District = (props) => {
-  const { setStrictSejm } = useContext(AppContext);
+  const { setStrictSejm, regenerateAllFlag, startAllFlag } =
+    useContext(AppContext);
   const { districts, setDistricts, parties } = useContext(DataContext);
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
@@ -36,6 +37,17 @@ const District = (props) => {
   const handleAddLocalParty = () => {
     setAddLocal(!addLocal);
   };
+  useEffect(() => {
+    if (regenerateAllFlag === true) {
+      const results = currentDistrict.parties.map((party) => {
+        const finalParty = currentDistrict.finalResult.find(
+          (finalParty) => finalParty.name === party.name
+        );
+        return finalParty ? finalParty.result : null;
+      });
+      setCurrentResults(results);
+    }
+  }, [regenerateAllFlag, currentDistrict]);
 
   const handleLocalDelete = (districtIndex, name) => {
     const newDistricts = [...districts];
@@ -103,8 +115,17 @@ const District = (props) => {
     setCurrentResults(results);
   };
 
+  useEffect(() => {
+    const results = currentDistrict.parties.map((party) => {
+      const finalParty = currentDistrict.finalResult.find(
+        (finalParty) => finalParty.name === party.name
+      );
+      return finalParty ? finalParty.result : null;
+    });
+    setCurrentResults(results);
+  }, [regenerateAllFlag, currentDistrict]);
+
   const handleStart = () => {
-    const currentDistrict = districts[props.index];
     const partiesWithResults = currentDistrict.parties.map((party, index) => ({
       ...party,
       result:
@@ -199,6 +220,115 @@ const District = (props) => {
     setCurrentResults(Array(props.deputies).fill(0));
     setAddLocal(false);
   };
+
+  useEffect(() => {
+    if (startAllFlag === true) {
+      const partiesWithResults = currentDistrict.parties.map(
+        (party, index) => ({
+          ...party,
+          result:
+            currentResults[index] !== undefined
+              ? Number(currentResults[index])
+              : 0,
+        })
+      );
+
+      const totalMandates = currentDistrict.deputies;
+
+      const eligibleParties = partiesWithResults.filter(
+        (party) => party.isOverThreshold
+      );
+
+      // Funkcja do przydzielania mandatów
+      const distributeSeats = (parties, totalSeats) => {
+        if (eligibleParties.length === 0) {
+          // Żadna z partii nie przekroczyła progu wyborczego, więc nic się nie dzieje
+          return parties.map((party) => ({ ...party, seats: 0 }));
+        }
+
+        const partiesWithSeats = eligibleParties.map((party) => ({
+          ...party,
+          seats: 0,
+        }));
+
+        for (let i = 0; i < totalSeats; i++) {
+          const adjustedResults = partiesWithSeats.map((party) => ({
+            ...party,
+            adjustedResult: party.result / (party.seats + 1),
+          }));
+
+          const nextMandateParty = adjustedResults.reduce(
+            (maxParty, party) =>
+              party.adjustedResult > maxParty.adjustedResult ? party : maxParty,
+            adjustedResults[0]
+          );
+
+          partiesWithSeats.find((party) => party.name === nextMandateParty.name)
+            .seats++;
+        }
+
+        return partiesWithSeats;
+      };
+
+      // Sprawdzenie, czy każda partia ma wynik 0 w results
+      const allPartiesHaveZeroResults = partiesWithResults.every(
+        (party) => party.result === 0 || isNaN(party.result)
+      );
+      if (allPartiesHaveZeroResults || eligibleParties.length === 0) {
+        return;
+      }
+
+      // Przydzielanie mandatów tylko jeśli nie wszystkie partie mają wyn ik 0
+      const partiesWithMandates = allPartiesHaveZeroResults
+        ? partiesWithResults.map((party) => ({ ...party, seats: 0 }))
+        : distributeSeats(partiesWithResults, totalMandates);
+
+      const booleanFinalResult = () => {
+        if (partiesWithResults.every((party) => party.result === 0)) {
+          return false;
+        } else return true;
+      };
+
+      const chartLabels = partiesWithMandates.map((party) => party.name);
+      const chartData = partiesWithMandates.map((party) => party.seats);
+      const chartColors = partiesWithMandates.map((party) => party.color);
+
+      const newForChart = {
+        labels: chartLabels,
+        datasets: [
+          {
+            label: "miejsca",
+            data: chartData,
+            backgroundColor: chartColors,
+            borderColor: "grey",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      setDistricts((prevDistricts) => {
+        const updatedDistricts = [...prevDistricts];
+        updatedDistricts[props.index] = {
+          ...updatedDistricts[props.index],
+          finalResult: partiesWithMandates,
+          parties: partiesWithResults, // Zachowujemy pierwotne wyniki
+          showFinalResult: booleanFinalResult(),
+          forChart: newForChart,
+        };
+
+        return updatedDistricts;
+      });
+      setCurrentResults(Array(props.deputies).fill(0));
+      setAddLocal(false);
+    }
+  }, [
+    startAllFlag,
+    currentResults,
+    currentDistrict,
+    props.deputies,
+    props.index,
+    setDistricts,
+  ]);
 
   const handleResultChange = (index, value) => {
     let currentValue = value;

@@ -24,6 +24,8 @@ export const AppProvider = ({ children }) => {
   const [simpleByName, setSimpleByName] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isTest, setIsTest] = useState(false);
+  const [regenerateAllFlag, setRegenerateAllFlag] = useState(false);
+  const [startAllFlag, setStartAllFlag] = useState(false);
   const selectOptions = [
     { value: "sejm", label: "sejmu" },
     { value: "euro", label: "europarlamentu" },
@@ -74,6 +76,10 @@ export const AppProvider = ({ children }) => {
     selectOptions,
     simpleElectionsType,
     setSimpleElectionsType,
+    regenerateAllFlag,
+    setRegenerateAllFlag,
+    startAllFlag,
+    setStartAllFlag,
   };
 
   useEffect(() => {
