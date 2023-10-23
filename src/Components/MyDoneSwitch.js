@@ -26,7 +26,8 @@ const MyDoneSwitch = (props) => {
       },
     },
     "& .MuiSwitch-thumb": {
-      backgroundColor: props.checked ? "#13810f" : "#b3687d",
+      backgroundColor: props.checked ? "#385b31" : "#5b3134",
+
       width: 32,
       height: 32,
       "&:before": {
