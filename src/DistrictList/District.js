@@ -21,7 +21,7 @@ const District = (props) => {
   const [addLocal, setAddLocal] = useState(false);
   const [name, setName] = useState("");
   const [currentResults, setCurrentResults] = useState(
-    Array(districts[props.index].parties.length).fill(0)
+    Array(districts[props.index].parties.length).fill(parseFloat(0))
   );
 
   const currentDistrict = districts[props.index];
@@ -45,7 +45,7 @@ const District = (props) => {
         const finalParty = currentDistrict.finalResult.find(
           (finalParty) => finalParty.name === party.name
         );
-        return finalParty ? finalParty.result : null;
+        return finalParty ? finalParty.result : 0;
       });
       setCurrentResults(results);
     }
@@ -112,7 +112,7 @@ const District = (props) => {
       const finalParty = currentDistrict.finalResult.find(
         (finalParty) => finalParty.name === party.name
       );
-      return finalParty ? finalParty.result : null;
+      return finalParty ? finalParty.result : 0;
     });
     setCurrentResults(results);
   };
@@ -122,7 +122,7 @@ const District = (props) => {
       const finalParty = currentDistrict.finalResult.find(
         (finalParty) => finalParty.name === party.name
       );
-      return finalParty ? finalParty.result : null;
+      return finalParty ? finalParty.result : 0;
     });
     setCurrentResults(results);
   }, [regenerateAllFlag, currentDistrict]);

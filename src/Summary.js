@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import MySwitch from "./Components/MySwitch";
 import { AppContext } from "./contexts/AppContext";
 import SummaryTable from "./Summary/SummaryTable";
 import MySmallInfoBox from "./Components/MySmallInfoBox";
