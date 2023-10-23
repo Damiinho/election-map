@@ -1,12 +1,10 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../contexts/AppContext";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CancelIcon from "@mui/icons-material/Cancel";
 import { Button, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import MySwitch from "../../Components/MySwitch";
 import { DataContext } from "../../contexts/DataContext";
 import MyEyeSwitch from "../../Components/MyEyeSwitch";
+import MyDoneSwitch from "../../Components/MyDoneSwitch";
 
 const PartyList = () => {
   const { showAddPartyList, setShowAddPartyList } = useContext(AppContext);
@@ -104,7 +102,7 @@ const PartyList = () => {
                     </div>
                   )}
                   <div className="addparty__main-list__ul-element__threshold">
-                    <MySwitch
+                    {/* <MySwitch
                       onClick={() => handleThreshold(index)}
                       checkedObject={
                         <CheckCircleIcon
@@ -138,6 +136,10 @@ const PartyList = () => {
                       size={1}
                       objectDisplay
                       value={parties[index].isOverThreshold}
+                    /> */}
+                    <MyDoneSwitch
+                      onChange={() => handleThreshold(index)}
+                      checked={parties[index].isOverThreshold}
                     />
                   </div>
                   <input
