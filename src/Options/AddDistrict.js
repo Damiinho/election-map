@@ -9,8 +9,8 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import MySwitch from "../Components/MySwitch";
 import { DataContext } from "../contexts/DataContext";
+import MyEyeSwitch from "../Components/MyEyeSwitch";
 
 const AddDistrict = () => {
   const [name, setName] = useState("");
@@ -578,11 +578,15 @@ const AddDistrict = () => {
       >
         2. generuj okręgi{" "}
         <div className="addparty__title__side">
-          <MySwitch
+          {/* <MySwitch
             onClick={handleShowAddDistrict}
             imgDisplay
             value={showAddDistrict}
             thumbDisplay={false}
+          /> */}
+          <MyEyeSwitch
+            onChange={handleShowAddDistrict}
+            checked={showAddDistrict}
           />
         </div>
       </div>

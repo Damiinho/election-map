@@ -26,13 +26,15 @@ const District = (props) => {
 
   const currentDistrict = districts[props.index];
   useEffect(() => {
-    const newDistricts = [...districts];
-    newDistricts[props.index].parties = [
-      ...parties,
-      ...newDistricts[props.index].localParties,
-    ];
-    setDistricts(newDistricts);
-  }, [parties, districts, props.index, setDistricts]);
+    setDistricts((prevDistricts) => {
+      const newDistricts = [...prevDistricts];
+      newDistricts[props.index].parties = [
+        ...parties,
+        ...newDistricts[props.index].localParties,
+      ];
+      return newDistricts;
+    });
+  }, [parties, props.index, setDistricts, currentDistrict.localParties]);
 
   const handleAddLocalParty = () => {
     setAddLocal(!addLocal);

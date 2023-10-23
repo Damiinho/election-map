@@ -389,11 +389,13 @@ $tertiary-color: #9c62a12c;
               padding: $default-padding;
               margin-bottom: 5px;
               font-family: "MuseoModerno", cursive;
-              > div {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                right: 0;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding-left: 20px;
+              > span:nth-of-type(2) {
+                position: relative;
+                left: -5px;
               }
             }
 
@@ -1264,10 +1266,6 @@ $tertiary-color: #9c62a12c;
         &__search {
           grid-row: auto;
           grid-column: span 2;
-        }
-        > button {
-          // margin: 0 auto;
-          // width: 140px;
         }
       }
     }

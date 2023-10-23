@@ -6,6 +6,7 @@ import { Button, TextField } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import MySwitch from "../../Components/MySwitch";
 import { DataContext } from "../../contexts/DataContext";
+import MyEyeSwitch from "../../Components/MyEyeSwitch";
 
 const PartyList = () => {
   const { showAddPartyList, setShowAddPartyList } = useContext(AppContext);
@@ -60,12 +61,8 @@ const PartyList = () => {
         <>
           <div className={`addparty__main-list__title`} onClick={handleHide}>
             <span># lista komitetów ogólnych</span>
-            <MySwitch
-              onClick={handleHide}
-              imgDisplay
-              value={showAddPartyList}
-              thumbDisplay={false}
-            />
+
+            <MyEyeSwitch onChange={handleHide} checked={showAddPartyList} />
           </div>
 
           <ul

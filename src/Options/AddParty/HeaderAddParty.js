@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
-import MySwitch from "../../Components/MySwitch";
+import MyEyeSwitch from "../../Components/MyEyeSwitch";
 
 const HeaderAddParty = () => {
   const { showAddParty, setShowAddParty } = useContext(AppContext);
@@ -17,12 +17,13 @@ const HeaderAddParty = () => {
     >
       1. dodaj komitety
       <div className="addparty__title__side">
-        <MySwitch
+        {/* <MySwitch
           onClick={handleShowAddParty}
           imgDisplay
           value={showAddParty}
           thumbDisplay={false}
-        />
+        /> */}
+        <MyEyeSwitch onChange={handleShowAddParty} checked={showAddParty} />
       </div>
     </div>
   );

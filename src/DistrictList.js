@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { AppContext } from "./contexts/AppContext";
 import District from "./DistrictList/District";
-import MySwitch from "./Components/MySwitch";
 import SearchDistrict from "./DistrictList/SearchDistrict";
 import { Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { DataContext } from "./contexts/DataContext";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import ReplayIcon from "@mui/icons-material/Replay";
+import MyEyeSwitch from "./Components/MyEyeSwitch";
 const DistrictList = () => {
   const {
     showDistricts,
@@ -67,11 +67,17 @@ const DistrictList = () => {
       >
         3. wpisz wyniki
         <div className="App__districtlist-title__side">
-          <MySwitch
+          {/* <MySwitch
             onClick={() => handleShowDistricts("switch")}
             imgDisplay
             thumbDisplay={false}
             value={showDistricts}
+          /> */}
+          <MyEyeSwitch
+            onChange={() => handleShowDistricts("switch")}
+            // imgDisplay
+            // thumbDisplay={false}
+            checked={showDistricts}
           />
         </div>
       </div>

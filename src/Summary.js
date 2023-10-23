@@ -8,6 +8,7 @@ import SummaryParliament from "./Summary/SummaryParliament";
 import { DataContext } from "./contexts/DataContext";
 import SimpleSummary from "./Summary/SimpleSummary";
 import SummaryCircus from "./Summary/SummaryCircus";
+import MyEyeSwitch from "./Components/MyEyeSwitch";
 
 const Summary = () => {
   const {
@@ -113,12 +114,13 @@ const Summary = () => {
       >
         4. podsumowanie
         <div className="App__summary-title__side">
-          <MySwitch
+          {/* <MySwitch
             onClick={handleShowSummary}
             imgDisplay
             value={showSummary}
             thumbDisplay={false}
-          />
+          /> */}
+          <MyEyeSwitch onChange={handleShowSummary} checked={showSummary} />
         </div>
       </div>
       <div className={`App__summary-main ${showSummary ? "" : "hide"}`}>

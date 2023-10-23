@@ -1,6 +1,3 @@
-import MySwitch from "./Components/MySwitch";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CancelIcon from "@mui/icons-material/Cancel";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "./contexts/AppContext";
 import Logo3 from "./img/calculatorlogo3.png";
@@ -9,6 +6,11 @@ import { DataContext } from "./contexts/DataContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useParams, useNavigate } from "react-router-dom";
 import { TestContext } from "./contexts/TestContext";
+import { Switch } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+import doneIcon from "./img/done.svg";
+import closeIcon from "./img/close.svg";
 
 const Header = () => {
   const {
@@ -51,6 +53,50 @@ const Header = () => {
     setHamburgerActive(!hamburgerActive);
   };
 
+  const DoneSwitch = styled(Switch)(() => ({
+    width: 62,
+    height: 34,
+    padding: 7,
+    "& .MuiSwitch-switchBase": {
+      margin: 1,
+      padding: 0,
+      transform: "translateX(6px)",
+      "&.Mui-checked": {
+        color: "#fff",
+        transform: "translateX(22px)",
+        "& .MuiSwitch-thumb:before": {
+          backgroundImage: `url(${doneIcon})`,
+        },
+        "& + .MuiSwitch-track": {
+          opacity: 1,
+          backgroundColor: "#aab4be",
+        },
+      },
+    },
+    "& .MuiSwitch-thumb": {
+      backgroundColor: advancedVersion ? "#13810f" : "#b3687d",
+      width: 32,
+      height: 32,
+      "&:before": {
+        content: "''",
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        left: 0,
+        top: 0,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+
+        backgroundImage: `url(${closeIcon})`,
+      },
+    },
+    "& .MuiSwitch-track": {
+      opacity: 1,
+      backgroundColor: "#aab4be",
+      borderRadius: 20 / 2,
+    },
+  }));
+
   return (
     <div className="App__header">
       <div className="App__header-title">
@@ -58,7 +104,7 @@ const Header = () => {
         <img src={advancedVersion ? Logo3 : SimpleLogo2} alt="" />
       </div>
       <div className="App__header-side">
-        <MySwitch
+        {/* <MySwitch
           onClick={handleAdvancedVersion}
           checkedObject={
             <CheckCircleIcon
@@ -92,6 +138,10 @@ const Header = () => {
           size={1}
           objectDisplay
           value={advancedVersion}
+        /> */}
+        <DoneSwitch
+          checked={advancedVersion}
+          onChange={handleAdvancedVersion}
         />
         <span>wersja zaawansowana</span>
       </div>
