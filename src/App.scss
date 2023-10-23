@@ -403,7 +403,8 @@ $tertiary-color: #9c62a12c;
             &__ul {
               display: grid;
               grid-template-rows: 1fr;
-              background-color: #8f8f8f;
+              color: black;
+              text-shadow: none;
 
               transition: 0.5s;
               > div {
@@ -413,7 +414,6 @@ $tertiary-color: #9c62a12c;
                 grid-template-rows: 0fr;
               }
               &-element {
-                background-color: #ffffff3a;
                 min-height: 34px;
                 display: grid;
                 grid-template-columns: 3fr 1fr 1fr 1fr;
@@ -423,11 +423,13 @@ $tertiary-color: #9c62a12c;
                 padding: 2px;
                 box-shadow: $material-box-shadow;
 
+                background-color: #6b77a035;
+
                 &:hover {
                   background-color: #9c62a111;
                 }
                 &.legend {
-                  background-color: #969696ad;
+                  background-color: #ffffffad;
                   // border-radius: $default-border-radius;
                   box-shadow: $material-box-shadow;
                   height: 26px;
@@ -445,6 +447,7 @@ $tertiary-color: #9c62a12c;
                 &__threshold {
                   text-align: center;
                   cursor: pointer;
+                  transform: scale(0.8);
                 }
 
                 &__color {
