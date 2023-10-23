@@ -25,7 +25,7 @@ const SummaryCircus = () => {
       xmlns="http://www.w3.org/2000/svg"
       width={360}
       height={185}
-      viewBox={windowWidth > 360 ? "" : "55 -20 250 250"}
+      viewBox={windowWidth > 360 ? "0 0 360 185" : "55 -20 250 250"}
     >
       <text
         x={175}

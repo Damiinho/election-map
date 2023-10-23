@@ -270,8 +270,9 @@ const SummaryParliament = () => {
               ?.finalResult.length > 0
               ? districts
                   .find((district) => district.id === hoveredElement)
-                  .finalResult.map((item) => (
+                  .finalResult.map((item, index) => (
                     <div
+                      key={index}
                       style={{
                         padding: 2,
                         display: "grid",
@@ -290,7 +291,7 @@ const SummaryParliament = () => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlSpace="preserve"
-        viewBox={windowWidth > 900 ? "0 0 1050 1050" : "0 0 1050 1050"}
+        viewBox={"0 0 1050 1050"}
         preserveAspectRatio="xMidYMid meet"
       >
         {showMapByResults ? <GradientsByResult /> : <GradientsBySeats />}
