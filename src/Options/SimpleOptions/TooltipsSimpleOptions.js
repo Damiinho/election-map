@@ -3,7 +3,7 @@ import { Tooltip } from "react-tooltip";
 import { AppContext } from "../../contexts/AppContext";
 
 const TooltipsSimpleOptions = () => {
-  const { simpleElectionsType } = useContext(AppContext);
+  const { simpleElectionsType, windowWidth } = useContext(AppContext);
   return (
     <>
       <Tooltip style={{ zIndex: 1, width: 440 }} id="correction-tooltip">
@@ -27,7 +27,10 @@ const TooltipsSimpleOptions = () => {
       <Tooltip style={{ zIndex: 1 }} id="td-tooltip">
         <div>Koalicja, próg wyborczy 8%</div>
       </Tooltip>
-      <Tooltip style={{ zIndex: 1, width: 440 }} id="options-tooltip">
+      <Tooltip
+        style={{ zIndex: 1, width: windowWidth > 450 ? 440 : 250 }}
+        id="options-tooltip"
+      >
         {simpleElectionsType.value === "sejm" && (
           <>
             <div style={{ marginBottom: 10 }}>
@@ -50,7 +53,10 @@ const TooltipsSimpleOptions = () => {
           </>
         )}
       </Tooltip>
-      <Tooltip style={{ zIndex: 1, width: 500 }} id="other-tooltip">
+      <Tooltip
+        style={{ zIndex: 1, width: windowWidth > 500 ? 500 : 250 }}
+        id="other-tooltip"
+      >
         <p style={{ marginBottom: 10 }}>
           Jeśli suma wyników wszystkich komitetów wyniesie mniej niż 100%,
           brakujące głosy zostaną dodane do pozostałych.

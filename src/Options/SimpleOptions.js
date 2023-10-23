@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Fab } from "@mui/material";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { AppContext } from "../contexts/AppContext";
@@ -9,6 +9,8 @@ import TitleSimpleOptions from "./SimpleOptions/TitleSimpleOptions";
 import TooltipsSimpleOptions from "./SimpleOptions/TooltipsSimpleOptions";
 import HeaderSimpleOptions from "./SimpleOptions/HeaderSimpleOptions";
 import ListSimpleOptions from "./SimpleOptions/ListSimpleOptions";
+import InfoIcon from "@mui/icons-material/Info";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 
 const SimpleOptions = () => {
   const navigate = useNavigate();
@@ -237,7 +239,18 @@ const SimpleOptions = () => {
         <>
           {" "}
           <div className="simpleOptions-info" data-tooltip-id="options-tooltip">
-            info
+            <Fab color="primary" size="small">
+              {/* <QuestionMarkIcon fontSize="medium" /> */}{" "}
+              <span
+                style={{
+                  textTransform: "lowercase",
+                  fontSize: 25,
+                  fontFamily: "Oleo Script, sans-serif",
+                }}
+              >
+                i
+              </span>
+            </Fab>
           </div>
           <div className="simpleOptions-handler">
             <TitleSimpleOptions />
