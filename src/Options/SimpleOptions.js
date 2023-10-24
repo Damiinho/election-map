@@ -9,8 +9,6 @@ import TitleSimpleOptions from "./SimpleOptions/TitleSimpleOptions";
 import TooltipsSimpleOptions from "./SimpleOptions/TooltipsSimpleOptions";
 import HeaderSimpleOptions from "./SimpleOptions/HeaderSimpleOptions";
 import ListSimpleOptions from "./SimpleOptions/ListSimpleOptions";
-import InfoIcon from "@mui/icons-material/Info";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 
 const SimpleOptions = () => {
   const navigate = useNavigate();
