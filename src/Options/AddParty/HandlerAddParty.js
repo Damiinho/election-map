@@ -88,7 +88,7 @@ const HandlerAddParty = () => {
         },
         {
           name: "Bezpartyjni Samorządowcy",
-          isOverThreshold: true,
+          isOverThreshold: false,
           color: "#000000",
         },
       ];
@@ -123,6 +123,34 @@ const HandlerAddParty = () => {
           name: "Grüne",
           isOverThreshold: true,
           color: "#66a134",
+        },
+      ];
+    } else if (item === "2022Hungary") {
+      predefinedParties = [
+        {
+          name: "Fidesz – KDNP",
+          isOverThreshold: true,
+          color: "#fa681e",
+        },
+        {
+          name: "Zjednoczeni dla Węgier",
+          isOverThreshold: true,
+          color: "#54b6a2",
+        },
+        {
+          name: "Ruch Naszej Ojczyzny",
+          isOverThreshold: true,
+          color: "#698d24",
+        },
+        {
+          name: "Węgierska Partia Psa o Dwóch Ogonach",
+          isOverThreshold: false,
+          color: "#808080",
+        },
+        {
+          name: "Samorząd Krajowy Niemców",
+          isOverThreshold: true,
+          color: "#1547a9",
         },
       ];
     }

@@ -71,7 +71,7 @@ const PartyList = () => {
             <div>
               <div className="addparty__main-list__ul-element legend">
                 <div>nazwa</div>
-                <div>{`> próg`}</div>
+                <div>{`> próg`}</div>
                 <div>kolor</div>
               </div>
               {parties.map((item, index) => (
