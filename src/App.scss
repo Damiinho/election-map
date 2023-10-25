@@ -319,22 +319,27 @@ $tertiary-color: #9c62a12c;
             }
           }
           &-predefined {
-            @include default-margin;
-            padding: $default-padding;
-            // border-radius: $default-border-radius;
-            box-shadow: $material-box-shadow;
             background-color: $secondary-color;
+            box-shadow: $material-box-shadow;
+            padding: $default-padding;
             margin-bottom: 5px;
-            display: flex;
-            @include justify-align-center;
-            button {
-              height: 40px;
-              padding: $default-padding;
-              margin-left: 20px;
-              border: none;
-              box-shadow: $material-box-shadow;
-              font-family: "MuseoModerno", cursive;
-              font-weight: 500;
+
+            &__buttons {
+              @include default-margin;
+              // border-radius: $default-border-radius;
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+              @include justify-align-center;
+              button {
+                height: 40px;
+                padding: $default-padding;
+                // margin-left: 20px;
+                border: none;
+                box-shadow: $material-box-shadow;
+                font-family: "MuseoModerno", cursive;
+                font-weight: 500;
+              }
             }
           }
           &-list {
@@ -449,22 +454,22 @@ $tertiary-color: #9c62a12c;
             }
           }
         }
-        @media screen and (max-width: 1200px) {
-          &__main {
-            &-predefined {
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              gap: 10px;
-              @include justify-align-center();
-              p {
-                margin: 0 auto;
-              }
-              button {
-                margin: 0 auto;
-              }
-            }
-          }
-        }
+        // @media screen and (max-width: 1200px) {
+        //   &__main {
+        //     &-predefined {
+        //       display: grid;
+        //       grid-template-columns: 1fr 1fr;
+        //       gap: 10px;
+        //       @include justify-align-center();
+        //       p {
+        //         margin: 0 auto;
+        //       }
+        //       button {
+        //         margin: 0 auto;
+        //       }
+        //     }
+        //   }
+        // }
         @media screen and (max-width: 800px) {
           &__title {
             text-align: left;
@@ -591,37 +596,24 @@ $tertiary-color: #9c62a12c;
             }
           }
           &-predefined {
-            @include default-margin;
-            padding: $default-padding;
-            // border-radius: $default-border-radius;
-            box-shadow: $material-box-shadow;
             background-color: $secondary-color;
-            display: flex;
-            @include justify-align-center;
+            box-shadow: $material-box-shadow;
+            padding: $default-padding;
+            @include default-margin;
+            &__buttons {
+              display: flex;
+              @include justify-align-center;
+              gap: 10px;
+              flex-wrap: wrap;
 
-            button {
-              height: 40px;
-              font-size: 11px;
-              padding: $default-padding;
-              margin-left: 20px;
-              cursor: pointer;
-              border-radius: $default-border-radius;
-              border: none;
-              box-shadow: $material-box-shadow;
-              font-family: "MuseoModerno", cursive;
-              font-weight: 500;
-              p {
-                position: relative;
-                top: -2px;
-              }
-              p:nth-of-type(2) {
-                color: white;
-              }
-              &.electionPoland {
-                background: linear-gradient(
-                  rgba(255, 255, 255, 1) 50%,
-                  rgba(255, 25, 0, 1) 50%
-                );
+              button {
+                height: 40px;
+                padding: $default-padding;
+                border-radius: $default-border-radius;
+                border: none;
+                box-shadow: $material-box-shadow;
+                font-family: "MuseoModerno", cursive;
+                font-weight: 500;
               }
             }
           }
