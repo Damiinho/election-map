@@ -1,12 +1,10 @@
-import { useContext, useState, useRef } from "react";
+import { useContext, useRef } from "react";
 import { TestContext } from "../contexts/TestContext";
 import { Button, Slider } from "@mui/material";
 import CubeIMG from "../img/cube.png";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import { AppContext } from "../contexts/AppContext";
-import MenuSharpIcon from "@mui/icons-material/MenuSharp";
-import { DataContext } from "../contexts/DataContext";
 
 const QuestionsPanel = () => {
   const {
@@ -18,10 +16,7 @@ const QuestionsPanel = () => {
     setIsTestStart,
   } = useContext(TestContext);
   const { windowWidth } = useContext(AppContext);
-  const { setDistricts } = useContext(DataContext);
   const navigate = useNavigate();
-
-  const [hamburgerActive, setHamburgerActive] = useState(false);
 
   // const defaultValue = 0;
   const sliderRef = useRef(null);
@@ -297,7 +292,7 @@ const QuestionsPanel = () => {
 
   return (
     <div className="test__questions">
-      {windowWidth > 400 ? (
+      {windowWidth > 500 ? (
         <div className="test__questions-buttons">
           <Button
             variant="contained"
@@ -323,78 +318,8 @@ const QuestionsPanel = () => {
           >
             od nowa
           </Button>
-          <Button
-            variant="contained"
-            // style={{ backgroundColor: "#f03b3b" }}
-            color="info"
-            size={windowWidth > 910 ? "medium" : "small"}
-            onClick={() => {
-              navigate("/prosty/");
-              setDistricts([]);
-            }}
-          >
-            kalkulator
-          </Button>
         </div>
-      ) : (
-        <div
-          className="test__questions-hamburger"
-          onClick={() => setHamburgerActive(!hamburgerActive)}
-          onMouseLeave={() => setHamburgerActive(false)}
-        >
-          <MenuSharpIcon
-            fontSize="large"
-            style={{ color: "black", position: "absolute", top: 10, right: 10 }}
-          />
-          {hamburgerActive ? (
-            <div
-              className="test__questions-hamburger-buttons"
-              style={{
-                color: "black",
-                position: "absolute",
-                top: 50,
-                right: 10,
-                display: "flex",
-                flexDirection: "column",
-                gap: 5,
-              }}
-            >
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#30609aaa" }}
-                size="small"
-                onClick={() => {
-                  navigate("/test/");
-                  setIsTestStart(false);
-                  setCurrentQuestion(0);
-                }}
-              >
-                od nowa
-              </Button>
-              <Button
-                style={{ backgroundColor: "#30609aaa" }}
-                variant="contained"
-                size="small"
-                onClick={() => {
-                  navigate("/prosty/");
-                }}
-              >
-                kalkulator
-              </Button>
-              <Button
-                style={{ backgroundColor: "#30609aaa" }}
-                variant="contained"
-                size="small"
-                onClick={() => {
-                  navigate("/test/lista");
-                }}
-              >
-                lista pytań
-              </Button>
-            </div>
-          ) : null}
-        </div>
-      )}
+      ) : null}
 
       <Question />
       <img src={CubeIMG} alt="" />
