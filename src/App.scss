@@ -94,34 +94,41 @@ $tertiary-color: #9c62a12c;
         width: 80px;
       }
     }
-    &-side {
-      height: 50px;
-      width: 150px;
-      // background-color: red;
-      position: absolute;
-      bottom: 10px;
-      right: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      span {
-        font-size: 12px;
-        font-family: "Mukta", sans-serif;
-        font-weight: normal;
-        line-height: 12px;
-      }
-    }
-    &-hamburger {
-      display: none;
-    }
-    &-test {
-      cursor: pointer;
-      position: absolute;
-      top: 0;
-      right: 30px;
-      font-size: 30px;
-    }
+    // &-side {
+    //   height: 50px;
+    //   width: 150px;
+    //   // background-color: red;
+    //   position: absolute;
+    //   bottom: 10px;
+    //   right: 0;
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: center;
+    //   align-items: center;
+    //   span {
+    //     font-size: 12px;
+    //     font-family: "Mukta", sans-serif;
+    //     font-weight: normal;
+    //     line-height: 12px;
+    //   }
+    // }
+    // &-hamburger {
+    //   display: none;
+    // }
+    // &-test {
+    //   cursor: pointer;
+    //   position: absolute;
+    //   top: 0;
+    //   right: 30px;
+    //   font-size: 30px;
+    //   display: flex;
+    //   @include justify-align-center();
+    //   gap: 5px;
+    //   font-family: "MuseoModerno", cursive;
+    //   font-family: "Overpass", sans-serif;
+    //   font-family: "Ysabeau Office", sans-serif;
+    //   font-weight: 600;
+    // }
   }
   @media screen and (max-width: 800px) {
     &__header {
@@ -135,46 +142,46 @@ $tertiary-color: #9c62a12c;
           top: -8px;
         }
       }
-      &-side {
-        display: none;
-      }
-      &-hamburger {
-        display: block;
-        cursor: pointer;
-        position: absolute;
-        bottom: 0px;
-        right: 10px;
-        &__advanced {
-          top: 60%;
-          right: 0;
-          z-index: 1;
-          width: 150px;
-          height: 25px;
-          background-color: #00498ddd;
-          position: absolute;
-          font-size: 15px;
-          box-shadow: $material-box-shadow;
-          // border-bottom: 2px solid black;
-          display: flex;
-          @include justify-align-center();
-        }
-        &__test {
-          top: 122%;
-          width: 150px;
-          height: 25px;
-          right: 0;
-          z-index: 1;
-          background-color: #00498ddd;
-          position: absolute;
-          font-size: 15px;
-          box-shadow: $material-box-shadow;
-          display: flex;
-          @include justify-align-center();
-        }
-      }
-      &-test {
-        display: none;
-      }
+      // &-side {
+      //   display: none;
+      // }
+      // &-hamburger {
+      //   display: block;
+      //   cursor: pointer;
+      //   position: absolute;
+      //   bottom: 0px;
+      //   right: 10px;
+      //   &__advanced {
+      //     top: 60%;
+      //     right: 0;
+      //     z-index: 1;
+      //     width: 150px;
+      //     height: 25px;
+      //     background-color: #00498ddd;
+      //     position: absolute;
+      //     font-size: 15px;
+      //     box-shadow: $material-box-shadow;
+      //     // border-bottom: 2px solid black;
+      //     display: flex;
+      //     @include justify-align-center();
+      //   }
+      //   &__test {
+      //     top: 122%;
+      //     width: 150px;
+      //     height: 25px;
+      //     right: 0;
+      //     z-index: 1;
+      //     background-color: #00498ddd;
+      //     position: absolute;
+      //     font-size: 15px;
+      //     box-shadow: $material-box-shadow;
+      //     display: flex;
+      //     @include justify-align-center();
+      //   }
+      // }
+      // &-test {
+      //   display: none;
+      // }
     }
   }
   @media screen and (max-width: 430px) {
