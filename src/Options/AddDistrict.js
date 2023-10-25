@@ -1,16 +1,10 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../contexts/AppContext";
-import {
-  Alert,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
 import { DataContext } from "../contexts/DataContext";
 import MyEyeSwitch from "../Components/MyEyeSwitch";
+import PredefinedAddDistrict from "./AddDistrict/PredefinedAddDistrict";
+import LabelAddDistrict from "./AddDistrict/LabelAddDistrict";
+import AlertAddDistrict from "./AddDistrict/AlertAddDistrict";
 
 const AddDistrict = () => {
   const [name, setName] = useState("");
@@ -26,8 +20,7 @@ const AddDistrict = () => {
     setShowDistricts,
     setStrictSejm,
   } = useContext(AppContext);
-  const { districts, setDistricts, parties } = useContext(DataContext);
-  const { windowWidth } = useContext(AppContext);
+  const { setDistricts, parties } = useContext(DataContext);
 
   const polishDistricts = [
     {
@@ -516,37 +509,6 @@ const AddDistrict = () => {
     },
   ];
 
-  const handleSubmit = (e) => {
-    setError(false);
-
-    if (deputies < 1 || name === "") {
-      setError(true);
-      return;
-    }
-
-    const district = {
-      name,
-      deputies,
-      method,
-      parties: [...parties],
-      localParties: [],
-      showFinalResult: false,
-      finalResult: [],
-      forChart: {},
-    };
-    const newDistricts = [...districts];
-    newDistricts.push(district);
-    setDistricts(newDistricts);
-    setName("");
-    setDeputies("");
-    setMethod("dhondt");
-    setAddDistrictSuccess(true);
-    setTimeout(() => {
-      setAddDistrictSuccess(false);
-    }, 2000);
-    setStrictSejm(false);
-  };
-
   const handlePredefined = (item) => {
     if (item === "2023Poland") {
       setDistricts(polishDistricts);
@@ -578,12 +540,6 @@ const AddDistrict = () => {
       >
         2. generuj okręgi{" "}
         <div className="addparty__title__side">
-          {/* <MySwitch
-            onClick={handleShowAddDistrict}
-            imgDisplay
-            value={showAddDistrict}
-            thumbDisplay={false}
-          /> */}
           <MyEyeSwitch
             onChange={handleShowAddDistrict}
             checked={showAddDistrict}
@@ -592,198 +548,21 @@ const AddDistrict = () => {
       </div>
       <div className={`adddistrict__main ${showAddDistrict ? "" : "hide"}`}>
         <div>
-          <div className="adddistrict__main-label">
-            <div className="adddistrict__main-label-name">
-              <TextField
-                color="error"
-                label="Nazwa okręgu"
-                hiddenLabel
-                variant="outlined"
-                size="small"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-                sx={{
-                  input: {
-                    backgroundColor: "#50402923",
-                    borderRadius: 1,
-                  },
-                }}
-              />
-            </div>
-            <div className="adddistrict__main-label-deputies">
-              <TextField
-                color="error"
-                type="number"
-                label="Liczba mandatów"
-                InputProps={{
-                  inputProps: {
-                    style: {
-                      textAlign: "center",
-                    },
-                  },
-                }}
-                sx={{
-                  input: {
-                    backgroundColor: "#50402923",
-                    borderRadius: 1,
-                  },
-                }}
-                size="small"
-                onChange={(e) => {
-                  let value = parseInt(e.target.value, 10);
-
-                  if (value > 1000) value = 1000;
-                  if (value < 0) value = 0;
-
-                  setDeputies(value);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-                value={deputies}
-                variant="outlined"
-              />
-            </div>
-            <div className="adddistrict__main-label-method">
-              <FormControl
-                size="small"
-                style={{
-                  width: 223,
-                  backgroundColor: "#50402923",
-                  borderRadius: 5,
-                }}
-              >
-                <InputLabel id="demo-simple-select-label">
-                  Metoda podziału mandatów
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={method}
-                  label="Metoda podziału mandatów"
-                  onChange={(e) => setMethod(e.target.value)}
-                >
-                  <MenuItem value="dhondt">d'Hondt</MenuItem>
-                  <MenuItem value="normal">bez dzielenia</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-            <Button
-              variant="contained"
-              color="success"
-              size="small"
-              style={{ textTransform: "lowercase" }}
-              onClick={handleSubmit}
-            >
-              dodaj
-            </Button>
-          </div>
-          <Alert
-            style={{
-              borderRadius: 0,
-              boxShadow:
-                "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-              margin: windowWidth > 600 ? "0 5px 5px" : "0",
-              backgroundColor: `${
-                error
-                  ? "#9c00008c"
-                  : addDistrictSuccess
-                  ? "#0d9c008c"
-                  : "#1988e48c"
-              }`,
-            }}
-            variant="filled"
-            severity={error ? "error" : addDistrictSuccess ? "success" : "info"}
-          >
-            {!error && !addDistrictSuccess && (
-              <p>
-                Wpisz nazwę nowego okręgu, ustal opcje i{" "}
-                <strong>dodaj go</strong>
-              </p>
-            )}
-            {error && (
-              <p>
-                Okręg{" "}
-                <strong>musi mieć nazwę i ustaloną liczbę mandatów</strong>
-              </p>
-            )}
-            {addDistrictSuccess && (
-              <p>
-                <strong>Okręg dodany!</strong>
-              </p>
-            )}
-          </Alert>
-          <div className="adddistrict__main-predefined">
-            <p
-              style={{
-                color: "white",
-                textShadow: "1px 1px 10px black",
-                fontSize: 15,
-                textAlign: "center",
-                marginBottom: 5,
-                backgroundColor: "#a8a8a877",
-              }}
-            >
-              # szablony okręgów
-            </p>
-            <div className="adddistrict__main-predefined__buttons">
-              <Button
-                style={{
-                  backgroundColor: "#dddddd",
-                  color: "black",
-                  padding: 20,
-                  gap: 20,
-                  fontSize: 12,
-                }}
-                onClick={() => handlePredefined("2023Poland")}
-              >
-                sejm – okręgi
-                <div
-                  style={{
-                    width: 25,
-                    height: 25,
-                    borderRadius: "10%",
-                    // border: "1px solid black",
-                    boxShadow:
-                      "0px 3px 1px -2px rgba(0, 0, 0, 0.2),0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                    background:
-                      "linear-gradient(rgba(255, 255, 255, 1) 50%, rgba(255, 25, 0, 1) 50%)",
-                  }}
-                ></div>
-              </Button>
-              <Button
-                style={{
-                  backgroundColor: "#dddddd",
-                  color: "black",
-                  padding: 20,
-                  gap: 20,
-                  fontSize: 12,
-                }}
-                onClick={() => handlePredefined("test")}
-              >
-                test
-                <div
-                  style={{
-                    width: 25,
-                    height: 25,
-                    borderRadius: "10%",
-                    // border: "1px solid black",
-                    boxShadow:
-                      "0px 3px 1px -2px rgba(0, 0, 0, 0.2),0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                    background:
-                      "linear-gradient(rgba(255, 0, 255, 1) 50%, rgba(0, 25, 250, 1) 50%)",
-                  }}
-                ></div>
-              </Button>
-            </div>
-          </div>
+          <LabelAddDistrict
+            setError={setError}
+            setAddDistrictSuccess={setAddDistrictSuccess}
+            name={name}
+            setName={setName}
+            method={method}
+            setMethod={setMethod}
+            deputies={deputies}
+            setDeputies={setDeputies}
+          />
+          <AlertAddDistrict
+            error={error}
+            addDistrictSuccess={addDistrictSuccess}
+          />
+          <PredefinedAddDistrict handlePredefined={handlePredefined} />
         </div>
       </div>
     </div>
