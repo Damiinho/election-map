@@ -13,7 +13,7 @@ const TestList = () => {
       <div className="test__list">
         <div className="test__list-title">
           <p>lista pytań</p>
-          <Button
+          {/* <Button
             variant="contained"
             color="info"
             size="small"
@@ -30,6 +30,35 @@ const TestList = () => {
             startIcon={<ReplySharpIcon />}
           >
             powrót
+          </Button> */}
+          <Button
+            size="small"
+            style={{
+              color: "white",
+              textTransform: "lowercase",
+              fontFamily: "Ysabeau Office, sans-serif",
+              fontWeight: 600,
+              gap: 10,
+              position: "absolute",
+              bottom: 5,
+              right: 5,
+            }}
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            <span
+              style={{
+                justifyContent: "right",
+                alignItems: "center",
+                width: "100%",
+                display: "flex",
+                gap: 10,
+              }}
+            >
+              <span style={{ position: "relative", top: 2 }}>powrót</span>
+              <ReplySharpIcon fontSize="medium" />
+            </span>
           </Button>
         </div>
         <Questions />

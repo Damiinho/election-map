@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { TestContext } from "../contexts/TestContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import CubeIMG from "../img/cube.png";
 
 const TestStartPanel = () => {
   const navigate = useNavigate();
@@ -48,7 +47,6 @@ const TestStartPanel = () => {
         </span>
         .
       </p>
-      <img src={CubeIMG} alt="" />
       <Button
         variant="contained"
         color="info"

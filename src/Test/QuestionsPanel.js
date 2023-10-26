@@ -1,29 +1,24 @@
 import { useContext, useRef } from "react";
 import { TestContext } from "../contexts/TestContext";
 import { Button, Slider } from "@mui/material";
-import CubeIMG from "../img/cube.png";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import { AppContext } from "../contexts/AppContext";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 const QuestionsPanel = () => {
-  const {
-    questions,
-    result,
-    setResult,
-    currentQuestion,
-    setCurrentQuestion,
-    setIsTestStart,
-  } = useContext(TestContext);
+  const { questions, result, setResult, currentQuestion, setCurrentQuestion } =
+    useContext(TestContext);
   const { windowWidth } = useContext(AppContext);
   const navigate = useNavigate();
 
   // const defaultValue = 0;
   const sliderRef = useRef(null);
   const handleClick = (value, effects) => {
-    console.log(value, effects);
+    // console.log(value, effects);
     const newResult = result;
-    console.log(newResult);
+    // console.log(newResult);
     if (effects.prog) {
       newResult.prog = newResult.prog + value * effects.prog;
     }
@@ -51,7 +46,13 @@ const QuestionsPanel = () => {
 
     return (
       <div className="test__questions-item">
-        <Tooltip id="question-tooltip">
+        <Tooltip
+          id="question-tooltip"
+          style={{
+            fontSize: 14,
+            textAlign: "left",
+          }}
+        >
           {!effects.right || effects.right === 0 ? (
             ""
           ) : effects.right > 0 ? (
@@ -86,23 +87,6 @@ const QuestionsPanel = () => {
         >
           {questions[currentQuestion].info}
         </Tooltip>
-        <div className="test__questions-item__number">
-          pytanie nr {currentQuestion + 1}/{questions.length}
-        </div>
-        <div
-          className="test__questions-item__effect"
-          data-tooltip-id={"question-tooltip"}
-        >
-          efekt?
-        </div>
-        {questions[currentQuestion].info && (
-          <div
-            className="test__questions-item__info"
-            data-tooltip-id={"info-tooltip"}
-          >
-            info?
-          </div>
-        )}
         <div className="test__questions-item__text">
           {questions[currentQuestion].question}
         </div>
@@ -292,37 +276,75 @@ const QuestionsPanel = () => {
 
   return (
     <div className="test__questions">
-      {windowWidth > 500 ? (
-        <div className="test__questions-buttons">
-          <Button
-            variant="contained"
-            // style={{ backgroundColor: "#f03b3b" }}
-            color="info"
-            size={windowWidth > 910 ? "medium" : "small"}
-            onClick={() => {
-              navigate("/test/lista");
-            }}
-          >
-            lista pytań
-          </Button>
-          <Button
-            variant="contained"
-            // style={{ backgroundColor: "#f03b3b" }}
-            color="info"
-            size={windowWidth > 910 ? "medium" : "small"}
-            onClick={() => {
-              navigate("/test/");
-              setIsTestStart(false);
-              setCurrentQuestion(0);
-            }}
-          >
-            od nowa
-          </Button>
+      <div className="test__questions-buttons">
+        <div
+          style={{
+            textTransform: "lowercase",
+            fontFamily: "Ysabeau Office, sans-serif",
+            fontSize: 15,
+            border: "1px solid black",
+            padding: "7px 15px",
+            borderRadius: 4,
+            boxShadow:
+              "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)",
+          }}
+        >
+          <span>
+            pytanie {currentQuestion + 1}/{questions.length}
+          </span>
         </div>
-      ) : null}
+        {/* <Button
+          color="error"
+          variant="contained"
+          // style={{ backgroundColor: "#f03b3b" }}
+          // color="info"
+          size={"medium"}
+          style={{
+            textTransform: "lowercase",
+            fontFamily: "Ysabeau Office, sans-serif",
+          }}
+          onClick={() => {
+            navigate("/test/");
+            setIsTestStart(false);
+            setCurrentQuestion(0);
+          }}
+          endIcon={<RestartAltIcon />}
+        >
+          od nowa
+        </Button> */}
+        <Button
+          size="medium"
+          variant="contained"
+          color="secondary"
+          style={{
+            textTransform: "lowercase",
+            fontFamily: "Ysabeau Office, sans-serif",
+          }}
+          // className="test__questions-item__effect"
+          data-tooltip-id={"question-tooltip"}
+          endIcon={<TipsAndUpdatesIcon />}
+        >
+          efekt
+        </Button>
 
+        <Button
+          size="medium"
+          variant="contained"
+          style={{
+            textTransform: "lowercase",
+            fontFamily: "Ysabeau Office, sans-serif",
+            // fontSize: 20,
+          }}
+          // className="test__questions-item__info"
+          data-tooltip-id={"info-tooltip"}
+          endIcon={<HelpOutlineIcon />}
+          disabled={questions[currentQuestion].info ? false : true}
+        >
+          info
+        </Button>
+      </div>
       <Question />
-      <img src={CubeIMG} alt="" />
+      {/* <img src={CubeIMG} alt="" /> */}
     </div>
   );
 };
