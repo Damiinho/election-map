@@ -291,6 +291,15 @@ $tertiary-color: #9c62a12c;
             margin-bottom: 5px;
             @include justify-align-center;
 
+            &__threshold {
+              margin: 0 auto;
+              transform: scale(0.8);
+              display: flex;
+              flex-direction: column;
+              @include justify-align-center();
+              gap: 5px;
+              font-family: "MuseoModerno", cursive;
+            }
             &__color {
               display: flex;
               @include justify-align-center;

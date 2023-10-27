@@ -1,16 +1,10 @@
-import {
-  Alert,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, Button, TextField } from "@mui/material";
 import PredefinedAddParty from "./PredefinedAddParty";
 import { useContext, useState } from "react";
 import randomColor from "randomcolor";
 import { DataContext } from "../../contexts/DataContext";
 import { AppContext } from "../../contexts/AppContext";
+import MyDoneSwitch from "../../Components/MyDoneSwitch";
 
 const HandlerAddParty = () => {
   const { parties, setParties } = useContext(DataContext);
@@ -188,7 +182,7 @@ const HandlerAddParty = () => {
         />
 
         <div label="overThreshold" className="addparty__main-label__threshold">
-          <FormControlLabel
+          {/* <FormControlLabel
             className="addparty__label-threshold__form"
             control={
               <Checkbox
@@ -212,6 +206,11 @@ const HandlerAddParty = () => {
               </Typography>
             }
             labelPlacement="start"
+          /> */}
+          <span>{">"} próg</span>
+          <MyDoneSwitch
+            onChange={(e) => setIsOverThreshold(e.target.checked)}
+            checked={isOverThreshold}
           />
         </div>
         <div className="addparty__main-label__color">
@@ -226,7 +225,7 @@ const HandlerAddParty = () => {
           variant="contained"
           color="success"
           size="small"
-          style={{ textTransform: "lowercase" }}
+          style={{ textTransform: "lowercase", margin: "0 auto" }}
           onClick={handleSubmit}
         >
           dodaj

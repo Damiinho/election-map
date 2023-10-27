@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup, Fab } from "@mui/material";
 
 import UndoRoundedIcon from "@mui/icons-material/UndoRounded";
 
@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 
 const OtherSimpleOptions = () => {
-  const { correction, setCorrection } = useContext(AppContext);
+  const { correction, setCorrection, windowWidth } = useContext(AppContext);
 
   const handleCorrection = () => {
     setCorrection(!correction);
@@ -36,6 +36,24 @@ const OtherSimpleOptions = () => {
         >
           <UndoRoundedIcon />
         </Button>
+        {!(windowWidth > 550) && (
+          <Fab
+            color="primary"
+            size="small"
+            data-tooltip-id="options-tooltip"
+            style={{ marginLeft: 5 }}
+          >
+            <span
+              style={{
+                textTransform: "lowercase",
+                fontSize: 25,
+                fontFamily: "Oleo Script, sans-serif",
+              }}
+            >
+              i
+            </span>
+          </Fab>
+        )}
       </ButtonGroup>
     </div>
   );

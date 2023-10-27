@@ -26,6 +26,7 @@ const SimpleOptions = () => {
     showSimpleSummary,
     setSimpleElectionsType,
     setAdvancedVersion,
+    windowWidth,
   } = useContext(AppContext);
   const [resultError, setResultError] = useState(false);
   const [thresholdError, setThresholdError] = useState(false);
@@ -235,21 +236,25 @@ const SimpleOptions = () => {
 
       {showSimpleSummary ? null : (
         <>
-          {" "}
-          <div className="simpleOptions-info" data-tooltip-id="options-tooltip">
-            <Fab color="primary" size="small">
-              {/* <QuestionMarkIcon fontSize="medium" /> */}{" "}
-              <span
-                style={{
-                  textTransform: "lowercase",
-                  fontSize: 25,
-                  fontFamily: "Oleo Script, sans-serif",
-                }}
-              >
-                i
-              </span>
-            </Fab>
-          </div>
+          {windowWidth > 550 && (
+            <div
+              className="simpleOptions-info"
+              data-tooltip-id="options-tooltip"
+            >
+              <Fab color="primary" size="small">
+                {/* <QuestionMarkIcon fontSize="medium" /> */}{" "}
+                <span
+                  style={{
+                    textTransform: "lowercase",
+                    fontSize: 25,
+                    fontFamily: "Oleo Script, sans-serif",
+                  }}
+                >
+                  i
+                </span>
+              </Fab>
+            </div>
+          )}
           <div className="simpleOptions-handler">
             <TitleSimpleOptions />
             <HeaderSimpleOptions />

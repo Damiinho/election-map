@@ -4,8 +4,12 @@ import { AppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const TitleSimpleOptions = () => {
-  const { selectOptions, simpleElectionsType, setSimpleElectionsType } =
-    useContext(AppContext);
+  const {
+    selectOptions,
+    simpleElectionsType,
+    setSimpleElectionsType,
+    windowWidth,
+  } = useContext(AppContext);
 
   const navigate = useNavigate();
   const selectStyles = {
@@ -16,7 +20,7 @@ const TitleSimpleOptions = () => {
     }),
     option: (provided) => ({
       ...provided,
-      fontSize: "20px", // Rozmiar liter
+      fontSize: windowWidth > 650 ? 20 : 15, // Rozmiar liter
       cursor: "pointer",
     }),
   };
@@ -32,6 +36,7 @@ const TitleSimpleOptions = () => {
           navigate(`/prosty/${simpleElectionsType.value}`);
           setSimpleElectionsType(simpleElectionsType);
         }}
+        isSearchable={false}
       />
     </div>
   );
