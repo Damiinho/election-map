@@ -30,6 +30,7 @@ const Test = () => {
   const buttons = [
     <Button
       size="small"
+      key="test"
       style={{
         color: "white",
         textTransform: "lowercase",
@@ -60,6 +61,7 @@ const Test = () => {
     </Button>,
     <Button
       size="small"
+      key="list"
       style={{
         color: "white",
         textTransform: "lowercase",
@@ -86,6 +88,7 @@ const Test = () => {
     </Button>,
     <Button
       size="small"
+      key="simple"
       style={{
         color: "white",
         textTransform: "lowercase",

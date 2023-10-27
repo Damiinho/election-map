@@ -56,6 +56,7 @@ const Header = () => {
   const buttons = [
     <Button
       size="small"
+      key="test"
       style={{
         color: "white",
         textTransform: "lowercase",
@@ -84,6 +85,7 @@ const Header = () => {
     </Button>,
     <Button
       size="small"
+      key="version"
       style={{
         color: "white",
         textTransform: "lowercase",
