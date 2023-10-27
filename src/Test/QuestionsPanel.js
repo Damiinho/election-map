@@ -8,8 +8,15 @@ import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 const QuestionsPanel = () => {
-  const { questions, result, setResult, currentQuestion, setCurrentQuestion } =
-    useContext(TestContext);
+  const {
+    questions,
+    result,
+    setResult,
+    currentQuestion,
+    setCurrentQuestion,
+    setAnswersValue,
+    answersValue,
+  } = useContext(TestContext);
   const { windowWidth } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -20,21 +27,50 @@ const QuestionsPanel = () => {
     const newResult = result;
     // console.log(newResult);
     if (effects.prog) {
-      newResult.prog = newResult.prog + value * effects.prog;
+      newResult.prog = parseFloat(
+        (newResult.prog + value * effects.prog).toFixed(2)
+      );
     }
     if (effects.right) {
-      newResult.right = newResult.right + value * effects.right;
+      newResult.right = parseFloat(
+        (newResult.right + value * effects.right).toFixed(2)
+      );
     }
     if (effects.auth) {
-      newResult.auth = newResult.auth + value * effects.auth;
+      newResult.auth = parseFloat(
+        (newResult.auth + value * effects.auth).toFixed(2)
+      );
     }
     setResult(newResult);
     setCurrentQuestion(currentQuestion + 1);
 
+    const newAnswersValue = [...answersValue];
+    newAnswersValue[currentQuestion] = {
+      prog: parseFloat((value * effects.prog).toFixed(2)),
+      right: parseFloat((value * effects.right).toFixed(2)),
+      auth: parseFloat((value * effects.auth).toFixed(2)),
+    };
+    if (isNaN(newAnswersValue[currentQuestion].prog)) {
+      newAnswersValue[currentQuestion].prog = 0;
+    }
+    if (isNaN(newAnswersValue[currentQuestion].right)) {
+      newAnswersValue[currentQuestion].right = 0;
+    }
+    if (isNaN(newAnswersValue[currentQuestion].auth)) {
+      newAnswersValue[currentQuestion].auth = 0;
+    }
+    setAnswersValue(newAnswersValue);
+
     if (currentQuestion + 1 === questions.length) {
-      navigate(
-        `wynik/k+${newResult.right}+a+${newResult.auth}+p+${newResult.prog}`
-      );
+      let newRight = 0;
+      let newProg = 0;
+      let newAuth = 0;
+      newAnswersValue.forEach((answer) => {
+        newRight = newRight + answer.right;
+        newProg = newProg + answer.prog;
+        newAuth = newAuth + answer.auth;
+      });
+      navigate(`wynik/k+${newRight}+a+${newAuth}+p+${newProg}`);
     }
   };
 
@@ -109,8 +145,9 @@ const QuestionsPanel = () => {
             valueLabelDisplay="auto"
             marks={
               questions[currentQuestion].marks
-                ? questions[currentQuestion].marks?.map((item) => {
+                ? questions[currentQuestion].marks?.map((item, index) => {
                     return {
+                      key: index,
                       value: item.value,
                       label: (
                         <div

@@ -1222,6 +1222,7 @@ export const TestProvider = ({ children }) => {
 
   const [isTestStart, setIsTestStart] = useState(false);
   const [result, setResult] = useState({ prog: 0, auth: 0, right: 0 });
+  const [answersValue, setAnswersValue] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answerValue, setAnswerValue] = useState(0);
   const providerValue = {
@@ -1235,6 +1236,8 @@ export const TestProvider = ({ children }) => {
     answerValue,
     setAnswerValue,
     extremeValues,
+    answersValue,
+    setAnswersValue,
   };
 
   return (
