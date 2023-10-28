@@ -9,11 +9,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SimpleLogo2 from "../img/calculatorsimplelogo2.png";
+import MyEyeSwitch from "../Components/MyEyeSwitch";
 
 const ResultsPanel = () => {
   const [officialResult, setOfficialResult] = useState({});
-  const { result, setIsTestStart, setCurrentQuestion, extremeValues } =
-    useContext(TestContext);
+  const {
+    result,
+    setIsTestStart,
+    setCurrentQuestion,
+    extremeValues,
+    questions,
+    answersValue,
+  } = useContext(TestContext);
   const { windowWidth } = useContext(AppContext);
   const params = useParams();
   const navigate = useNavigate();
@@ -224,6 +231,31 @@ const ResultsPanel = () => {
     />
   );
 
+  const styleForAnswerList =
+    windowWidth > 800
+      ? {
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          justifyContent: "space-around",
+          backgroundColor: "#80808055",
+          boxShadow:
+            "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+          padding: "10px 10px",
+
+          fontFamily: "Ysabeau Office, sans-serif",
+        }
+      : {
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+          backgroundColor: "#80808055",
+          boxShadow:
+            "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+          padding: "10px 10px",
+
+          fontFamily: "Ysabeau Office, sans-serif",
+        };
+
   return (
     <div className="test">
       <div className="test__title">
@@ -397,6 +429,200 @@ const ResultsPanel = () => {
             prog={officialResult.progForBox}
           />
         </div>
+        {answersValue.length > 1 && (
+          <div>
+            <div
+              style={{
+                textAlign: "center",
+                width: "100%",
+                backgroundColor: "#80dd8055",
+                padding: 10,
+                boxShadow:
+                  "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+              }}
+            >
+              Szczegóły odpowiedzi
+              <MyEyeSwitch />
+            </div>
+            <div>
+              {questions.map((question, index) => {
+                return (
+                  <div key={index} style={styleForAnswerList}>
+                    <div
+                      style={{
+                        minWidth: windowWidth > 570 ? 250 : "auto",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        textAlign: "center",
+                        padding:
+                          windowWidth > 800 ? "0 10px" : "10px 10px 20px",
+                        width: windowWidth > 800 ? "auto" : "100%",
+                        fontSize:
+                          windowWidth > 800
+                            ? "16px"
+                            : windowWidth > 350
+                            ? "20px"
+                            : "16px",
+                      }}
+                    >
+                      {question.question}
+                    </div>
+                    <div
+                      style={{
+                        minWidth: windowWidth > 570 ? 250 : "auto",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        backgroundColor: "#80808055",
+                        padding: "0 10px",
+                        boxShadow:
+                          "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+
+                        width: windowWidth > 570 ? "auto" : "100%",
+                      }}
+                    >
+                      <Slider
+                        step={0.01}
+                        min={question.min || -1}
+                        max={question.max || 1}
+                        value={answersValue[index].value}
+                        readOnly
+                        // disabled
+                        sx={{
+                          // color: "red",
+                          height: 8,
+                          "span.MuiSlider-valueLabel": {
+                            backgroundColor: "blue",
+                            color: "white",
+                          },
+                          "& .MuiSlider-thumb": {
+                            height: 24,
+                            width: 24,
+                            backgroundColor: "#fff",
+                            border: "2px solid currentColor",
+                            "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible":
+                              {
+                                boxShadow: "inherit",
+                              },
+                            "&:before": {
+                              display: "none",
+                            },
+                          },
+                          // "& .MuiSlider-track": {
+                          //   border: "none",
+                          //   backgroundColor: "transparent",
+                          // },
+                          // "& .MuiSlider-rail": {
+                          //   backgroundColor: "yellow"
+                          // },
+
+                          "& .MuiSlider-valueLabel": {
+                            lineHeight: 1.2,
+                            fontSize: 12,
+                            background: "unset",
+                            padding: 0,
+                            width: 40,
+                            height: 40,
+                            borderRadius: "50% 50% 50% 0",
+                            backgroundColor: "#52af77",
+                            transformOrigin: "bottom left",
+                            transform:
+                              "translate(50%, -100%) rotate(-45deg) scale(0)",
+                            "&:before": { display: "none" },
+                            "&.MuiSlider-valueLabelOpen": {
+                              transform:
+                                "translate(50%, -100%) rotate(-45deg) scale(1)",
+                            },
+                            "& > *": {
+                              transform: "rotate(45deg)",
+                            },
+                          },
+                        }}
+                        // disabled
+                      />{" "}
+                    </div>
+
+                    <div
+                      style={{
+                        minWidth: windowWidth > 570 ? 250 : "auto",
+                        width: windowWidth > 570 ? "auto" : "100%",
+                        margin: windowWidth > 570 ? "0 10px" : 0,
+                      }}
+                    >
+                      <div
+                        style={{
+                          textAlign: "center",
+                          fontSize: 15,
+                          backgroundColor: "#50ffdd55",
+                          boxShadow:
+                            "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+                        }}
+                      >
+                        wpływ
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "5fr 1fr",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            textAlign: "center",
+                            backgroundColor: "#f0494955",
+                            boxShadow:
+                              "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+                          }}
+                        >
+                          <span>Socjalizm / wolny rynek</span>
+
+                          <span style={{ backgroundColor: "#ffffffaa" }}>
+                            {answersValue[index].right}
+                          </span>
+                        </div>
+                        <div
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "5fr 1fr",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            textAlign: "center",
+                            backgroundColor: "#8349f055",
+                            boxShadow:
+                              "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+                          }}
+                        >
+                          <span>Tradycja / postęp</span>
+
+                          <span style={{ backgroundColor: "#ffffffaa" }}>
+                            {answersValue[index].prog}
+                          </span>
+                        </div>
+                        <div
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "5fr 1fr",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            textAlign: "center",
+                            backgroundColor: "#fdfb7f55",
+                            boxShadow:
+                              "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+                          }}
+                        >
+                          <span>Anarchizm / autorytaryzm</span>
+                          <span style={{ backgroundColor: "#ffffffaa" }}>
+                            {answersValue[index].auth}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>{" "}
     </div>
   );

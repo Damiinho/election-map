@@ -49,6 +49,7 @@ const QuestionsPanel = () => {
       prog: parseFloat((value * effects.prog).toFixed(2)),
       right: parseFloat((value * effects.right).toFixed(2)),
       auth: parseFloat((value * effects.auth).toFixed(2)),
+      value: value,
     };
     if (isNaN(newAnswersValue[currentQuestion].prog)) {
       newAnswersValue[currentQuestion].prog = 0;
