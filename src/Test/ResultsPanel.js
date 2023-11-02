@@ -10,6 +10,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SimpleLogo2 from "../img/calculatorsimplelogo2.png";
 import MyEyeSwitch from "../Components/MyEyeSwitch";
+import AnswerDetails from "./ResultPanel/AnswersDetails";
 
 const ResultsPanel = () => {
   const [officialResult, setOfficialResult] = useState({});
@@ -18,7 +19,6 @@ const ResultsPanel = () => {
     setIsTestStart,
     setCurrentQuestion,
     extremeValues,
-    questions,
     answersValue,
   } = useContext(TestContext);
   const { windowWidth } = useContext(AppContext);
@@ -233,31 +233,6 @@ const ResultsPanel = () => {
     />
   );
 
-  const styleForAnswerList =
-    windowWidth > 800
-      ? {
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          justifyContent: "space-around",
-          backgroundColor: "#80808055",
-          boxShadow:
-            "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-          padding: "10px 10px",
-
-          fontFamily: "Ysabeau Office, sans-serif",
-        }
-      : {
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-around",
-          backgroundColor: "#80808055",
-          boxShadow:
-            "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-          padding: "10px 10px",
-
-          fontFamily: "Ysabeau Office, sans-serif",
-        };
-
   return (
     <div className="test">
       <div className="test__title">
@@ -437,7 +412,7 @@ const ResultsPanel = () => {
               style={{
                 textAlign: windowWidth > 450 ? "center" : "left",
                 width: "100%",
-                backgroundColor: "#80dd8055",
+                backgroundColor: "#0676d155",
                 padding: 10,
                 paddingLeft:
                   windowWidth > 450 ? 10 : windowWidth > 310 ? 20 : 10,
@@ -475,280 +450,7 @@ const ResultsPanel = () => {
                 transition: "grid-template-rows 1s ease-out",
               }}
             >
-              <div style={{ overflow: "hidden" }}>
-                {questions.map((question, index) => {
-                  return (
-                    <div key={index} style={styleForAnswerList}>
-                      <div
-                        style={{
-                          minWidth: windowWidth > 800 ? 250 : "auto",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          textAlign: "center",
-                          padding:
-                            windowWidth > 800 ? "0 10px" : "10px 10px 20px",
-                          width: windowWidth > 800 ? "auto" : "100%",
-                          fontSize:
-                            windowWidth > 800
-                              ? "16px"
-                              : windowWidth > 350
-                              ? "20px"
-                              : "16px",
-                        }}
-                      >
-                        {index + 1}. {question.question}
-                      </div>
-                      <div
-                        style={{
-                          minWidth: windowWidth > 800 ? 250 : "auto",
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          backgroundColor: "#80808055",
-                          boxShadow:
-                            "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-
-                          width: windowWidth > 800 ? "100%" : "100%",
-                        }}
-                      >
-                        <Slider
-                          step={0.01}
-                          min={question.min || -1}
-                          max={question.max || 1}
-                          value={answersValue[index].value}
-                          readOnly
-                          sx={{
-                            // color: "red",
-                            height: 8,
-                            width: "90%",
-                            "span.MuiSlider-valueLabel": {
-                              backgroundColor: "blue",
-                              color: "white",
-                            },
-                            "& .MuiSlider-thumb": {
-                              height: 24,
-                              width: 24,
-                              backgroundColor: "#fff",
-                              border: "2px solid currentColor",
-                              "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible":
-                                {
-                                  boxShadow: "inherit",
-                                },
-                              "&:before": {
-                                display: "none",
-                              },
-                            },
-
-                            // "& .MuiSlider-valueLabel": {
-                            //   lineHeight: 1.2,
-                            //   fontSize: 12,
-                            //   background: "unset",
-                            //   padding: 0,
-                            //   width: 40,
-                            //   height: 40,
-                            //   borderRadius: "50% 50% 50% 0",
-                            //   backgroundColor: "#52af77",
-                            //   transformOrigin: "bottom left",
-                            //   transform:
-                            //     "translate(50%, -100%) rotate(-45deg) scale(0)",
-                            //   "&:before": { display: "none" },
-                            //   "&.MuiSlider-valueLabelOpen": {
-                            //     transform:
-                            //       "translate(50%, -100%) rotate(-45deg) scale(1)",
-                            //   },
-                            //   "& > *": {
-                            //     transform: "rotate(45deg)",
-                            //   },
-                            // },
-                          }}
-                        />
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: 5,
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            width: "100%",
-                          }}
-                        >
-                          <span
-                            style={{
-                              textAlign: "center",
-                              backgroundColor: "#77661155",
-                              width: 25,
-                            }}
-                          >
-                            Od{" "}
-                            {question.min
-                              ? question.min
-                              : question.min === 0
-                              ? "0"
-                              : "-1"}
-                          </span>
-                          <div
-                            style={{
-                              display: "flex",
-                              flexWrap: "wrap",
-                              columnGap: 10,
-                              rowGap: 5,
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            {question.marks ? (
-                              question.marks.map((mark, index) => (
-                                <span
-                                  key={`mark${index}`}
-                                  style={{
-                                    padding: "0px 5px",
-                                    backgroundColor:
-                                      index % 2 === 0
-                                        ? "#3399aa55"
-                                        : "#11552855",
-                                    boxShadow:
-                                      "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                                  }}
-                                >
-                                  {mark.value} {mark.answer}
-                                </span>
-                              ))
-                            ) : (
-                              <>
-                                <span
-                                  key={`span${index}`}
-                                  style={{
-                                    padding: "0px 5px",
-                                    backgroundColor: "#3399aa55",
-                                    boxShadow:
-                                      "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                                  }}
-                                >
-                                  -0.99 Nie zgadzam się
-                                </span>
-                                <span
-                                  key={`span2${index}`}
-                                  style={{
-                                    padding: "0px 5px",
-                                    backgroundColor: "#11552855",
-                                    boxShadow:
-                                      "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                                  }}
-                                >
-                                  0 Nie wiem
-                                </span>
-                                <span
-                                  key={`span3${index}`}
-                                  style={{
-                                    padding: "0px 5px",
-                                    backgroundColor: "#3399aa55",
-                                    boxShadow:
-                                      "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                                  }}
-                                >
-                                  0.99 Zgadzam się
-                                </span>
-                              </>
-                            )}
-                          </div>
-                          <span
-                            style={{
-                              textAlign: "center",
-                              backgroundColor: "#77661155",
-                              width: 25,
-                            }}
-                          >
-                            do{" "}
-                            {question.max
-                              ? question.max
-                              : question.max === 0
-                              ? "0"
-                              : "1"}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div
-                        style={{
-                          minWidth: windowWidth > 800 ? 250 : "auto",
-                          width: windowWidth > 800 ? "auto" : "100%",
-                          margin: windowWidth > 800 ? "0 10px" : 0,
-                        }}
-                      >
-                        <div
-                          style={{
-                            textAlign: "center",
-                            fontSize: 15,
-                            backgroundColor: "#50ffdd55",
-                            boxShadow:
-                              "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                          }}
-                        >
-                          wpływ
-                        </div>
-                        <div
-                          style={{ display: "flex", flexDirection: "column" }}
-                        >
-                          <div
-                            style={{
-                              display: "grid",
-                              gridTemplateColumns: "5fr 1fr",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              textAlign: "center",
-                              backgroundColor: "#f0494955",
-                              boxShadow:
-                                "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                            }}
-                          >
-                            <span>Socjalizm / wolny rynek</span>
-
-                            <span style={{ backgroundColor: "#ffffffaa" }}>
-                              {answersValue[index].right}
-                            </span>
-                          </div>
-                          <div
-                            style={{
-                              display: "grid",
-                              gridTemplateColumns: "5fr 1fr",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              textAlign: "center",
-                              backgroundColor: "#8349f055",
-                              boxShadow:
-                                "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                            }}
-                          >
-                            <span>Tradycja / postęp</span>
-
-                            <span style={{ backgroundColor: "#ffffffaa" }}>
-                              {answersValue[index].prog}
-                            </span>
-                          </div>
-                          <div
-                            style={{
-                              display: "grid",
-                              gridTemplateColumns: "5fr 1fr",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              textAlign: "center",
-                              backgroundColor: "#fdfb7f55",
-                              boxShadow:
-                                "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
-                            }}
-                          >
-                            <span>Anarchizm / autorytaryzm</span>
-                            <span style={{ backgroundColor: "#ffffffaa" }}>
-                              {answersValue[index].auth}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <AnswerDetails />
             </div>
           </div>
         )}

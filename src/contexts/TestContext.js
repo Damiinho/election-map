@@ -1,52 +1,64 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const TestContext = createContext();
 
 export const TestProvider = ({ children }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const questions = [
-    {
-      question:
-        "Ekonomia powinna opierać się najbardziej jak to możliwe na zasadach wolnego rynku.",
-      effects: { right: 1, auth: -0.2 },
-      min: -1,
-      max: 1,
-      marks: [
-        {
-          value: -0.99,
-          answer: "Nie zgadzam się",
-          left: 0,
-          position: "absolute",
-        },
-        {
-          value: 0,
-          answer: "Nie wiem",
-        },
-        {
-          value: 0.99,
-          answer: "Zgadzam się",
-          right: 0,
-          position: "absolute",
-        },
-      ],
-    },
-    {
-      question: "Ubezpieczenia zdrowotne powinny być",
-      effects: { right: 1, auth: -0.2, prog: 0 },
-      marks: [
-        {
-          value: -0.99,
-          answer: "Tylko państwowe",
-          left: 0,
-          position: "absolute",
-        },
-        {
-          value: 0.99,
-          answer: "Tylko prywatne",
-          right: 0,
-          position: "absolute",
-        },
-      ],
-    },
+    // {
+    //   question:
+    //     "Ekonomia powinna opierać się najbardziej jak to możliwe na zasadach wolnego rynku.",
+    //   effects: { right: 1, auth: -0.2 },
+    //   min: -1,
+    //   max: 1,
+    //   marks: [
+    //     {
+    //       value: -0.99,
+    //       answer: "Nie zgadzam się",
+    //       left: 0,
+    //       position: "absolute",
+    //     },
+    //     {
+    //       value: 0,
+    //       answer: "Nie wiem",
+    //     },
+    //     {
+    //       value: 0.99,
+    //       answer: "Zgadzam się",
+    //       right: 0,
+    //       position: "absolute",
+    //     },
+    //   ],
+    // },
+    // {
+    //   question: "Ubezpieczenia zdrowotne powinny być",
+    //   effects: { right: 1, auth: -0.2, prog: 0 },
+    //   marks: [
+    //     {
+    //       value: -0.99,
+    //       answer: "Tylko państwowe",
+    //       left: 0,
+    //       position: "absolute",
+    //     },
+    //     {
+    //       value: 0.99,
+    //       answer: "Tylko prywatne",
+    //       right: 0,
+    //       position: "absolute",
+    //     },
+    //   ],
+    // },
     // {
     //   question:
     //     "Pracodawcy najlepiej znają wartość pracy zatrudnionego, dlatego też uczciwie go wynagradzają.",
@@ -396,84 +408,84 @@ export const TestProvider = ({ children }) => {
     //     },
     //   ],
     // },
-    // {
-    //   question: "To władza powinna decydować o wysokości wynagrodzenia.",
-    //   effects: { right: -1, auth: 1 },
-    //   min: -0.5,
-    //   max: 1,
-    //   marks: [
-    //     {
-    //       value: -0.49,
-    //       position: "absolute",
-    //       answer: "Żadnego wynagrodzenia",
-    //       left: 0,
-    //     },
-    //     {
-    //       value: -0.3,
-    //       answer: "W rządzie / policji / wojsku",
-    //       left: 50,
-    //       top: -50,
-    //     },
-    //     {
-    //       value: 0,
-    //       answer: "W biurokracji państwowej",
-    //       left: 50,
-    //       top: -50,
-    //     },
-    //     {
-    //       value: 0.5,
-    //       // position: "absolute",
-    //       answer: "W pewnych gałęziach gospodarki",
-    //       // left: -60,
-    //       left: 50,
-    //       top: -50,
-    //     },
-    //     {
-    //       value: 0.99,
-    //       answer: "Powinna ustalać wszystkie",
-    //       right: 0,
-    //       position: "absolute",
-    //     },
-    //   ],
-    // },
+    {
+      question: "To władza powinna decydować o wysokości wynagrodzenia.",
+      effects: { right: -1, auth: 1 },
+      min: -0.5,
+      max: 1,
+      marks: [
+        {
+          value: -0.49,
+          position: "absolute",
+          answer: "Żadnego wynagrodzenia",
+          left: 0,
+        },
+        {
+          value: -0.3,
+          answer: "W rządzie / policji / wojsku",
+          left: 50,
+          top: -50,
+        },
+        {
+          value: 0,
+          answer: "W biurokracji państwowej",
+          left: 50,
+          top: -50,
+        },
+        {
+          value: 0.5,
+          // position: "absolute",
+          answer: "W pewnych gałęziach gospodarki",
+          // left: -60,
+          left: 50,
+          top: -50,
+        },
+        {
+          value: 0.99,
+          answer: "Powinna ustalać wszystkie",
+          right: 0,
+          position: "absolute",
+        },
+      ],
+    },
 
-    // {
-    //   question: "Związki zawodowe powinny mieć istotny wpływ na gospodarkę",
-    //   effects: { right: -0.7, prog: 0.3 },
-    //   max: 0.8,
-    //   marks: [
-    //     {
-    //       value: -0.99,
-    //       answer: "Nie zgadzam się",
-    //       left: 0,
-    //       position: "absolute",
-    //     },
-    //     {
-    //       value: 0,
-    //       answer: "Nie wiem",
-    //     },
-    //     {
-    //       value: 0.79,
-    //       answer: "Zgadzam się",
-    //       right: 0,
-    //       position: "absolute",
-    //     },
-    //   ],
-    // },
-    // {
-    //   question: "Wszystkie przemysły i banki powinny być upaństwowione.",
-    //   effects: { right: -1 },
-    // },
-    // {
-    //   question:
-    //     "Zadaniem państwa powinno być między innymi przeciwdziałanie nierównościom ekonomicznym.",
-    //   effects: { right: -0.5 },
-    // },
-    // {
-    //   question:
-    //     "Nie da się skutecznie walczyć z terroryzmem bez ograniczania wolności obywateli.",
-    //   effects: { auth: 0.5 },
-    // },
+    {
+      question: "Związki zawodowe powinny mieć istotny wpływ na gospodarkę",
+      effects: { right: -0.7, prog: 0.3 },
+      max: 0.8,
+      marks: [
+        {
+          value: -0.99,
+          answer: "Nie zgadzam się",
+          left: 0,
+          position: "absolute",
+        },
+        {
+          value: 0,
+          answer: "Nie wiem",
+        },
+        {
+          value: 0.79,
+          answer: "Zgadzam się",
+          right: 0,
+          position: "absolute",
+        },
+      ],
+    },
+    {
+      question: "Wszystkie przemysły i banki powinny być upaństwowione.",
+      effects: { right: -1 },
+    },
+    {
+      question:
+        "Zadaniem państwa powinno być między innymi przeciwdziałanie nierównościom ekonomicznym.",
+      effects: { right: -0.5 },
+    },
+    {
+      question:
+        "Nie da się skutecznie walczyć z terroryzmem bez ograniczania wolności obywateli.",
+      effects: { auth: 0.5 },
+    },
     // {
     //   question: "Każdy obywatel powinien być stale monitorowany",
     //   effects: { auth: 1 },
@@ -1049,20 +1061,20 @@ export const TestProvider = ({ children }) => {
     //     </div>
     //   ),
     // },
-    // {
-    //   question:
-    //     "Przynależność do danej struktuiry samorządowej lub rządowej powinna być kwestią dobrowolną.",
-    //   effects: { prog: 1, auth: -1 },
-    //   info: (
-    //     <div>
-    //       Pytanie dotyczy kwestii czy każdy sam powinien móc zdecydować o tym,
-    //       czy należy np. do danego państwa i w zamian za przywileje z tym
-    //       związane zobowiązywać się do przestrzegania obowiązującego w nim
-    //       prawa. Oczywiście takie rozwiązanie ma sens wyłącznie wtedy, gdy osoba
-    //       o tym decydująca ma jakąś sensowną alternatywę.
-    //     </div>
-    //   ),
-    // },
+    {
+      question:
+        "Przynależność do danej struktury samorządowej lub rządowej powinna być kwestią dobrowolną.",
+      effects: { prog: 1, auth: -1 },
+      info: (
+        <div>
+          Pytanie dotyczy kwestii czy każdy sam powinien móc zdecydować o tym,
+          czy należy np. do danego państwa i w zamian za przywileje z tym
+          związane zobowiązywać się do przestrzegania obowiązującego w nim
+          prawa. Oczywiście takie rozwiązanie ma sens wyłącznie wtedy, gdy osoba
+          o tym decydująca ma jakąś sensowną alternatywę.
+        </div>
+      ),
+    },
     {
       question:
         "Rządy jednej osoby nad całym społeczeństwem są lepsze od tych prowadzonych przez więcej osób.",
