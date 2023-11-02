@@ -450,7 +450,7 @@ const ResultsPanel = () => {
                   <div key={index} style={styleForAnswerList}>
                     <div
                       style={{
-                        minWidth: windowWidth > 570 ? 250 : "auto",
+                        minWidth: windowWidth > 800 ? 250 : "auto",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -470,16 +470,16 @@ const ResultsPanel = () => {
                     </div>
                     <div
                       style={{
-                        minWidth: windowWidth > 570 ? 250 : "auto",
+                        minWidth: windowWidth > 800 ? 250 : "auto",
                         display: "flex",
+                        flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center",
                         backgroundColor: "#80808055",
-                        padding: "0 10px",
                         boxShadow:
                           "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
 
-                        width: windowWidth > 570 ? "auto" : "100%",
+                        width: windowWidth > 800 ? "100%" : "100%",
                       }}
                     >
                       <Slider
@@ -488,10 +488,10 @@ const ResultsPanel = () => {
                         max={question.max || 1}
                         value={answersValue[index].value}
                         readOnly
-                        // disabled
                         sx={{
                           // color: "red",
                           height: 8,
+                          width: "90%",
                           "span.MuiSlider-valueLabel": {
                             backgroundColor: "blue",
                             color: "white",
@@ -509,45 +509,138 @@ const ResultsPanel = () => {
                               display: "none",
                             },
                           },
-                          // "& .MuiSlider-track": {
-                          //   border: "none",
-                          //   backgroundColor: "transparent",
-                          // },
-                          // "& .MuiSlider-rail": {
-                          //   backgroundColor: "yellow"
-                          // },
 
-                          "& .MuiSlider-valueLabel": {
-                            lineHeight: 1.2,
-                            fontSize: 12,
-                            background: "unset",
-                            padding: 0,
-                            width: 40,
-                            height: 40,
-                            borderRadius: "50% 50% 50% 0",
-                            backgroundColor: "#52af77",
-                            transformOrigin: "bottom left",
-                            transform:
-                              "translate(50%, -100%) rotate(-45deg) scale(0)",
-                            "&:before": { display: "none" },
-                            "&.MuiSlider-valueLabelOpen": {
-                              transform:
-                                "translate(50%, -100%) rotate(-45deg) scale(1)",
-                            },
-                            "& > *": {
-                              transform: "rotate(45deg)",
-                            },
-                          },
+                          // "& .MuiSlider-valueLabel": {
+                          //   lineHeight: 1.2,
+                          //   fontSize: 12,
+                          //   background: "unset",
+                          //   padding: 0,
+                          //   width: 40,
+                          //   height: 40,
+                          //   borderRadius: "50% 50% 50% 0",
+                          //   backgroundColor: "#52af77",
+                          //   transformOrigin: "bottom left",
+                          //   transform:
+                          //     "translate(50%, -100%) rotate(-45deg) scale(0)",
+                          //   "&:before": { display: "none" },
+                          //   "&.MuiSlider-valueLabelOpen": {
+                          //     transform:
+                          //       "translate(50%, -100%) rotate(-45deg) scale(1)",
+                          //   },
+                          //   "& > *": {
+                          //     transform: "rotate(45deg)",
+                          //   },
+                          // },
                         }}
-                        // disabled
-                      />{" "}
+                      />
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: 5,
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          width: "100%",
+                        }}
+                      >
+                        <span
+                          style={{
+                            textAlign: "center",
+                            backgroundColor: "#77661155",
+                            width: 25,
+                          }}
+                        >
+                          Od{" "}
+                          {question.min
+                            ? question.min
+                            : question.min === 0
+                            ? "0"
+                            : "-1"}
+                        </span>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            columnGap: 10,
+                            rowGap: 5,
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          {question.marks ? (
+                            question.marks.map((mark, index) => (
+                              <span
+                                key={`mark${index}`}
+                                style={{
+                                  padding: "0px 5px",
+                                  backgroundColor:
+                                    index % 2 === 0 ? "#3399aa55" : "#11552855",
+                                  boxShadow:
+                                    "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+                                }}
+                              >
+                                {mark.value} {mark.answer}
+                              </span>
+                            ))
+                          ) : (
+                            <>
+                              <span
+                                key={`span${index}`}
+                                style={{
+                                  padding: "0px 5px",
+                                  backgroundColor: "#3399aa55",
+                                  boxShadow:
+                                    "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+                                }}
+                              >
+                                -0.99 Nie zgadzam się
+                              </span>
+                              <span
+                                key={`span2${index}`}
+                                style={{
+                                  padding: "0px 5px",
+                                  backgroundColor: "#11552855",
+                                  boxShadow:
+                                    "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+                                }}
+                              >
+                                0 Nie wiem
+                              </span>
+                              <span
+                                key={`span3${index}`}
+                                style={{
+                                  padding: "0px 5px",
+                                  backgroundColor: "#3399aa55",
+                                  boxShadow:
+                                    "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+                                }}
+                              >
+                                0.99 Zgadzam się
+                              </span>
+                            </>
+                          )}
+                        </div>
+                        <span
+                          style={{
+                            textAlign: "center",
+                            backgroundColor: "#77661155",
+                            width: 25,
+                          }}
+                        >
+                          do{" "}
+                          {question.max
+                            ? question.max
+                            : question.max === 0
+                            ? "0"
+                            : "1"}
+                        </span>
+                      </div>
                     </div>
 
                     <div
                       style={{
-                        minWidth: windowWidth > 570 ? 250 : "auto",
-                        width: windowWidth > 570 ? "auto" : "100%",
-                        margin: windowWidth > 570 ? "0 10px" : 0,
+                        minWidth: windowWidth > 800 ? 250 : "auto",
+                        width: windowWidth > 800 ? "auto" : "100%",
+                        margin: windowWidth > 800 ? "0 10px" : 0,
                       }}
                     >
                       <div
